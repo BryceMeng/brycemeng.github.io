@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=endge, chrome=IE8" />
     <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no" />
-    <title>雪山 — Mots-clés</title>
+    <title>雪山 — Articles avec le mot clé « python »</title>
     <!--[if lte IE 8]><script type="text/javascript" src="/theme/js/html5shiv.js"></script><![endif]-->
     <link rel="stylesheet" type="text/css" href="/theme/css/skeleton.css" />
     <link rel="stylesheet" type="text/css" href="/theme/css/theme.css" />
@@ -13,22 +13,6 @@
     <link rel="alternate" type="application/atom+xml"
                            title="雪山 — Flux Atom"
                            href="/" /> 
-
-    <script type="text/javascript" src="/theme/js/microTags.js"></script>
-    <script>
-      function tag_cloud_init() {
-        var ul = document.getElementById("tag-cloud");
-        window.tagCloud = new microTags(ul, {
-          'min-size': .95,
-          'max-size': 3.5,
-          'min-angle': -8,
-          'max-angle': 8
-        });
-      }
-      if (window.addEventListener) window.addEventListener("load", tag_cloud_init, false);
-      else if (window.attachEvent) window.attachEvent("onload", tag_cloud_init);
-      else window.onload = tag_cloud_init;
-    </script>
   </head>
   <body>
     <div id="page">
@@ -40,12 +24,37 @@
       
       <div id="page-body">
         <section id="page-main" role="main">
-      <h1>Mots-clés</h1>
-      <ul id="tag-cloud">
-      <li data-count="1" title="1 article(s)"><a href="/tag/python.html">python</a></li>
-      <li data-count="1" title="1 article(s)"><a href="/tag/ce-shi.html">测试</a></li>
-      </ul>
-      </section> <!-- /#page-main -->
+      <h1 class="small-title">Articles avec le mot clé « python » :</h1>
+     
+        
+      <article class="post">
+        <header class="post-header">
+          <h1>
+            <a rel="bookmark"
+               href="/first-post.html"
+               title="Lien permanent vers «第一篇测试文章»">
+               第一篇测试文章
+            </a>
+          </h1>
+          <div class="meta">
+<!-- includes/article_meta.html -->
+            Le <time datetime="2017-08-08T20:00:00+08:00">二 08 八月 2017</time>
+            dans «<a href="/category/ce-shi.html">测试</a>» 
+            par <a href="/author/xue-shan.html">雪山</a>              <br />Mots-clés:              <a rel="tag" href="/tag/python.html">python</a>,               <a rel="tag" href="/tag/ce-shi.html">测试</a>          </div>
+        </header>
+        <div class="post-content"> 
+          <p>我的第一篇博文.</p>
+        </div>
+        <footer class="post-footer">
+          <a class="readmore" href="/first-post.html">Lire la suite...</a>
+        </footer>
+      </article>
+      <nav id="pagination">   <!-- <span id="first_page" class="a inactive">&#60;&#60;</span>
+        <span id="first_page" class="a inactive">&#60;</span> -->
+        <span class="a active">1</span>
+   <!-- <span id="next_page" class="a inactive">&#62;</span>
+        <span id="next_page" class="a inactive">&#62;&#62;</span> -->
+</nav>      </section> <!-- /#page-main -->
 
         <aside id="page-side">
           <!-- begin includes/sidebar.html -->
