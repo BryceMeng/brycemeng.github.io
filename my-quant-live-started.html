@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>谈清华男的猝死2015 - 雪山</title>
+    <title>我的量化交易 - 雪山</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,20 +10,20 @@
 
     <link href="/images/favicon.png" rel="icon">
 
-<link rel="canonical" href="/sorry-to.html">
+<link rel="canonical" href="/my-quant-live-started.html">
 
         <meta name="author" content="雪山" />
-        <meta name="keywords" content="杂谈" />
-        <meta name="description" content="谈清华男的猝死2015，听到新闻的这天早上所写" />
+        <meta name="keywords" content="量化" />
+        <meta name="description" content="我的量化交易，当时写这篇文章时有点小激动啊" />
 
         <meta property="og:site_name" content="雪山" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="谈清华男的猝死2015"/>
-        <meta property="og:url" content="/sorry-to.html"/>
-        <meta property="og:description" content="谈清华男的猝死2015，听到新闻的这天早上所写"/>
-        <meta property="article:published_time" content="2015-04-09" />
-            <meta property="article:section" content="日常" />
-            <meta property="article:tag" content="杂谈" />
+        <meta property="og:title" content="我的量化交易"/>
+        <meta property="og:url" content="/my-quant-live-started.html"/>
+        <meta property="og:description" content="我的量化交易，当时写这篇文章时有点小激动啊"/>
+        <meta property="article:published_time" content="2016-12-22" />
+            <meta property="article:section" content="量化" />
+            <meta property="article:tag" content="量化" />
             <meta property="article:author" content="雪山" />
 
 
@@ -61,10 +61,10 @@
                         <li >
                             <a href="/category/ji-zhu.html">技术</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="/category/liang-hua.html">量化</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="/category/ri-chang.html">日常</a>
                         </li>
             </ul>
@@ -83,10 +83,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/sorry-to.html"
+                    <a href="/my-quant-live-started.html"
                        rel="bookmark"
-                       title="Permalink to 谈清华男的猝死2015">
-                        谈清华男的猝死2015
+                       title="Permalink to 我的量化交易">
+                        我的量化交易
                     </a>
                 </h1>
             </header>
@@ -96,7 +96,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-04-09T08:29:00+08:00"> 四 09 四月 2015</time>
+        <i class="fa fa-calendar"></i><time datetime="2016-12-22T20:12:00+08:00"> 四 22 十二月 2016</time>
     </span>
 
 
@@ -104,45 +104,63 @@
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/za-tan.html">杂谈</a>
+	<a href="/tag/liang-hua.html">量化</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=38358214&auto=1&height=66"></iframe>
-
-<p>去年华为旗下海思公司无线芯片开发部部长42岁王劲在加班时猝死，今年这位36岁的高材生猝死。</p>
-<p>大家都在说公司疯狂的催促项目进度导致了他加班过多，为了项目活活累死了，公司没人情味。原因仅仅如此吗？这可能只是个导火索，背后应该还有更深层次的原因。</p>
+                <p>我是一名程序猿，非常想进入量化行业的程序猿，为什么我想进入量化行业呢？</p>
+<p>从2008年入坑炒股，到现在总盈利5W，10%，中间经历过大小行情很多个，发现人工交易的弱点非常明显，<strong>心里因素</strong>，有时候股价下跌，我非常有信心的认为这是调整，不用卖，可真跌了5%再回升到2%时，立刻就抛了，因为怕(<strong>前景理论 Prospect Theory</strong>)。</p>
+<p>在2013年底的时候，我非常想做一件事情就是把一些简单的短线规律实现到股票软件上，给上涨线画个红色向上的箭头。因为有位神秘人物有着非常严谨的人工交易逻辑，但是我又不太懂，所以我想用程序来实现这些逻辑。这些逻辑比股软上的公式要复杂，股软根本实现不了，怎么办呢？我当时做了两件事</p>
+<ol>
+<li>下载了一个开源的股票软件</li>
+<li>下载了一套连接某券商行情的代码(crack)</li>
+</ol>
+<p>这套行情代码非原创，但是非常难编译，需要Matlab和Boost库，还需要一系列貌似在Linux下才用得到的库，我花了一个星期的时间还真给编译出来了，最神奇的事情是还能用，真有行情。后来我把这个行情引入到了这款开源的股软上，我真在60分钟K线上实现了一套非常简单的无交易策略，只做展示用：在我认为会涨的K线下面画个红色上涨的箭头。</p>
+<p>后来这套东西也没怎么用，用C++写策略有点复杂，写个MACD啥的都费劲。。。逻辑不复杂，但是在开源股软里面硬插入策略是非常难受的，取数据，画图什么的，很麻烦。所以就慢慢就放弃了。</p>
+<p>其实去年和今年我都没有碰股市，因为我觉得人工交易需要的时间太多了。之前提到的那位神秘人物一直在我背后给我指点，他做人工交易付出的时间让我有点害怕，我觉得以我现在白天被虐，晚上还有可能被加班的情况，做人工交易从科学上来讲是必定会亏的，简单来讲就是付出少回报多这个事情不太可能发生。</p>
+<p>现在回想起来，其实在2013年底我是在做股票的类CTA策略，基于股价和成交量关系来对未来进行预测。</p>
+<p>为什么今年又有了这个冲动，今年在听一个技术Live时，发现主讲人，也是我的偶像在搞量化基金，而且他还听了一个知乎Live“<a href="https://www.zhihu.com/lives/749262897309315072">金融外行如何入门量化交易</a>”，我就好奇去听了一下。听完后根据里面的内容在网上一搜，发现大量的量化平台已经崛起，我当年花了九牛二虎之力搞的行情现在完全免费了，我在想：<strong>量化交易时代到来</strong>。对于我们程序猿来讲，是不是另外一个能实现自我价值的机会呢？</p>
+<p>和好友交流了这个想法之后决定开始干。</p>
+<p>迷茫，对于量化和我这个门外汉来讲就这个词来形容最准确。此时我做了如下几件事：</p>
 <ol>
 <li>
-<p>基本演译法来分析一下。网上没有张斌的家庭资料，但是说到女儿去年刚出生，说明35岁才生孩子，应该是晚婚或者晚育，晚婚无疑几种情况，要求太高一直想玩，不想被婚姻的枷索套住；另一种就是家庭条件不好，家庭条件不好一般会让人缺乏自信，他自身可能会觉得需要更多的经济基础才能娶妻，实在人。网上说到他把家人也接到了深圳来住，当然孝道为先这是非常好的事情，这也说明一件事情，他的家人对他的依赖性非常大，很有可能父母都是老实人，老年人现在面临最严重的问题就是老年人的娱乐活动，从这里来看他的父母可能是缺乏娱乐活动的。还有一条非常重要的线索 ” 斌的为人很好，事业也在稳步上升中，很多公司邀请他加入，待遇非常优厚，对加班时间也有限制。可是斌的责任心太强了，对公司太忠诚了，作为项目负责人他要把项目做好，他婉拒了一家又一家公司，为了这个项目把自己活活累死了。“ 这是他妻子说的。责任感极强的这点说明了他晚婚很有可能是由于家庭条件问题，而非想多玩几年，这就推算出了他的家庭教育还比较传统，安心做好事就行，那么他的家人就是一家很传统很善良的人，他现在的工作就是为了钱。</p>
+<p>看了两本入门书籍：《打开量化投资的黑箱》《西蒙斯用公式打败市场的故事》；</p>
 </li>
 <li>
-<p>中国人民是最有忍耐力的族群，不记得是哪位说的了。其实也不全对，说实话忍耐力强不强与家庭环境相关，不是纯粹的经济环境。如果张斌的父母或者妻子对他说，没必要超出自己的体能极限去加班，钱多买不了健康，我们更希望看到你健康，或者张斌的妻子或者父母会营造一个非常舒适的家庭环境，让张斌感觉到家庭的温暖，或者张斌会更喜欢家庭生活而非住在公司旁边的酒店，而且女儿去年才出生。这里也就说明张斌的压力非常大？</p>
+<p>把知乎上与量化相关的live都听了下，最终只听了与股票和期货相关的；</p>
 </li>
 <li>
-<p>张斌的压力真的很大吗？以他的工年龄和他现在的职位，我猜一年不可能少于50万吧，已经超过很多人，我猜应该是有车有房了，经济方面其实已经可以了，为什么我不换个轻松点的，钱少点的职位，反正基础设施已经弄好了？但是张斌会这么想：我就是因为辛苦工作获得了这么多，万一我换个工作钱不多了怎么办？没钱的我的家人怎么办？他会始终跳不出这个思维定势。</p>
+<p>看了一套优酷上的量化36节公开课；</p>
 </li>
 <li>
-<p>总体来讲张斌的情况在经济条件一般的家庭当中更多发生，其实根据我的观察在一线城市经济水平总体靠前的家庭当中，这种情况很少发生，这也许和经济条件相关，但也讲和接受的文化相关。现在中国其实已经是资本主义，我目测应该在初期吧，资本主义是以利益为目的，和西方国家早期应该一样，本质就是不断的剥削，而中国的教育本质就是要听话，这样一个愿打，一个愿挨，难免会有这样的悲剧发生。</p>
+<p>阅读了CTP协议，因为我打算从CTA策略开始入门。高频，套利现在做的人多，而且我们一下子还没有那么高的硬件和网络环境，所以CTA最适合；</p>
 </li>
 <li>
-<p>能长期加班不管身体，直到死亡（在去世之前身体肯定发出过N多警报），这得是多大的压力下才能干出来的事情，默哀。我觉得不管家庭环境怎么样，或者以前受的什么教育，做为工作中的小屌丝要为自己的生命负责，把生活变成自己的，家庭和生活可能才是安心工作的根源，不要把主次颠倒。还有我想和苦逼岗位上的人说一句，其实你很棒，生活要靠自己去选择。</p>
+<p>用了VNPY框架来做为我的入门框架，在Ubuntu 16.04和Win 10 To Go上都成功运行；</p>
 </li>
 </ol>
-<p>感谢我的家人和公司，让我有了现在的生活</p>
-<blockquote>
-<p>写在2017-08-10转移博客时：
-我工作10年了，其实我发现找准自己的生活目标，知道自己为什么而活才是最重要的，这样自己才能有非常强的自我修复能力去抵抗这些外界的压迫。为你自己而活。</p>
-</blockquote>
+<p>计划：</p>
+<ol>
+<li>今晚用VNPY把基于CTP的Tick数据拿到手了，准备把Tick数据详细分析一下；
+<img alt="My Program" src="http://sinacloud.net/mhblog/2016/12/1.png"></li>
+<li>把常见的，已经存在的CTA策略先用VNPY实现，同时阅读期货相关书籍；</li>
+<li>每天阅读国外的量化相关文章(<a href="https://www.zhihu.com/question/20874888">量化投资方面，国内外都有哪些好的论坛或者网站</a>)；</li>
+<li>把神秘人物的策略用VNPY实现；</li>
+<li>后面的计划还没有想好，先把前3点实施好吧，不能太急。</li>
+</ol>
+<p>我个人觉得，现在量化和主观是不是有点脱节？我觉得如果能结合，是不是更好呢？</p>
+<p>这1个多月以来，感觉量化这个行业门槛非常高，数学，股市，期货，金融心理，程序都要有所涉及，我和我的好友深感这个行当中的困难，不过这些都将会被我们的努力慢慢侵蚀掉，也希望其他想进入该行业的朋友能一起努力。</p>
+<p>这篇就是我想入门量化行业的一篇杂文，没啥含量，借此文记录我的量化成长历程。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/make-android-to-hifi.html">Android手机能变Hifi播放器？</a></li>
-        <li><a href="/tech-meet-content.html">当技术遇到内容</a></li>
-        <li><a href="/opendata-read-note.html">《开放数据》读后感</a></li>
-        <li><a href="/train-for-scrum.html">我的一次敏捷培训</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
     </ul>
 </section>
         </article>

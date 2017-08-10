@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>用CTP接口实现期货交易明细分析(1) - 雪山</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="/images/favicon.png" rel="icon">
+
+<link rel="canonical" href="/ctp-archive-future-tick.html">
+
+        <meta name="author" content="雪山" />
+        <meta name="keywords" content="量化" />
+        <meta name="description" content="用CTP接口实现期货交易明细分析第一篇，刚接触期货这玩意儿真是头大" />
+
+        <meta property="og:site_name" content="雪山" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="用CTP接口实现期货交易明细分析(1)"/>
+        <meta property="og:url" content="/ctp-archive-future-tick.html"/>
+        <meta property="og:description" content="用CTP接口实现期货交易明细分析第一篇，刚接触期货这玩意儿真是头大"/>
+        <meta property="article:published_time" content="2017-01-10" />
+            <meta property="article:section" content="量化" />
+            <meta property="article:tag" content="量化" />
+            <meta property="article:author" content="雪山" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="/images/favicon.png" width="24"/> 雪山            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="/category/ji-zhu.html">技术</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/liang-hua.html">量化</a>
+                        </li>
+                        <li >
+                            <a href="/category/ri-chang.html">日常</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/ctp-archive-future-tick.html"
+                       rel="bookmark"
+                       title="Permalink to 用CTP接口实现期货交易明细分析(1)">
+                        用CTP接口实现期货交易明细分析(1)
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-01-10T21:12:00+08:00"> 二 10 一月 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/liang-hua.html">量化</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>简单来讲就是我自己用CTP接口拿来了tick数据来做分析，期望达到一些期货软件交易明细功能所产生的效果。由于我不是行内人，所以有些地方可能实现得不是很合理或者有误，请大家指点或者提出来，非常感谢。</p>
+<p>本篇文章只把代码贴出来，下一篇基于代码讲程序的流程。</p>
+<p>希望通过这个实践达到如下目的：</p>
+<ol>
+<li>熟悉CTP接口</li>
+<li>熟悉期货的盘口分析</li>
+</ol>
+<p>我是基于vn.py框架上做的开发，先看看期望达成的效果和我的成果</p>
+<h3>目的</h3>
+<p><img alt="目的" src="http://sinacloud.net/mhblog/2017/1/1.png"></p>
+<h3>成果</h3>
+<p><img alt="成果" src="http://sinacloud.net/mhblog/2017/1/2.png"></p>
+<h3>CTP接口</h3>
+<p>CTP接口这里不多说，去看看官方文档即可：<a href="http://link.zhihu.com/?target=http%3A//www.sfit.com.cn/5_2_DocumentDown.htm">CTP官方文档下载</a></p>
+<p>我用到了行情查询相关的接口，先订阅，再在回调函数中处理每个tick数据。说到这里，个人觉得CTP要是能开源就好了，这样就能自己编译在mac下的版本了，哈哈，真想把CTP的dll文件反编译掉。现在我自己搞了个WindowsToGo在mac上跑着的，想装个B真不容易。</p>
+<p>而且如果开源的话，说不定能在CTP实现层大大提高效率。而此时我们只能在CTP的上层做文章，当然我暂时不会做HFT，也无所谓了。</p>
+<h3>我的程序</h3>
+<p>我用到的数据是我们常说的tick数据，我的tick数据的知识还来自于<a href="https://www.zhihu.com/question/26950456">Tick 数据在技术上究竟是什么东西？</a></p>
+<p>通过这篇文章、CTP开发文档还有自己对期货行情的观察可以看出通过CTP接口订阅到的tick数据其实不是order book 每次发生变化发送的通知，而是1秒钟两次的快照数据，准确的应该是说两次快照间的统计数据。</p>
+<p>而这个实例当中有一部分（计算单的类型：多开，空开，计算对手单的组成）是根据order book 只变化一次来进行编写的，所以这部分是不准确的，像有朋友开玩笑说，期货软件里面这部分数据也是忽悠小白的。不管怎样拥有分析tick数据的技能是不忽悠的。</p>
+<p>直接上代码吧，哎呦，知乎也能贴代码了，不过没有语法高亮，知乎，加油哦</p>
+<p>把代码放在vn.py项目的\vnpy\vn.ctp\vnctpmd\test\目录下就可以执行啦，需要源码的朋友也可以到我的github上去下载。程序主要是两部分，一部分是Enum和字典定义，第二部分是根据当前tick和上一个tick算出我们要的值，详细分析请见下一篇文章。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/24671222">用CTP接口实现期货交易明细分析(2)</a></p>
+<p><a href="http://link.zhihu.com/?target=https%3A//github.com/mhxueshan/VnpyStudy">TickAnalysis on github</a></p>
+<div class="highlight"><pre><span></span><span class="c1"># 仓位变化方向</span>
+<span class="n">open_interest_delta_forward_enum</span> <span class="o">=</span> <span class="n">enum</span><span class="p">(</span><span class="n">OPEN</span><span class="o">=</span><span class="s2">&quot;Open&quot;</span><span class="p">,</span> <span class="n">CLOSE</span><span class="o">=</span><span class="s2">&quot;Close&quot;</span><span class="p">,</span> <span class="n">EXCHANGE</span><span class="o">=</span><span class="s2">&quot;Exchange&quot;</span><span class="p">,</span> <span class="n">NONE</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
+                                        <span class="n">OPENFWDOUBLE</span><span class="o">=</span><span class="s2">&quot;OpenFwDouble&quot;</span><span class="p">,</span> <span class="n">CLOSEFWDOUBLE</span><span class="o">=</span><span class="s2">&quot;CloseFwDOuble&quot;</span><span class="p">)</span>
+<span class="c1"># 订单成交区域，决定是多还是空</span>
+<span class="n">order_forward_enum</span> <span class="o">=</span> <span class="n">enum</span><span class="p">(</span><span class="n">UP</span><span class="o">=</span><span class="s2">&quot;Up&quot;</span><span class="p">,</span> <span class="n">DOWN</span><span class="o">=</span><span class="s2">&quot;Down&quot;</span><span class="p">,</span> <span class="n">MIDDLE</span><span class="o">=</span><span class="s2">&quot;Middle&quot;</span><span class="p">)</span>
+
+<span class="c1"># 最终需要的tick方向</span>
+<span class="n">tick_type_enum</span> <span class="o">=</span> <span class="n">enum</span><span class="p">(</span><span class="n">OPENLONG</span><span class="o">=</span><span class="s2">&quot;OpenLong&quot;</span><span class="p">,</span> <span class="n">OPENSHORT</span><span class="o">=</span><span class="s2">&quot;OpenShort&quot;</span><span class="p">,</span> <span class="n">OPENDOUBLE</span><span class="o">=</span><span class="s2">&quot;OpenDouble&quot;</span><span class="p">,</span>
+                      <span class="n">CLOSELONG</span><span class="o">=</span><span class="s2">&quot;CloseLong&quot;</span><span class="p">,</span> <span class="n">CLOSESHORT</span><span class="o">=</span><span class="s2">&quot;CloseShort&quot;</span><span class="p">,</span> <span class="n">CLOSEDOUBLE</span><span class="o">=</span><span class="s2">&quot;CloseDouble&quot;</span><span class="p">,</span>
+                      <span class="n">EXCHANGELONG</span><span class="o">=</span><span class="s2">&quot;ExchangeLong&quot;</span><span class="p">,</span> <span class="n">EXCHANGESHORT</span><span class="o">=</span><span class="s2">&quot;ExchangeShort&quot;</span><span class="p">,</span>
+                      <span class="n">OPENUNKOWN</span><span class="o">=</span><span class="s2">&quot;OpenUnkown&quot;</span><span class="p">,</span> <span class="n">CLOSEUNKOWN</span><span class="o">=</span><span class="s2">&quot;CloseUnkown&quot;</span><span class="p">,</span> <span class="n">EXCHANGEUNKOWN</span><span class="o">=</span><span class="s2">&quot;ExchangeUnkown&quot;</span><span class="p">,</span>
+                      <span class="n">UNKOWN</span><span class="o">=</span><span class="s2">&quot;Unkown&quot;</span><span class="p">,</span> <span class="n">NOCHANGE</span><span class="o">=</span><span class="s2">&quot;NoChange&quot;</span><span class="p">)</span>
+
+<span class="n">tick_color_enum</span> <span class="o">=</span> <span class="n">enum</span><span class="p">(</span><span class="n">RED</span><span class="o">=</span><span class="s2">&quot;Red&quot;</span><span class="p">,</span> <span class="n">GREEN</span><span class="o">=</span><span class="s2">&quot;Green&quot;</span><span class="p">,</span> <span class="n">WHITE</span><span class="o">=</span><span class="s2">&quot;White&quot;</span><span class="p">)</span>
+
+<span class="n">tick_type_key_enum</span> <span class="o">=</span> <span class="n">enum</span><span class="p">(</span><span class="n">TICKTYPE</span><span class="o">=</span><span class="s2">&quot;TickType&quot;</span><span class="p">,</span> <span class="n">TICKCOLOR</span><span class="o">=</span><span class="s2">&quot;TickColor&quot;</span><span class="p">)</span>
+
+<span class="c1"># 只与计算对手单的组成相关</span>
+<span class="n">opponent_key_enum</span> <span class="o">=</span> <span class="n">enum</span><span class="p">(</span><span class="n">OPPOSITE</span><span class="o">=</span><span class="s2">&quot;Opposite&quot;</span><span class="p">,</span> <span class="n">SIMILAR</span><span class="o">=</span><span class="s2">&quot;Similar&quot;</span><span class="p">)</span>
+
+<span class="c1"># 只做翻译成中文使用，对应 tick_type_enum</span>
+<span class="n">tick_type_str_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">tick_type_enum</span><span class="o">.</span><span class="n">OPENLONG</span><span class="p">:</span> <span class="s2">&quot;多开&quot;</span><span class="p">,</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">OPENSHORT</span><span class="p">:</span> <span class="s2">&quot;空开&quot;</span><span class="p">,</span>
+                      <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">OPENDOUBLE</span><span class="p">:</span> <span class="s2">&quot;双开&quot;</span><span class="p">,</span>
+                      <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">CLOSELONG</span><span class="p">:</span> <span class="s2">&quot;多平&quot;</span><span class="p">,</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">CLOSESHORT</span><span class="p">:</span> <span class="s2">&quot;空平&quot;</span><span class="p">,</span>
+                      <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">CLOSEDOUBLE</span><span class="p">:</span> <span class="s2">&quot;双平&quot;</span><span class="p">,</span>
+                      <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">EXCHANGELONG</span><span class="p">:</span> <span class="s2">&quot;多换&quot;</span><span class="p">,</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">EXCHANGESHORT</span><span class="p">:</span> <span class="s2">&quot;空换&quot;</span><span class="p">,</span>
+                      <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">OPENUNKOWN</span><span class="p">:</span> <span class="s2">&quot;未知开仓&quot;</span><span class="p">,</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">CLOSEUNKOWN</span><span class="p">:</span> <span class="s2">&quot;未知平仓&quot;</span><span class="p">,</span>
+                      <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">EXCHANGEUNKOWN</span><span class="p">:</span> <span class="s2">&quot;未知换仓&quot;</span><span class="p">,</span>
+                      <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">UNKOWN</span><span class="p">:</span> <span class="s2">&quot;未知&quot;</span><span class="p">,</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">NOCHANGE</span><span class="p">:</span> <span class="s2">&quot;没有变化&quot;</span><span class="p">,</span>
+                      <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">RED</span><span class="p">:</span> <span class="s2">&quot;红&quot;</span><span class="p">,</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">GREEN</span><span class="p">:</span> <span class="s2">&quot;绿&quot;</span><span class="p">,</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">WHITE</span><span class="p">:</span> <span class="s2">&quot;白&quot;</span><span class="p">}</span>
+
+<span class="c1"># 根据 open_interest_delta_forward_enum 和 order_forward_enum 计算出tick类型的字典</span>
+<span class="n">tick_type_cal_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">open_interest_delta_forward_enum</span><span class="o">.</span><span class="n">NONE</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">UP</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">NOCHANGE</span><span class="p">,</span>
+                                    <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">WHITE</span><span class="p">},</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">DOWN</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">NOCHANGE</span><span class="p">,</span>
+                                      <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">WHITE</span><span class="p">},</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">MIDDLE</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">NOCHANGE</span><span class="p">,</span>
+                                        <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">WHITE</span><span class="p">}</span>
+        <span class="p">},</span>
+    <span class="n">open_interest_delta_forward_enum</span><span class="o">.</span><span class="n">EXCHANGE</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">UP</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">EXCHANGELONG</span><span class="p">,</span>
+                                    <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">RED</span><span class="p">},</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">DOWN</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">EXCHANGESHORT</span><span class="p">,</span>
+                                      <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">GREEN</span><span class="p">},</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">MIDDLE</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">EXCHANGEUNKOWN</span><span class="p">,</span>
+                                        <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">WHITE</span><span class="p">}</span>
+        <span class="p">},</span>
+    <span class="n">open_interest_delta_forward_enum</span><span class="o">.</span><span class="n">OPENFWDOUBLE</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">UP</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">OPENDOUBLE</span><span class="p">,</span>
+                                    <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">RED</span><span class="p">},</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">DOWN</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">OPENDOUBLE</span><span class="p">,</span>
+                                      <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">GREEN</span><span class="p">},</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">MIDDLE</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">OPENDOUBLE</span><span class="p">,</span>
+                                        <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">WHITE</span><span class="p">}</span>
+        <span class="p">},</span>
+    <span class="n">open_interest_delta_forward_enum</span><span class="o">.</span><span class="n">OPEN</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">UP</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">OPENLONG</span><span class="p">,</span>
+                                    <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">RED</span><span class="p">},</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">DOWN</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">OPENSHORT</span><span class="p">,</span>
+                                      <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">GREEN</span><span class="p">},</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">MIDDLE</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">OPENUNKOWN</span><span class="p">,</span>
+                                        <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">WHITE</span><span class="p">}</span>
+        <span class="p">},</span>
+    <span class="n">open_interest_delta_forward_enum</span><span class="o">.</span><span class="n">CLOSEFWDOUBLE</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">UP</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">CLOSEDOUBLE</span><span class="p">,</span>
+                                    <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">RED</span><span class="p">},</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">DOWN</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">CLOSEDOUBLE</span><span class="p">,</span>
+                                      <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">GREEN</span><span class="p">},</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">MIDDLE</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">CLOSEDOUBLE</span><span class="p">,</span>
+                                        <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">WHITE</span><span class="p">}</span>
+        <span class="p">},</span>
+    <span class="n">open_interest_delta_forward_enum</span><span class="o">.</span><span class="n">CLOSE</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">UP</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">CLOSESHORT</span><span class="p">,</span>
+                                    <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">RED</span><span class="p">},</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">DOWN</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">CLOSELONG</span><span class="p">,</span>
+                                      <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">GREEN</span><span class="p">},</span>
+            <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">MIDDLE</span><span class="p">:</span> <span class="p">{</span><span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKTYPE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">CLOSEUNKOWN</span><span class="p">,</span>
+                                        <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">WHITE</span><span class="p">}</span>
+        <span class="p">},</span>
+<span class="p">}</span>
+
+
+<span class="c1"># input1 计算订单是在ask范围内成交还是在bid范围内成交</span>
+<span class="n">order_forward</span> <span class="o">=</span> <span class="n">TickAnalysis</span><span class="o">.</span><span class="n">get_order_forward</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;LastPrice&quot;</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;AskPrice1&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;BidPrice1&quot;</span><span class="p">],</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">PreDepthMarketData</span><span class="p">[</span><span class="s2">&quot;LastPrice&quot;</span><span class="p">],</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">PreDepthMarketData</span><span class="p">[</span><span class="s2">&quot;AskPrice1&quot;</span><span class="p">],</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">PreDepthMarketData</span><span class="p">[</span><span class="s2">&quot;BidPrice1&quot;</span><span class="p">])</span>
+<span class="c1"># input2 计算仓位变化方向</span>
+<span class="n">open_interest_delta_forward</span> <span class="o">=</span> <span class="n">TickAnalysis</span><span class="o">.</span><span class="n">get_open_interest_delta_forward</span><span class="p">(</span><span class="n">open_interest_delta</span><span class="p">,</span>
+                                            <span class="n">volume_delta</span><span class="p">)</span>
+
+<span class="c1"># f(input1,input2) = output1 根据成交区域和仓位变化方向计算出tick的类型</span>
+ <span class="n">tick_type_dict</span> <span class="o">=</span> <span class="n">tick_type_cal_dict</span><span class="p">[</span><span class="n">open_interest_delta_forward</span><span class="p">][</span><span class="n">order_forward</span><span class="p">]</span>
+</pre></div>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+    <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+    <li class="list-group-item"><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+    <li class="list-group-item"><a href="/first-post.html">欢迎来到我的博客</a></li>
+    <li class="list-group-item"><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+    <li class="list-group-item"><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-2">
+      <a href="/tag/adb.html">adb</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/android.html">Android</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/elite3.html">Elite3</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/hifi.html">hifi</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/ji-zhu.html">技术</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/liang-hua.html">量化</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/lu-you-qi.html">路由器</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/monkey.html">monkey</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/ri-chang.html">日常</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xin-li-xue.html">心理学</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="/tag/yi-wen.html">译文</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/yu-le.html">娱乐</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/za-tan.html">杂谈</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://python.org/" target="_blank">Python.org</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+    <li class="list-group-item">
+      <a href="#" target="_blank">You can modify those links in your config file</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 雪山
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+</body>
+</html>

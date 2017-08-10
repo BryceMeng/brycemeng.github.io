@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>量化中的一些注意细节(min数据合成逻辑) - 雪山</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="/images/favicon.png" rel="icon">
+
+<link rel="canonical" href="/details-in-quant-tick2min.html">
+
+        <meta name="author" content="雪山" />
+        <meta name="keywords" content="量化" />
+        <meta name="description" content="量化中的一些注意细节（tick数据合成分钟级数据）" />
+
+        <meta property="og:site_name" content="雪山" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="量化中的一些注意细节(min数据合成逻辑)"/>
+        <meta property="og:url" content="/details-in-quant-tick2min.html"/>
+        <meta property="og:description" content="量化中的一些注意细节（tick数据合成分钟级数据）"/>
+        <meta property="article:published_time" content="2017-08-10" />
+            <meta property="article:section" content="量化" />
+            <meta property="article:tag" content="量化" />
+            <meta property="article:author" content="雪山" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="/images/favicon.png" width="24"/> 雪山            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="/category/ji-zhu.html">技术</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/liang-hua.html">量化</a>
+                        </li>
+                        <li >
+                            <a href="/category/ri-chang.html">日常</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/details-in-quant-tick2min.html"
+                       rel="bookmark"
+                       title="Permalink to 量化中的一些注意细节(min数据合成逻辑)">
+                        量化中的一些注意细节(min数据合成逻辑)
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-08-10T16:35:00+08:00"> 四 10 八月 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/liang-hua.html">量化</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>这里主要针对vnpy吧，因为我在用这个平台，说到这里还是非常感谢作者，给新手们真的减少了好多的时间。</p>
+<h2><a href="https://github.com/vnpy/vnpy/issues/411">Github上的Issue</a></h2>
+<ol>
+<li>tick合成分钟线。在ctp的tick流中，有一些tick只是快照数据，并没有真正成交，也就是成交量为0的tick。这些tick现在是全部用作了分钟线的合成计算，我比较过一些数据，mc,tb的，他们的数据逻辑从我的逆向分析来讲应该是过滤掉了成交量为0的tick了的。</li>
+<li>tick合成分钟线。只判断了Minute，这样会导致一个问题，就是今天23:00:00和明天的09:00:00的tick数据会统一当做今天23:00的分钟线，其实这这分钟的tick里面只包含了一根23:00的tick，其余的全部是明天9点的。</li>
+<li>分钟线合成多分钟线。KkStrategy里面是合成的5分钟线。我做了一个测试，比如：09:00:00,09:01:00,09:02:00,09:03:00,09:04:00,09:05:00,09:06:00 这个序列，09:00:00不会参与计算，09:01:00-09:05:00会参与一个5分钟线的计算。我比较过文华的数据，他们是09:00:00-09:04:00参与的计算。</li>
+</ol>
+<h2>解决方案：</h2>
+<ol>
+<li>过滤掉没有成交量的tick就行。代码：</li>
+</ol>
+<div class="highlight"><pre><span></span> <span class="k">def</span> <span class="nf">onTick</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tick</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;收到行情TICK推送（必须由用户继承实现）&quot;&quot;&quot;</span>
+        <span class="c1"># print str(tick.__dict__)</span>
+
+        <span class="c1"># 过滤掉没有成交量的tick Issue411-1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="n">volume</span> <span class="o">==</span> <span class="n">tick</span><span class="o">.</span><span class="n">volume</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="c1"># 计算分钟线</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        在原有逻辑的基础上增加了对小时的判断，为什么呢？因为前一天的23:00:00和第二天的09:00:00的minute都是0</span>
+<span class="sd">        但是其实是在不同的小时里面了，按原有的逻辑的话，今天早上09:00:00～09:01:00的走势会作为昨天23:00的K线展示</span>
+<span class="sd">        Issue411-2</span>
+
+<span class="sd">        TODO:</span>
+<span class="sd">        1. 但是要考虑增加这个逻辑的性能消耗和实盘的一个权衡</span>
+<span class="sd">        2. 还有23:00这分钟里面一般只有两个tick，可以根据实际情况去掉</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tick_hour</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">hour</span>
+        <span class="n">tick_minute</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">minute</span>
+
+        <span class="k">if</span> <span class="n">tick_minute</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">barMinute</span> <span class="ow">or</span> <span class="n">tick_hour</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">barHour</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">minBar</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="n">volume</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">minBar</span><span class="o">.</span><span class="n">volume</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">minBar</span><span class="o">.</span><span class="n">__dict__</span>
+                    <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="n">__dict__</span>
+                    <span class="k">print</span> <span class="n">tick</span><span class="o">.</span><span class="n">__dict__</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;bar volume less than 0&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">minBar</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="n">volume</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">minBar</span><span class="o">.</span><span class="n">volume</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">onMinBar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minBar</span><span class="p">)</span>
+
+            <span class="n">bar</span> <span class="o">=</span> <span class="n">CtaBarData</span><span class="p">()</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">vtSymbol</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">vtSymbol</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">symbol</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">exchange</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">exchange</span>
+
+            <span class="n">bar</span><span class="o">.</span><span class="n">open</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">lastPrice</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">high</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">lastPrice</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">low</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">lastPrice</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">close</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">lastPrice</span>
+
+            <span class="n">bar</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">date</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">time</span><span class="p">[:</span><span class="mi">8</span><span class="p">]</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">datetime</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">second</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># K线的时间设为第一个Tick的时间</span>
+
+            <span class="c1"># 实盘中用不到的数据可以选择不算，从而加快速度</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">bar</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">tick</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tickVolumeSplitTime</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tickVolumeResetSwitch</span><span class="p">:</span>
+                        <span class="n">bar</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">tickVolumeResetSwitch</span> <span class="o">=</span> <span class="bp">True</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">bar</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="n">volume</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># 真坑，通过逆向分析发现上海期货的tick合成规则是21开始，如果前一个交易日没有夜市，则今天重新计算volume</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">tick</span><span class="o">.</span><span class="n">datetime</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="n">datetime</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">3600</span><span class="o">*</span><span class="mi">12</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">hour</span> <span class="o">&lt;</span> <span class="mi">21</span><span class="p">:</span>
+                        <span class="n">bar</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">bar</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="n">volume</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">tickVolumeResetSwitch</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="c1"># bar.openInterest = tick.openInterest</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">minBar</span> <span class="o">=</span> <span class="n">bar</span>  <span class="c1"># 这种写法为了减少一层访问，加快速度</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">barMinute</span> <span class="o">=</span> <span class="n">tick_minute</span>  <span class="c1"># 更新当前的分钟</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">barHour</span> <span class="o">=</span> <span class="n">tick_hour</span>  <span class="c1"># 更新当前的小时</span>
+
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># 否则继续累加新的K线</span>
+            <span class="n">bar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minBar</span>  <span class="c1"># 写法同样为了加快速度</span>
+
+            <span class="n">bar</span><span class="o">.</span><span class="n">high</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">high</span><span class="p">,</span> <span class="n">tick</span><span class="o">.</span><span class="n">lastPrice</span><span class="p">)</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">low</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">low</span><span class="p">,</span> <span class="n">tick</span><span class="o">.</span><span class="n">lastPrice</span><span class="p">)</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">close</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">lastPrice</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span> <span class="o">=</span> <span class="n">tick</span>
+</pre></div>
+
+
+<ol>
+<li>加上Hour的过滤就行，可以参考上面的代码。</li>
+<li>改了一些逻辑，看代码：</li>
+</ol>
+<div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">onMinBar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bar</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;收到Bar推送（必须由用户继承实现）&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtMinBarCount</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># 特殊处理分钟线，减少后面处理时间</span>
+        <span class="c1"># TODO: 实盘时一定要精简代码，不要太多if else，减少处理时间</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiFramePeriod</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">onMultiFrameBar</span><span class="p">(</span><span class="n">bar</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># 如果当前是一个K线周期走完</span>
+        <span class="c1"># TODO:这时的计算逻辑比较简单，计算正确的前提是每个小时的开始是从0分开始，</span>
+        <span class="c1"># TODO:否则就会出错，也就是要保证该品种的活跃度要达到每分钟内必须有成交量</span>
+        <span class="k">if</span> <span class="n">bar</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">minute</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiFramePeriod</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># 如果已经有聚合5分钟K线</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiFrameBar</span><span class="p">:</span>
+                <span class="n">mmBar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiFrameBar</span>
+                <span class="c1"># 推送5分钟线数据</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">onMultiFrameBar</span><span class="p">(</span><span class="n">mmBar</span><span class="p">)</span>
+                <span class="c1"># 清空5分钟线数据缓存</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">multiFrameBar</span> <span class="o">=</span> <span class="bp">None</span>
+
+            <span class="c1"># clark add 建立缓存，不应该在下一分钟建立缓存</span>
+            <span class="c1"># print &#39;init 5 bar &#39; + str(bar.datetime)</span>
+            <span class="n">mmBar</span> <span class="o">=</span> <span class="n">CtaBarData</span><span class="p">()</span>
+
+            <span class="n">mmBar</span><span class="o">.</span><span class="n">vtSymbol</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">vtSymbol</span>
+            <span class="n">mmBar</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">symbol</span>
+            <span class="n">mmBar</span><span class="o">.</span><span class="n">exchange</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">exchange</span>
+
+            <span class="n">mmBar</span><span class="o">.</span><span class="n">open</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">open</span>
+            <span class="n">mmBar</span><span class="o">.</span><span class="n">high</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">high</span>
+            <span class="n">mmBar</span><span class="o">.</span><span class="n">low</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">low</span>
+            <span class="n">mmBar</span><span class="o">.</span><span class="n">close</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">close</span>
+
+            <span class="n">mmBar</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">date</span>
+            <span class="n">mmBar</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">time</span>
+            <span class="n">mmBar</span><span class="o">.</span><span class="n">datetime</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">datetime</span>
+
+            <span class="n">mmBar</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">volume</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">multiFrameBar</span> <span class="o">=</span> <span class="n">mmBar</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 如果没有缓存则新建</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiFrameBar</span><span class="p">:</span>
+                <span class="n">mmBar</span> <span class="o">=</span> <span class="n">CtaBarData</span><span class="p">()</span>
+
+                <span class="n">mmBar</span><span class="o">.</span><span class="n">vtSymbol</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">vtSymbol</span>
+                <span class="n">mmBar</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">symbol</span>
+                <span class="n">mmBar</span><span class="o">.</span><span class="n">exchange</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">exchange</span>
+
+                <span class="n">mmBar</span><span class="o">.</span><span class="n">open</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">open</span>
+                <span class="n">mmBar</span><span class="o">.</span><span class="n">high</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">high</span>
+                <span class="n">mmBar</span><span class="o">.</span><span class="n">low</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">low</span>
+                <span class="n">mmBar</span><span class="o">.</span><span class="n">close</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">close</span>
+
+                <span class="n">mmBar</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">date</span>
+                <span class="n">mmBar</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">time</span>
+                <span class="n">mmBar</span><span class="o">.</span><span class="n">datetime</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">datetime</span>
+
+                <span class="n">mmBar</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">volume</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">multiFrameBar</span> <span class="o">=</span> <span class="n">mmBar</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">mmBar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiFrameBar</span>
+                <span class="n">mmBar</span><span class="o">.</span><span class="n">high</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">mmBar</span><span class="o">.</span><span class="n">high</span><span class="p">,</span> <span class="n">bar</span><span class="o">.</span><span class="n">high</span><span class="p">)</span>
+                <span class="n">mmBar</span><span class="o">.</span><span class="n">low</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">mmBar</span><span class="o">.</span><span class="n">low</span><span class="p">,</span> <span class="n">bar</span><span class="o">.</span><span class="n">low</span><span class="p">)</span>
+                <span class="n">mmBar</span><span class="o">.</span><span class="n">close</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">close</span>
+                <span class="n">mmBar</span><span class="o">.</span><span class="n">volume</span> <span class="o">+=</span> <span class="n">bar</span><span class="o">.</span><span class="n">volume</span>
+</pre></div>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+    <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+    <li class="list-group-item"><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+    <li class="list-group-item"><a href="/first-post.html">欢迎来到我的博客</a></li>
+    <li class="list-group-item"><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+    <li class="list-group-item"><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-2">
+      <a href="/tag/adb.html">adb</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/android.html">Android</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/elite3.html">Elite3</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/hifi.html">hifi</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/ji-zhu.html">技术</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/liang-hua.html">量化</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/lu-you-qi.html">路由器</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/monkey.html">monkey</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/ri-chang.html">日常</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xin-li-xue.html">心理学</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="/tag/yi-wen.html">译文</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/yu-le.html">娱乐</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/za-tan.html">杂谈</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://python.org/" target="_blank">Python.org</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+    <li class="list-group-item">
+      <a href="#" target="_blank">You can modify those links in your config file</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 雪山
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+</body>
+</html>
