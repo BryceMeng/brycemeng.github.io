@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>阅读英文书箱的小工具 - 雪山</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="/images/favicon.png" rel="icon">
+
+<link rel="canonical" href="/formar-tools-in-reading-quant-book.html">
+
+        <meta name="author" content="雪山" />
+        <meta name="keywords" content="量化" />
+        <meta name="description" content="阅读英文书箱的小工具，主要是进行格式化，方便拷贝到google translate进行翻译" />
+
+        <meta property="og:site_name" content="雪山" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="阅读英文书箱的小工具"/>
+        <meta property="og:url" content="/formar-tools-in-reading-quant-book.html"/>
+        <meta property="og:description" content="阅读英文书箱的小工具，主要是进行格式化，方便拷贝到google translate进行翻译"/>
+        <meta property="article:published_time" content="2017-08-11" />
+            <meta property="article:section" content="量化" />
+            <meta property="article:tag" content="量化" />
+            <meta property="article:author" content="雪山" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+
+
+    <!-- baidu Statistics -->
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?a7cd0e317621471e586bf369894135aa";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="/images/favicon.png" width="24"/> 雪山            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="/category/ji-zhu.html">技术</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/liang-hua.html">量化</a>
+                        </li>
+                        <li >
+                            <a href="/category/ri-chang.html">日常</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/formar-tools-in-reading-quant-book.html"
+                       rel="bookmark"
+                       title="Permalink to 阅读英文书箱的小工具">
+                        阅读英文书箱的小工具
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-08-11T17:59:00+08:00"> 五 11 八月 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/liang-hua.html">量化</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h3>使用场景</h3>
+<p><a href="trading-systems-reading-note.html">Trading System 读书笔记</a>,哈哈，其实就是用来看英文文档用的，为什么要用这款软件呢？因为在Ubuntu上用自带的软件打开pdf后，把内容拷贝下来后，格式是有点混乱的，再放在google translate里面翻译时就会导致不连贯而使结果不准确。</p>
+<p>主要有以下几点：</p>
+<ul>
+<li>一个句子被隔断了</li>
+<li>一个断落该换行时而没被换行</li>
+<li>有些字符后面拷贝出来后某名的给你在后面加了空格，导致一个单词一分为二</li>
+<li>隔页拷贝的时候，会把页脚和页眉也拷贝进去，关键还是给你夹在句子当中的</li>
+</ul>
+<h3>使用前提</h3>
+<p>操作系统：Ubuntu</p>
+<p>书箱格式：Pdf</p>
+<p>软件：Ubuntu自带阅读软件</p>
+<h3>如何使用</h3>
+<ol>
+<li>提前打开软件。<blockquote>
+<p>./TranPdfUbuntu.py</p>
+</blockquote>
+</li>
+<li>在阅读软件里面把内容拷贝好</li>
+<li>按Ctrl+B。这个操作过后，内容在剪切板里已经格式化好了</li>
+<li>粘贴到google translate里面</li>
+</ol>
+<h3>代码</h3>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: UTF-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">about key binder</span>
+<span class="sd">https://gist.github.com/lesthack/1302380</span>
+<span class="sd">http://programtalk.com/python-examples/keybinder.bind/</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">keybinder</span>
+<span class="kn">import</span> <span class="nn">gtk</span>
+
+<span class="n">TRAN_KEY_STR</span> <span class="o">=</span> <span class="s2">&quot;&lt;Ctrl&gt;B&quot;</span>
+<span class="n">EXIT_KEY_STR</span> <span class="o">=</span> <span class="s2">&quot;&lt;Ctrl&gt;&lt;Alt&gt;C&quot;</span>
+
+<span class="n">COUNT</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">BOOK_NAME</span> <span class="o">=</span> <span class="s2">&quot;TRADING SYSTEMS AND METHODS&quot;</span>
+<span class="n">TITLES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Introduction&quot;</span><span class="p">,</span> <span class="s2">&quot;Basic Concepts and Calculations&quot;</span><span class="p">,</span> <span class="s2">&quot;Charting&quot;</span><span class="p">,</span> <span class="s2">&quot;Cycle Analysis&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Volume, Open Interest and Breadth&quot;</span><span class="p">,</span> <span class="s2">&quot;Spreads and Arbitrage&quot;</span><span class="p">,</span> <span class="s2">&quot;Behavioral Techniques&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Pattern Recognition&quot;</span><span class="p">,</span> <span class="s2">&quot;Day Trading&quot;</span><span class="p">]</span>
+<span class="n">FUS_STR</span> <span class="o">=</span> <span class="s2">&quot;|!@#&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">ltrim_number</span><span class="p">(</span><span class="n">strr</span><span class="p">):</span>
+    <span class="n">strr</span> <span class="o">=</span> <span class="n">strr</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_str_int</span><span class="p">(</span><span class="n">strr</span><span class="p">[</span><span class="o">-</span><span class="n">i</span><span class="p">]):</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">strr</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">strr</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+
+
+<span class="k">def</span> <span class="nf">title_end_with</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">TITLES</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">text</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">title</span><span class="o">+</span><span class="s2">&quot; &quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">title</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">is_str_int</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="c1"># Handle the exception</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+
+<span class="k">def</span> <span class="nf">callback_exit</span><span class="p">(</span><span class="n">user_data</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">print</span> <span class="s1">&#39;traslate </span><span class="si">%d</span><span class="s1"> times&#39;</span> <span class="o">%</span> <span class="n">COUNT</span>
+    <span class="k">print</span> <span class="s2">&quot;unbinding ...&quot;</span>
+    <span class="n">keybinder</span><span class="o">.</span><span class="n">unbind</span><span class="p">(</span><span class="n">TRAN_KEY_STR</span><span class="p">)</span>
+    <span class="n">keybinder</span><span class="o">.</span><span class="n">unbind</span><span class="p">(</span><span class="n">EXIT_KEY_STR</span><span class="p">)</span>
+    <span class="n">gtk</span><span class="o">.</span><span class="n">main_quit</span><span class="p">()</span>
+    <span class="k">print</span> <span class="s2">&quot;exited&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">user_data</span><span class="p">):</span>
+    <span class="c1"># get txt from clipboard</span>
+    <span class="n">src_txt</span> <span class="o">=</span> <span class="n">gtk</span><span class="o">.</span><span class="n">clipboard_get</span><span class="p">()</span><span class="o">.</span><span class="n">wait_for_text</span><span class="p">()</span>
+    <span class="n">des_txt</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="c1"># translate</span>
+    <span class="n">origin_split</span> <span class="o">=</span> <span class="n">src_txt</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">origin_split</span><span class="p">:</span>
+        <span class="c1"># fix words</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;fi &quot;</span><span class="p">,</span> <span class="s2">&quot;fi&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;fl &quot;</span><span class="p">,</span> <span class="s2">&quot;fl&quot;</span><span class="p">)</span>
+
+        <span class="c1"># clear titles</span>
+        <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="n">BOOK_NAME</span><span class="p">:</span>
+            <span class="n">des_txt</span> <span class="o">=</span> <span class="n">ltrim_number</span><span class="p">(</span><span class="n">des_txt</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">des_txt</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;. &quot;</span><span class="p">):</span>
+                <span class="n">des_txt</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="c1"># clear page num</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">__len__</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">is_str_int</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="n">title_end_with</span><span class="p">(</span><span class="n">des_txt</span><span class="p">)</span>
+            <span class="n">des_txt</span> <span class="o">=</span> <span class="n">des_txt</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="o">+</span> <span class="n">FUS_STR</span>
+            <span class="n">des_txt</span> <span class="o">=</span> <span class="n">des_txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="n">FUS_STR</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">des_txt</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;. &quot;</span><span class="p">):</span>
+                <span class="n">des_txt</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="ow">and</span> <span class="n">des_txt</span><span class="o">.</span><span class="n">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">des_txt</span> <span class="o">+=</span> <span class="n">line</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">des_txt</span> <span class="o">+=</span> <span class="n">line</span>
+        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
+            <span class="n">des_txt</span> <span class="o">+=</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">des_txt</span> <span class="o">+=</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+
+    <span class="c1"># copy txt to clipboard and des txt</span>
+    <span class="n">gtk</span><span class="o">.</span><span class="n">clipboard_get</span><span class="p">()</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">des_txt</span><span class="p">)</span>
+    <span class="c1"># print count</span>
+    <span class="k">global</span> <span class="n">COUNT</span>
+    <span class="n">COUNT</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># print COUNT,</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">keybinder</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">EXIT_KEY_STR</span><span class="p">,</span> <span class="n">callback_exit</span><span class="p">,</span> <span class="s2">&quot;Keystring </span><span class="si">%s</span><span class="s2"> (user data)&quot;</span> <span class="o">%</span> <span class="n">EXIT_KEY_STR</span><span class="p">)</span>
+    <span class="n">keybinder</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">TRAN_KEY_STR</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="s2">&quot;Keystring </span><span class="si">%s</span><span class="s2"> (user data)&quot;</span> <span class="o">%</span> <span class="n">TRAN_KEY_STR</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">TRAN_KEY_STR</span><span class="p">,</span> <span class="s1">&#39;-&gt;translate </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">EXIT_KEY_STR</span><span class="p">,</span> <span class="s1">&#39;-&gt;exit&#39;</span>
+    <span class="n">gtk</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/mhxueshan"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-2">
+      <a href="/tag/adb.html">adb</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/android.html">Android</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/elite3.html">Elite3</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/hifi.html">hifi</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/ji-zhu.html">技术</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/liang-hua.html">量化</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/lu-you-qi.html">路由器</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/monkey.html">monkey</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/ri-chang.html">日常</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xin-li-xue.html">心理学</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="/tag/yi-wen.html">译文</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/yu-le.html">娱乐</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/za-tan.html">杂谈</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://makerchen.com" target="_blank">MakerChen</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 雪山
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+</body>
+</html>
