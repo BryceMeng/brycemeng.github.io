@@ -152,7 +152,7 @@
 <p>先以这篇论文最后的一首诗做为开头，激励正在奋斗的你我，希望能在航行中找到自我。</p>
 <h3>我对alpha的理解为：</h3>
 <p>A小姐2017-01-01买入S1股票，2017-01-05卖掉，盈利100元，B小姐在这5天当中，没有一直持有S1股票，而是根据某一个规则在2017-01-02才买入，2017-01-02就买出，然后又在2017-01-03买入，在2017-01-05卖掉，盈利108元，这个规则就是一个正的alpha，经过之后的测试和参数优化是可能成为实盘策略的。</p>
-<h3>里面用到的函数</h3>
+<h3>里面用到的函数和变量</h3>
 <p>现在讲讲这101个公式里面常用的一些函数吧，我之前以为就是简单的计算，没想到还用到了相关性，协方差等等东东，好头大</p>
 <p><strong>rank()</strong> <a href="https://uqer.io/community/share/5750f4a1228e5b86a61fd7dc">引用</a></p>
 <blockquote>
@@ -182,8 +182,41 @@
 </pre></div>
 
 
+<p><strong>stddev()</strong></p>
+<blockquote>
+<p>标准差 <img alt="标准差" src="http://sinacloud.net/mhblog/2017/8/01.png"></p>
+<p>表明数据的离散程序，与正态分布有着一定的关系</p>
+</blockquote>
+<p><strong>signedpower(x,a)</strong></p>
+<blockquote>
+<p>x^a</p>
+<p>就是x的a次方，我找的中文资料当中，解释为  Sign(x) * (Abs(x)^e) </p>
+<p>Sign(x)：如果 x &gt; 0，就返回 1，如果 x &lt; 0，则返回 -1，如果 x == 0，返回 0</p>
+<p>不要把Sign当做sin了哦</p>
+<p>在01号alpha当中的作用是将两数值间的差异放大</p>
+</blockquote>
+<p><strong>ts_max(x,d)</strong></p>
+<blockquote>
+<p>基于时间序列的最大值</p>
+</blockquote>
+<p><strong>max(x,d)</strong></p>
+<blockquote>
+<p>ts_max(x,d)</p>
+</blockquote>
+<p><strong>Ts_ArgMax(x,n)</strong></p>
+<blockquote>
+<p>ts_max(x,d)最大值对应的索引</p>
+</blockquote>
+<p><strong>returns</strong></p>
+<blockquote>
+<p>今天的收盘价减去昨天的收盘价带来的收益 close-to-close</p>
+</blockquote>
 <h3>这101个Alpha</h3>
 <p>这些alpha很难直接盈利，而且这些公式很多是不能直接写在代码中的，需要自己进行改造，和创建卖点，这些公式更多的应该是让我们熟悉一下哪些因素能带来正的收益，而应用到自己的策略里面</p>
+<p><strong>#01&nbsp;&nbsp;&nbsp;&nbsp;(rank(Ts_ArgMax(SignedPower(((returns &lt; 0) ? stddev(returns, 20) : close), 2.), 5)) -
+0.5)</strong></p>
+<p><a href="https://uqer.io/community/share/575699be228e5b8a3c285c1a">源码参考链接</a></p>
+<p>还真是有点小复杂，我要是不看这个源码分析，自己一下还真是很难逆向分析这其中的奥秘，按这位作者的理解，应该就是判断连续下跌多少天了，越久反弹的可能性越大。平均回归型的策略。</p>
 <p><strong>#03&nbsp;&nbsp;&nbsp;&nbsp;(-1 * correlation(rank(open), rank(volume), 10))</strong></p>
 <p><a href="https://uqer.io/community/share/5750f4a1228e5b86a61fd7dc">源码参考链接</a></p>
 <p>该alpha主要表现在的成交量和价格的负相关，也就是简单的量价背离，但是这个在主观交易还行，实盘可不行的，回测下来效果还是有点差，这个源码实现对卖点的把握差了点，第二天卖出，而且没有止损和止盈的操作。</p>
@@ -195,7 +228,7 @@
     <ul>
         <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
     </ul>
