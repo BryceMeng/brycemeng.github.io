@@ -152,6 +152,7 @@
 <p>先以这篇论文最后的一首诗做为开头，激励正在奋斗的你我，希望能在航行中找到自我。</p>
 <h3>我对alpha的理解为：</h3>
 <p>A小姐2017-01-01买入S1股票，2017-01-05卖掉，盈利100元，B小姐在这5天当中，没有一直持有S1股票，而是根据某一个规则在2017-01-02才买入，2017-01-02就买出，然后又在2017-01-03买入，在2017-01-05卖掉，盈利108元，这个规则就是一个正的alpha，经过之后的测试和参数优化是可能成为实盘策略的。</p>
+<h3>里面用到的函数</h3>
 <p>现在讲讲这101个公式里面常用的一些函数吧，我之前以为就是简单的计算，没想到还用到了相关性，协方差等等东东，好头大</p>
 <p><strong>rank()</strong> <a href="https://uqer.io/community/share/5750f4a1228e5b86a61fd7dc">引用</a></p>
 <blockquote>
@@ -181,6 +182,11 @@
 </pre></div>
 
 
+<h3>这101个Alpha</h3>
+<p>这些alpha很难直接盈利，而且这些公式很多是不能直接写在代码中的，需要自己进行改造，和创建卖点，这些公式更多的应该是让我们熟悉一下哪些因素能带来正的收益，而应用到自己的策略里面</p>
+<p><strong>#03</strong></p>
+<p><a href="https://uqer.io/community/share/5750f4a1228e5b86a61fd7dc">源码参考链接</a></p>
+<p>该alpha主要表现在的成交量和价格的负相关，也就是简单的量价背离，但是这个在主观交易还行，实盘可不行的，回测下来效果还是有点差，这个源码实现对卖点的把握差了点，第二天卖出，而且没有止损和止盈的操作。</p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
@@ -188,10 +194,10 @@
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
         <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
     </ul>
 </section>
         </article>
