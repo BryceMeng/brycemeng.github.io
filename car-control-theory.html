@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>谈谈汽车的操控 - 理论 - 雪山</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="/images/favicon.png" rel="icon">
+
+<link rel="canonical" href="/car-control-theory.html">
+
+        <meta name="author" content="雪山" />
+        <meta name="keywords" content="日常" />
+        <meta name="description" content="从身边的细节发现生活的美 - 汽车的操控" />
+
+        <meta property="og:site_name" content="雪山" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="谈谈汽车的操控 - 理论"/>
+        <meta property="og:url" content="/car-control-theory.html"/>
+        <meta property="og:description" content="从身边的细节发现生活的美 - 汽车的操控"/>
+        <meta property="article:published_time" content="2017-10-30" />
+            <meta property="article:section" content="日常" />
+            <meta property="article:tag" content="日常" />
+            <meta property="article:author" content="雪山" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+
+
+    <!-- baidu Statistics -->
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?a7cd0e317621471e586bf369894135aa";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="/images/favicon.png" width="24"/> 雪山            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="/category/ji-zhu.html">技术</a>
+                        </li>
+                        <li >
+                            <a href="/category/liang-hua.html">量化</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/ri-chang.html">日常</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/car-control-theory.html"
+                       rel="bookmark"
+                       title="Permalink to 谈谈汽车的操控 - 理论">
+                        谈谈汽车的操控 - 理论
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-10-30T20:30:00+08:00"> 一 30 十月 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/ri-chang.html">日常</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=461074351&auto=1&height=66"></iframe>
+
+<p>我以前学车时对自动档的车的幻想：踩着油门，速度一直往上走，不就完了么？想着自动档应该是会比手动起步更快的。但是经过自己驾车这么几个月来，还真发现事情并没想像的这么简单。</p>
+<p>本文重点讲一下发动机和变速箱对操控的影响，至于其他因素：转向，适时四驱等等暂不提及。也不会涉及太多的技术名词，直接从人的<strong>体感</strong>出发来讲。</p>
+<h2>发动机</h2>
+<p>汽车的心脏，从进气方式上来讲分为自吸和增压，当然增压方式比较常见的就是涡轮增压，排量标号后面带T的。比如1.5T，2.0T都是涡轮增压的发动机，自吸的是不带T的，1.5，2.0。</p>
+<p><strong>那么1.5，2.0这些数字代表什么呢？</strong>就是常说的排量，发动机中所有气缸容积的总和，单位是升(L)。</p>
+<p><strong>排量越大，动力越强，油耗越高，相同排量下带T的加速爆发力会比不带T的强。</strong></p>
+<p>这时候会有人问，如果带T的爆发力强的话，<strong>为什么不都采用涡轮增压发动机呢？动力强不强会影响什么呢？</strong></p>
+<p>先回答动力强不强会影响什么。会影响在路上<strong>加速的快慢，上坡速度</strong>，还有<strong>最高时速</strong>等。<strong>最高时速</strong>我们不用太关心，现在中国高速最高时速也就120km/h，1.3排量的都没问题，而且我真心不建议在高速上超速，非常的危险。</p>
+<p>为什么不都采用涡轮增压的发动机呢？不过从趋势来讲，用涡轮增压发动机的车型已经越来越多了。由于涡轮只有在一定转速才会介入的机制，会常常给人一种感觉就是在某个速度会忽然加速的突兀感  ，而且给人以加速延迟的感觉，也就是油门灵敏度较低（加速突兀的问题会随着技术的发展解决掉）。</p>
+<p>而自吸的车<strong>加速会非常的线性，油门灵敏度非常高</strong>（<em>马自达有几款车的电控油门特意把油门反应时间延迟了0.3s</em>），速度输出就像一根直线，这是很多自吸粉丝所喜欢的。对于我的体验来讲，线性的输出开起来确实会比较舒服，但是带T的起步加速会很猛，只能说各有优缺点，不能整合。</p>
+<p>传说带T的发动机由于结构复杂，造价会略高，保养费贵，而且发动机仓的温度会非常高（曾经大众的涡轮加速出过自燃事故），这些可能是很多极致追求操控的厂商不想花大成本去解决的问题，而导致一直用自吸发动机。不过如果你真心在意驾驶的感受，一定会选择自吸，因为<strong>油门灵敏度</strong>这一项是不能失去的。</p>
+<h2>变速箱</h2>
+<p>如果发动机是心脏，那么变速箱，应该说<strong>变速箱</strong>和<strong>电控</strong>是汽车的大脑。</p>
+<p>因为发动机只是简单的动力输出，就是从800～6000转，发动机只用转速去描述会更合适，说时速，加速等等是要结合变速箱的。</p>
+<p><strong>直接将发动机的动力输出到轮胎上不行吗？</strong>行，那是特斯拉和卡丁车。特斯拉是因为电动机的低速扭矩和最高转速比内燃机都大很多，而且电动机不需要怠速起步。卡丁车嘛，整车质量低，而且卡丁车是采用了低档位的高扭矩的结构，导致起步快，但是高端点的高速卡丁车也是有变速箱的。</p>
+<p><strong>什么是扭矩？</strong>问得好。高中物理学过力矩吧，类似。简单来讲就是扭矩越大，加速越快。以我有一次租车的体感来讲，在上一个小坡时，速度差不多60km/h，但是我再怎么踩油门都加不了速。这就是因为60km/h时，一般变速箱已经到了高档位（<strong>档位越高，扭矩越小</strong>）扭矩小，而上坡时的阻力非常大，所以加速就非常困难。有解决方案吗？有，<strong>降档</strong>。</p>
+<p>有哪几种变速箱我就不讲了，网上一大堆，区别最大的就是CVT无级变速箱，目的是为了让动力输出随时都能达到最佳扭矩，这样最省油。除了这个外，一般的变速箱都是5～7档，听说最近还有9档的，我也是醉了，那干脆就用无级变速好了。</p>
+<p><strong>档位如何形成的呢？</strong>齿轮的直径不同，直径越大，扭矩越大，看看山地自行车的后胎齿轮你就知道了，和汽车变速箱原理一样，不过汽车变速箱会复杂很多。所以简单来讲就是从1～6档，就是有6个直径大小不一样的齿轮，最大的是1档，最小的是6档。</p>
+<p>来回归主题，讲讲操控，从我的经验来讲，影响操控的程度，<strong>变速箱比发动机更明显</strong>。发动机如果我们用自吸，大不了，排量小一点，动力小一点，但是保持了油门灵敏度和线性输出就够了，如果变速箱不好，油门灵敏度和线性就会被毁掉，如果变速箱够智能，反应够快，能对小排量动力小的缺点有很大的修复。</p>
+<p>拿我自己的马自达某款和我以前租的大众一款比较老的车型来比对，都是AT（<em>手自一体自动变速箱</em>）。</p>
+<p>a. <strong>暴力起步</strong>。小马哥到了3档再也不升档，转速到了5000都不升档，推背感就来了，这就是传说中的低档高转速加速，也就是跑车模式，当油门松一点才换到合适档位。</p>
+<p>但是那款大众老款就不一样了，反应也是让我震惊了，转速到了也是5000转，但是档没挂进去，车还在20km/h飘着了......我立马就松了油门。也就是说有的AT只能2000转换档（<em>传统的手动档换档转速，我学车的时候还是看的时速，其实看转速换档才最顺手</em>）当你突然不小心踩多了油门，他是不会给你识别你要高扭矩加速的，只会认为你转速不合，换不了档，也是醉了。</p>
+<p>当然这是一款老车，不过在很多新款车型上的变速箱也是不智能的，在一些评测里面看到过，新的AT也是2000换档，只是控制了你的油门，你死踩也不会给你快速到5000，这样是安全了，不过加速就弱了好多好多。</p>
+<p>b. <strong>中途加速</strong>。都说中途带T的发动机会有涡轮介入，但是如果变速箱差，也会让你失望的。</p>
+<p>小马哥的变速箱有一个功能就是<strong>自动降档</strong>（<em>一共6档</em>），当然这个功能现在很多车都有。有一次我在70km/h左右时超车，我发现轻踩油门加速很慢（<em>6档扭矩太小</em>），我想不能让右边这个Audi看不起我啊，虽然我是廉价车，就是一脚猛踩，自动从6档降为5档，转速一下从1600升到2200（<em>此时速度没变</em>），然后2200到3000，时速从70km/h到了90km/h在两秒内完成，秒超，而且推背感真心很强。</p>
+<p>这时候的低延迟中途加速岂是一台简单的带T的高暴发力发动机能给你的？不管什么发动机都需要一台反应极快的变速箱配合才能得到，不过小马哥的1秒内的自动降档反应在业界算是非常快的。而且虽然很多款车都有这个功能，但是反应速度，降档的顿挫都会非常大的影响整个操控感。</p>
+<p>c. <strong>线性输出</strong>。这个现在大部分厂商都做得蛮好了，简单来讲就是持续加速过程中，换档的顿挫感觉明不明显。小马哥和其他几款车都还不错，但是带T的由于动力源的问题就会有突兀的感觉。</p>
+<p>所以我们在选择一台车时不能只顾看发动机的性能如何，看得看配合的变速箱实测下来的性能如何，而且由于变速箱的参数略少，导致变速箱很难通过参数去判断它的性能是否强劲，去试驾。</p>
+<p>下一篇我们讲讲实际生活中，怎么很好的去利用<strong>操控性</strong>。</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/feel-low-stickers.html">心情低落吐槽贴</a></li>
+        <li><a href="/hifi-talk-4-2.html">Hifi - 声音输出经过哪些设备？(2/4)</a></li>
+        <li><a href="/first-post.html">欢迎来到我的博客</a></li>
+        <li><a href="/hifi-talk-is-car-hifi.html">Hifi - 车载音响能变Hifi吗？</a></li>
+        <li><a href="/hifi-talk-4-3.html">Hifi - 怎么买设备？(3/4)</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/mhxueshan"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-2">
+      <a href="/tag/adb.html">adb</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/android.html">Android</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/elite3.html">Elite3</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/hifi.html">hifi</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/ji-zhu.html">技术</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/liang-hua.html">量化</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/lu-you-qi.html">路由器</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/monkey.html">monkey</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/ri-chang.html">日常</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xin-li-xue.html">心理学</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="/tag/yi-wen.html">译文</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/yu-le.html">娱乐</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/za-tan.html">杂谈</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://makerchen.com" target="_blank">MakerChen</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 雪山
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+</body>
+</html>
