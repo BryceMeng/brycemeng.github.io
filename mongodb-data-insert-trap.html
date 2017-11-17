@@ -123,12 +123,14 @@
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>两个问题：</p>
+                <p>优化前：<strong>1天导入1个月左右的数据</strong>
+优化后：<strong>30分钟内导入1年的数据</strong></p>
+<h2>两个问题：</h2>
 <ol>
 <li>mongodb插入大数据的正确方法</li>
 <li>mongodb如何把数据切换到外置SSD上面</li>
 </ol>
-<h1>插入方式</h1>
+<h2>插入方式</h2>
 <p>大概在两个星期前，买了03年到现在的商品期货的tick数据，不过只有15年和以后的才是ctp格式，所以我还需要写两个导入程序，我是先写的15年前的，其实我走错了一步，应该先写15年后的，这样和我现在的数据（17年）能连接起来，不然我2004年的导好了，是用不了的。不过当时我确实没想到，我用错了数据插入方法后，速度会如此的慢，也是有点超出我的想像。</p>
 <p>我先写的老数据（15年前）的导入，其实程序不复杂，就是把tick里面的细节处理好就行，然后在插入时我用了</p>
 <div class="highlight"><pre><span></span><span class="n">flt</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">tick_data</span><span class="o">.</span><span class="n">datetime</span><span class="p">}</span>
@@ -139,7 +141,7 @@
 <p>这句话是从vnpy老版本的数据收集器里面扒下来的，当时的场景是收集实时数据，数据量不是很大，这样写是没有问题的，还可以防止日期重复的数据产生。但是我现在数据量压缩包都是50个G，所以还是不能直接用，我昨天实在受不了之后其实是先切换的SSD，发现还是慢，所以才想到了是不是插入方式的问题。</p>
 <p>后来查了一些资料，我改用了insert_many，10000条一轮，但是该函数少了一个check主键datetime的问题，不过我在导入之前已经判断了相邻datetime重复的问题，所以出现datetime重复的概率应该不是很大。</p>
 <p>所以现在是30分钟之内可以成功导入1年的数据，棒棒哒</p>
-<h1>SSD切换</h1>
+<h2>SSD切换</h2>
 <p>再来讲讲我切换SSD的过程，也是一个坑。</p>
 <p>其实原理非常简单，停止mongod服务，把/var/lib/mongodb下的文件移动到SSD上，再把/etc/mongodb.conf里面的dbPath对应的改掉就行。</p>
 <p>但是我今天试了好几个小时都没启动起来，错误都是对目录没有访问权限，但是我明明chmod 777过啊，我擦。后来我用mongodb的用户登陆了bash，在里面做实验，确实没有权限，没有深究，估计是系统对这些服务类的用户限制比较大，还有一个原因应该是我的是USB SSD，所以是移动硬盘，我在home文件夹下是成功了的。</p>
@@ -152,9 +154,9 @@
     <ul>
         <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
         <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
     </ul>
 </section>
         </article>
