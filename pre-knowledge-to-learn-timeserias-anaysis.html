@@ -140,17 +140,17 @@
 
 <p>了解这个概念主要是相对于MA来讲的（算术移动平均线），现在有些策略属于突破策略，普罗大众都用短期均线突破长期均线来判断买卖点，但是有一个东西叫标准差，我之前不太了解细节时觉得没啥用，而且当时在Trading System and Methods这本书第一章的基本概念里面就看到过，没太引起重视，主要是没有实际操盘经验，这次引起重视是在<strong>知乎上看到了一位大神的文章里面说他的策略用到了标准差</strong>，<strong>BOLL通道也用的标准差</strong>进行的计算，这里我才<strong>回想起知乎上一个cta大神</strong>以前说过，最基础的先把这些<strong>基础指标过一下</strong>，是啊，我算是偷懒了。</p>
 <p>标准差是方差的开根号，为什么要用标准差而不是直接方差，因为方差是把当前的离散程度做了一个平方的，这样会导致离散程度的偏差过大。标准差，MA等等都是表示数据的离散程度的，做离散程序分析是需要关注这些概念的。</p>
-<p>相关链接：
-<a href="https://baike.baidu.com/item/%E7%A6%BB%E6%95%A3%E7%A8%8B%E5%BA%A6">离散程度</a>
-<a href="https://zhuanlan.zhihu.com/p/24448511">大神的策略</a></p>
+<p>相关链接：</p>
+<p><a href="https://baike.baidu.com/item/%E7%A6%BB%E6%95%A3%E7%A8%8B%E5%BA%A6">离散程度</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/24448511">大神的策略</a></p>
 <h2>协方差(Covariance)，相关系数</h2>
 <p>不讲数据含义了，对现在的我来讲意义不大，主要是描述两组变量变化的方向是否一致，一致就是正数，不相关（<em>一个往北，一个往东或者是西</em>）就是0,负相关（<em>一个往东一个往西</em>）就是负数，但是纯的协方差计算出来的值意义不是特别大，因为很可能两组变量变化的方向一致，但是量不一样，这样会导致数值计算出来特别大，这样就引申出来了相关系数的概念，协方差/标准差的积，这样算出来是在-1~1之间，可以很好的量化出两组数据的相关性。</p>
-<p>我这么一两句讲的不是很透彻，来看看大神的讲解：
-<a href="https://www.zhihu.com/question/20852004/answer/134902061">非常形象的讲解</a></p>
+<p>我这么一两句讲的不是很透彻，来看看大神的讲解：</p>
+<p><a href="https://www.zhihu.com/question/20852004/answer/134902061">非常形象的讲解</a></p>
 <h2>矩</h2>
 <p>不是矩阵哦，符号是<strong>E(x)，期望值(Expectation)，基础概念，很多地方要用到，</strong>标准差是二阶中心矩**，一阶就是均值(期望值)</p>
-<p>我不罗嗦了，来大神：
-<a href="https://www.zhihu.com/question/19915565/answer/233262673">非常形象的讲解</a></p>
+<p>我不罗嗦了，来大神：</p>
+<p><a href="https://www.zhihu.com/question/19915565/answer/233262673">非常形象的讲解</a></p>
 <h2>log return</h2>
 <p>经常在知乎上看到这个词，感觉很高大上。和log return对标的是simple return（简单收益率），就是 <strong>尾-头/头</strong> 的计算收益率的方法，这个概念也是基础，后面经常用到，对统计和分析有着不错的影响。</p>
 <p>基础公式可以</p>
@@ -159,10 +159,10 @@
 <li>Ln(x) 以e为底求对数</li>
 <li>exp(x) e的x次方</li>
 </ul>
-<p>来大神链接：
-<a href="https://www.zhihu.com/question/30113132/answer/247404483">实例讲解，可以同时看看上面其他的回答</a>
-<a href="https://www.zhihu.com/question/20064721">概念性的，看第一个回答</a>
-<a href="http://www.risklatte.com/Articles/QuantitativeFinance/QF163.php">用积分的概念讲解，我也不是特别理解</a></p>
+<p>来大神链接：</p>
+<p><a href="https://www.zhihu.com/question/30113132/answer/247404483">实例讲解，可以同时看看上面其他的回答</a></p>
+<p><a href="https://www.zhihu.com/question/20064721">概念性的，看第一个回答</a></p>
+<p><a href="http://www.risklatte.com/Articles/QuantitativeFinance/QF163.php">用积分的概念讲解，我也不是特别理解</a></p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
