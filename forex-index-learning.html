@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>时间序列 - 雪山</title>
+    <title>成熟指标库慢啃 - 雪山</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,16 +10,22 @@
 
     <link href="/images/favicon.png" rel="icon">
 
+<link rel="canonical" href="/forex-index-learning.html">
 
-    <meta name="author" content="雪山" />
-    <meta name="keywords" content="时间序列" />
+        <meta name="author" content="雪山" />
+        <meta name="keywords" content="量化,成熟指标" />
+        <meta name="description" content="还是要把成熟指标熟悉起来，起码在脑子里知道某个指标是干啥的" />
 
-    <!-- Open Graph tags -->
         <meta property="og:site_name" content="雪山" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="雪山"/>
-        <meta property="og:url" content=""/>
-        <meta property="og:description" content="雪山"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="成熟指标库慢啃"/>
+        <meta property="og:url" content="/forex-index-learning.html"/>
+        <meta property="og:description" content="还是要把成熟指标熟悉起来，起码在脑子里知道某个指标是干啥的"/>
+        <meta property="article:published_time" content="2017-12-11" />
+            <meta property="article:section" content="量化" />
+            <meta property="article:tag" content="量化" />
+            <meta property="article:tag" content="成熟指标" />
+            <meta property="article:author" content="雪山" />
 
 
     <!-- Bootstrap -->
@@ -68,7 +74,7 @@
                         <li >
                             <a href="/category/ji-zhu.html">技术</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="/category/liang-hua.html">量化</a>
                         </li>
                         <li >
@@ -86,13 +92,57 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></h2>
-                <div class="summary"><p>一些统计和概率方面的前置知识，为了学习时间序列分析</p>
-                    <a class="btn btn-default btn-xs" href="/pre-knowledge-to-learn-timeserias-anaysis.html">more ...</a>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/forex-index-learning.html"
+                       rel="bookmark"
+                       title="Permalink to 成熟指标库慢啃">
+                        成熟指标库慢啃
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-12-11T23:34:00+08:00"> 一 11 十二月 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/liang-hua.html">量化</a>
+        /
+	<a href="/tag/cheng-shou-zhi-biao.html">成熟指标</a>
+    
+</footer><!-- /.post-info -->                    </div>
                 </div>
-            </article>
-            <hr/>
+                <p><a href="https://www.forexrealm.com/technical-analysis/technical-indicators.html">成熟指标库源网站</a></p>
+<p>这套指标库原来是为外汇服务的，现在也应用于各大领域，我们常见的kdj,boll带等等这里面都有。之前学量化时想着先把这些指标过一下的，法这量化入门需要学习的东西太多了，这个也有点忽略了，现在补上，每天一个。</p>
+<h3>2017.12.11  ASI,SI</h3>
+<p>ASI就是SI累加(cumsum)，主要是用最近几天的最高价，最低价，收盘价等等元素。</p>
+<p>SI 上穿0买入，下穿0卖出（用得少）
+ASI 比close更拼接真实价格，来判断真假期阻力位和支撑位的，如果价格已经突破，但ASI没有突破就是假的。</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
 
         </div>
         <div class="col-sm-3" id="sidebar">
