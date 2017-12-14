@@ -139,16 +139,28 @@
 <li>A/D 价格和成交量的关系，和OBV用法类似，主要看背离</li>
 </ul>
 <p>策略：可以根据背离来写这两个指标的策略，对突破方向的确认（突破型策略）</p>
+<h3>2017.12.13 A/D Line， A/D Line (Breadth)，A/D Ratio，Advancing-Declining Issues</h3>
+<ul>
+<li>A/D Line 一定周期内上涨的股票数量减去下跌的股票数量加上前一交易日的A/D Line值，表明市场强弱，在国内估计用在股票市场更好，期货市场不太实用</li>
+<li>A/D Line (Breadth) 一定周期内上涨的股票数量除以上涨加下跌的股票数量</li>
+<li>A/D Ratio 一定周期内上涨的股票数量除以下跌的股票数量</li>
+<li>Advancing-Declining Issues 一定周期内上涨的股票数量减去下跌的股票数量</li>
+</ul>
+<p>策略：全品种的数据进行计算，在国内市场做单一板块的分析应该可以，某一板块内，某几个涨了，分权重，找一个没怎么涨的买，做套利</p>
+<h3>2017.12.14 alligator</h3>
+<p>鳄鱼指标，设计给外汇使用，传说外汇市场中30%的时间才是波动比较大的，该指标就是为了捕捉这30%的时间。<a href="http://myeatrade.com/277/#Alligator_toc2">详细算法请点击</a></p>
+<p>主要是3根均线的组合，但是这3根均线都做了往未来的平移。3根线纠缠在一块儿的时候没有方向，震荡，3条线分开，可以看做张嘴，比较活跃。</p>
+<p>策略：我也不知道怎么应用，识别大趋势用吧。能用做趋势和单边行情的判断吗？这样可以给趋势跟踪策略加一个过滤器，提高胜率。能否过滤出震荡行情做回归？不知道，可以试试</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
         <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
     </ul>
 </section>
         </article>
