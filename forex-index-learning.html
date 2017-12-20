@@ -171,17 +171,27 @@
 <li>Aroon(下降)=[(计算期天数-最低价后的天数)/计算期天数]*100 </li>
 <li>Aroon Oscillator = Aroon(上升) - Aroon(下降)</li>
 </ul>
-<p>策略：从用法上来讲很简单，判断现有的趋势，我个人不是很看好这个指标，统计的有点怪。</p>
+<p>策略：从用法上来讲很简单，判断现有的趋势，我个人不是很看好这个指标，统计的有点怪。 </p>
+<h3>2017.12.19 ADX, ADXR</h3>
+<p>通过价格数据算出，里面用到了TR(True Range)，通达信有该指标，可惜TB没有，写一个应该不难。</p>
+<p>两种用法：
+- ADX或者ADXR，ADXR是ADX和m天前ADR值的平滑，在20(ADRX25)或者其他值之上趋势启动，40之上算是比较强的趋势，数值下降时和RSI或者一些动量指标进行结合
+- (+)PDI,(-)MDI 分别表明正向和负向趋势，交叉表明买卖点，不过这个用法真正在震荡时会反复交叉</p>
+<p>策略：ADX或者ADXR判断是否能做趋势跟踪</p>
+<h3>2017.12.20 ATR</h3>
+<p>这个可是明星指标，在海龟里面经常提到。计算很简单，TR是当天震荡的最大值(昨天的close参与计算)，ATR取了个MA</p>
+<p>之所以称为True Range估计就是这个原因，不仅仅是简单的|open - close|。用14天的ATR比较常用，低值价格不会有太大的变化，值比较高时，价格通常会不稳定。弱点在于对于长周期会比较迟缓。</p>
+<p>策略：用ATR做移动上损，VNPY的boll策略里面有示例，简单来讲就是回撤的价格是ATR的0点几倍这样。这种用法还真是比较神奇。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
     </ul>
 </section>
         </article>
