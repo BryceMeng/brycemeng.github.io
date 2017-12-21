@@ -182,15 +182,26 @@
 <p>这个可是明星指标，在海龟里面经常提到。计算很简单，TR是当天震荡的最大值(昨天的close参与计算)，ATR取了个MA</p>
 <p>之所以称为True Range估计就是这个原因，不仅仅是简单的|open - close|。用14天的ATR比较常用，低值价格不会有太大的变化，值比较高时，价格通常会不稳定。弱点在于对于长周期会比较迟缓。</p>
 <p>策略：用ATR做移动上损，VNPY的boll策略里面有示例，简单来讲就是回撤的价格是ATR的0点几倍这样。这种用法还真是比较神奇。</p>
+<h3>2017.12.21 beta, beta2</h3>
+<p>这是CAPM资产定价模型里面的一个概念，风险系数，一般和alpha结合起来使用。以1.0为限，以上表明收益变化幅度相对于大盘变化越大，反之越小。</p>
+<p>beta2做了ma运算。</p>
+<p>策略：无法直接应用</p>
+<h3>2017.12.21 Bollinger Bands，CCT Bollinger Bands Histogram</h3>
+<ul>
+<li>Boll 最近才知道这是最复杂的计算公式之一，因为用了标准差，标准差用来表明数据离散程度，中轨是移动平均线（M日），上轨和下轨是中轨线加减N倍的标准差，现在为2倍，自己写时可以自定义一下这个N。</li>
+<li><a href="https://www.tradingview.com/script/iA4XGCJW-CCT-Bollinger-Band-Oscillator/">CCT Boll</a> 只有一条用标准差计算的线，然后用0和100平行线替换了boll的两条线。这个boll线呢就和传统的MACD类似，接近或者低于0就是超卖，接近或者大于100就是超买</li>
+</ul>
+<p>标准差是一个很棒的方法，boll带有两种用法，突破任何一条边之后趋势变更强，另一种就是碰到边之后回归</p>
+<p>策略：ma(m)+n*stdv(m) 用这个来定义突破 <a href="https://zhuanlan.zhihu.com/p/24448511">示例策略</a></p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
     </ul>
 </section>
