@@ -193,16 +193,52 @@
 </ul>
 <p>标准差是一个很棒的方法，boll带有两种用法，突破任何一条边之后趋势变更强，另一种就是碰到边之后回归</p>
 <p>策略：ma(m)+n*stdv(m) 用这个来定义突破 <a href="https://zhuanlan.zhihu.com/p/24448511">示例策略</a></p>
+<h3>2017.12.22 Breadth Thrust Indicator(BTI)</h3>
+<p>应用于指数，老指标，这个指标真没啥意义：100*上涨家数/(上涨家数+下跌家数)的N日指数移动平均</p>
+<h3>2017.12.22 Accumulation and Distribution (A/D)</h3>
+<p>参与计算：L,C,H,V，成交量也参与了计算，不过没有考虑到跳空缺口，这个是有缺陷的</p>
+<p>数值往上表明强势，往下表明弱势，可以考虑背离的用法，参考的是价量同行的原则</p>
+<p>策略：没有考虑缺口，暂不考虑使用</p>
+<h3>2017.12.24 Chaikin Money Flow(CMF)</h3>
+<p>C,L,H,Vol参与计算，在+-0.1之间信号不明确，大于0.1做多信号，小于-0.1做空信号。缺失跳空缺口的体现</p>
+<p>策略：和MACD这种类似，不过没有CCI敏感,从图上来讲比CCI更适用，CCI过于敏感</p>
+<h3>2017.12.24 Chaikin Oscillator (CHO)</h3>
+<p><a href="http://blog.csdn.net/zuoyang1990/article/details/71479637">中文详解</a></p>
+<p>这个指标是基于 2017.12.22 (A/D)指标的：</p>
+<p>３天A/D line的指数移动平均值－10天A/D line的指数移动平均值</p>
+<p>也有成交量参与计算，依赖的是价量同行的原则，所以背离会用的比较顺</p>
+<p>策略：趋势强弱，能不能区分 牛，熊，震荡</p>
+<h3>2017.12.24 Chaikin's Volatility(CHV)</h3>
+<p><a href="https://www.incrediblecharts.com/indicators/chaikin_volatility.php">详解</a></p>
+<p>这个指标啊，好吧，我改造后正准备用在我的策略当中，不过要注意哦，这个指标没有考虑跳空的缺口和其他一些因素。</p>
+<p>策略：波动率大小非常重要，波动率小时说明市场比较稳定，等待选择方向</p>
+<h3>2017.12.25 Chande momentum oscillator (CMO)</h3>
+<div class="highlight"><pre><span></span><span class="gh">diff = Pi - Pi-1,</span>
+where Pi -the price (usually closing price) of the current period;
+Pi-1 -the price (usually closing price) of the previous period;
+If diff &gt; 0, then cmo1i = diff, cmo2i = 0.
+If diff &lt; 0, then cmo2i = -diff, cmo1i = 0.
+sum1 = Sum(cmo1, n) - summary value of cmo1 within n periods.
+sum2 = Sum(cmo2, n) - summary value of cmo2 within n periods.
+CMO = ((sum1-sum2)/(sum1+sum2)) 100
+</pre></div>
+
+
+<p>动量指标但是没有成交量参与运算，主要是靠每天close的差来进行计算，运用方法就是看长期均线和短期均线形成金死叉来进行判断</p>
+<p>策略：多空力量吧，现在看来看多空的指标太多了，应该找一个测试方法来看准确度</p>
+<h3>2017.12.25 Chaos Gator</h3>
+<p><a href="https://www.ifcmarkets.com/en/ntx-indicators/gator-oscillator">详解</a></p>
+<p>中间价(High+Low/2)的移动平均线，再平移，参考（2017.12.14 alligator），可以一起使用</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
     </ul>
 </section>
         </article>
