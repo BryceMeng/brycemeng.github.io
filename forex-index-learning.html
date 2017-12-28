@@ -248,6 +248,44 @@ CMO = ((sum1-sum2)/(sum1+sum2)) 100
 
 
 <p>策略：有点复杂资料太少，暂不使用。</p>
+<h3>2017.12.27 Correlation Analysis</h3>
+<p>相关性分析，刚好我在看基础统计学看到了这里，0.7以下为弱相关，0.7以上为强相关，因为都是往右走，所以不存丰负相关。这个确实很重要。</p>
+<p>策略：<strong>套利</strong>和<strong>股票相对于大盘的异动</strong>需要关注。</p>
+<h3>2017.12.27 CP Volumentum Trend</h3>
+<p>研发所基于的理论是当市场发生转变时总是伴随着很大的成交量，这个指标非常难找，也没有相关的资料，我找到几个相关的公式</p>
+<ul>
+<li>volumentum-weekly </li>
+</ul>
+<div class="highlight"><pre><span></span>[Price (End of this week) - Price (End of last week)]*[Avg Week Volume / Avg 6 Mo Volume]
+</pre></div>
+
+
+<ul>
+<li>volumentum-monthly</li>
+</ul>
+<div class="highlight"><pre><span></span>[Price (End of this month) - Price (End of last month)]*[Avg Monthly Volume / Avg 12 Mo Volume]
+</pre></div>
+
+
+<p>策略：先不做评论，后面可以开发出来试一下</p>
+<h3>2017.12.28 Cumulative Volume Index (CVI)</h3>
+<p><a href="https://stockmarketstudent.com/cumulative-volume-index-cvi/">英文详解</a></p>
+<p>成交量计算的指标，类似OBV，但又不一样，OBV计算的向上成交量是上涨就是向上的成交量，下跌就是下跌的成交量，用于个股，而CVI适用于指数，所有的股票。</p>
+<div class="highlight"><pre><span></span>CVI[0] = CVI[1] + Advancing Volume - Declining Volume
+
+where:
+  CVI[0] is today&#39;s Cumulative Volume Index
+  CVI[1] is yesterday&#39;s Cumulative Volume Index
+  Advancing Volume is the total volume of all advancing stocks on the NYSE
+  Declining Volume is the total volume of all declining stocks on the NYSE
+</pre></div>
+
+
+<p>策略：后面用到市场型策略时可以做趋势分析的辅助</p>
+<h3>2017.12.28 Cutler's RSI</h3>
+<p>是RSI的另外一个版本(<a href="https://en.wikipedia.org/wiki/Relative_strength_index#Cutler's_RSI">wiki详解</a>)，把计算U和D的移动平均的方式变更了，RSI是指数平均(SMMA)，而Cutler是SMA</p>
+<p><img alt="和RSI的区别" src="http://sinacloud.net/mhblog/2017/12/1228.svg"></p>
+<p>其实差别也不大，用法的话看标准RSI的用法吧</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
@@ -255,9 +293,9 @@ CMO = ((sum1-sum2)/(sum1+sum2)) 100
     <ul>
         <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
     </ul>
 </section>
         </article>
