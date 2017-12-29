@@ -286,16 +286,26 @@ where:
 <p>是RSI的另外一个版本(<a href="https://en.wikipedia.org/wiki/Relative_strength_index#Cutler's_RSI">wiki详解</a>)，把计算U和D的移动平均的方式变更了，RSI是指数平均(SMMA)，而Cutler是SMA</p>
 <p><img alt="和RSI的区别" src="http://sinacloud.net/mhblog/2017/12/1228.png"></p>
 <p>其实差别也不大，用法的话看标准RSI的用法吧</p>
+<h3>2017.12.29 DeMarker(DeM)</h3>
+<p>DeMarker的指标可不仅仅这个，DeMarker指标是一个体系。该指标只用了今和昨的L,H进行计算，是0~1区间的单一指标，0.3和0.7表明超卖和超买。</p>
+<p>策略：不能判断趋势，做回归？</p>
+<h3>2017.12.29 Detrended Price Oscillator (DPO)</h3>
+<p>另一种形式的均线，去趋势指标，不能表现趋势，只能表现超买或者超卖，超买超卖线得自己定，计算方法</p>
+<div class="highlight"><pre><span></span>DPO＝MA(N)-MA(N÷2+1)
+</pre></div>
+
+
+<p>策略：试一下回归</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
     </ul>
 </section>
         </article>
