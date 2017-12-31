@@ -320,7 +320,17 @@ where:
 
 
 <h3>2017.12.31 Dynamic Momentum Index(DMI)</h3>
-<p>这个和之前那个DMI不一样哈，非常像RSI，动量指标，比RSI更敏感。RSI是计算的14天中的上升和下跌的价格统计，而DMI则可以改变这个天数，后续可以详细参考RSI的用法。</p>
+<p><a href="https://www.technicalindicators.net/indicators-technical-analysis/172-dymoi-dynamic-momentum-index">英文详解</a></p>
+<p>这个和之前那个DMI不一样哈，非常像RSI，动量指标，比RSI更敏感。RSI是计算的14天中的上升和下跌的价格统计，而DMI则是动态计算这个天数，这个<strong>动态计算的方法很重要</strong>。</p>
+<blockquote>
+<ol>
+<li>Calculate the Standard Deviation for a chosen time period (reccomendation is 5 days)</li>
+<li>The result is smoothed using a moving average (reccomended is 10 days smoothing)</li>
+<li>Standard Deviation is divided by its smoothed version. So we get the V value.</li>
+<li>Number 14 is divided by the V value and the number is rounded down to the nearest integer. This is called a T value. It should be between 5-30 days. Should it exceed the maximal value, we should adjust the calculation so it wouldn't take into consideration any higher values. This days we get are used next to calculate the RSI indicator.</li>
+<li>Now we can calculate the RSI values for every single day.</li>
+</ol>
+</blockquote>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
@@ -329,8 +339,8 @@ where:
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
         <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
     </ul>
 </section>
         </article>
