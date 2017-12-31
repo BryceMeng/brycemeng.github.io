@@ -177,7 +177,7 @@
 <p>两种用法：
 - ADX或者ADXR，ADXR是ADX和m天前ADR值的平滑，在20(ADRX25)或者其他值之上趋势启动，40之上算是比较强的趋势，数值下降时和RSI或者一些动量指标进行结合
 - (+)PDI,(-)MDI 分别表明正向和负向趋势，交叉表明买卖点，不过这个用法真正在震荡时会反复交叉</p>
-<p>策略：ADX或者ADXR判断是否能做趋势跟踪</p>
+<p>策略：ADX或者ADXR判断是否能做趋势跟踪，ADX和ADXR与方向无关，可以试试看现在是否处于盘整行情，以20或者其他值为限</p>
 <h3>2017.12.20 ATR</h3>
 <p>这个可是明星指标，在海龟里面经常提到。计算很简单，TR是当天震荡的最大值(昨天的close参与计算)，ATR取了个MA</p>
 <p>之所以称为True Range估计就是这个原因，不仅仅是简单的|open - close|。用14天的ATR比较常用，低值价格不会有太大的变化，值比较高时，价格通常会不稳定。弱点在于对于长周期会比较迟缓。</p>
@@ -296,6 +296,31 @@ where:
 
 
 <p>策略：试一下回归</p>
+<h3>2017.12.30 DMI</h3>
+<p>PDI下穿MDI时为一个极点，再上穿时为交易点</p>
+<p>参见 <strong>2017.12.19 ADX, ADXR</strong> </p>
+<h3>2017.12.30 Disparity Index</h3>
+<div class="highlight"><pre><span></span><span class="k">[ C - Mov(C,X,MA ) ] / [ Mov(C,X,MA) * 100 ]</span>
+
+<span class="err">Where</span> <span class="err">X</span> <span class="err">is</span> <span class="err">the</span> <span class="err">number</span> <span class="err">of</span> <span class="err">time</span> <span class="err">periods</span>
+<span class="err">MA</span> <span class="err">is</span> <span class="err">the</span> <span class="err">calculation</span> <span class="err">type</span> <span class="err">of</span> <span class="err">the</span> <span class="err">moving</span> <span class="err">average.</span>
+</pre></div>
+
+
+<p>这个指标没有任何解释，看这个计算公式其实就是表明相对于均价的偏离程度，偏离程度的话是不是用标准差会更好</p>
+<p>策略：看起来回归倒是不错，以0为回归线</p>
+<h3>2017.12.31 Displaced Moving Average</h3>
+<p><a href="http://blog.sina.com.cn/s/blog_4e5cbbe50100ck9h.html">中文详解</a></p>
+<p>确实就是后后平移，这样可以减少噪音的干扰</p>
+<p>策略：如果确实趋势之后应该还是不错的</p>
+<h3>2017.12.31 Double Exponential Moving Average (DEMA)</h3>
+<p>另外一种均线形式，计算公式如下：</p>
+<div class="highlight"><pre><span></span>(2 * n-day EMA) - (n-day EMA of EMA)
+</pre></div>
+
+
+<h3>2017.12.31 Dynamic Momentum Index(DMI)</h3>
+<p>这个和之前那个DMI不一样哈，非常像RSI，动量指标，比RSI更敏感。RSI是计算的14天中的上升和下跌的价格统计，而DMI则可以改变这个天数，后续可以详细参考RSI的用法。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
@@ -305,7 +330,7 @@ where:
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
         <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
     </ul>
 </section>
         </article>
