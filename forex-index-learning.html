@@ -331,16 +331,29 @@ where:
 <li>Now we can calculate the RSI values for every single day.</li>
 </ol>
 </blockquote>
+<h3>2018.1.1 Ease of Movement</h3>
+<p>这个指标是v和价格一起进行混合运算，这是不太合理的。原有意思是检测成交量能不能根上价格变动的速度的。和 <strong>TRIN</strong> 出自同一作者。</p>
+<div class="highlight"><pre><span></span>[ {(H+L)/2} - {(Hp+Lp)/2} ] / [ V/(H-L) ]
+</pre></div>
+
+
+<p>策略：该指标的计算方法不太合理，因为价格和成交量的单位是没有任何关系的，直接没经过单位的消除就进行计算肯定是不合理的</p>
+<h3>2018.1.1 Ehlers' Fisher Transform</h3>
+<p><a href="http://www.stockspotter.com/Files/usingthefishertransform.pdf">英文详细PDF</a>
+<a href="https://www.joinquant.com/post/4198">JoinQuant的策略研究</a></p>
+<p>作者统计了价格分布的规律，非正态分布，当然，收益率才是正态分析，算法有点意思(<strong>VIP</strong>)</p>
+<p>这是一个统计学上的东西<a href="https://en.wikipedia.org/wiki/Fisher_transformation">详见wiki</a>，<a href="http://blog.csdn.net/zj910092147/article/details/17426427">Fisher z-transform是对数据近似的变异稳定化处理</a>，z变换后近似服从均值为标准差为的正态分布。假设价格表现为方波，不服从传统的正态分布，所以经过z变换之后就服从近似的正态分布了。</p>
+<p>策略：直接可以判断出趋势的拐点，在软件上先试试看。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
         <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
     </ul>
 </section>
         </article>
