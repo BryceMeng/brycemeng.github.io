@@ -357,16 +357,28 @@ where:
 <p>策略：该指标暂不考虑进策略</p>
 <h3>2018.1.2 Elliot Oscillator（艾略特波浪指标）</h3>
 <p>一套很大的论理系统，波浪理论不太符合现在的交易市场。</p>
+<h3>2018.1.3 Envelopes Indicator</h3>
+<p><a href="http://www.onlinetradingconcepts.com/TechnicalAnalysis/MovingAverageEnvelopes.html">英文详解</a></p>
+<p>就是移动平均线，往上和往下扩展一个百分比，一般来讲是20天均线，上下各扩展5%</p>
+<div class="highlight"><pre><span></span>UPPER BAND = SMA (CLOSE, N) * [1 + K / 1000]
+
+LOWER BAND = SMA (CLOSE, N) * [1 - K / 1000]
+</pre></div>
+
+
+<h3>2018.1.3 Exponential Moving Average (EMA)</h3>
+<p>指数移动平均，只是一种均线的形式，简约形式可以只需要上一个EMA和今天的Close。</p>
+<p>策略：基于一个交易周期是一个月，可以应用一下22日左右的均线，也可以对成交量做EMA。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
         <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
         <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
     </ul>
 </section>
         </article>
