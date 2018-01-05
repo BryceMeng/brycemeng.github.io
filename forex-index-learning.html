@@ -369,16 +369,59 @@ LOWER BAND = SMA (CLOSE, N) * [1 - K / 1000]
 <h3>2018.1.3 Exponential Moving Average (EMA)</h3>
 <p>指数移动平均，只是一种均线的形式，简约形式可以只需要上一个EMA和今天的Close。</p>
 <p>策略：基于一个交易周期是一个月，可以应用一下22日左右的均线，也可以对成交量做EMA。</p>
+<h3>2018.01.04 Fast Stochastic Oscillator (Fast STO)</h3>
+<p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:stochastic_oscillator_fast_slow_and_full">英文详解</a></p>
+<p>它基于的理论是，趋势往下时close会无限接近low，往上时会接近high。用法就是判断超买超卖</p>
+<div class="highlight"><pre><span></span><span class="c">%K = (Current Close - Lowest Low)/(Highest High - Lowest Low) * 100</span>
+<span class="c">%D = 3-day SMA of %K</span>
+
+<span class="n">Fast</span> <span class="c">%K = %K basic calculation</span>
+<span class="n">Fast</span> <span class="c">%D = 3-period SMA of Fast %K</span>
+
+<span class="o">/*</span>
+<span class="n">Lowest</span> <span class="n">Low</span> <span class="p">=</span> <span class="n">lowest</span> <span class="n">low</span> <span class="k">for</span> <span class="n">the</span> <span class="n">look</span><span class="o">-</span><span class="n">back</span> <span class="n">period</span>
+<span class="n">Highest</span> <span class="n">High</span> <span class="p">=</span> <span class="n">highest</span> <span class="n">high</span> <span class="k">for</span> <span class="n">the</span> <span class="n">look</span><span class="o">-</span><span class="n">back</span> <span class="n">period</span>
+<span class="c">%K is multiplied by 100 to move the decimal point two places</span>
+<span class="o">*/</span>
+</pre></div>
+
+
+<p>策略：是不是可以买时判断是不是处于超卖的阶段，这样的买点成功率会更高，或者直接用超买和超卖的指标进行买卖。</p>
+<h3>2018.01.04 Force Index (FRC)</h3>
+<p><a href="https://www.forexmt4indicators.com/zh/force-index-frc-indicator-for-metatrader-4/">中文详解</a></p>
+<p>成交量和价格均线参与计算，单根线，以0为界，买点：当指标值在0以下往上升时买入</p>
+<p>策略：判断趋势</p>
+<h3>2018.01.05 Forecast Oscillator</h3>
+<p><a href="https://www.tradingtechnologies.com/help/x-study/technical-indicator-definitions/time-series-forecast-tsf/">英文详解</a></p>
+<p>这个指标是 The Time Series Forecast (TSF) 的扩展，如果当前价在指标值之上说明趋势往上，反之亦然。</p>
+<div class="highlight"><pre><span></span>//Time Series Forecast：
+
+Time Series Forecast = a + bx
+
+a = (Σy – bΣx) / n
+
+b = (nΣ(xy) – (Σx) (Σy)) / (nΣx² – (Σx)²)
+
+......
+
+(Close - Previous Time Series Forecast) * 100 / (Close)
+</pre></div>
+
+
+<p>策略：判断趋势</p>
+<h3>2018.01.05 Four Percent Model</h3>
+<p>指标值涨4%时买入，据说1993年的回报率非常不错。只看一个价格，就是每周的收盘价。</p>
+<p>策略：长线指标，而且很扯，不用。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
         <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
     </ul>
 </section>
         </article>
