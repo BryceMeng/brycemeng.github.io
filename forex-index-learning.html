@@ -446,17 +446,27 @@ G＝在今天或前一天的未平仓量中，取较低者
 
 
 <p>策略：这个可以先在软件里面写出来试一试。</p>
-<h3>2018.1.7 Historical (Natenberg) Volatility</h3>
-<p>期货指标，</p>
+<h3>2018.1.7 Historical (Natenberg) Volatility（历史波动率）</h3>
+<p><a href="https://www.metastock.com/customer/resources/formulas/?id=42">英文详解</a></p>
+<p>历史波动率，非常有用<strong>vip</strong></p>
+<div class="highlight"><pre><span></span>Std( Log( C / Ref( C ,-1 ) ) ,10 ) * Sqrt( 365 / 7 )  
+
+weekly:
+
+Std( Log( C / Ref( C,-1) ),10 ) * Sqrt( 365 )
+</pre></div>
+
+
+<p>策略：结合之前有一个动态计算指标周期的东东一起使用。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
         <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
     </ul>
 </section>
