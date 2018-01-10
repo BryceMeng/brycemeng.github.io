@@ -449,7 +449,7 @@ G＝在今天或前一天的未平仓量中，取较低者
 <h3>2018.1.7 Historical (Natenberg) Volatility（历史波动率）</h3>
 <p><a href="https://www.metastock.com/customer/resources/formulas/?id=42">英文详解</a></p>
 <p>历史波动率，非常有用<strong>vip</strong>。这个和我那个 Chaikin 的波动率还不一样，这个应该只用了close，不是很合理。</p>
-<div class="highlight"><pre><span></span>Std( Log( C / Ref( C ,-1 ) ) ,10 ) * Sqrt( 365 / 7 )  
+<div class="highlight"><pre><span></span>Std( Log( C / Ref( C ,-1 ) ) ,10 ) * Sqrt( 365 / 7 )
 
 weekly:
 
@@ -458,16 +458,56 @@ Std( Log( C / Ref( C,-1) ),10 ) * Sqrt( 365 )
 
 
 <p>策略：结合之前有一个动态计算指标周期的东东一起使用。</p>
+<h3>2018.1.8 Ichimoku Kinko Hyo (IKH)</h3>
+<p><a href="http://www.cnblogs.com/zeroone/archive/2011/08/27/2155320.html">中文详解</a></p>
+<p>一个日本人30年前写的策略。</p>
+<p>一定周期内的最高价和最低价参与计算，有T(红)K(蓝)A(沙褐色)B(蓟色)C(绿色线)</p>
+<p>策略：看详解里面说很很多种信号，可以把最强的一种信号试试看怎么样</p>
+<h3>2018.1.8 Ichimoku Japanese charts</h3>
+<p>还是讲 IKH的，里面的参数原版是9,26,52，因为当时一个交易周是6天，现在为5天，需要把参数修改为7,22,44。其实很多指标都涉及到了<strong>交易周期</strong>，还有一个<strong>涨跌周期</strong>，这两个概念是非常的重要。</p>
+<h3>2018.1.9 Inertia</h3>
+<p><a href="https://www.tradingview.com/script/ODEBlQkx-Inertia-Indicator/">代码实现</a></p>
+<p>平滑后的RVI，只有一根线，用到了波动率，STDEV，看到RVI时，再返回过来看看这个指标。</p>
+<p>策略：参考RVI <strong>Return</strong></p>
+<h3>2018.1.9 Intraday Momentum (IMI)</h3>
+<p>等看到RSI时再返回，计算方法类似</p>
+<p>策略：日内策略参考 <strong>Return</strong></p>
+<h3>2018.1.10 Kairi</h3>
+<p><a href="https://www.tradingview.com/script/xzRPAboO-Indicator-Kairi-Relative-Index-KRI/">指标源码</a></p>
+<p>简单的用了close和均线系统，用于超买超卖识别</p>
+<div class="highlight"><pre><span></span>length=input(14)
+
+ki(src)=&gt; ((src - sma(src, length))/sma(src, length)) * 100
+</pre></div>
+
+
+<p>策略：暂无</p>
+<h3>2018.1.10 Keltner Channel (KC)</h3>
+<p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:keltner_channels">指标源码</a></p>
+<p>肯特纳通道，和CCI结合起来使用，</p>
+<div class="highlight"><pre><span></span>KC Middle = MA(Price, n, Type),
+KC Upper = KC Middle + MA(TR, n, Type) * Dev,
+KC Lower = KC Middle - MA(TR, n, Type) * Dev,
+
+where
+
+Price – the price in the current period (Close, Open, etc),
+TR - True Range
+Dev - deviation factor
+</pre></div>
+
+
+<p>策略：回归看样子效果还不错，突破结合其他指标adx啥的使用</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
     </ul>
 </section>
         </article>
