@@ -484,7 +484,7 @@ ki(src)=&gt; ((src - sma(src, length))/sma(src, length)) * 100
 <p>策略：暂无</p>
 <h3>2018.1.10 Keltner Channel (KC)</h3>
 <p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:keltner_channels">指标源码</a></p>
-<p>肯特纳通道，和CCI结合起来使用，</p>
+<p>肯特纳通道，和CCI结合起来使用，和envelope还有boll带都是带，都是均线加减一定的值，envelop是加减固定百分比，boll带是加减标准差，这个是加减atr。</p>
 <div class="highlight"><pre><span></span>KC Middle = MA(Price, n, Type),
 KC Upper = KC Middle + MA(TR, n, Type) * Dev,
 KC Lower = KC Middle - MA(TR, n, Type) * Dev,
