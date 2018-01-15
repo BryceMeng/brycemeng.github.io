@@ -503,30 +503,72 @@ Dev - deviation factor
 <p>动量指标，成交量超大势能越强，反之越弱。在值极大时回调时死叉空，值极小回调时金叉多。</p>
 <p>策略：通过值是否大于0和KVO在Trigger之上或之下表示趋势强或弱。</p>
 <h3>插曲</h3>
-<p>这几天感冒了，人的精力也是正弦曲线，我曾经想过我是不是可以长期保持一个效率比较高的一个状态，而且保持着还相对稳定的运动状态，最终发现还是不大可能。</p>
+<p>这几天感冒了，人的精力也是正弦曲线，我曾经想过我是不是可以长期保持一个效率比较高的一个状态，而且保持着还相对稳定的运动状态，最终发现还是不大可能。对于现在来讲，自律很重要。</p>
 <h3>2018.1.12 Linear Regression Channel</h3>
 <p><a href="http://www.onlinetradingconcepts.com/TechnicalAnalysis/LinRegChannel.html">英文详解</a></p>
+<p>线性回归就是一根指定周期内的直线，根据下面的公司，然后channel就是上下加减一个或者两个标准差，形成两条平行线，这样的通道叫线性回归通道，和一般的通道一样，有回归也有趋势的作用。一般的用法是超出轨道进行回归性质的买或者卖。</p>
+<p>和boll band的差别在于这个的中心线是线性回归，而boll的中心线的均线。</p>
+<p><a href="https://www.tradingtechnologies.com/help/x-study/technical-indicator-definitions/linear-regression-intercept-lri/">线性回归公式1</a></p>
+<p><a href="https://www.incrediblecharts.com/indicators/linear_regression.php">线性回归公式2</a></p>
 <div class="highlight"><pre><span></span>linear resgression formula
+
+y = mx +b
+
+slope = m = (nΣ(xy) – (Σx) (Σy))/(nΣx² – (Σx)²)
+
+intercept = b = (Σy – mΣx) / n
 </pre></div>
 
 
-<p>$$
-P_{r-j}=
- \begin{cases}
-   0 &amp;\mbox{if $r-j$ is odd}\
-   r!\,(-1)^{(r-j)/2} &amp;\mbox{if $r-j$ is even}
-   \end{cases}
-$$</p>
+<h3>2018.1.12 Linear Regression Indicator (LRI)</h3>
+<p>LRI其实是一条曲线，这里会有一个疑问，线性回归是直线，为什么LRI是曲线，是的，因为某个bar对应的指标值是，该bar和之前19个bar（假如是20周期的LRI）的线性回归直线的终点值。<a href="https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/linear-regression">请看详解</a></p>
+<p>用法和均线是一样的，短周期的LRI上穿长周期的LRI做多，反之亦然。<a href="https://www.incrediblecharts.com/indicators/linear_regression_indicator.php">用法详解</a></p>
+<p>策略：看示例，均线上穿的效果比价格均线的交易要好，用4均线做振荡和趋势的判断？</p>
+<h3>2018.1.12 Linear Regression Slope</h3>
+<p>线性回归的斜率(slope)，和LRI一样，取最后一个点的值，公式是上上个的公式。</p>
+<p>策略：周期越长延迟越大，周期短了，LR回归又没啥意义，而且没有成交量参与有点失真。</p>
+<h3>2018.1.13 Linear Regression Trendline</h3>
+<p>这其实就是绘制一条指定周期内的线性回归的直线，人工交易可能参考性会更大。</p>
+<p>策略：人工交易会更好</p>
+<h3>2018.1.13 Linear Regression</h3>
+<p>讲了一个线性回归的方法，使用最小二乘法，周期越长越有用，谨慎使用，用之前提到的channel会比较靠谱。</p>
+<h3>2018.1.14 Moving Average Convergence/Divergence (2 lines)</h3>
+<p><a href="https://baike.baidu.com/item/MACD%E7%BA%BF/4717979">中文详解</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/MACD">wikipadia</a></p>
+<p>MACD，中国人炒股人人都在看。两根均线为根基进行计算。这里面讲的主要是里面的DIF和DEM线。</p>
+<p>策略：背离和趋势</p>
+<h3>2018.1.14 Moving Average Convergence/Divergence (MACD) Histogram</h3>
+<p>macd有很强的滞后性，所以研发出来了MACD Histogram来提前预判，其实就是我们常见的图上面的柱状图。</p>
+<div class="highlight"><pre><span></span>DIF: (12-day EMA - 26-day EMA) 
+
+Signal Line: 9-day EMA of MACD
+
+MACD Histogram: DIF - Signal Line
+</pre></div>
+
+
+<p>策略：以0为基础判断趋势，估计不太靠谱，有一个band会好一些</p>
+<h3>2018.1.15 Market Facilitation Index (BW MFI)</h3>
+<p>和成交量结合起来看，如果成交量和指标值一起在增长说明可持续。</p>
+<div class="highlight"><pre><span></span>[High] - [Low] / Volume
+</pre></div>
+
+
+<p>策略：成交量和价格一起参与计算是不靠谱的，因为价格和成交量不是一个数量级的。</p>
+<h3>2018.1.15 Mass Index</h3>
+<p><img alt="计算公式" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/83bb4433603a5b6024fd56b65f0996a9e504a190"></p>
+<p>专门开发出来用来判断回归点的，可以判断是否有逆转发生，但是不能判断方向。如果有一个超过27再跌回26.5的突起就表明很可能有逆转。</p>
+<p>策略：看图示还蛮准的，可以测试一下这个指标。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
     </ul>
 </section>
         </article>
