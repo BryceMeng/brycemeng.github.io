@@ -120,25 +120,28 @@
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>这不是正态分布吗？是的。英文Normal distribution，还叫高斯分布。Normal distribution这个直译应该是正常分布，可能当时某位学者翻译时觉得正常分布这个名字不高大上，所以用了正态分布。但是看完这篇文章，你会觉得自然分布才是最佳命名。</p>
+                <h2>概念</h2>
+<p>这不是<strong>正态分布</strong>吗？是的。英文Normal distribution，还叫<strong>高斯分布</strong>。Normal distribution这个直译应该是正常分布，可能当时某位学者翻译时觉得正常分布这个名字不高大上，所以用了正态分布。但是看完这篇文章，你会觉得<strong>自然分布</strong>才是最佳命名。</p>
 <p>本来想引用一下wiki里面的一些解释，全是公式，算了，公式不是这篇文章的目的。先来看一下全球智商的概率分布图。</p>
 <p><img alt="IQ概率分布" src="http://sinacloud.net/mhblog/2018/01/IQ_Curve.png"></p>
 <p>这时候大家是不是先去测一下智商，我当时看到这张图就去测了一下，结果还凑合，和我在现实生活当中的自我估计值差不多。</p>
-<p>100 为均值，也为期望值，图中的M。也就是大家的智商都是靠向100的，从统计学来讲，我们生的孩子智商都是向100靠拢的。</p>
+<p>100 为均值，也为<strong>期望值</strong>，图中的M。也就是大家的智商都是靠向100的，从统计学来讲，我们生的孩子智商都是向100靠拢的。</p>
 <p>这时候有人问了，那么智商为100的概率是多少呢？具体多少我也不会算，正态分布是连续分布，一般不用于计算单个点的概率，主要用于某个区间概率的计算。</p>
 <p>100为均值，这样大于100的概率为50%，小于100的概率为50%，不要问我等于100的情况哪里去了，上面说了不考虑单点概率。还好我的是在右边的50%。</p>
 <p>更细致的解读下，智商在100和116之间的概率为34.13%，智商大于132的概率只有2.14%，100个人中只有2个人智商大于132，非常稀少，我也不是。</p>
 <p>下面还有一个横坐标是什么呢？-1σ这些是啥？</p>
-<p>σ是标准差，公式大家可以自行搜索，中文表示为：所有可能出现的值减去均值(100)的平方除以，可能出现的值的个数，再开平方，不开平方的叫方差。</p>
+<p>σ是<strong>标准差</strong>，公式大家可以自行搜索，中文表示为：所有可能出现的值减去均值(100)的平方除以，可能出现的值的个数，再开平方，不开平方的叫方差。</p>
 <p>在金融行业里面经常用标准差来表示某个时间序列（也可以理解为某支股票）的波动率。为什么不用方差呢？因为方差里面的计算因子是经过平方的，再开个平方最接近于真实波动率。</p>
 <p>图中显示的标准差就是16。</p>
-<p>智商分布如此，其他呢？身高，体重，都是这样的，还有学校单次考试成绩的分布，公司里面工资的分布，当然这些不敢说完全服从正态分布，因为样本数量，群体特性等原因，但都者近似正态分布。所以说自然世界中很多属性的概率分布基本都近似正态分布，所以叫自然分布是不是更合适，自然分布也是统计学的核心。</p>
+<h2>生活应用</h2>
+<p>智商分布如此，其他呢？身高，体重，都是这样的，还有学校单次考试成绩的分布，公司里面工资的分布，当然这些不敢说完全服从正态分布，因为样本数量，群体特性等原因，但都者近似正态分布。所以说自然世界中很多属性的概率分布基本都近似正态分布，所以叫<strong>自然分布</strong>是不是更合适，自然分布也是<strong>统计学的核心</strong>。</p>
 <p>在一个团队中，可以把人分从多方属性进行统计，忠诚度，工作能力，搞事能力等等。如果不是在招聘时特别针对某项属性进行了筛选，那么是不是大部分的人其实都是中等水平，而且出现少数高于正常水平的和少数低于正常水平的也是一个正常现象。</p>
 <p>在某一天发完工资后，偷偷的和小伙伴们一讨论，为什么我和大部分的人一样呢？愤愤不平。这时候自然分布告诉我们，我们起码有68%的概率工资都在一个普通区间内，是不是一下就平衡了。当然如果你想超越这68%那就得加倍努力，诶，努力程度如果可以量化的话是否也是自然分布呢？我没试过，但是应该是。</p>
 <p>为什么世间会有如此有意思的统计学原理呢？这个嘛，我也不太清楚。</p>
 <hr>
 <p>下面我想做一个针对上证指数分布的代码尝试，比较基础，大师们和不想看代码的朋友可以先撤了。</p>
 <p>这时候有朋友会问？如果上证指数也服从正态分布，那么会有一个均值，假如是4000点，那么上证指数会永远在4000点附近转悠吗？根据经济学原理，现在每年CPI好歹也有个3左右，这不科学啊。</p>
+<h2>代码实践</h2>
 <p>好问题，看代码一步步的分析起来，本测试采用了上证指数2008.1.1到2018.1.1 10年的日线数据，数据可以从QuantOS上面获取。</p>
 <h3>1. 上证指数</h3>
 <p><img alt="上证指数概率分布" src="http://sinacloud.net/mhblog/2018/01/source_curve.png"></p>
@@ -157,9 +160,7 @@
 </pre></div>
 
 
-<ol>
-<li>价差</li>
-</ol>
+<h3>2. 价差</h3>
 <p>先线上证指数做了一阶差分，然后再做统计。简单来讲就是测试一下上证指数每天价格变化量的分布。</p>
 <p><img alt="上证指数1阶差分概率分布" src="http://sinacloud.net/mhblog/2018/01/Diff_l1_curve.png"></p>
 <div class="highlight"><pre><span></span><span class="c1"># shts_diff_l1 上证指数每日收盘点数的1阶差分时间序列</span>
@@ -173,9 +174,7 @@
 
 
 <p>现在再来看看，是不是有点意思了，再想想我们其实对收益更感兴趣。</p>
-<ol>
-<li>简单收益率</li>
-</ol>
+<h3>3. 简单收益率</h3>
 <p><img alt="上证指数简单收益率概率分布" src="http://sinacloud.net/mhblog/2018/01/return_ratio_curve.png"></p>
 <div class="highlight"><pre><span></span><span class="n">ts_simple_rate</span> <span class="o">=</span> <span class="p">((</span><span class="n">shts</span> <span class="o">-</span> <span class="n">shts</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="n">shts</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 
@@ -188,9 +187,7 @@
 
 <p>收益率其实已经很接近正态分布，当然尖锋特别明显，这也表明我国股市处于无力振荡的时间真的很长啊...</p>
 <p>其实在金融领域大都采用<strong>对数收益率</strong>，对数收益率有可以做方便统计的加减运算等等很多优点，下面我们来做一下对数收益率的分布统计。</p>
-<ol>
-<li>对数收益率</li>
-</ol>
+<h3>4. 对数收益率</h3>
 <p><img alt="上证指数对数收益率概率分布" src="http://sinacloud.net/mhblog/2018/01/log_return_ratio_curve.png"></p>
 <div class="highlight"><pre><span></span><span class="n">ts_log_return_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">shts</span><span class="o">/</span><span class="n">shts</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 
@@ -209,11 +206,11 @@
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
         <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
         <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
         <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
         <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
     </ul>
 </section>
         </article>
