@@ -130,18 +130,18 @@
 <p>100为均值，这样大于100的概率为50%，小于100的概率为50%，不要问我等于100的情况哪里去了，上面说了不考虑单点概率。还好我的是在右边的50%。</p>
 <p>更细致的解读下，智商在100和116之间的概率为34.13%，智商大于132的概率只有2.14%，100个人中只有2个人智商大于132，非常稀少，我也不是。</p>
 <p>下面还有一个横坐标是什么呢？-1σ这些是啥？</p>
-<p>σ是<strong>标准差</strong>，公式大家可以自行搜索，中文表示为：所有可能出现的值减去均值(100)的平方除以，可能出现的值的个数，再开平方，不开平方的叫方差。</p>
-<p>在金融行业里面经常用标准差来表示某个时间序列（也可以理解为某支股票）的波动率。为什么不用方差呢？因为方差里面的计算因子是经过平方的，再开个平方最接近于真实波动率。</p>
+<p>σ是<strong>标准差</strong>，公式大家可以自行搜索，中文表示为：所有属性值减去均值(100)的平方除以属性值的个数，再开平方，不开平方的叫方差。</p>
+<p>在金融行业里面经常用标准差来表示某个时间序列（<em>也可以理解为某支股票</em>）的波动率。为什么不用方差呢？因为方差里面的计算因子是经过平方的，再开个平方最接近于真实波动率。</p>
 <p>图中显示的标准差就是16。</p>
 <h2>生活应用</h2>
-<p>智商分布如此，其他呢？身高，体重，都是这样的，还有学校单次考试成绩的分布，公司里面工资的分布，当然这些不敢说完全服从正态分布，因为样本数量，群体特性等原因，但都者近似正态分布。所以说自然世界中很多属性的概率分布基本都近似正态分布，所以叫<strong>自然分布</strong>是不是更合适，自然分布也是<strong>统计学的核心</strong>。</p>
-<p>在一个团队中，可以把人分从多方属性进行统计，忠诚度，工作能力，搞事能力等等。如果不是在招聘时特别针对某项属性进行了筛选，那么是不是大部分的人其实都是中等水平，而且出现少数高于正常水平的和少数低于正常水平的也是一个正常现象。</p>
-<p>在某一天发完工资后，偷偷的和小伙伴们一讨论，为什么我和大部分的人一样呢？愤愤不平。这时候自然分布告诉我们，我们起码有68%的概率工资都在一个普通区间内，是不是一下就平衡了。当然如果你想超越这68%那就得加倍努力，诶，努力程度如果可以量化的话是否也是自然分布呢？我没试过，但是应该是。</p>
+<p>智商分布如此，其他呢？身高，体重，都是这样的，还有学校单次考试成绩的分布，公司里面工资的分布，当然这些不敢说完全服从正态分布，因为样本数量，群体特性等原因，但都者近似正态分布。所以说自然世界中很多属性的概率分布基本都近似正态分布，所以叫<strong>自然分布</strong>是不是更合适，当然自然分布也是<strong>统计学的核心</strong>。</p>
+<p>在一个团队中，可以把人分从多方属性进行统计，<strong>忠诚度，工作能力，搞事能力</strong>等等。如果不是在招聘时特别针对某项属性进行了筛选，那么是不是大部分的人其实都是中等水平，而且出现少数高于正常水平的和少数低于正常水平的也是一个正常现象。</p>
+<p>在某一天发完工资后，偷偷的和小伙伴们一讨论，为什么我和大部分的人一样呢？愤愤不平。这时候自然分布告诉我们，我们起码有68%的概率工资都在一个普通区间内，是不是一下就平衡了。当然如果你想超越这68%那就得<strong>加倍努力</strong>，诶，努力程度如果可以量化的话是否也是自然分布呢？我没试过，但是应该是。</p>
 <p>为什么世间会有如此有意思的统计学原理呢？这个嘛，我也不太清楚。</p>
 <hr>
+<h2>代码实践</h2>
 <p>下面我想做一个针对上证指数分布的代码尝试，比较基础，大师们和不想看代码的朋友可以先撤了。</p>
 <p>这时候有朋友会问？如果上证指数也服从正态分布，那么会有一个均值，假如是4000点，那么上证指数会永远在4000点附近转悠吗？根据经济学原理，现在每年CPI好歹也有个3左右，这不科学啊。</p>
-<h2>代码实践</h2>
 <p>好问题，看代码一步步的分析起来，本测试采用了上证指数2008.1.1到2018.1.1 10年的日线数据，数据可以从QuantOS上面获取。</p>
 <h3>1. 上证指数</h3>
 <p><img alt="上证指数概率分布" src="http://sinacloud.net/mhblog/2018/01/source_curve.png"></p>
@@ -153,15 +153,13 @@
 <span class="n">draw_guass</span><span class="p">(</span><span class="n">shts</span><span class="p">)</span> 
 
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">shts</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;yellowgreen&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
-
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">u&#39;Shanghai Stock Index -&gt; Price&#39;</span><span class="p">)</span>
-
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
 
 <h3>2. 价差</h3>
-<p>先线上证指数做了一阶差分，然后再做统计。简单来讲就是测试一下上证指数每天价格变化量的分布。</p>
+<p>先对上证指数做了一阶差分，然后再做统计。简单来讲就是测试一下上证指数每天价格变化量的分布。</p>
 <p><img alt="上证指数1阶差分概率分布" src="http://sinacloud.net/mhblog/2018/01/Diff_l1_curve.png"></p>
 <div class="highlight"><pre><span></span><span class="c1"># shts_diff_l1 上证指数每日收盘点数的1阶差分时间序列</span>
 <span class="n">shts_diff_l1</span> <span class="o">=</span> <span class="n">shts</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
@@ -199,15 +197,15 @@
 
 
 <p>尖锋比简单收益率小了一些，不过大体形状上类似。</p>
-<p>最后基于上证指数做的统计测试，只是我学习的一个案例，不过对于小菜鸟的我前前后后也花了不少的功夫，大师们可以完全绕过，也希望菜鸟朋友门可以把统计学这门基础学好，慢慢来，不要着急。</p>
-<p>自然分布存在于世间万事万物，这也让我在最近的学习中体会到了数学之美。我又想到了查理芒格提到的，多学习一些普世科学，不要局限于一个领域内，会对我们有非常大的帮助。我觉得基础统计学应该算一门普世科学。</p>
+<p>最后基于上证指数做的统计测试，只是我学习的一个案例，不过对于小菜鸟的我前前后后也花了不少的功夫，大师们可以完全绕过，也希望菜鸟朋友门可以把统计学这门基础学好，<strong>慢慢来，不要着急</strong>。</p>
+<p>自然分布存在于世间万事万物，这也让我在最近的学习中体会到了<strong>数学之美</strong>。我又想到了查理芒格提到的，多学习一些普世科学，不要局限于一个领域内，会对我们有非常大的帮助。我觉得<strong>基础统计学</strong>应该算一门<strong>普世科学</strong>。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
         <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
         <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
         <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
