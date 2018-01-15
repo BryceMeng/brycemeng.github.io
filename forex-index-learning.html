@@ -490,7 +490,7 @@ KC Upper = KC Middle + MA(TR, n, Type) * Dev,
 KC Lower = KC Middle - MA(TR, n, Type) * Dev,
 
 where
-
+tradingtechnologies
 Price – the price in the current period (Close, Open, etc),
 TR - True Range
 Dev - deviation factor
@@ -502,16 +502,31 @@ Dev - deviation factor
 <p><a href="https://www.tradingview.com/script/Ka0gS4Kh-Klinger-Volume-Oscillator-KVO/">源码</a></p>
 <p>动量指标，成交量超大势能越强，反之越弱。在值极大时回调时死叉空，值极小回调时金叉多。</p>
 <p>策略：通过值是否大于0和KVO在Trigger之上或之下表示趋势强或弱。</p>
+<h3>插曲</h3>
+<p>这几天感冒了，人的精力也是正弦曲线，我曾经想过我是不是可以长期保持一个效率比较高的一个状态，而且保持着还相对稳定的运动状态，最终发现还是不大可能。</p>
+<h3>2018.1.12 Linear Regression Channel</h3>
+<p><a href="http://www.onlinetradingconcepts.com/TechnicalAnalysis/LinRegChannel.html">英文详解</a></p>
+<div class="highlight"><pre><span></span>linear resgression formula
+</pre></div>
+
+
+<p>$$
+P_{r-j}=
+ \begin{cases}
+   0 &amp;\mbox{if $r-j$ is odd}\
+   r!\,(-1)^{(r-j)/2} &amp;\mbox{if $r-j$ is even}
+   \end{cases}
+$$</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
-        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
     </ul>
 </section>
         </article>
