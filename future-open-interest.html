@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>量化 - 雪山</title>
+    <title>期货持仓量 - 雪山</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,16 +10,22 @@
 
     <link href="/images/favicon.png" rel="icon">
 
+<link rel="canonical" href="/future-open-interest.html">
 
-    <meta name="author" content="雪山" />
-    <meta name="keywords" content="量化" />
+        <meta name="author" content="雪山" />
+        <meta name="keywords" content="量化,持仓量" />
+        <meta name="description" content="期货持仓量的分析" />
 
-    <!-- Open Graph tags -->
         <meta property="og:site_name" content="雪山" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="雪山"/>
-        <meta property="og:url" content=""/>
-        <meta property="og:description" content="雪山"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="期货持仓量"/>
+        <meta property="og:url" content="/future-open-interest.html"/>
+        <meta property="og:description" content="期货持仓量的分析"/>
+        <meta property="article:published_time" content="2018-01-16" />
+            <meta property="article:section" content="量化" />
+            <meta property="article:tag" content="量化" />
+            <meta property="article:tag" content="持仓量" />
+            <meta property="article:author" content="雪山" />
 
 
     <!-- Bootstrap -->
@@ -68,7 +74,7 @@
                         <li >
                             <a href="/category/ji-zhu.html">技术</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="/category/liang-hua.html">量化</a>
                         </li>
                         <li >
@@ -86,51 +92,68 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></h2>
-                <div class="summary"><p>EdgeRouter Lite 3配置实例，这是一款性能非常高，但非常难配的路由器</p>
-                    <a class="btn btn-default btn-xs" href="/edgerouter-lite-3-config.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/trading-systems-reading-note.html">Trading Systems</a></h2>
-                <div class="summary"><p>Trading Systems 读后笔记</p>
-                    <a class="btn btn-default btn-xs" href="/trading-systems-reading-note.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></h2>
-                <div class="summary"><p>用CTP接口实现期货交易明细分析第二篇，细节决定一切</p>
-                    <a class="btn btn-default btn-xs" href="/ctp-archive-future-tick-2.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></h2>
-                <div class="summary"><p>用CTP接口实现期货交易明细分析第一篇，刚接触期货这玩意儿真是头大</p>
-                    <a class="btn btn-default btn-xs" href="/ctp-archive-future-tick.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/my-quant-live-started.html">我的量化交易</a></h2>
-                <div class="summary"><p>我的量化交易，当时写这篇文章时有点小激动啊</p>
-                    <a class="btn btn-default btn-xs" href="/my-quant-live-started.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/future-open-interest.html"
+                       rel="bookmark"
+                       title="Permalink to 期货持仓量">
+                        期货持仓量
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-01-16T17:34:00+08:00"> 二 16 一月 2018</time>
+    </span>
 
-        <ul class="pagination">
-                <li class="prev"><a href="/tag/liang-hua.html">&laquo;</a>
-                </li>
-                    <li class=""><a
-                            href="/tag/liang-hua.html">1</a></li>
-                    <li class="active"><a
-                            href="/tag/liang-hua2.html">2</a></li>
-                <li class="next disabled"><a href="#">&raquo;</a></li>
-        </ul>
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/liang-hua.html">量化</a>
+        /
+	<a href="/tag/chi-cang-liang.html">持仓量</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>今天看到一篇分析外汇持仓量的分析，里面涉及到某支品种的持仓量，有<strong>商业做多</strong>和<strong>商业做空</strong>的持仓量比对，这样可以看出一些大机构对多空的看法，我后来想期货里面能不能也这么分析呢？</p>
+<p>后来仔细一分析，其实持仓量是相对的，多持仓量和空持仓量一定是一样的，下面我们做一个简单的模拟：</p>
+<table>
+<thead>
+<tr>
+<th>多仓100</th>
+<th>空仓100</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aaaaa</td>
+<td>sdfbbbb</td>
+</tr>
+</tbody>
+</table>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
