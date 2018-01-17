@@ -21,7 +21,7 @@
         <meta property="og:title" content="成熟指标库慢啃"/>
         <meta property="og:url" content="/forex-index-learning.html"/>
         <meta property="og:description" content="还是要把成熟指标熟悉起来，起码在脑子里知道某个指标是干啥的"/>
-        <meta property="article:published_time" content="2017-12-31" />
+        <meta property="article:published_time" content="2018-01-16" />
             <meta property="article:section" content="量化" />
             <meta property="article:tag" content="量化" />
             <meta property="article:tag" content="成熟指标" />
@@ -109,7 +109,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-12-31T23:34:00+08:00"> 日 31 十二月 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-01-16T19:34:00+08:00"> 二 16 一月 2018</time>
     </span>
 
 
@@ -559,16 +559,83 @@ MACD Histogram: DIF - Signal Line
 <p><img alt="计算公式" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/83bb4433603a5b6024fd56b65f0996a9e504a190"></p>
 <p>专门开发出来用来判断回归点的，可以判断是否有逆转发生，但是不能判断方向。如果有一个超过27再跌回26.5的突起就表明很可能有逆转。</p>
 <p>策略：看图示还蛮准的，可以测试一下这个指标。</p>
+<h3>2018.1.16 McClellan Oscillator (McClellan Osc)</h3>
+<p>指数型指标，依据是大量温和上涨的股票是牛市稳定的指标，如果突然大幅度上涨，说明头部已经到来。超买和超卖型指标，用成交量进行计算。</p>
+<div class="highlight"><pre><span></span>DIF=UPW─DPW
+AD＝DIF的19天指数平均数。
+BD＝DIF的39天指数平均数。
+MCL＝AD-BD
+</pre></div>
+
+
+<p>策略：板块趋势判断。</p>
+<h3>2018.1.16 McClellan Summation</h3>
+<p>基于McClellan Osc进行计算，以-1300和1600做为底和顶的分割线，</p>
+<div class="highlight"><pre><span></span>Previous day&#39;s Summation Index* + current day McClellan Oscillator
+
+* The very first Summation Index is simply the value of the McClellan Oscillator.
+</pre></div>
+
+
+<p>策略：板块回归。</p>
+<h3>2018.1.17 Median Price</h3>
+<p><a href="http://www.incrediblecharts.com/indicators/median_price.php">英文详解</a></p>
+<p>就是对高低价做的一个平均，不知道有什么用。</p>
+<div class="highlight"><pre><span></span>(High + Low ) / 2
+</pre></div>
+
+
+<p>策略：是否可以替代一些指标的计算因子。</p>
+<h3>2018.1.17 Mesa Sine Wave</h3>
+<p><a href="http://www.davenewberg.com/Trading/EhlersCodes.html">John Ehler 的相关指标</a></p>
+<p>sine 正弦波指标，计算方法太复杂，<a href="http://www.davenewberg.com/Trading/TS_Code/Ehlers_Indicators/SineWave_Ind.html">看这里</a>，用法Sine在LeadSine线下为空，上为多。</p>
+<div class="highlight"><pre><span></span><span class="n">Inputs</span><span class="o">:</span> <span class="n">Price</span><span class="o">((</span><span class="n">H</span><span class="o">+</span><span class="n">L</span><span class="o">)/</span><span class="mi">2</span><span class="o">),</span> <span class="n">alpha</span><span class="o">(.</span><span class="mi">07</span><span class="o">);</span> 
+
+<span class="n">Vars</span><span class="o">:</span> <span class="n">Smooth</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">Cycle</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">I1</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">Q1</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">I2</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">Q2</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">DeltaPhase</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">MedianDelta</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">MaxAmp</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">AmpFix</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">Re</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">Im</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">DC</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span>
+<span class="n">alpha1</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">InstPeriod</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">DCPeriod</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">count</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">SmoothCycle</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">RealPart</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">ImagPart</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">DCPhase</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+
+<span class="n">Smooth</span> <span class="o">=</span> <span class="o">(</span><span class="n">Price</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">Price</span><span class="o">[</span><span class="mi">1</span><span class="o">]+</span><span class="mi">2</span><span class="o">*</span><span class="n">Price</span><span class="o">[</span><span class="mi">2</span><span class="o">]+</span><span class="n">Price</span><span class="o">[</span><span class="mi">3</span><span class="o">])/</span><span class="mi">6</span><span class="o">;</span>
+<span class="n">Cycle</span> <span class="o">=</span> <span class="o">(</span><span class="mi">1</span><span class="o">-.</span><span class="mi">5</span><span class="o">*</span><span class="n">alpha</span><span class="o">)*(</span><span class="mi">1</span><span class="o">-.</span><span class="mi">5</span><span class="o">*</span><span class="n">alpha</span><span class="o">)*(</span><span class="n">Smooth</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">Smooth</span><span class="o">[</span><span class="mi">1</span><span class="o">]+</span><span class="n">Smooth</span><span class="o">[</span><span class="mi">2</span><span class="o">])+</span><span class="mi">2</span><span class="o">*(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="o">)*</span><span class="n">Cycle</span><span class="o">[</span><span class="mi">1</span><span class="o">]-(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="o">)*(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="o">)*</span><span class="n">Cycle</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+<span class="n">If</span> <span class="n">CurrentBar</span> <span class="o">&lt;</span><span class="mi">7</span> <span class="n">then</span> <span class="n">Cycle</span><span class="o">=(</span><span class="n">Price</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">Price</span><span class="o">[</span><span class="mi">1</span><span class="o">]+</span><span class="n">Price</span><span class="o">[</span><span class="mi">2</span><span class="o">])/</span><span class="mi">4</span><span class="o">;</span> 
+<span class="n">Q1</span><span class="o">=(.</span><span class="mi">0962</span><span class="o">*</span><span class="n">Cycle</span><span class="o">+.</span><span class="mi">5769</span><span class="o">*</span><span class="n">Cycle</span><span class="o">[</span><span class="mi">2</span><span class="o">]-.</span><span class="mi">5769</span><span class="o">*</span><span class="n">Cycle</span><span class="o">[</span><span class="mi">4</span><span class="o">]-.</span><span class="mi">0962</span><span class="o">*</span><span class="n">Cycle</span><span class="o">[</span><span class="mi">6</span><span class="o">])*(.</span><span class="mi">5</span><span class="o">+.</span><span class="mi">08</span><span class="o">*</span><span class="n">InstPeriod</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
+<span class="n">I1</span> <span class="o">=</span> <span class="n">Cycle</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
+<span class="n">If</span> <span class="n">Q1</span><span class="o">&lt;&gt;</span><span class="mi">0</span> <span class="n">and</span> <span class="n">Q1</span><span class="o">[</span><span class="mi">1</span><span class="o">]&lt;&gt;</span><span class="mi">0</span> <span class="n">then</span> <span class="n">DeltaPhase</span><span class="o">=(</span><span class="n">I1</span><span class="sr">/Q1-I1[1]/Q1[1])/(1+I1*I1[1]/</span><span class="o">(</span><span class="n">Q1</span><span class="o">*</span><span class="n">Q1</span><span class="o">[</span><span class="mi">1</span><span class="o">]));</span>
+<span class="n">If</span> <span class="n">DeltaPhase</span> <span class="o">&lt;</span><span class="mf">0.1</span> <span class="n">then</span> <span class="n">DeltaPhase</span><span class="o">=</span><span class="mf">0.1</span><span class="o">;</span>
+<span class="n">If</span> <span class="n">DeltaPhase</span> <span class="o">&gt;</span> <span class="mf">1.1</span> <span class="n">then</span> <span class="n">DeltaPhase</span> <span class="o">=</span> <span class="mf">1.1</span><span class="o">;</span>
+<span class="n">MedianDelta</span> <span class="o">=</span> <span class="n">Median</span><span class="o">(</span><span class="n">DeltaPhase</span><span class="o">,</span><span class="mi">5</span><span class="o">);</span>
+<span class="n">If</span> <span class="n">MedianDelta</span> <span class="o">=</span><span class="mi">0</span> <span class="n">then</span> <span class="n">DC</span><span class="o">=</span><span class="mi">15</span> <span class="k">else</span> <span class="n">DC</span><span class="o">=</span><span class="mf">6.28318</span><span class="o">/</span><span class="n">MedianDelta</span><span class="o">+.</span><span class="mi">5</span><span class="o">;</span>
+<span class="n">InstPeriod</span><span class="o">=.</span><span class="mi">33</span><span class="o">*</span><span class="n">DC</span><span class="o">+.</span><span class="mi">67</span><span class="o">*</span><span class="n">InstPeriod</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+<span class="n">Value1</span> <span class="o">=</span> <span class="o">.</span><span class="mi">15</span><span class="o">*</span><span class="n">InstPeriod</span><span class="o">+.</span><span class="mi">85</span><span class="o">*</span><span class="n">Value1</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+<span class="n">DCPeriod</span> <span class="o">=</span> <span class="n">IntPortion</span><span class="o">(</span><span class="n">Value1</span><span class="o">);</span> 
+<span class="n">RealPart</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> 
+<span class="n">ImagPart</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> 
+<span class="n">For</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">To</span> <span class="n">DCPeriod</span> <span class="o">-</span> <span class="mi">1</span> <span class="n">begin</span> 
+<span class="n">RealPart</span> <span class="o">=</span> <span class="n">RealPart</span> <span class="o">+</span> <span class="n">Sine</span><span class="o">(</span><span class="mi">360</span> <span class="o">*</span> <span class="n">count</span> <span class="o">/</span> <span class="n">DCPeriod</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="n">Cycle</span><span class="o">[</span><span class="n">count</span><span class="o">]);</span> 
+<span class="n">ImagPart</span> <span class="o">=</span> <span class="n">ImagPart</span> <span class="o">+</span> <span class="n">Cosine</span><span class="o">(</span><span class="mi">360</span> <span class="o">*</span> <span class="n">count</span> <span class="o">/</span> <span class="n">DCPeriod</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="n">Cycle</span><span class="o">[</span><span class="n">count</span><span class="o">]);</span> 
+<span class="n">End</span><span class="o">;</span> 
+<span class="n">If</span> <span class="n">AbsValue</span><span class="o">(</span><span class="n">ImagPart</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mf">0.001</span> <span class="n">then</span> <span class="n">DCPhase</span> <span class="o">=</span> <span class="n">Arctangent</span><span class="o">(</span><span class="n">RealPart</span> <span class="o">/</span> <span class="n">ImagPart</span><span class="o">);</span> 
+<span class="n">If</span> <span class="n">AbsValue</span><span class="o">(</span><span class="n">ImagPart</span><span class="o">)</span> <span class="o">&lt;=</span> <span class="mf">0.001</span> <span class="n">then</span> <span class="n">DCPhase</span> <span class="o">=</span> <span class="mi">90</span> <span class="o">*</span> <span class="n">Sign</span><span class="o">(</span><span class="n">RealPart</span><span class="o">);</span> 
+
+<span class="n">DCPhase</span> <span class="o">=</span> <span class="n">DCPhase</span> <span class="o">+</span> <span class="mi">90</span><span class="o">;</span> 
+<span class="n">If</span> <span class="n">ImagPart</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">DCPhase</span> <span class="o">=</span> <span class="n">DCPhase</span> <span class="o">+</span> <span class="mi">180</span><span class="o">;</span> 
+<span class="n">If</span> <span class="n">DCPhase</span> <span class="o">&gt;</span> <span class="mi">315</span> <span class="n">then</span> <span class="n">DCPhase</span> <span class="o">=</span> <span class="n">DCPhase</span> <span class="o">-</span> <span class="mi">360</span><span class="o">;</span> 
+
+<span class="n">Plot1</span><span class="o">(</span><span class="n">Sine</span><span class="o">(</span><span class="n">DCPhase</span><span class="o">),</span> <span class="s2">&quot;Sine&quot;</span><span class="o">,</span><span class="n">blue</span><span class="o">);</span> 
+<span class="n">Plot2</span><span class="o">(</span><span class="n">Sine</span><span class="o">(</span><span class="n">DCPhase</span> <span class="o">+</span> <span class="mi">45</span><span class="o">),</span> <span class="s2">&quot;LeadSine&quot;</span><span class="o">,</span><span class="n">green</span><span class="o">);</span>
+</pre></div>
+
+
+<p>策略：在网上其实有一些人说这个指标很准，下拉用这个指标进行交易，做回归都行。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
     </ul>
 </section>
         </article>
