@@ -588,7 +588,7 @@ MCL＝AD-BD
 <p>策略：是否可以替代一些指标的计算因子。</p>
 <h3>2018.1.17 Mesa Sine Wave</h3>
 <p><a href="http://www.davenewberg.com/Trading/EhlersCodes.html">John Ehler 的相关指标</a></p>
-<p>sine 正弦波指标，计算方法太复杂，<a href="http://www.davenewberg.com/Trading/TS_Code/Ehlers_Indicators/SineWave_Ind.html">看这里</a>，用法Sine在LeadSine线下为空，上为多。</p>
+<p>sine 正弦波指标，用Median Price为输入进行计算，计算方法太复杂，<a href="http://www.davenewberg.com/Trading/TS_Code/Ehlers_Indicators/SineWave_Ind.html">看这里</a>，用法Sine在LeadSine线下为空，上为多。</p>
 <div class="highlight"><pre><span></span><span class="n">Inputs</span><span class="o">:</span> <span class="n">Price</span><span class="o">((</span><span class="n">H</span><span class="o">+</span><span class="n">L</span><span class="o">)/</span><span class="mi">2</span><span class="o">),</span> <span class="n">alpha</span><span class="o">(.</span><span class="mi">07</span><span class="o">);</span> 
 
 <span class="n">Vars</span><span class="o">:</span> <span class="n">Smooth</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">Cycle</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">I1</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">Q1</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">I2</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">Q2</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">DeltaPhase</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">MedianDelta</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">MaxAmp</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">AmpFix</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">Re</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">Im</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">DC</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span>
@@ -626,16 +626,19 @@ MCL＝AD-BD
 
 
 <p>策略：在网上其实有一些人说这个指标很准，下拉用这个指标进行交易，做回归都行。</p>
+<h3>2018.1.18 Modified Moving Average (MMA)</h3>
+<div class="highlight"><pre><span></span>![f1](http://sinacloud.net/mhblog/2018/01/2018011801.png)
+</pre></div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
         <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
     </ul>
 </section>
         </article>
