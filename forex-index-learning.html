@@ -631,17 +631,30 @@ MCL＝AD-BD
 <p>第一根</p>
 <p><img alt="f1" src="http://sinacloud.net/mhblog/2018/01/2018011801.png"></p>
 <p>后面的</p>
-<p><img alt="f1" src="http://sinacloud.net/mhblog/2018/01/2018011802.png"></p>
+<p><img alt="f2" src="http://sinacloud.net/mhblog/2018/01/2018011802.png"></p>
+<p>C close price</p>
+<p>f 常数,有时会取做1/n,有时会取做0.1</p>
+<p>策略: 常规均线用法,后面要比较一下各种ma的在各品种上的差别</p>
+<h3>2018.1.18 Momentum</h3>
+<p>动量指标,计算一定时间内价格变动的值。</p>
+<div class="highlight"><pre><span></span>1. MOMENTUM = CLOSE (i) / CLOSE (i - n) * 100
+
+2. MOMENTUM = CLOSE (i) - CLOSE (i - n)
+</pre></div>
+
+
+<p>有两种表达形式,第2种才有可能为负值。</p>
+<p>策略: 以0做为趋势的判断。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
         <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
     </ul>
 </section>
         </article>
