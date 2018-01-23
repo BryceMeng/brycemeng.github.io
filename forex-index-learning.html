@@ -645,16 +645,243 @@ MCL＝AD-BD
 
 <p>有两种表达形式,第2种才有可能为负值。</p>
 <p>策略: 以0做为趋势的判断。</p>
+<h3>2018.1.19 Momentum Percent</h3>
+<div class="highlight"><pre><span></span>If you define MOmax the highest absolute value of the momentum, the Momentum Percent % is:
+
+MO%t = MOt / MOmax
+</pre></div>
+
+
+<p>策略：方向反转做为买卖信号。</p>
+<h3>2018.1.19 Money Flow (MF)</h3>
+<div class="highlight"><pre><span></span>Money Flow = (Typical Price) * (Volume)
+
+Where Typical Price is defined as: (High + Low + Close) / 3
+</pre></div>
+
+
+<p>20和80是超卖和超买线</p>
+<p>策略：价格直接和成交量进行计算，总不是个好事。</p>
+<h3>2018.1.19 Money Flow Index (MFI)</h3>
+<p>指数类的指标</p>
+<div class="highlight"><pre><span></span>Money Ratio: Negative Money Flow / Positive Money Flow
+Money Flow Index: 100 - 100 / (1+ Money Ratio)
+</pre></div>
+
+
+<p>80和20也是基准线，见Money Flow指标</p>
+<p>策略：指数类，板块分析</p>
+<h3>2018.1.20 Moving Average (MA)</h3>
+<p>就简单讲了一下，简单，指数移动均线。</p>
+<h3>2018.1.20 Moving Average Convergence/Divergence (MACD)</h3>
+<p>MACD指标，上面好象提到过。</p>
+<div class="highlight"><pre><span></span>MACD = MA(P, nlong) - MA(P, nshort),
+
+MACD Signal = MA(MACD, n),
+
+where MA(P, nlong) - moving average of the price P within nlong periods (usually 26),
+
+MA(P, nshort) - moving average of the price P within nshort periods (usually 12),
+
+MA(MACD, n) - moving average MACD within n periods (usually 9).
+</pre></div>
+
+
+<p>详情见上面的MACD 2 Lines</p>
+<h3>2018.1.21 Moving Average Envelope</h3>
+<p>和之前的Envelope指标一模一样。</p>
+<p>用法：</p>
+<ol>
+<li>用作过滤器</li>
+<li>双线回归</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>延迟比较严重</li>
+<li>Moving Average envelopes cannot be provided under ongoing inconstancy as, let's say, Bollinger Bands. 这句话一直没看明白</li>
+</ol>
+<h3>2018.1.21 Negative Volume Index (NVI)</h3>
+<p>PVI 是表明非专业人士，也就是散户的交易活跃度，看起来不像，因为国内股市肯定是散户走涨，散来跌，但是这个PVI的趋势竟然和价格一样。NVI</p>
+<div class="highlight"><pre><span></span>Initial value of PVI:
+
+PVI0 = 1.
+
+If the volume of the current period is more than volume of the previous one, then
+
+PVIi = PVIi-1 + (PVIi-1 * (Pi - Pi-1) / Pi-1),
+
+where Pi - is the price of the current period, Pi-1 - is the price of the previous period.
+</pre></div>
+
+
+<p>PVI 如果成交量增长，则用上面的公式，如果成交量减少，则PVIi=PVIi-1
+NVI 如果成交量减少，则用上面的公式 ...</p>
+<p>用法：有一个NVI的年均线，如果上穿，买入。</p>
+<p>策略：可以把上面的用法实现一下，或者进行bull和bear的判断，但是这种一根线的判断bull和bear不是很靠谱，因为无法判断震荡市。</p>
+<h3>2018.1.22 New Highs - Lows Cumulative</h3>
+<div class="highlight"><pre><span></span>(New Highs - New Lows) + Yesterday&#39;s Indicator value
+</pre></div>
+
+
+<p>长期指数型指标，52周，这不就是一年吗，是的。</p>
+<p>策略：人工判断干预可能会好一些</p>
+<h3>2018.1.22 New Highs/Lows Ratio (NYHL)</h3>
+<div class="highlight"><pre><span></span>New Highs/New Lows
+</pre></div>
+
+
+<p>指数型指标。</p>
+<p>策略：人工判断。</p>
+<h3>2018.1.22 New Highs - New Lows</h3>
+<p>讲解了一下以New Highs 和 New Lows作为计算因子的指标，主要是上面两个。</p>
+<h3>2018.1.23 Norton High/Low Indicator</h3>
+<p><a href="http://www.traderslaboratory.com/forums/coding-forum/6830-demand-index-james-sibbet.html">DMI的easy版本源码</a></p>
+<p><a href="http://forum.esignal.com/forum/efs-development/efs-library-discussion-board/misc/29911-demand-index-tweaked">DMI的PHP版本源码</a></p>
+<div class="highlight"><pre><span></span><span class="nt">Function</span>
+
+<span class="p">{</span> <span class="n">James</span> <span class="n">Sibbet</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">Demand</span> <span class="n">Index</span> <span class="n">Function</span> <span class="p">}</span>
+<span class="p">{</span> <span class="n">Programmed</span> <span class="n">by</span> <span class="n">David</span> <span class="n">Fenstemaker</span> <span class="p">}</span>
+<span class="p">{</span> <span class="n">The</span> <span class="n">Demand</span> <span class="n">Index</span> <span class="n">combines</span> <span class="n">price</span> <span class="n">and</span> <span class="nb">volume</span> <span class="n">in</span> <span class="p">}</span>
+<span class="p">{</span> <span class="n">such</span> <span class="n">a</span> <span class="n">way</span> <span class="n">that</span> <span class="n">it</span> <span class="n">is</span> <span class="n">often</span> <span class="n">a</span> <span class="n">leading</span> <span class="n">indicator</span> 
+<span class="p">(</span> <span class="n">of</span> <span class="n">price</span> <span class="n">change</span><span class="o">.</span> <span class="p">}</span>
+
+
+<span class="nt">Inputs</span><span class="o">:</span> <span class="nt">Length</span> <span class="o">(</span><span class="nt">NumericSeries</span><span class="o">);</span>
+
+<span class="nt">Vars</span> <span class="o">:</span> <span class="nt">WtCRatio</span><span class="o">(</span><span class="nt">1</span><span class="o">),</span> <span class="nt">VolRatio</span><span class="o">(</span><span class="nt">1</span><span class="o">),</span> <span class="nt">VolAvg</span><span class="o">(</span><span class="nt">Volume</span><span class="o">),</span>
+<span class="nt">BuyP</span><span class="o">(</span><span class="nt">1</span><span class="o">),</span> <span class="nt">SellP</span><span class="o">(</span><span class="nt">1</span><span class="o">),</span> <span class="nt">Sign</span><span class="o">(+</span><span class="nt">1</span><span class="o">),</span> <span class="nt">Return</span><span class="o">(</span><span class="nt">0</span><span class="o">),</span>
+<span class="nt">WghtClose</span><span class="o">(</span><span class="nt">Close</span><span class="o">),</span> <span class="nt">AvgTR</span><span class="o">(</span><span class="nt">High</span> <span class="nt">-</span> <span class="nt">Low</span><span class="o">),</span>
+<span class="nt">Constant</span><span class="o">(</span><span class="nt">1</span><span class="o">),</span> <span class="nt">BuyPres</span><span class="o">(</span><span class="nt">1</span><span class="o">),</span> <span class="nt">SellPres</span><span class="o">(</span><span class="nt">1</span><span class="o">),</span>
+<span class="nt">TempDI</span><span class="o">(</span><span class="nt">1</span><span class="o">),</span> <span class="nt">DMIndx</span><span class="o">(</span><span class="nt">1</span><span class="o">);</span>
+
+<span class="nt">If</span> <span class="nt">CurrentBar</span> <span class="o">=</span> <span class="nt">1</span> <span class="nt">then</span>
+<span class="nt">Begin</span>
+<span class="nt">VolAvg</span> <span class="o">=</span> <span class="nt">Average</span><span class="o">(</span><span class="nt">Volume</span><span class="o">,</span> <span class="nt">Length</span><span class="o">);</span>
+<span class="nt">End</span><span class="o">;</span>
+
+<span class="nt">Return</span> <span class="o">=</span> <span class="nt">0</span> <span class="o">;</span>
+
+<span class="nt">WghtClose</span> <span class="o">=</span> <span class="o">(</span><span class="nt">High</span> <span class="o">+</span> <span class="nt">Low</span> <span class="o">+</span> <span class="nt">Close</span> <span class="o">+</span> <span class="nt">Close</span><span class="o">)</span> <span class="o">*</span> <span class="nt">0</span><span class="nc">.25</span><span class="o">;</span>
+<span class="nt">AvgTR</span> <span class="o">=</span> <span class="nt">Average</span> <span class="o">(</span><span class="nt">Highest</span> <span class="o">(</span><span class="nt">High</span><span class="o">,</span> <span class="nt">2</span><span class="o">)</span> <span class="nt">-</span> <span class="nt">Lowest</span> <span class="o">(</span> <span class="nt">Low</span><span class="o">,</span> <span class="nt">2</span><span class="o">),</span> <span class="nt">Length</span><span class="o">);</span>
+<span class="nt">VolAvg</span> <span class="o">=</span> <span class="o">((</span><span class="nt">VolAvg</span> <span class="cp">[</span><span class="mi">1</span><span class="cp">]</span> <span class="o">*</span> <span class="o">(</span><span class="nt">Length</span> <span class="nt">-</span> <span class="nt">1</span><span class="o">))</span> <span class="o">+</span> <span class="nt">Volume</span><span class="o">)</span> <span class="o">/</span> <span class="nt">Length</span><span class="o">;</span>
+
+<span class="nt">If</span> <span class="nt">WghtClose</span> <span class="o">&lt;&gt;</span> <span class="nt">0</span> <span class="nt">and</span> <span class="nt">WghtClose</span><span class="cp">[</span><span class="mi">1</span><span class="cp">]</span> <span class="o">&lt;&gt;</span> <span class="nt">0</span> <span class="nt">and</span>
+    <span class="nt">AvgTR</span> <span class="o">&lt;&gt;</span> <span class="nt">0</span> <span class="nt">and</span> <span class="nt">VolAvg</span> <span class="o">&lt;&gt;</span> <span class="nt">0</span> <span class="nt">then</span>
+    <span class="nt">Begin</span>
+        <span class="nt">WtCRatio</span> <span class="o">=</span> <span class="o">(</span><span class="nt">WghtClose</span> <span class="nt">-</span> <span class="nt">WghtClose</span><span class="cp">[</span><span class="mi">1</span><span class="cp">]</span><span class="o">)</span> <span class="o">/</span> <span class="nt">MinList</span><span class="o">(</span><span class="nt">WghtClose</span><span class="o">,</span><span class="nt">WghtClose</span><span class="cp">[</span><span class="mi">1</span><span class="cp">]</span><span class="o">)</span> <span class="o">;</span>
+<span class="nt">VolRatio</span> <span class="o">=</span> <span class="nt">Volume</span> <span class="o">/</span> <span class="nt">VolAvg</span><span class="o">;</span>
+<span class="nt">Constant</span> <span class="o">=</span> <span class="o">((</span><span class="nt">WghtClose</span> <span class="o">*</span> <span class="nt">3</span><span class="o">)</span> <span class="o">/</span><span class="nt">AvgTR</span><span class="o">)</span> <span class="o">*</span> <span class="nt">AbsValue</span> <span class="o">(</span><span class="nt">WtCRatio</span><span class="o">);</span>
+<span class="nt">If</span> <span class="nt">Constant</span> <span class="o">&gt;</span> <span class="nt">88</span> <span class="nt">then</span> <span class="nt">Constant</span> <span class="o">=</span> <span class="nt">88</span><span class="o">;</span>
+<span class="nt">Constant</span> <span class="o">=</span> <span class="nt">VolRatio</span> <span class="o">/</span> <span class="nt">ExpValue</span> <span class="o">(</span><span class="nt">Constant</span><span class="o">);</span>
+
+<span class="nt">If</span> <span class="nt">WtCRatio</span> <span class="o">&gt;</span> <span class="nt">0</span> <span class="nt">then</span>
+    <span class="nt">Begin</span>
+        <span class="nt">BuyP</span> <span class="o">=</span> <span class="nt">VolRatio</span><span class="o">;</span>
+        <span class="nt">SellP</span> <span class="o">=</span> <span class="nt">Constant</span><span class="o">;</span>
+    <span class="nt">End</span>
+<span class="nt">Else</span>
+    <span class="nt">Begin</span>
+        <span class="nt">BuyP</span> <span class="o">=</span> <span class="nt">Constant</span><span class="o">;</span>
+        <span class="nt">SellP</span> <span class="o">=</span> <span class="nt">VolRatio</span><span class="o">;</span>
+    <span class="nt">End</span><span class="o">;</span>
+
+<span class="nt">BuyPres</span> <span class="o">=</span> <span class="o">((</span><span class="nt">BuyPres</span> <span class="cp">[</span><span class="mi">1</span><span class="cp">]</span> <span class="o">*</span> <span class="o">(</span><span class="nt">Length</span> <span class="nt">-</span> <span class="nt">1</span><span class="o">))</span> <span class="o">+</span> <span class="nt">BuyP</span><span class="o">)</span> <span class="o">/</span> <span class="nt">Length</span><span class="o">;</span>
+<span class="nt">SellPres</span> <span class="o">=</span> <span class="o">((</span><span class="nt">SellPres</span> <span class="cp">[</span><span class="mi">1</span><span class="cp">]</span> <span class="o">*</span> <span class="o">(</span><span class="nt">Length</span> <span class="nt">-</span> <span class="nt">1</span><span class="o">))</span> <span class="o">+</span> <span class="nt">SellP</span><span class="o">)</span> <span class="o">/</span> <span class="nt">Length</span><span class="o">;</span>
+
+<span class="nt">TempDI</span> <span class="o">=</span> <span class="o">+</span><span class="nt">1</span><span class="o">;</span>
+
+<span class="nt">If</span> <span class="nt">SellPres</span> <span class="o">&gt;</span> <span class="nt">BuyPres</span> <span class="nt">then</span>
+    <span class="nt">Begin</span>
+        <span class="nt">Sign</span> <span class="o">=</span> <span class="nt">-1</span><span class="o">;</span>
+        <span class="nt">If</span> <span class="nt">SellPres</span> <span class="o">&lt;&gt;</span> <span class="nt">0</span> <span class="nt">then</span> <span class="nt">TempDI</span> <span class="o">=</span> <span class="nt">BuyPres</span> <span class="o">/</span> <span class="nt">SellPres</span><span class="o">;</span>
+    <span class="nt">End</span>
+<span class="nt">Else</span>
+    <span class="nt">Begin</span>
+        <span class="nt">Sign</span> <span class="o">=</span> <span class="o">+</span><span class="nt">1</span><span class="o">;</span>
+        <span class="nt">If</span> <span class="nt">BuyPres</span> <span class="o">&lt;&gt;</span> <span class="nt">0</span> <span class="nt">then</span> <span class="nt">TempDI</span> <span class="o">=</span> <span class="nt">SellPres</span> <span class="o">/</span> <span class="nt">BuyPres</span><span class="o">;</span>
+    <span class="nt">End</span><span class="o">;</span>
+
+<span class="nt">TempDI</span> <span class="o">=</span> <span class="nt">TempDI</span> <span class="o">*</span> <span class="nt">Sign</span><span class="o">;</span>
+<span class="nt">If</span> <span class="nt">TempDI</span> <span class="o">&lt;</span> <span class="nt">0</span> <span class="nt">then</span>
+    <span class="nt">DMIndx</span> <span class="o">=</span> <span class="nt">-1</span> <span class="nt">-</span> <span class="nt">TempDI</span>
+<span class="nt">else</span>
+    <span class="nt">DMIndx</span> <span class="o">=</span> <span class="o">+</span><span class="nt">1</span> <span class="nt">-</span> <span class="nt">TempDI</span> <span class="o">;</span>
+
+<span class="nt">Return</span> <span class="o">=</span> <span class="nt">DMIndx</span> <span class="p">{</span><span class="o">*</span> <span class="m">100</span><span class="o">.</span><span class="m">0</span><span class="p">}</span> <span class="o">;</span>
+
+<span class="nt">End</span><span class="o">;</span>
+
+<span class="nt">DemandIndex</span> <span class="o">=</span> <span class="nt">Return</span> <span class="o">;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="nt">call</span>
+
+<span class="p">{</span> <span class="n">James</span> <span class="n">Sibbet</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">Demand</span> <span class="n">Index</span> <span class="n">Indicator</span> <span class="p">}</span>
+<span class="p">{</span> <span class="n">Programmed</span> <span class="n">by</span> <span class="n">David</span> <span class="n">Fenstemaker</span> <span class="p">}</span>
+<span class="p">{</span> <span class="n">The</span> <span class="n">Demand</span> <span class="n">Index</span> <span class="n">combines</span> <span class="n">price</span> <span class="n">and</span> <span class="nb">volume</span> <span class="n">in</span> <span class="p">}</span>
+<span class="p">{</span> <span class="n">such</span> <span class="n">a</span> <span class="n">way</span> <span class="n">that</span> <span class="n">it</span> <span class="n">is</span> <span class="n">often</span> <span class="n">a</span> <span class="n">leading</span> 
+<span class="p">(</span> <span class="n">indicator</span> <span class="n">of</span> <span class="n">price</span> <span class="n">change</span><span class="o">.</span> <span class="p">}</span>
+
+<span class="nt">Inputs</span><span class="o">:</span> <span class="nt">Length</span><span class="o">(</span><span class="nt">5</span><span class="o">);</span>
+
+<span class="nt">Vars</span><span class="o">:</span> <span class="nt">DMIndx</span><span class="o">(</span><span class="nt">0</span><span class="o">);</span>
+
+<span class="nt">DMIndx</span> <span class="o">=</span> <span class="nt">DeMandIndex</span> <span class="o">(</span><span class="nt">Length</span><span class="o">)</span> <span class="o">;</span>
+
+<span class="nt">Plot1</span><span class="o">(</span><span class="nt">DMIndx</span><span class="o">,</span> <span class="s2">&quot;DMI&quot;</span><span class="o">)</span> <span class="o">;</span>
+<span class="nt">Plot2</span><span class="o">(</span><span class="nt">0</span><span class="o">,</span> <span class="s2">&quot;Zero&quot;</span><span class="o">)</span> <span class="o">;</span>
+</pre></div>
+
+
+<p>上面贴出来的是DMI的公式，因为该公式是由DMI和随机指标(如KD)算出来的，具体的算法找了好久没找着，下面有一个怪怪的公式，也不知道能不能用。</p>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="err">#</span> <span class="n">BuyP</span><span class="err">和</span><span class="n">SellP</span><span class="err">请参考上面的公式</span>
+    <span class="n">BuyP</span><span class="p">();</span> 
+    <span class="n">SellP</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="nt">Smoothing</span><span class="o">:=</span><span class="nt">Input</span><span class="o">(</span><span class="s2">&quot;Smoothing Periods&quot;</span><span class="o">,</span><span class="nt">3</span><span class="o">,</span><span class="nt">200</span><span class="o">,</span><span class="nt">50</span><span class="o">);</span>
+
+<span class="p">{</span>
+<span class="n">Hi</span><span class="cp">[</span><span class="nx">censored</span><span class="cp">]</span><span class="n">yP</span><span class="p">()</span> <span class="o">-</span> <span class="n">SellP</span><span class="p">()</span> <span class="p">;</span>
+<span class="err">{</span><span class="n">Line</span><span class="p">}</span> <span class="nt">Mov</span><span class="o">(</span><span class="nt">BuyP</span><span class="o">()</span> <span class="nt">-</span> <span class="nt">SellP</span><span class="o">(),</span><span class="nt">Smoothing</span><span class="o">,</span><span class="nt">E</span><span class="o">);</span>
+<span class="p">{</span><span class="n">End</span><span class="p">}</span> <span class="nt">or</span> <span class="nt">Smoothing</span><span class="o">:=</span><span class="nt">Input</span><span class="o">(</span><span class="s2">&quot;Smoothing Periods&quot;</span><span class="o">,</span><span class="nt">3</span><span class="o">,</span><span class="nt">200</span><span class="o">,</span><span class="nt">50</span><span class="o">);</span>
+<span class="p">{</span><span class="n">Green</span> <span class="n">Hi</span><span class="cp">[</span><span class="nx">censored</span><span class="cp">]</span><span class="n">yP</span><span class="p">();</span>
+
+<span class="err">{</span><span class="n">Red</span> <span class="n">Histo</span><span class="p">}</span> <span class="nt">SellP</span><span class="o">();</span>
+
+<span class="p">{</span><span class="n">Line</span><span class="p">}</span> <span class="nt">Mov</span><span class="o">((</span><span class="nt">BuyP</span><span class="o">()+</span><span class="nt">SellP</span><span class="o">()/</span><span class="nt">2</span><span class="o">),</span><span class="nt">Smoothing</span><span class="o">,</span><span class="nt">E</span><span class="o">);</span>
+
+<span class="p">{</span><span class="n">End</span><span class="p">}</span>
+</pre></div>
+
+
+<p>用法：有NHP和NLP两根线，NLP在-3下4～6个周期则算表示是一个底。NHP在3以下同样的周期表明是一个顶。</p>
+<p>策略：可以试试先在TB上实现一下，代码有点复杂。</p>
+<h3>2018.1.23 Notis %V</h3>
+<p><a href="http://fxcodebase.com/code/viewtopic.php?f=38&amp;t=60763">源码</a></p>
+<div class="highlight"><pre><span></span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">High</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">Close</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+<span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Close</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">Low</span><span class="p">[</span><span class="n">i</span><span class="p">].</span>
+
+<span class="n">NOTIS</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">Plus</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">Plus</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">Minus</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="n">where</span>
+<span class="n">Plus</span> <span class="o">=</span> <span class="n">Moving</span> <span class="n">Average</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">Method</span><span class="p">),</span>
+<span class="n">Minus</span> <span class="o">=</span> <span class="n">Moving</span> <span class="n">average</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">Method</span><span class="p">),</span>
+</pre></div>
+
+
+<p>只有一条线，只有价格参与计算，计算出来与波动相关。</p>
+<p>策略：当过滤器应该可以，先在tb中实现。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
     </ul>
 </section>
         </article>
