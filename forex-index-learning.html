@@ -870,18 +870,195 @@ NVI 如果成交量减少，则用上面的公式 ...</p>
 </pre></div>
 
 
-<p>只有一条线，只有价格参与计算，计算出来与波动相关。</p>
+<p>只有一条线，只有价格参与计算，计算出来与波动相关。 </p>
 <p>策略：当过滤器应该可以，先在tb中实现。</p>
+<h3>2018.1.24 On Balance Volume (OBV)</h3>
+<div class="highlight"><pre><span></span>若今日收盤價高於前一交易日收盤價
+則今日OBV值=前一交易日OBV值+今日成交量
+若今日收盤價低於前一交易日收盤價，
+則今日OBV值=前一交易日OBV值-今日成交量
+</pre></div>
+
+
+<p>基于成交量的计算， 主要是看背离。</p>
+<p>策略：看股票的日线其实还蛮准的，过滤器判断底部更准确</p>
+<h3>2018.1.24 Open-10 TRIN</h3>
+<p>指数指标</p>
+<p><img alt="公式" src="http://sinacloud.net/mhblog/2018/01/open10trincalc.png"></p>
+<p>策略：指数指标，板块分析可以用</p>
+<h3>2018.1.25 Oscillator of Moving Average (OsMA)</h3>
+<div class="highlight"><pre><span></span>OsMA = MACD - SIGNAL
+We remember that:
+MACD = EMA(P, N)-EMA(P, N)
+SIGNAL = SMA(MACD, N)
+Where:
+EMA - exponential moving average;
+SIGNAL - smoothing moving line, signal line of the indicator;
+N - number of calculation periods;
+</pre></div>
+
+
+<p>和MACD的用法类似</p>
+<p>策略：强弱判断的过滤器</p>
+<h3>2018.1.25 Overbought/Oversold (OB/OS)</h3>
+<ol>
+<li>Consider a moving average with a known period.</li>
+<li>Calculate the slope of the moving average up to a certain period. This is the market trend.</li>
+<li>Add the slope (+/-) to the moving aveage. This is the modified moving average, and determines where the price should be if the current trend is steady.</li>
+<li>OSOB then shows the relationship between the modified moving average and the price of the security.</li>
+</ol>
+<p>在网上找到一些php的代码，不过不对。</p>
+<p>策略：先找到代码再说。</p>
+<h3>2018.1.26 Parabolic SAR (pSAR)</h3>
+<p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:parabolic_sar">英英详解</a></p>
+<p>计算公式有点复杂，计算上升和下降时的公式不一样，详情请看上面的文章。</p>
+<p>怎么判断反转的趋势呢？在上升趋势中，如果昨天的SAR值大于今天的H，则下降模式启动，反之亦然。</p>
+<p>策略：适用于单边趋势，趋势跟踪得还不错，可以结合过滤器，做单边趋势，反转信号大于3～5个再反向开仓。</p>
+<h3>2018.1.26 Percent Change</h3>
+<p>网上资料不多，主要是用上（绿）下（红）来表示方向，柱的长短来表示价格变化的多少。</p>
+<p>策略：暂时没发现可用性，不采用。</p>
+<h3>2018.1.27 Percent R (%R)</h3>
+<p><a href="http://stockcharts.com/school/doku.php?id=chart_school%3Atechnical_indicators%3Awilliams_r">英文详解</a></p>
+<div class="highlight"><pre><span></span>(Highest High(n) – Close(current period)) ÷ (Highest High(n) - Lowest Low(n)) * -100
+</pre></div>
+
+
+<p>用法：判断超买和超卖的，也是以20和80为限，为什么说也？因为随机指标KDJ也是的。</p>
+<p>策略：做为买入或者卖出的过滤器应该不错，KDJ也有这个功能。</p>
+<h3>2018.1.27 Percentage Volume Oscillator (PVO)</h3>
+<div class="highlight"><pre><span></span>PVO = ((Vol 12-day EMA - Vol 26-day EMA)/Vol 12-day EMA) x 100
+</pre></div>
+
+
+<p>两根成交量均线之间的爱恨情愁，最大值100，没有最小值。如果值小于0,说明短期均线值低，在缩量，意味着迎来大的波动，突然很大的波动意味着下跌或者上涨结束。(PPO 就是以价格做为计算因子的指标)</p>
+<p>策略：挺不错的一个辅助策略，增加风险判断和买卖点的信心。(纯成交量一定不能成为主策略)</p>
+<h3>2018.1.28 Polarized Fractal Efficiency (PFE)</h3>
+<p><a href="https://www.multicharts.com/support/base/fractals-gt-pfe-polarized-fractal-efficiency/">英文详解</a></p>
+<p><a href="https://www.motivewave.com/studies/polarized_fractal_efficiency.htm">又一篇英文详解</a></p>
+<div class="highlight"><pre><span></span><span class="n">VARS</span><span class="o">:</span>  <span class="n">PFE</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="n">C2C</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="n">COUNTER</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="n">FRACEFF</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="n">EMA</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+
+<span class="n">PFE</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="n">C2C</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="n">COUNTER</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="n">FRACEFF</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="n">EMA</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+<span class="n">PFE</span> <span class="o">=</span> <span class="n">SQUAREROOT</span> <span class="o">(</span><span class="n">POWER</span><span class="o">(</span><span class="n">CLOSE</span> <span class="o">-</span> <span class="n">CLOSE</span><span class="o">[</span><span class="mi">9</span><span class="o">],</span> <span class="mi">2</span><span class="o">)</span> <span class="o">+</span> <span class="mi">100</span><span class="o">);</span>
+
+<span class="n">FOR</span> <span class="n">COUNTER</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">TO</span> <span class="mi">9</span>
+<span class="n">BEGIN</span>
+         <span class="n">C2C</span> <span class="o">=</span> <span class="n">C2C</span> <span class="o">+</span> <span class="n">SQUAREROOT</span><span class="o">(</span><span class="n">POWER</span><span class="o">((</span><span class="n">CLOSE</span><span class="o">[</span><span class="n">COUNTER</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]</span> <span class="o">-</span> <span class="n">CLOSE</span><span class="o">[</span><span class="n">COUNTER</span><span class="o">]),</span><span class="mi">2</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+<span class="n">END</span><span class="o">;</span>
+
+<span class="n">IF</span> <span class="o">(</span><span class="n">CLOSE</span> <span class="o">-</span> <span class="n">CLOSE</span><span class="o">[</span><span class="mi">9</span><span class="o">])</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="n">THEN</span>
+    <span class="n">FRACEFF</span> <span class="o">=</span> <span class="n">ROUND</span><span class="o">((</span><span class="n">PFE</span> <span class="o">/</span> <span class="n">C2C</span><span class="o">)</span> <span class="o">*</span> <span class="mi">100</span><span class="o">,</span><span class="mi">0</span><span class="o">)</span>
+<span class="n">ELSE</span>
+    <span class="n">FRACEFF</span> <span class="o">=</span> <span class="n">ROUND</span><span class="o">(-(</span><span class="n">PFE</span> <span class="o">/</span> <span class="n">C2C</span><span class="o">)</span> <span class="o">*</span> <span class="mi">100</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span>
+
+<span class="n">IF</span> <span class="n">CURRENTBAR</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">THEN</span> <span class="n">EMA</span> <span class="o">=</span> <span class="n">FRACEFF</span>
+<span class="n">ELSE</span>
+    <span class="n">EMA</span> <span class="o">=</span> <span class="n">ROUND</span><span class="o">((</span><span class="n">FRACEFF</span> <span class="o">*</span> <span class="mf">0.333</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">EMA</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">*</span> <span class="o">(</span><span class="mi">1</span> <span class="o">-</span>  <span class="mf">0.333</span><span class="o">)),</span><span class="mi">0</span><span class="o">);</span>
+
+<span class="n">PLOT1</span><span class="o">(</span><span class="n">EMA</span><span class="o">,</span><span class="s2">&quot;EMA&quot;</span><span class="o">);</span>
+<span class="n">PLOT2</span><span class="o">(</span><span class="mi">50</span><span class="o">,</span><span class="s2">&quot;BUYZONE&quot;</span><span class="o">);</span>
+<span class="n">PLOT3</span><span class="o">(-</span><span class="mi">50</span><span class="o">,</span><span class="s2">&quot;SELLZONE&quot;</span><span class="o">);</span>
+</pre></div>
+
+
+<p>策略：计算方法有点复杂，先不做使用，找个机会先实现再说。</p>
+<h3>2018.1.28 Positive volume index (PVI)</h3>
+<p>公式参考NVI。以成交量做为判断条件，价格做为计算因子。放量就进行计算，不放量就按前一天的PVI值来。倒是符合价量原理，如果PVI比较平衡，说明成交量在减小，如果在波形的顶部，小心可能会往下走，如果在波形底部，PVI开始总体往上波动了说明有人开始做事了。</p>
+<p>策略：买卖辅助</p>
+<h3>2018.1.29 Price Action Indicator (PAIN)</h3>
+<div class="highlight"><pre><span></span>[(C-O)+(C-H)+(C-L)] / 2
+
+where:
+
+(C-O) defines Intra-Day Momentum,
+(C-L) defines Late Selling Pressure (LSP) and
+(C-H) defines Late Buying Pressure (LBP)
+</pre></div>
+
+
+<p>策略: 像心中一样，太快恢复到0，暂不启用</p>
+<h3>2018.1.29 Price and Volume Trend (PVT)</h3>
+<p>和OBV类似，也是价格上涨量累积，下跌减，但是PVT计算了幅度。</p>
+<div class="highlight"><pre><span></span>[ { (Close - Yesterday&#39;s Close) / Yesterday&#39;s Close } * Volume ] + Yesterday&#39;s PVT
+</pre></div>
+
+
+<p>策略：先实现一下再说，可做辅助。</p>
+<h3>2018.1.30 Price Channel</h3>
+<p>基于艾略特波浪理论，在一定周期内的最高价和最低价组成水平且平行的通道。</p>
+<p>策略：很难量化，人肉操作可能会更好操作一些。</p>
+<h3>2018.1.30 Price Oscillator (PO)</h3>
+<p>看公式这不就是MACD吗？只是没有定义计算MA的方式，而且没有固定MA的周期而已。</p>
+<div class="highlight"><pre><span></span>PO = MA(P, n1) - MA(P, n2),
+
+where
+MA(P, n1) - moving average of the P price within n1 periods,
+MA(P, n2) - moving average of theP price within n2 periods.
+</pre></div>
+
+
+<p>策略：参见MACD</p>
+<h3>2018.1.31 Rate of change (ROC)</h3>
+<p>当前价格相对于N个bar前的变化率</p>
+<div class="highlight"><pre><span></span>ROC = Pi - Pi-n,
+
+Pi - the price of the current period,
+Pi-n - the price of the period, which is located n periods back from the current one.
+As usual, they use the relative (in percentage) value of the velocity of the ROC:
+ROC% = 100% * (Pi - Pi-n) / Pi-n
+</pre></div>
+
+
+<p>策略：用作背离分析。</p>
+<h3>2018.1.31 QStick (QSTK)</h3>
+<div class="highlight"><pre><span></span>QStick = MA(n, (Close - Open)),
+</pre></div>
+
+
+<p>策略：计算简单，无法应用。</p>
+<h3>2018.2.1 Random Walk Index (RWI)</h3>
+<p>RWIH大于1是上升趋势，RWIL&gt;1时下降趋势，</p>
+<div class="highlight"><pre><span></span>RWIH=(high-ref(Low,n))/(ATR(n)*Sqrt(n));
+
+RWIL=(ref(High,n)-L)/(ATR(n)*Sqrt(n));
+</pre></div>
+
+
+<p>策略：当过滤器用试试，先在软件上把指标实现</p>
+<h3>2018.2.1 Range Expansion Index (REI)</h3>
+<p>看图表上，该指标的方向和价格方向一致，所以就是两条线决定超买和超卖的？</p>
+<div class="highlight"><pre><span></span>IF( ( (HI&gt;=LO5 OR HI&gt;=LO6) AND (LO&lt;=HI5 OR LO&lt;=HI6) ) OR ( (HI2&gt;=CL7 OR HI2&gt;=CL8) AND (LO2&lt;=CL7 OR LO2&lt;=CL8) ) ) 
+    THEN 
+        VALUE = HI - HI2 + LO - LO2 
+        ABSVALUE = ABS(HI - HI2) + ABS(LO - LO2) 
+    ELSE
+        VALUE = ABSVALUE = 0
+
+TD_REI = SUM(VALUE, N) / SUM(ABSVALUE, N)
+
+where N is the the TD_REI Period
+
+LO5 5天前的Low
+HI5 5天前的High
+CL7 7天前的Close
+</pre></div>
+
+
+<p>策略：超卖和超买做过滤器</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
-        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
     </ul>
 </section>
         </article>
