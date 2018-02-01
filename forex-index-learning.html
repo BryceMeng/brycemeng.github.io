@@ -1031,6 +1031,7 @@ RWIL=(ref(High,n)-L)/(ATR(n)*Sqrt(n));
 <p>策略：当过滤器用试试，先在软件上把指标实现</p>
 <h3>2018.2.1 Range Expansion Index (REI)</h3>
 <p>看图表上，该指标的方向和价格方向一致，所以就是两条线决定超买和超卖的？</p>
+<p><a href="http://en.verysource.com/code/5074269_1/Tom+DeMark+Range+Expansion+Index+%28TDREI%29.afl.html">英文公式详解</a></p>
 <div class="highlight"><pre><span></span>IF( ( (HI&gt;=LO5 OR HI&gt;=LO6) AND (LO&lt;=HI5 OR LO&lt;=HI6) ) OR ( (HI2&gt;=CL7 OR HI2&gt;=CL8) AND (LO2&lt;=CL7 OR LO2&lt;=CL8) ) ) 
     THEN 
         VALUE = HI - HI2 + LO - LO2 
@@ -1054,11 +1055,11 @@ CL7 7天前的Close
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
     </ul>
 </section>
         </article>
