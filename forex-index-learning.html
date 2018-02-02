@@ -1050,16 +1050,47 @@ CL7 7天前的Close
 
 
 <p>策略：超卖和超买做过滤器</p>
+<h3>2018.2.2 Relative Momentum Index (RMI)</h3>
+<p>close参与计算，相对动量指标，70-90是超买，10-30是超卖</p>
+<div class="highlight"><pre><span></span>len = input(20, title=&quot;Length&quot;)
+mom = input(4, title=&quot;Momentum&quot;,minval=0)
+ob = input(70,title=&quot;Overbought&quot;)
+os = input(30,title=&quot;Oversold&quot;)
+c = close
+sig = input(6,title=&quot;Signal Length&quot;)
+
+//calc
+up = ema(max(c - c[mom],0),len)
+dn = ema(max(c[mom] - c,0),len)
+rmi = dn == 0 ? 0 : 100 - 100 / (1 + up / dn)
+signal = sma(rmi,sig)
+</pre></div>
+
+
+<p>策略：做过滤器使用。</p>
+<h3>2018.2.2 Comparative Relative Strength (CRS)</h3>
+<p>貌似是做对冲时用的，就是用股票a的价格除以股票b的价格，一般是某支股票除以某个指数，这样可以看出这支股票相对于大盘的强弱。</p>
+<div class="highlight"><pre><span></span>a = tickerid 
+b = input(&quot;SPX500&quot;, type=symbol) 
+as = security(a, period, close) 
+bs = security(b, period, close) 
+plot(as/bs, title=&quot;CRS&quot;, color=gray) 
+len = input(10) 
+plot(sma(as/bs, len), color=navy)
+</pre></div>
+
+
+<p>策略：在股票世界里面会不会有点用，或者把商品期货里面某些相关品种做成指数做为分母。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
     </ul>
 </section>
         </article>
