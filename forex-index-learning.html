@@ -470,8 +470,8 @@ Std( Log( C / Ref( C,-1) ),10 ) * Sqrt( 365 )
 <p>平滑后的RVI，只有一根线，用到了波动率，STDEV，看到RVI时，再返回过来看看这个指标。</p>
 <p>策略：参考RVI <strong>Return</strong></p>
 <h3>2018.1.9 Intraday Momentum (IMI)</h3>
-<p>等看到RSI时再返回，计算方法类似</p>
-<p>策略：日内策略参考 <strong>Return</strong></p>
+<p>等看到RSI时再返回，计算方法类似，只是RSI是close和昨天close的计算，而IMI是close和open做计算。</p>
+<p>策略：用RSI其实更好，计算进了高开和低开的情况。</p>
 <h3>2018.1.10 Kairi</h3>
 <p><a href="https://www.tradingview.com/script/xzRPAboO-Indicator-Kairi-Relative-Index-KRI/">指标源码</a></p>
 <p>简单的用了close和均线系统，用于超买超卖识别</p>
@@ -1081,16 +1081,55 @@ plot(sma(as/bs, len), color=navy)
 
 
 <p>策略：在股票世界里面会不会有点用，或者把商品期货里面某些相关品种做成指数做为分母。</p>
+<h3>2018.2.3 Relative strength index (RSI)</h3>
+<p><a href="https://www.zhihu.com/question/51959474">中文详解</a></p>
+<p>非常常用的指标，30和70是顶线和底线，作为顶部区域和底部区域的分界，还可作背离使用。</p>
+<p>公式里面一个D和U不好理解，请看中文详解，里面第一个答案也是不对的，应该是今天的close和昨天的close做计算，算出量。而IMI指标则是当天的close和open做计算，当然和昨天close做计算是更准确的，因为算进了高开和低开的情况。</p>
+<div class="highlight"><pre><span></span>RSI = 100 - 100 / (1 + U(P,n)/D(P,n)),
+
+Where U(P,n) is a moving average of growth of the P price within n periods,
+D(P,n) - is a moving average of falling of the P price within n periods.
+</pre></div>
+
+
+<p>策略：过滤器使用。</p>
+<h3>2018.2.3 Relative Volatility Index (RVI)</h3>
+<p><a href="https://www.tradingview.com/script/xXETnL9H-Relative-Volatility-Index/">英英详解</a></p>
+<p>RSI的变种，把价格变动换成了标准差， 详见公式，周期默认为10</p>
+<div class="highlight"><pre><span></span>Period = input(10, minval=1)
+
+xPrice = close
+
+StdDev = stdev(xPrice, Period)
+d = iff(close &gt; close[1], 0, StdDev)
+
+u = iff(close &gt; close[1], StdDev, 0)
+nU = (13 * nz(nU[1],0) + u) / 14
+nD = (13 * nz(nD[1],0) + d) / 14
+
+nRes = 100 * nU / (nU + nD)
+plot(nRes, color=red, title=&quot;RVI&quot;)
+</pre></div>
+
+
+<p>用法：
+1. 在RVI大于50时购买
+2. 在小于50时卖
+3. 如果大于50时错过机会了就在大于时购买
+4. 如果小于50时错过机会就在小于40时做空
+5. 小于40时关闭多仓
+6. 大于60时关闭空仓</p>
+<p>策略：就按照上面的用法进行操作</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
         <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
     </ul>
 </section>
         </article>
