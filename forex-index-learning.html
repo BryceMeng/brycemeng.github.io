@@ -1122,16 +1122,90 @@ plot(nRes, color=red, title=&quot;RVI&quot;)
 <li>大于60时关闭空仓</li>
 </ol>
 <p>策略：就按照上面的用法进行操作</p>
+<h3>2018.2.4 Ribbon Study</h3>
+<p>用很多条均线作分析。</p>
+<p>策略：倒是可以极端一点，多条均线，方向全部一样才开仓，只要有一条交叉就空仓。</p>
+<h3>2018.2.4 R-Squared (R2)</h3>
+<p><a href="https://www.investopedia.com/terms/r/r-squared.asp">英英详解</a></p>
+<p>根据线性回归来进行计算的指标，上面的详解里面非常详细的讲角了R的平方是怎么计算出来的。所以其实该指标就是R的平方，越接近1表明回归越好，越远表明价格在偏离。</p>
+<p>策略：统计学用在这里不知道能不能用，先在软件里面实现该指标。</p>
+<h3>2018.2.5 Schaff Trend Cycle</h3>
+<p>下面有一段关键代码，把macd的柱值算出来，找这个动态period里面的low和high，再进行后面的计算，这个是动态算法。VIP</p>
+<p><a href="https://www.tradingview.com/script/dbxXeuw2-Indicator-Schaff-Trend-Cycle-STC/">公式详解</a></p>
+<div class="highlight"><pre><span></span>stc(length, fastLength, slowLength) =&gt; 
+    factor=input(0.5)  
+    m = macd(close,fastLength,slowLength)     
+    v1 = lowest(m, length)
+    v2 = highest(m, length) - v1    
+    f1 = (v2 &gt; 0 ? ((m - v1) / v2) * 100 : nz(f1[1])) 
+    pf = (na(pf[1]) ? f1 : pf[1] + (factor * (f1 - pf[1]))) 
+    v3 = lowest(pf, length) 
+    v4 = highest(pf, length) - v3     
+    f2 = (v4 &gt; 0 ? ((pf - v3) / v4) * 100 : nz(f2[1])) 
+    pff = (na(pff[1]) ? f2 : pff[1] + (factor * (f2 - pff[1])))
+    pff
+</pre></div>
+
+
+<p>策略：先在软件上实现，按MACD的用法来，但应该比MACD会好用一点。</p>
+<h3>2018.2.5 Simple Moving Average (SMA)</h3>
+<p>这个就不说了，人人都会用的。</p>
+<p>策略：均线趋势策略。</p>
+<h3>2018.2.6 Slow Stochastic (Slow STO)</h3>
+<p>随机指标，请参考 Full Stochastic Oscillator </p>
+<p>策略：见随机指标</p>
+<h3>2018.2.6 Standard Deviation</h3>
+<p>用来计算波动率的东西，boll线里面用了标准差。</p>
+<p>策略：非常重要的一个指标，用来计算波动率。</p>
+<h3>2018.2.7 Standard Deviation Channel</h3>
+<p>三条平等线，中间是线性回归线，上下是加减标准差的值</p>
+<p>策略：通道就是回归的，不过因为通道有斜率，要考虑向上的通道，做多更好，下下的通道做空更好。</p>
+<h3>2018.2.7 Standard Error</h3>
+<p><a href="http://davidmlane.com/hyperstat/A103735.html">Std Error的计算方法</a></p>
+<p>其实Std Error主要讲的是样本和总体间的误差，但是这里就简单的用下面的公式。</p>
+<div class="highlight"><pre><span></span>σ/square(N)
+
+σ - 标准差
+</pre></div>
+
+
+<p>策略：本身Std Error的值，和标准差比倒底谁更有意义呢？得系统实测。更多的用法参考后面的band和channel。</p>
+<h3>2018.2.8 Standard Error Bands</h3>
+<p>中间线是20周期线性回归的3周期平滑，然后上下加减2倍标准误，回顾一下keltner，boll，envelopes。envelopes计算太过于粗糙，keltner和boll都与波动率相关。</p>
+<div class="highlight"><pre><span></span>Smoothed Linear Regression Line: Generally a 21-period linear regression curve that is smoothed by a 3-period simple moving average
+Upper Standard Error Band: The linear regression line plus 2 standard errors.
+Lower Standard Error Band: The linear regression line minus 2 standard errors.
+</pre></div>
+
+
+<p>策略：通道嘛，都一样。</p>
+<h3>2018.2.8 Standard Error Channel</h3>
+<p>这个在网上的资料没有Standard Error Bands 多，这个的差别就是中间线是根直线，是某一段周期做的线性回归，而不是上个指标里面某个周期里面最后一个点的值（<em>请参考Linear Regression Indicator (LRI)</em>）</p>
+<p>策略：直线通道其实应该没有曲线通道靠谱。</p>
+<h3>2018.2.9 STIX</h3>
+<p>指数型指标，基于A/D ratio的，做了指数平均。</p>
+<p>>58 严重超买 &gt;56 超买 &lt;45 超卖 &lt;42 严重超卖</p>
+<div class="highlight"><pre><span></span>A/D Ratio = ( Advancing Issues / Advancing Issues-Declining Issues ) *100
+
+STIX = (A/D Ratio * 0.09) + (yesterday&#39;s STIX * 0.91)
+</pre></div>
+
+
+<p>策略：做板块分析可以用。</p>
+<h3>2018.2.9 Stochastic Momentum Index (SMI)</h3>
+<p><a href="http://www.blastchart.com/Community/IndicatorGuide/Indicators/StochasticMomentumIndex.aspx">英文公式详解</a></p>
+<p>用法：在40上方下降时卖出，在-40下放上升时买入，先用R-Squared来判断趋势。</p>
+<p>策略：随机指标，不知道怎么用。参考下面的随机指标。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
-        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
     </ul>
 </section>
         </article>
@@ -1180,6 +1254,9 @@ plot(nRes, color=red, title=&quot;RVI&quot;)
     </li>
     <li class="list-group-item tag-1">
       <a href="/tag/ji-zhu.html">技术</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/lai-ci-gou.html">莱茨狗</a>
     </li>
     <li class="list-group-item tag-1">
       <a href="/tag/liang-hua.html">量化</a>
