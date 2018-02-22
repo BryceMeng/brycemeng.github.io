@@ -141,7 +141,9 @@
 <p>这里单举了一个例子：银华日利（511880）每天都是收盘价比开盘价高，为什么呢？因为开盘前大家要把钱套出来买股票，收市前又要卖出股票买基金。不过我算了下，2017整年收益也才4.4%左右。</p>
 <p>3、<strong>银行的T+0理财</strong></p>
 <p>这个就没啥好讲的，我们需要注意一下申购规则。</p>
-<p>上面3种方案可以看哪种利率高，自行选择，不过需要注意一下申购规则，时间，数量啊等等。</p>
+<p>4、<strong>新股</strong></p>
+<p>如果新股下跌破发，是有规则要公司主动购买的。</p>
+<p>上面前3种方案可以看哪种利率高，自行选择，不过需要注意一下申购规则，时间，数量啊等等。</p>
 <h3>b. 仓位管理</h3>
 <p>这里举了一个例子，比如要重仓空调股，看好这个板块，现有<strong>美的</strong>和<strong>格立</strong>，我怎么分配仓位呢？</p>
 <p>v = P(美的)/P(格立)</p>
@@ -158,16 +160,52 @@
 
 
 <p>当v穿过上轨时，做一次换仓的动作，下穿反之亦然。</p>
+<h2>2、实操：行情的获取，自动化的实现</h2>
+<h3>a. 行情获取</h3>
+<p>新浪和Tencent，Tushare，容错，或者新浪L2,wind，同花顺等等</p>
+<h3>b. 自动化实现</h3>
+<p>autoit（这个不靠谱）</p>
+<p>推荐EasyTrader</p>
+<p><strong>PS：如果可以破解掉通信协议比什么都靠谱，可以从Android客户端下手</strong></p>
+<h2>3、交易策略的分析（包含各种衍生品）</h2>
+<h3>a. 不靠谱的交易策略</h3>
+<p>网格交易，讲师是说有时候行情是下跌了就不起来，或者起来了就不下来，根本没法操作。</p>
+<p>PS：如果确认了是震荡行情，再做短周期的网格也不是不行</p>
+<h3>b. 指数ETF</h3>
+<p>主要是讲指数ETF，股票，股指期货间的套利，有软件<strong>宏汇（华泰）</strong>可以实现</p>
+<h3>c. 海龟</h3>
+<p>主要提出了突破的箱休，用N日最高、最低价，或者用boll带？</p>
+<h3>d. 分级基金</h3>
+<p><strong>定义</strong></p>
+<p>母基 = A + B，本质上A的钱是优先资金，这部分钱只吃利息（6%左右），B是借A的钱去炒股。所以如果 （3=2+1）那么B就是3倍杠杆</p>
+<p><strong>折价套利</strong></p>
+<p>现货价（当前价） &gt; 净值，这是溢价，相反为折价，折价时很简单，买，再场外赎回。</p>
+<p><strong>分拆合并套利</strong></p>
+<p>如果出现 3 = 1 + 1，那么买入A+B，再合并成母即可套利</p>
+<p><strong>分析A轮动</strong></p>
+<p>这个没讲，不过这个套利当年确实火了一把，<a href="https://www.jisilu.cn/question/36483">详情点击</a></p>
+<h3>e. 停牌套利</h3>
+<p>在停牌期间，基金方如果不看好这支股票，可能会下调他的公允价，这样如果你觉得看好的话就可以购买，这样复牌如果没有跌到预期就可以套利。</p>
+<h3>f. 公司债</h3>
+<p>折价买就行，找到好公司折价的机会，但是差公司就不要买了，风险太高（T+N）</p>
+<h3>g. 可转债</h3>
+<p>可转债就是可以转为公司的股票，利率比公司债低很多才2%左右，有一个套利规则：</p>
+<p>转股价 &lt; 现价*10%</p>
+<p>即可申购，如果反向则可融券卖出。</p>
+<p>程序化：每天拉拉取数据分析，看有没有符合上面公式的。</p>
+<h3>h. 捡钱策略</h3>
+<p>a. 异常跌停板</p>
+<p>b. 跌停板强势开板</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
         <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
     </ul>
 </section>
         </article>
