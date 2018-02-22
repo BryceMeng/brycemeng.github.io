@@ -21,7 +21,7 @@
         <meta property="og:title" content="成熟指标库慢啃"/>
         <meta property="og:url" content="/forex-index-learning.html"/>
         <meta property="og:description" content="还是要把成熟指标熟悉起来，起码在脑子里知道某个指标是干啥的"/>
-        <meta property="article:published_time" content="2018-01-16" />
+        <meta property="article:published_time" content="2018-02-10" />
             <meta property="article:section" content="量化" />
             <meta property="article:tag" content="量化" />
             <meta property="article:tag" content="成熟指标" />
@@ -109,7 +109,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-01-16T19:34:00+08:00"> 二 16 一月 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-02-10T19:34:00+08:00"> 六 10 二月 2018</time>
     </span>
 
 
@@ -1196,6 +1196,31 @@ STIX = (A/D Ratio * 0.09) + (yesterday&#39;s STIX * 0.91)
 <p><a href="http://www.blastchart.com/Community/IndicatorGuide/Indicators/StochasticMomentumIndex.aspx">英文公式详解</a></p>
 <p>用法：在40上方下降时卖出，在-40下放上升时买入，先用R-Squared来判断趋势。</p>
 <p>策略：随机指标，不知道怎么用。参考下面的随机指标。</p>
+<h3>2018.2.22 Stochastic oscillator (STOCH)</h3>
+<p>随机震荡指标，其实就是KDJ啦，然而早期版本只有KD,%D的计算可以以多种方式：简单均线，指数均线，时间序列，加权均线或者可变三角形。</p>
+<p>使用方法：</p>
+<ol>
+<li>80和20做为区间，超过后回落为买卖点。</li>
+<li>K穿D时买卖（和快慢均线类似）</li>
+<li>背离</li>
+</ol>
+<div class="highlight"><pre><span></span>RSV = 100 * (N - LLV(n)) / (HHV(n) - LLV(n)),
+%K = MA(RSV, m1)
+%D = MA(%K, m2)
+
+where N - is the price of closing of the current period,
+LLV(n) - the lowest price within the last n periods,
+HHV(n) - the highest price within the last n periods,
+n - amount of periods (usually from 5 to 21),
+m1,m2 - amount of periods of calculation of the moving average.
+</pre></div>
+
+
+<p>策略：见使用方法。</p>
+<h3>2018.2.22 Stochastic RSI (Stoch RSI)</h3>
+<p>KD指标和RSI的组合，把KD计算公式中的close换作RSI即可。</p>
+<p>从图示上来看过于敏感。</p>
+<p>策略：当过滤器使用可能更靠谱一点，比如第几次上穿或者下穿才能做买卖点，因为往往第一次下跌或者上涨都是无效的。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
@@ -1204,8 +1229,8 @@ STIX = (A/D Ratio * 0.09) + (yesterday&#39;s STIX * 0.91)
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
         <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
         <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
     </ul>
 </section>
         </article>
