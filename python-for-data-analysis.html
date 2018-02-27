@@ -126,20 +126,23 @@
 <p>ndarray只能是同一类型，这时候会有个疑问，Pandas的底层是Numpy，为什么可以每列是不同的类型。我看完了之后才知道</p>
 <p>比如:</p>
 <p>print df</p>
-<div class="highlight"><pre><span></span>A    B
+<div class="highlight"><pre><span></span>    A    B
+1  2.2  ShangHai
+2  2.3  BeiJing
+3  1.7  ShenZhen
 </pre></div>
 
 
-<p>1  2.2  ShangHai
-2  2.3  BeiJing
-3  1.7  ShenZhen</p>
 <p>在Numpy里面就是：</p>
-<p>[
- [2.2, 'ShangHai']
- [2.3, 'BeiJing']
- [1.7, 'ShenZhen']
+<div class="highlight"><pre><span></span>[
+ [2.2, &#39;ShangHai&#39;]
+ [2.3, &#39;BeiJing&#39;]
+ [1.7, &#39;ShenZhen&#39;]
 ]
-dtype: object</p>
+dtype: object
+</pre></div>
+
+
 <p>没想到pandas利用了万能的object，然后在pandas这一层存储每列的类型像上面的A列就是float64,B列是String_</p>
 <ol>
 <li>ndarray的slice是<strong>view而非copy</strong></li>
@@ -161,16 +164,18 @@ dtype: object</p>
 <li>层次化索引有点像<strong>多维数据处理，还有点像分组</strong>，还是很有用，特别是金融时间序列</li>
 </ol>
 <h2>时间序列</h2>
-<p>这part是我最感兴趣的啦，在本书里面写了两章，时间序列和金融数据处理
-1. datetime 和 timedelta ，还有strftime 这个是python内置的，还有个dateutil.parser第三方库，很方便，但是有容错性太好导致异常数据的坑
-2. 判断某时间序列是否有<strong>重复日期</strong>的数据：df.index.is_unique True不重复，False有重复，用groupby(level=0).count()，再排序可以找出重复的数据
-3. pd.data_range()是生成日期时间序列索引的重要函数，而且功能强大，可以生成各成频率的数据
-4. 重采样<strong>resample()</strong>比如把tick或者min合并成5min的数据，竟然专门有一个方法resample('5min', how='ohlc')，做Open high low close的合并运算，如果需要自定义函数resample(...).apply(custom_resampler)
-5. rolling().apply()也可以自定义函数，窗口移动是时间序列里面非常重要的函数，还有shift()平移也是，但是shift()会丢失某些值，还有一个df.pct_change()可以直接算出简单收益率
-6. 在做板块分析时，可以用groupby，具体参考p356
-7. 选取某个时间点的数据at_time(), 还有asof()可以找到离某时间点最近的时间数据
-8. cumprod()计算累计收益率
-9. dataframe 可以直接用 apply 做数据处理</p>
+<p>这part是我最感兴趣的啦，在本书里面写了两章，时间序列和金融数据处理</p>
+<ol>
+<li>datetime 和 timedelta ，还有strftime 这个是python内置的，还有个dateutil.parser第三方库，很方便，但是有容错性太好导致异常数据的坑</li>
+<li>判断某时间序列是否有<strong>重复日期</strong>的数据：df.index.is_unique True不重复，False有重复，用groupby(level=0).count()，再排序可以找出重复的数据</li>
+<li>pd.data_range()是生成日期时间序列索引的重要函数，而且功能强大，可以生成各成频率的数据</li>
+<li>重采样<strong>resample()</strong>比如把tick或者min合并成5min的数据，竟然专门有一个方法resample('5min', how='ohlc')，做Open high low close的合并运算，如果需要自定义函数resample(...).apply(custom_resampler)</li>
+<li>rolling().apply()也可以自定义函数，窗口移动是时间序列里面非常重要的函数，还有shift()平移也是，但是shift()会丢失某些值，还有一个df.pct_change()可以直接算出简单收益率</li>
+<li>在做板块分析时，可以用groupby，具体参考p356</li>
+<li>选取某个时间点的数据at_time(), 还有asof()可以找到离某时间点最近的时间数据</li>
+<li>cumprod()计算累计收益率</li>
+<li>dataframe 可以直接用 apply 做数据处理</li>
+</ol>
 <h3>更多功能</h3>
 <p><a href="https://www.quantopian.com/lectures/factor-risk-exposure#notebook">风险因子暴露</a></p>
 <p><a href="http://wiki.mbalib.com/wiki/%E5%9B%9B%E5%88%86%E4%BD%8D%E6%95%B0">四分位数</a></p>
@@ -200,11 +205,11 @@ pct_change  计算百分数变化
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
         <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
     </ul>
 </section>
         </article>
