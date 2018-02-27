@@ -128,7 +128,7 @@
 <h3>2017.12.11  ASI,SI</h3>
 <p>ASI就是SI累加(cumsum)，主要是用最近几天的最高价，最低价，收盘价等等元素。</p>
 <ul>
-<li>SI 上穿0买入，下穿0卖出（用得少）</li>
+<li>SI 上穿0买入，下穿0卖出（用得少），见后面的(Swing Index)</li>
 <li>ASI 比close更拼接真实价格，来判断真假期阻力位和支撑位的，如果价格已经突破，但ASI没有突破就是假的。</li>
 </ul>
 <p>策略：支撑位和阻力位的突破真假判断？</p>
@@ -1221,16 +1221,134 @@ m1,m2 - amount of periods of calculation of the moving average.
 <p>KD指标和RSI的组合，把KD计算公式中的close换作RSI即可。</p>
 <p>从图示上来看过于敏感。</p>
 <p>策略：当过滤器使用可能更靠谱一点，比如第几次上穿或者下穿才能做买卖点，因为往往第一次下跌或者上涨都是无效的。</p>
+<h3>2018.2.23 Stoller Average Range Channels (STARC) Bands</h3>
+<p>和boll带不一样，boll穿透表示突破，而STARC表示回归。看公式和boll的差别在于标准差和atr。</p>
+<div class="highlight"><pre><span></span>Upper STARC band = SMA + ATR*
+Lower STARC band = SMA - ATR*
+</pre></div>
+
+
+<p>策略：很少有回归的策略，试试看？</p>
+<h3>2018.2.23 Swing Index (SI)</h3>
+<p><a href="https://www.marketvolume.com/technicalanalysis/swingindex.asp">英英详解</a></p>
+<div class="highlight"><pre><span></span>Swing Index = 50 * [ { Cy - C + 0.5(Cy - Oy) + 0.25(C - O) } / R ] * (K / T) Where:
+
+C = Today&#39;s closing price
+L = Today&#39;s lowest price
+O = Today&#39;s opening price
+Cy = Yesterday&#39;s closing price
+Ly = Yesterday&#39;s lowest price
+Oy = Yesterday&#39;s opening price
+Hy = Yesterday&#39;s highest price
+K = The larger of either (Hy - C) or (Ly - C)
+R = A variable based on the relationship between today&#39;s closing price and yesterday&#39;s high and low
+T = The limit move value
+
+
+For the R variable we need to find out:
+
+MAX (H – C n-1) (L – C n-1) (H – C)
+If the highest difference is between (H – C n-1), then:
+R = (H – C n-1) + 0.5*(L – C n-1) + 0.25*(C n-1 + O n-1)
+If the highest difference is between (L – C n-1), then:
+R = (L – C n-1) + 0.5*(H – C n-1) + 0.25*(C n-1 + O n-1)
+If the highest difference is between (H – C), then:
+R = (H – L) + 0.25*(C n-1 + O n-1)
+</pre></div>
+
+
+<p>策略：计算有点复杂，看图示好像很准，先试试看。上穿0买，下穿0卖。</p>
+<h3>2018.2.24 Time Series Forecast (TSF)</h3>
+<p>线性回归（最小二乘法），详情见之前的TSF，与线性回归有两点不同：
+1. 周期要短
+2. TSF会把线往后平移，一般是7bar</p>
+<p>策略：先实现再说，还从没用过线性回归的策略</p>
+<h3>2018.2.24 Tom Demark (TD) Moving Average</h3>
+<p>主要用来设置止损的，Demark的所有指标都是一个体系，不能单独分析，再找机会全盘阅读他的书。</p>
+<h3>2018.2.25 Tom Demark (TD) Range Projections</h3>
+<p>迪马克系，可以预测下一个bar的range，明显是吹牛的... 如果第二天的价格在预测的区间内，那么就会一直在区间里，如果在外则会突破</p>
+<div class="highlight"><pre><span></span>1) Close of the most recent bar is less than the open:
+
+(Current High + 2 * Current Low + Current Close) = X
+Projected High = X - Current Low
+Projected Low = X - Current High
+
+2) Close of the most recent bar is greater than the open:
+(2 * Current High + Current Low + Current Close) = X
+Projected High = X - Current Low
+Projected Low = X - Current High
+
+3) Close of the most recent bar is equal to the open:
+(Current High + Current Low +2 * Current Close) = X
+Projected High = X - Current Low
+Projected Low = X - Current High
+</pre></div>
+
+
+<p>策略：可以做日内，实现。</p>
+<h3>2018.2.25 Trade Volume Index (TVI)</h3>
+<p>类似于OBV，价量都参与计算，与OBV的差别就是TVI是日内数据，OBV是Close Price  背离指标，说明是还会用到tick，日内指标，分时图操作，MTV是指最小的价差，这个应该是可以自己定义的，这样价格上涨超过最小价差，加上tick的Volume，下载超过则减去tick的volume。</p>
+<div class="highlight"><pre><span></span>Change = Price - Last Price
+MTV = Minimum Tick Value
+Accumulation when Change &gt; MTV or Distribution when Change &lt; MTV
+
+With direction determined, calculate the TVI:
+Accumulation: TVI = TVI + Today&#39;s Volume
+Distribution: TVI = TVI - Today&#39;s Volume
+</pre></div>
+
+
+<p>策略：先研究明白，文档解释得不太明白。</p>
+<h3>2018.2.26 Triangular Moving Averages</h3>
+<p>均线的均线。</p>
+<div class="highlight"><pre><span></span>First, calculate the simple moving average (SMA):
+
+    SMA = (P1 + P2 + P3 + P4 + ... + PN) / N
+Then, take the average of all the SMA values to get TMA values.
+
+    TMA = (SMA1 + SMA2 + SMA3 + SMA4 + ... SMAN) / N
+The TMA can also be expressed as: TMA = SUM (SMA values) / N
+</pre></div>
+
+
+<p>策略：按均线策略走。</p>
+<h3>2018.2.26 Triple Exponential Moving Average (TEMA, or TRIX)</h3>
+<p>单，双，三指数均线的组合，延迟最小。0线上方的金叉是买入信号，0线下方的死叉是卖出信号。</p>
+<div class="highlight"><pre><span></span>First DEMA is calculated, then the error of price deviation from DEMA is calculated:
+
+err(i) = Price(i) — DEMA(Price, N, ii)
+
+Where:
+
+err(i)  — current DEMA error;
+Price(i) — current price;
+DEMA(Price, N, i) — current DEMA value from Price series with N period.
+
+Then add value of the exponential average of the error and get TEMA:
+
+TEMA(i) = DEMA(Price, N, i) + EMA(err, N, i) = DEMA(Price, N, i) + EMA(Price - EMA(Price, N, i), N, i) =
+
+= DEMA(Price, N, i) + EMA(Price - DEMA(Price, N, i), N, i) = 3 * EMA(Price, N, i) - 3 * EMA2(Price, N, i) + EMA3(Price, N, i)
+
+Where:
+
+EMA(err, N, i) — current value of the exponential average of the err error;
+EMA2(Price, N, i) — current value of the double sequential price smoothing;
+EMA3(Price, N, i) — current value of the triple sequential price smoothing.
+</pre></div>
+
+
+<p>策略：基于均线的指标，先实现再说。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
         <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
     </ul>
 </section>
         </article>
@@ -1286,7 +1404,7 @@ m1,m2 - amount of periods of calculation of the moving average.
     <li class="list-group-item tag-4">
       <a href="/tag/lai-ci-gou.html">莱茨狗</a>
     </li>
-    <li class="list-group-item tag-1">
+    <li class="list-group-item tag-0">
       <a href="/tag/liang-hua.html">量化</a>
     </li>
     <li class="list-group-item tag-4">
