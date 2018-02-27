@@ -1339,16 +1339,33 @@ EMA3(Price, N, i) — current value of the triple sequential price smoothing.
 
 
 <p>策略：基于均线的指标，先实现再说。</p>
+<h3>2018.2.27 True Strength Index (TSI)</h3>
+<p>用ema做的计算</p>
+<div class="highlight"><pre><span></span>r=input(25, title=&quot;Momentum Smoothing 1&quot;)
+s=input(13, title=&quot;Momentum Smoothing 2&quot;)
+src=close
+m=src-src[1]
+tsi=100*(ema(ema(m,r),s)/ema(ema(abs(m), r),s))
+</pre></div>
+
+
+<p>策略：低于-25时买入，卖点暂时不支持。</p>
+<h3>2018.2.27 Typical Price</h3>
+<div class="highlight"><pre><span></span>Typical Price = ( High + Low + Close / 3 )
+</pre></div>
+
+
+<p>策略：做为其他指标的计算因子。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
         <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
     </ul>
 </section>
         </article>
