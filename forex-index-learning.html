@@ -1372,19 +1372,37 @@ UO = 100 x [(4 x Average7)+(2 x Average14)+Average28]/(4+2+1)
 
 <p>策略：震荡策略当过滤器会比较好。</p>
 <h3>2018.2.28 Upside/Downside Ratio</h3>
-<p><a href="https://www.investopedia.com/terms/u/upsidedownsideratio.asp">英英详解</a></p>
+<p><a href="http://www.buyupside.com/stockreturncalculator/upsidedownsideratiocalcinput.php">英英详解</a></p>
+<div class="highlight"><pre><span></span>Upside price potential = percent current price is from high price
+Downside price potential = percent current price is from low price
+
+Upside/Downside Ratio = (percent current price is from high price / percent current price is from low price
+</pre></div>
+
+
+<p>策略：板块分析</p>
+<h3>2018.3.1 Upside/Downside Volume</h3>
 <p>指数指标，上升股票的总成交量除以下跌股票的总成交量</p>
 <p>策略：板块分析</p>
+<h3>2018.3.1 Variable Moving Average (VMA)</h3>
+<p>根据波动率实时调整的均线，还是不错的，VIP，但是VR的算法需要自己确定,可以参考<a href="http://etfhq.com/blog/2011/02/07/kaufmans-efficiency-ratio/">ER算法</a></p>
+<div class="highlight"><pre><span></span>with VR = Volatility Ratio
+VMA = [ { 0.0788 * VR } * Close ] + [ { (1 - 0.078) * VR } * yesterday&#39;s VMA ]
+</pre></div>
+
+
+<p>0.0788也可以用2/(N+1)代替，可以看这个<a href="https://www.tradingview.com/script/6Ix0E5Yr-Variable-Moving-Average-LazyBear/">示例算法</a></p>
+<p>策略：自定义程度较高，可以先实现几种再说。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/recording-of-problem-in-using.html">pandas应用问题记录</a></li>
-        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
         <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
     </ul>
 </section>
         </article>
