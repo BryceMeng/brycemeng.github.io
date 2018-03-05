@@ -1393,16 +1393,86 @@ VMA = [ { 0.0788 * VR } * Close ] + [ { (1 - 0.078) * VR } * yesterday&#39;s VMA
 
 <p>0.0788也可以用2/(N+1)代替，可以看这个<a href="https://www.tradingview.com/script/6Ix0E5Yr-Variable-Moving-Average-LazyBear/">示例算法</a></p>
 <p>策略：自定义程度较高，可以先实现几种再说。</p>
+<h3>2018.3.2 Vertical Horizontal Filter</h3>
+<p><a href="https://incrediblecharts.com/indicators/vertical_horizontal_filter.php">英英详解</a></p>
+<div class="highlight"><pre><span></span>Select the number of periods (n) to include in the indicator. This should be based on the length of the cycle that you are analyzing. The most popular is 28 days (for intermediate cycles).
+Determine the highest closing price (HCP) in n periods.
+Determine the lowest closing price (LCP) in n periods.
+Calculate the range of closing prices in n periods: 
+           HCP - LCP
+Next, calculate the movement in closing price for each period: 
+           Closing price [today] - Closing price [yesterday]
+Add up all price movements for n periods, disregarding whether they are up or down: 
+           Sum of absolute values of ( Close [today] - Close [yesterday] ) for n periods
+Divide Step 4 by Step 6: 
+           VHF = (HCP - LCP) / (Sum of absolute values for n periods)
+</pre></div>
+
+
+<p>策略：背离指标，可做过滤器</p>
+<h3>2018.3.2 Volatility indicator</h3>
+<p><a href="https://www.incrediblecharts.com/indicators/volatility_indicators.php">三种振荡指标的解释</a></p>
+<p>波动率是非常有用的东西，标准差，震幅比，atr等等</p>
+<p>策略：已经在应用</p>
+<h3>2018.3.3 Volume</h3>
+<p>成交量，在101alpha中已经表示，alpha最直接是与价格发生关系，成交量只是辅助，直接用成交量做alpha的还是很难。</p>
+<p>这是个很大的话题，成交量大时代表什么？成交量弱时代表什么？在每个阶段都代表不同的意思。</p>
+<h3>2018.3.3 Chaikin's Volume Accumulation (VAC)</h3>
+<p>Chaikin发明用来改进obv的指标。公式的累积方法和obv是一样，但是obv是整天的成交量，而vac是一部分，哪部分呢？看代码</p>
+<div class="highlight"><pre><span></span>VAC = Volume * ( Close - High + Low / 2 )
+</pre></div>
+
+
+<p>策略：从计算方式来讲会比obv更精细一些，可以和obv进行比对，看哪个效果更好</p>
+<h3>2018.3.4 Volume by Price</h3>
+<p>其实这就是现在一些股软上的筹码分布，计算方法其实很简单，交易价在某个价格区间的bar的成交量加起来即可，某个区间的交易量大说明这里是个调整区，但是不能真正的说明持仓结构，因为有在那个区间买卖的筹码都统计进去了，而且买入的可能在其他价格卖了。</p>
+<div class="highlight"><pre><span></span>There are four steps involved in the calculation. 
+This example is based on closing prices and the default parameter setting (12). 
+
+  1. Find the high-low range for closing prices for the entire period.  
+  2. Divide this range by 12 to create 12 equal price zones.
+  3. Total the amount of volume traded within each price zone.  
+  4. Divide the volume into up volume and down volume (optional). 
+</pre></div>
+
+
+<p>策略：用来计算阻力支撑位倒是一个不错的东西。（vip）</p>
+<h3>2018.3.4 Volume Oscillator</h3>
+<p>其实就是两根volume均线的差值</p>
+<div class="highlight"><pre><span></span>Percentage Volume Oscillator (PVO):
+((12-day EMA of Volume - 26-day EMA of Volume)/26-day EMA of Volume) x 100
+
+Signal Line: 9-day EMA of PVO
+
+PVO Histogram: PVO - Signal Line
+</pre></div>
+
+
+<p>策略：可以做一个辅助指标，成交量的指标一般来讲都很难做主指标。</p>
+<h3>2018.3.5 Volume Rate of Change (VROC)</h3>
+<p>和Price ROC相呼应，表示成交量的变化速度，可以判断一极极端情况</p>
+<div class="highlight"><pre><span></span>( Volume - Volume n periods ago ) / Volume n periods ago
+</pre></div>
+
+
+<p>策略：可以判断一些极端情况。</p>
+<h3>2018.3.5 Weighted Close</h3>
+<p>想替代close的一个想法</p>
+<div class="highlight"><pre><span></span>(Daily Close * 2) + Daily High + Daily Low / 4
+</pre></div>
+
+
+<p>策略：可以做为其他指标计算的基础数据。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
         <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
-        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
     </ul>
 </section>
         </article>
