@@ -1463,16 +1463,103 @@ PVO Histogram: PVO - Signal Line
 
 
 <p>策略：可以做为其他指标计算的基础数据。</p>
+<h3>2018.3.6 Weighted Moving Average (WMA)</h3>
+<p>移动平均线的一种。</p>
+<p>策略：和均线一样</p>
+<h3>2018.3.6 Wilder's Relative Strength Index (RSI)</h3>
+<p>同RSI</p>
+<h3>2018.3.7 Wilder's Smoothing</h3>
+<p>均线的一种</p>
+<div class="highlight"><pre><span></span>WSMA(i) = (SUM1-WSMA1+CLOSE(i))/N
+
+Where:
+
+WSMA1 = Wilder’s
+ Smoothing for the first period.
+
+WSMA(i)
+ = Wilder’s Smoothing of the current period (except for the first
+ one).
+
+CLOSE(i) = The current closing
+ price.
+
+N = The smoothing period
+</pre></div>
+
+
+<p>策略：和均线一样</p>
+<h3>2018.3.7 Wilders Volatility Index</h3>
+<p><a href="https://www.marketvolume.com/technicalanalysis/wildersvolatility.asp">英英详解</a></p>
+<p>一个波动率指标，和atr一样都是以tr为基础进行计算，但是计算方式略有不一样</p>
+<div class="highlight"><pre><span></span>he calculation of the ATR is simple and consists of two steps:
+
+Step #1: Define the True Range (TR) - get the highest of the following numbers:
+
+The absolute value of the difference between the current bar High and the current bar Low.
+The absolute value of the difference between the current bar High and the previous bar Close.
+The absolute value of the difference between the current bar Low and the previous bar Close.
+Step #2: Apply the moving average to the defined TR.
+
+ATR = SMA(TR)
+
+Wilder uses simplified formula to calculate Average of True Range:
+
+ATR = Wilder&#39;s Volatility = ((N-1) x Previous ATR + TR) / N
+
+Where N is the selected bar period.
+
+When it comes to the formula specified in the Wilder&#39;s book for 14-day ATR, the Wilder&#39;s formula would look:
+
+14-day ATR = Wilder&#39;s Volatility = (13 x Previous ATR + TR) / 14
+</pre></div>
+
+
+<p>策略：波动率指标</p>
+<h3>2018.3.8 Williams Percent Range (%R)</h3>
+<p>震荡性指标主要用在非趋势，那就是震荡市，提示出超买和超卖区域的。他提示了超买超卖需要时间，第一次产生信号可能不准确。</p>
+<div class="highlight"><pre><span></span>( Highest High in n periods - Today&#39;s Close / Highest High in n periods - Lowest Low in n periods ) * -100
+</pre></div>
+
+
+<p>策略：超买超买型，当过滤器比较好，用在震荡市中</p>
+<h3>2018.3.8 Williams' Accumulation/Distribution (A/D)</h3>
+<p>不是板块指标，单股票指标，比较敏感的指标，作者表示是超买超卖型。</p>
+<div class="highlight"><pre><span></span>To calculate the Williams&#39; Accumulation/Distribution indicator, determine:
+
+True Range High (TRH) = Yesterday&#39;s close or today&#39;s high whichever is greater
+
+True Range Low (TRL) = Yesterday&#39;s close or today&#39;s low whichever is less
+
+The day&#39;s accumulation/distribution is then calculated by comparing today&#39;s closing price to yesterday&#39;s closing price.
+
+If today&#39;s close is greater than yesterday&#39;s close: Today&#39;s A/D = today&#39;s close - TRL
+
+If today&#39;s close is less than yesterday&#39;s close: Today&#39;s A/D = today&#39;s close - TRH
+
+If today&#39;s close is the same as yesterday&#39;s close then the A/D is zero.
+
+The Williams&#39; Accumulation/Distribution indicator is a cumulative total of the daily values:
+
+Williams A/D = Today&#39;s A/D + Yesterday&#39;s Williams A/D
+</pre></div>
+
+
+<p>策略：超买超卖型的话那就做过滤器好了。</p>
+<h3>2018.3.9 Zig Zag</h3>
+<p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:zigzag">英英详解</a></p>
+<p>辅助型指标，只是为了减少噪音，画出大趋势，会根据未来的值更改前面的值。</p>
+<p>策略：这是第一个这么辅助型的指标，还不知道怎么用</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
         <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
     </ul>
 </section>
         </article>
