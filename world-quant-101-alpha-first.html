@@ -173,6 +173,7 @@
 <p><strong>Correlation(x, y, n)</strong></p>
 <blockquote>
 <p>计算向量 x 中的值在过去n天的相关系数。请注意，n 必须小于256。</p>
+<p>在pandas里面有个相关方便的函数DataFrame.corr()直接返回-1～1的数值</p>
 </blockquote>
 <div class="highlight"><pre><span></span><span class="c1"># 计算相关系数</span>
 <span class="k">def</span> <span class="nf">Neg_pearson</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
@@ -192,8 +193,9 @@
 <p>x^a</p>
 <p>就是x的a次方，我找的中文资料当中，解释为  Sign(x) * (Abs(x)^e) </p>
 <p>Sign(x)：如果 x &gt; 0，就返回 1，如果 x &lt; 0，则返回 -1，如果 x == 0，返回 0</p>
-<p>不要把Sign当做sin了哦</p>
+<p>不要把Sign当做sin了哦，np.sign()</p>
 <p>在01号alpha当中的作用是将两数值间的差异放大</p>
+<p>其实就是保留符号的次方处理</p>
 </blockquote>
 <p><strong>ts_max(x,d)</strong></p>
 <blockquote>
@@ -206,6 +208,7 @@
 <p><strong>Ts_ArgMax(x,n)</strong></p>
 <blockquote>
 <p>ts_max(x,d)最大值对应的索引</p>
+<p>np.argmax() <a href="http://www.cnblogs.com/zhouyang209117/p/6512302.html">详解</a></p>
 </blockquote>
 <p><strong>returns</strong></p>
 <blockquote>
@@ -217,6 +220,7 @@
 0.5)</strong></p>
 <p><a href="https://uqer.io/community/share/575699be228e5b8a3c285c1a">源码参考链接</a></p>
 <p>还真是有点小复杂，我要是不看这个源码分析，自己一下还真是很难逆向分析这其中的奥秘，按这位作者的理解，应该就是判断连续下跌多少天了，越久反弹的可能性越大。平均回归型的策略。</p>
+<p>2018.3.10: 这个策略呢？主要是对当前的股票池里面的股票进行分析，参考的就是前5天内最高值最近的买的权重越大。</p>
 <p><strong>#03&nbsp;&nbsp;&nbsp;&nbsp;(-1 * correlation(rank(open), rank(volume), 10))</strong></p>
 <p><a href="https://uqer.io/community/share/5750f4a1228e5b86a61fd7dc">源码参考链接</a></p>
 <p>该alpha主要表现在的成交量和价格的负相关，也就是简单的量价背离，但是这个在主观交易还行，实盘可不行的，回测下来效果还是有点差，这个源码实现对卖点的把握差了点，第二天卖出，而且没有止损和止盈的操作。</p>
@@ -226,11 +230,11 @@
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
     </ul>
 </section>
         </article>
