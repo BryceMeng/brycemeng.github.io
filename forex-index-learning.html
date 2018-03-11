@@ -145,6 +145,20 @@
 <li>OBV 只与成交量相关，主要看是否与股价背离，相当于就是成交量是否跟得上</li>
 <li>A/D 价格和成交量的关系，和OBV用法类似，主要看背离</li>
 </ul>
+<p><a href="https://www.metatrader5.com/en/terminal/help/indicators/volume_indicators/ad">A/D公式</a></p>
+<div class="highlight"><pre><span></span>A/D(i) =((CLOSE(i) - LOW(i)) - (HIGH(i) - CLOSE(i)) * VOLUME(i) / (HIGH(i) - LOW(i)) + A/D(i-1)
+
+Where:
+
+A/D(i) — value of the Accumulation/Distribution indicator for the current bar;
+CLOSE(i) — close price of the bar;
+LOW(i) — the lowest price of the bar;
+HIGH(i) — the highest price of the bar;
+VOLUME(i) — volume;
+A/D(i-1) — value of the Accumulation/Distribution indicator for the previous bar.
+</pre></div>
+
+
 <p>策略：可以根据背离来写这两个指标的策略，对突破方向的确认（突破型策略）</p>
 <h3>2017.12.13 A/D Line， A/D Line (Breadth)，A/D Ratio，Advancing-Declining Issues</h3>
 <ul>
@@ -1565,11 +1579,11 @@ Williams A/D = Today&#39;s A/D + Yesterday&#39;s Williams A/D
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
         <li><a href="/nature-distribution.html">自然分布</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
     </ul>
 </section>
         </article>
