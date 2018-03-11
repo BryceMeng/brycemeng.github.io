@@ -145,8 +145,11 @@
 <li>OBV 只与成交量相关，主要看是否与股价背离，相当于就是成交量是否跟得上</li>
 <li>A/D 价格和成交量的关系，和OBV用法类似，主要看背离</li>
 </ul>
-<p><a href="https://www.metatrader5.com/en/terminal/help/indicators/volume_indicators/ad">A/D公式</a></p>
-<div class="highlight"><pre><span></span>A/D(i) =((CLOSE(i) - LOW(i)) - (HIGH(i) - CLOSE(i)) * VOLUME(i) / (HIGH(i) - LOW(i)) + A/D(i-1)
+<p><a href="https://en.wikipedia.org/wiki/Accumulation/distribution_index">A/D公式</a></p>
+<p>A/D 其实不是在OBV的Volume上加了个系数，而OBV的CLV不是1就是-1，在A/D里面1的情况是实体阳线，-1是实体阴线，否则就是1和-1之间。</p>
+<div class="highlight"><pre><span></span>CLV = ((CLOSE(i) - LOW(i)) - (HIGH(i) - CLOSE(i))) / (HIGH(i) - LOW(i))
+
+A/D(i) = CLV * VOLUME(i) + A/D(i-1)
 
 Where:
 
@@ -1581,9 +1584,9 @@ Williams A/D = Today&#39;s A/D + Yesterday&#39;s Williams A/D
     <ul>
         <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
         <li><a href="/nature-distribution.html">自然分布</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
     </ul>
 </section>
         </article>
