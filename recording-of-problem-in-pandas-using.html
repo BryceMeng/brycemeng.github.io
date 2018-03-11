@@ -123,8 +123,11 @@
                 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=110771&auto=1&height=66"></iframe>
 
 <h3>两个Dataframe都是时间index，但是时间范围不一样，而且列名不一样，想组合在一块儿，用Nan来填充</h3>
-<p>df1.add(df2, fill_value=0)</p>
-<p>如果有一些Nan可以用前面的值顺延来填充可以用fillna(method='ffill')，在做投资品种分析时多品种（各品种交易时间会有差别）组合时会用得到</p>
+<div class="highlight"><pre><span></span><span class="n">df1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+
+<p>如果有一些Nan可以用前面的值顺延来填充可以用<strong>fillna(method='ffill')</strong>，在做投资品种分析时多品种（各品种交易时间会有差别）组合时会用得到</p>
 <h3>Dataframe 持久化</h3>
 <ol>
 <li>
@@ -153,11 +156,11 @@
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
         <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
     </ul>
 </section>
         </article>
