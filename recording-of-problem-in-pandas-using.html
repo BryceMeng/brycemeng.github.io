@@ -134,16 +134,24 @@
 <p>最方便的是hdf5，to_hdf或者HDFStore，速度快，操作方便<a href="https://github.com/pandas-dev/pandas/issues/9636">操作示例</a></p>
 </li>
 </ol>
+<h3>计算收益率</h3>
+<p><strong>简单收益率</strong></p>
+<p>df['close'].pct_change().dropna()</p>
+<p>(df['close']/df['close'].shift(1)).dropna() - 1</p>
+<p><strong>对数收益率</strong></p>
+<p>np.log(df['close']/df['close'].shift(1)).dropna()</p>
+<p>这种方法运用了log里面除拆出来就是减法的规则
+np.log(df['close']).diff().dropna()</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/nature-distribution.html">自然分布</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
     </ul>
 </section>
         </article>
