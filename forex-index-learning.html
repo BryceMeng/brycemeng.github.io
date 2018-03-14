@@ -174,6 +174,7 @@ A/D(i-1) — value of the Accumulation/Distribution indicator for the previous b
 <h3>2017.12.14 alligator</h3>
 <p>鳄鱼指标，设计给外汇使用，传说外汇市场中30%的时间才是波动比较大的，该指标就是为了捕捉这30%的时间。<a href="http://myeatrade.com/277/#Alligator_toc2">详细算法请点击</a></p>
 <p>主要是3根均线的组合，但是这3根均线（用的中间价，非close）都做了往未来的平移。3根线纠缠在一块儿的时候没有方向，震荡，3条线分开，可以看做张嘴，比较活跃。</p>
+<p>2018.3.14 其实现在回过头来想短周期波动上升上穿或者下穿长周期均线，和波动率分析类似，如果实际周波动率大于实际天波动率换算出来的周波动率，说明是有趋势存在的。道理是一样的，因为长周期的均线对短期的波动率上升不敏感，所以会相对接近于换算出来的波动率一样，而短期均线更贴近实际波动率。哈哈，搞了这么久回过头来妈蛋的核心就是均线。</p>
 <p>策略：我也不知道怎么应用，识别大趋势用吧。能用做趋势和单边行情的判断吗？这样可以给趋势跟踪策略加一个过滤器，提高胜率。能否过滤出震荡行情做回归？不知道，可以试试</p>
 <h3>2017.12.15 alpha, Alpha Jensen</h3>
 <ul>
@@ -186,7 +187,10 @@ A/D(i-1) — value of the Accumulation/Distribution indicator for the previous b
 <p>这是需要手工绘制的3根线，很难做量化，目测实用性不强</p>
 <h3>2017.12.18 TRIN</h3>
 <p>不知道怎么翻译，下面是计算公式，由于成交量是分母，所以如果数值越大说明成交量没根上，就是超买。作者建议是TRIN的10日均线，大于1.2超买，小于0.7超卖。</p>
-<p>TRIN = (The number of advancing stocks/The number of declining stocks)/(The composite volume of advancing stocks/The composite volume of declining stocks)</p>
+<div class="highlight"><pre><span></span>TRIN = (The number of advancing stocks/The number of declining stocks)/(The composite volume of advancing stocks/The composite volume of declining stocks)
+</pre></div>
+
+
 <p>策略：这是一个市场的综合指数，做板块的总体分析可以试试</p>
 <h3>2017.12.18 Aroon index，Aroon Oscillator</h3>
 <p>阿隆指标，看过它的计算公式发现竟然是按最高价或者最低价后的天数来统计的，我也是醉了，不知道有没有统计学上的意义。用法是有个30和70的临界值，大于70表示哪一方的趋势很强，小于30则弱。我觉得吧，用Aroon Oscilloator是不是会好一点。</p>
@@ -1582,11 +1586,11 @@ Williams A/D = Today&#39;s A/D + Yesterday&#39;s Williams A/D
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
         <li><a href="/nature-distribution.html">自然分布</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
     </ul>
 </section>
         </article>
