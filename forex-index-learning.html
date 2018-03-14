@@ -194,11 +194,13 @@ A/D(i-1) — value of the Accumulation/Distribution indicator for the previous b
 <p>策略：这是一个市场的综合指数，做板块的总体分析可以试试</p>
 <h3>2017.12.18 Aroon index，Aroon Oscillator</h3>
 <p>阿隆指标，看过它的计算公式发现竟然是按最高价或者最低价后的天数来统计的，我也是醉了，不知道有没有统计学上的意义。用法是有个30和70的临界值，大于70表示哪一方的趋势很强，小于30则弱。我觉得吧，用Aroon Oscilloator是不是会好一点。</p>
-<ul>
-<li>Aroon(上升)=[(计算期天数-最高价后的天数)/计算期天数]*100 </li>
-<li>Aroon(下降)=[(计算期天数-最低价后的天数)/计算期天数]*100 </li>
-<li>Aroon Oscillator = Aroon(上升) - Aroon(下降)</li>
-</ul>
+<p>通常会建议用25做为计算周期。</p>
+<div class="highlight"><pre><span></span> Aroon(上升)=[(计算期天数-最高价后的天数)/计算期天数]*100 
+ Aroon(下降)=[(计算期天数-最低价后的天数)/计算期天数]*100 
+ Aroon Oscillator = Aroon(上升) - Aroon(下降)
+</pre></div>
+
+
 <p>策略：从用法上来讲很简单，判断现有的趋势，我个人不是很看好这个指标，统计的有点怪。 </p>
 <h3>2017.12.19 ADX, ADXR</h3>
 <p>通过价格数据算出，里面用到了TR(True Range)，通达信有该指标，可惜TB没有，写一个应该不难。</p>
@@ -1586,11 +1588,11 @@ Williams A/D = Today&#39;s A/D + Yesterday&#39;s Williams A/D
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
         <li><a href="/nature-distribution.html">自然分布</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
     </ul>
 </section>
         </article>
