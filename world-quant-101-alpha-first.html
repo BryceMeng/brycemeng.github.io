@@ -156,6 +156,7 @@
 <p>波动，成交量没有明显的影响，记住做量化交易就是在做波动。</p>
 <h3>里面用到的函数和变量</h3>
 <p>现在讲讲这101个公式里面常用的一些函数吧，我之前以为就是简单的计算，没想到还用到了相关性，协方差等等东东，好头大</p>
+<p><a href="https://www.joinquant.com/data/dict/alpha101#%E5%85%AC%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E">发现聚宽竟然全部实现了，还有函数的说明</a></p>
 <p><strong>rank()</strong> <a href="https://uqer.io/community/share/5750f4a1228e5b86a61fd7dc">引用</a></p>
 <blockquote>
 <p>排列所有工具的 x 值，然后返回的数值是介于0.0和1.0之间均匀分布的浮点数。</p>
@@ -216,6 +217,18 @@
 <blockquote>
 <p>今天的收盘价减去昨天的收盘价带来的收益 close-to-close</p>
 </blockquote>
+<p><strong>delta(x,d)</strong></p>
+<blockquote>
+<p>今天的x值减去d天前的x值</p>
+</blockquote>
+<p><strong>ts_rank(x,d)</strong>
+没有一个地方讲明白了，应该与最后一天的值在序列中的排名值0～1之间</p>
+<p><strong>vwap</strong></p>
+<p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:vwap_intraday">公式说明</a></p>
+<div class="highlight"><pre><span></span>Cumulative(Volume x Typical Price)/Cumulative(Volume)
+</pre></div>
+
+
 <h3>这101个Alpha</h3>
 <p>这些alpha很难直接盈利，而且这些公式很多是不能直接写在代码中的，需要自己进行改造，和创建卖点，这些公式更多的应该是让我们熟悉一下哪些因素能带来正的收益，而应用到自己的策略里面</p>
 <p><strong>#01&nbsp;&nbsp;&nbsp;&nbsp;(rank(Ts_ArgMax(SignedPower(((returns &lt; 0) ? stddev(returns, 20) : close), 2.), 5)) -
@@ -226,18 +239,26 @@
 <p><strong>#03&nbsp;&nbsp;&nbsp;&nbsp;(-1 * correlation(rank(open), rank(volume), 10))</strong></p>
 <p><a href="https://uqer.io/community/share/5750f4a1228e5b86a61fd7dc">源码参考链接</a></p>
 <p>该alpha主要表现在的成交量和价格的负相关，也就是简单的量价背离，但是这个在主观交易还行，实盘可不行的，回测下来效果还是有点差，这个源码实现对卖点的把握差了点，第二天卖出，而且没有止损和止盈的操作。</p>
-<p>2018.3.11 价量背离的信号，注意101alpha的这种形式很有意思，用一个公式表现出来</p>
+<p>2018.3.11: 价量背离的信号，注意101alpha的这种形式很有意思，用一个公式表现出来</p>
+<p><strong>#02&nbsp;&nbsp;&nbsp;&nbsp;(-1 * correlation(rank(delta(log(volume),2)), rank(((close-open)/open)),6))</strong></p>
+<p><a href="https://uqer.io/community/share/576cfa81228e5b747e9dd85a">源码参考链接</a></p>
+<p>delta(log(volume),2) -&gt; log(volume) - log(volume(-2)) -&gt; log(volume/volume(-2)) 这句其实就是计算的2天的成交量变化率</p>
+<p>2018.3.14: 和03类似，但是03是绝对值是对方向，而02是针对变化率的方向，按几何意义加速向上是走的内圆，缓慢向上走的是外圆。和03的意义差不多，放量下跌，缩量上涨，其实这个是行不通的，现实情况应该是放量滞涨要卖的，而这个公式是要买的。</p>
+<p><strong>#04&nbsp;&nbsp;&nbsp;&nbsp;(-1 * Ts_Rank(rank(low), 9))</strong></p>
+<p>2018.3.14: 9天内最后一天的最低值如果是最低的说明上涨的概率大，如果是最高的则说明下跌概率大，我也是猜的，我擦</p>
+<p><strong>#05&nbsp;&nbsp;&nbsp;&nbsp;(rank((open-(sum(vwap,10)/10)))<em>(-1</em>abs(rank((close - vwap)))))</strong></p>
+<p>2018.3.14 这个很难用语言描述，看起来像是open close的变化方向背离，但是在计算close的时候用了abs，所以在某一种情况下又不是背离，有点复杂，也说明rank或许会有负值，上面对于rank的解读可能会有错，who knows?难道是波动变小，而且总体方向向上的变小才是买入点？</p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
         <li><a href="/nature-distribution.html">自然分布</a></li>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
         <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
     </ul>
 </section>
         </article>
