@@ -206,7 +206,11 @@ A/D(i-1) — value of the Accumulation/Distribution indicator for the previous b
 <p>通过价格数据算出，里面用到了TR(True Range)，通达信有该指标，可惜TB没有，写一个应该不难。</p>
 <p>作者建议可以过滤趋势，判断什么时候用趋势策略，什么时候用回归策略，ADX大于25是趋势，小于20是回归，</p>
 <p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx">公式详解 "ADX/DMI enthusiasts can click here to download"</a></p>
-<p>(HLC,p[HLC]) -&gt;(TR1,+DM1,-DM1)-sum-&gt;(TR14,+DM14,-DM14)-&gt;(+DI14,-DI14)-&gt;(DI14 diff, DI14 sum)-&gt;DX-ma-&gt;ADX</p>
+<div class="highlight"><pre><span></span>(HLC,p[HLC]) -&gt;(TR1,+DM1,-DM1)-sum-&gt;(TR14,+DM14,-DM14)-&gt;
+(+DI14,-DI14)-&gt;(DI14 diff, DI14 sum)-&gt;DX-ma-&gt;ADX
+</pre></div>
+
+
 <p>两种用法：
 - ADX或者ADXR，ADXR是ADX和m天前ADR值的平滑，在20(ADRX25)或者其他值之上趋势启动，40之上算是比较强的趋势，数值下降时和RSI或者一些动量指标进行结合
 - (+)PDI,(-)MDI 分别表明正向和负向趋势，交叉表明买卖点，不过这个用法真正在震荡时会反复交叉</p>
@@ -1592,10 +1596,10 @@ Williams A/D = Today&#39;s A/D + Yesterday&#39;s Williams A/D
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
         <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
     </ul>
 </section>
         </article>
