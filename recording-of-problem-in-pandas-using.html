@@ -123,10 +123,18 @@
                 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=110771&auto=1&height=66"></iframe>
 
 <h3>两个Dataframe都是时间index，但是时间范围不一样，而且列名不一样，想组合在一块儿，用Nan来填充</h3>
-<div class="highlight"><pre><span></span><span class="n">df1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="c1">#这种方式只能应用于数字</span>
+<span class="n">df1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1">#这种方式通用性更强 axis=1表明是列左右拼接 0行上下拼接，key不会自动重合</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
 
+<p><a href="https://stackoverflow.com/questions/25773245/ambiguity-in-pandas-dataframe-numpy-array-axis-definition">关于axis的解释</a></p>
+<p>其实不复杂，0或者是1都代表两种操作：
+1. 取值：0 按行label取，1 按列label取
+2. 扫描：0 按列上下扫描，1 按行左右扫描</p>
 <p>如果有一些Nan可以用前面的值顺延来填充可以用<strong>fillna(method='ffill')</strong>，在做投资品种分析时多品种（各品种交易时间会有差别）组合时会用得到</p>
 <h3>Dataframe 持久化</h3>
 <ol>
@@ -157,16 +165,24 @@
 
 <h3>matplotlib 图形的横轴</h3>
 <p>只能用日期或者数字，这样是连续的，非连续的都不行</p>
+<h3>相关系数</h3>
+<p>dataframe.corr 
+np.corrcoef <em>一般取结果数组里面的[0,1]用作相关系数<a href="https://www.ricequant.com/community/topic/2039//3">这里有样例</a>，如果打不开就点击"克隆研究"</em></p>
+<p>经测试，上面两个函数计算的数值是一样的</p>
+<h3>取某些行，但是索引里面还有不存在的key</h3>
+<p>reindex(key_list).dropna()</p>
+<h3>把原来的索引取消，转为正常数据列</h3>
+<p>reset_index(drop=False)</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
         <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
-        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
     </ul>
 </section>
         </article>
