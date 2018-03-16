@@ -224,14 +224,31 @@ A/D(i-1) — value of the Accumulation/Distribution indicator for the previous b
 <p>beta2做了ma运算。</p>
 <p>策略：无法直接应用</p>
 <h3>2017.12.21 Bollinger Bands，CCT Bollinger Bands Histogram</h3>
+<p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:bollinger_bands">boll公式详解</a></p>
 <ul>
 <li>Boll 最近才知道这是最复杂的计算公式之一，因为用了标准差，标准差用来表明数据离散程度，中轨是移动平均线（M日），上轨和下轨是中轨线加减N倍的标准差，现在为2倍，自己写时可以自定义一下这个N。</li>
 <li><a href="https://www.tradingview.com/script/iA4XGCJW-CCT-Bollinger-Band-Oscillator/">CCT Boll</a> 只有一条用标准差计算的线，然后用0和100平行线替换了boll的两条线。这个boll线呢就和传统的MACD类似，接近或者低于0就是超卖，接近或者大于100就是超买</li>
 </ul>
+<div class="highlight"><pre><span></span>src=close
+cctbbo=100 * ( src + 2*stdev( src, length) - sma( src, length ) ) / ( 4 * stdev( src, length ) )
+</pre></div>
+
+
 <p>标准差是一个很棒的方法，boll带有两种用法，突破任何一条边之后趋势变更强，另一种就是碰到边之后回归</p>
 <p>策略：ma(m)+n*stdv(m) 用这个来定义突破 <a href="https://zhuanlan.zhihu.com/p/24448511">示例策略</a></p>
 <h3>2017.12.22 Breadth Thrust Indicator(BTI)</h3>
-<p>应用于指数，老指标，这个指标真没啥意义：100*上涨家数/(上涨家数+下跌家数)的N日指数移动平均</p>
+<div class="highlight"><pre><span></span>BTI = MA(Up / Up + Down, N)
+
+BTI  = 廣量衝力指標
+Up   = 上升股票數量
+Down = 下跌股票數量
+MA(x, n) = n 天的平均值
+
+建議使用 N = 10 計算 BTI 的平均值
+</pre></div>
+
+
+<p>应用于指数，老指标，和A/D Line(Breadth)一模一样，这个指标真没啥意义</p>
 <h3>2017.12.22 Accumulation and Distribution (A/D)</h3>
 <p>参与计算：L,C,H,V，成交量也参与了计算，不过没有考虑到跳空缺口，这个是有缺陷的</p>
 <p>数值往上表明强势，往下表明弱势，可以考虑背离的用法，参考的是价量同行的原则</p>
@@ -1595,11 +1612,11 @@ Williams A/D = Today&#39;s A/D + Yesterday&#39;s Williams A/D
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
-        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
         <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
     </ul>
 </section>
         </article>

@@ -233,6 +233,11 @@
 </pre></div>
 
 
+<p><strong>adv{d}</strong></p>
+<p>d天的平均成交额</p>
+<p><em>注意不是成交量</em></p>
+<p><strong>Sign(x)</strong></p>
+<p>如果 x &gt; 0，就返回 1，如果 x &lt; 0，则返回 -1，如果 x == 0，返回 0</p>
 <h3>这101个Alpha</h3>
 <p>这些alpha很难直接盈利，而且这些公式很多是不能直接写在代码中的，需要自己进行改造，和创建卖点，这些公式更多的应该是让我们熟悉一下哪些因素能带来正的收益，而应用到自己的策略里面</p>
 <p><strong>#01&nbsp;&nbsp;&nbsp;&nbsp;(rank(Ts_ArgMax(SignedPower(((returns &lt; 0) ? stddev(returns, 20) : close), 2.), 5)) -
@@ -252,19 +257,23 @@
 <p>2018.3.14: 9天内最后一天的最低值如果是最低的说明上涨的概率大，如果是最高的则说明下跌概率大，我也是猜的，我擦</p>
 <p><strong>#05&nbsp;&nbsp;&nbsp;&nbsp;(rank((open-(sum(vwap,10)/10)))<em>(-1</em>abs(rank((close - vwap)))))</strong></p>
 <p>2018.3.14 这个很难用语言描述，看起来像是open close的变化方向背离，但是在计算close的时候用了abs，所以在某一种情况下又不是背离，有点复杂，也说明rank或许会有负值，上面对于rank的解读可能会有错，who knows?难道是波动变小，而且总体方向向上的变小才是买入点？</p>
-<p><strong>#05&nbsp;&nbsp;&nbsp;&nbsp;(-1*correlation(open, volume, 10))</strong></p>
+<p><strong>#06&nbsp;&nbsp;&nbsp;&nbsp;(-1*correlation(open, volume, 10))</strong></p>
 <p>2018.3.15 你妹的，这不和3基本差不多么，只是这个是原始值，03做了个rank</p>
+<p><strong>#07&nbsp;&nbsp;&nbsp;&nbsp;((adv20&lt;volume)?((-1<em>ts_rank(abs(delta(close,7)),60))</em>sign(delta(close,7))):(-1*1))</strong></p>
+<p>成交量小于20天均线才进行计算，如果大于直接-1，不操作。</p>
+<p>小于20天均线时，7天内价差变化越大越好，而且方向要是向下的。</p>
+<p>2018.3.16 人肉理解出来竟然要求是缩量下跌7天左右，我去，前面不是有话题下跌10的吗？回头想想，101aplha内部还会有矛盾，说明只要下跌个7天以上，大概率会上涨，我去，竞争是这个理。</p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
-        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
         <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
     </ul>
 </section>
         </article>
