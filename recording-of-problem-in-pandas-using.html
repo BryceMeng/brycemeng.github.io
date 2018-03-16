@@ -168,8 +168,13 @@
 <h3>matplotlib 图形的横轴</h3>
 <p>只能用日期或者数字，这样是连续的，非连续的都不行</p>
 <h3>相关系数</h3>
-<p>dataframe.corr 
-np.corrcoef <em>一般取结果数组里面的[0,1]用作相关系数<a href="https://www.ricequant.com/community/topic/2039//3">这里有样例</a>，如果打不开就点击"克隆研究"</em></p>
+<div class="highlight"><pre><span></span><span class="n">dataframe</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># 一般取结果数组里面的[0,1]用作相关系数[这里有样例](https://www.ricequant.com/community/topic/2039//3)，如果打不开就点击&quot;克隆研究&quot;</span>
+<span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> 
+</pre></div>
+
+
 <p>经测试，上面两个函数计算的数值是一样的</p>
 <h3>取某些行，但是索引里面还有不存在的key</h3>
 <p>reindex(key_list).dropna()</p>
@@ -180,11 +185,11 @@ np.corrcoef <em>一般取结果数组里面的[0,1]用作相关系数<a href="ht
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
     </ul>
 </section>
         </article>
