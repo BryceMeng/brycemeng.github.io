@@ -195,13 +195,13 @@ A/D(i-1) — value of the Accumulation/Distribution indicator for the previous b
 <h3>2017.12.18 Aroon index，Aroon Oscillator</h3>
 <p>阿隆指标，看过它的计算公式发现竟然是按最高价或者最低价后的天数来统计的，我也是醉了，不知道有没有统计学上的意义。用法是有个30和70的临界值，大于70表示哪一方的趋势很强，小于30则弱。我觉得吧，用Aroon Oscilloator是不是会好一点。</p>
 <p>通常会建议用25做为计算周期。</p>
-<div class="highlight"><pre><span></span> Aroon(上升)=[(计算期天数-最高价后的天数)/计算期天数]*100 
- Aroon(下降)=[(计算期天数-最低价后的天数)/计算期天数]*100 
+<div class="highlight"><pre><span></span> Aroon(上升)=[(计算期天数-最高价后的天数)/计算期天数]*100
+ Aroon(下降)=[(计算期天数-最低价后的天数)/计算期天数]*100
  Aroon Oscillator = Aroon(上升) - Aroon(下降)
 </pre></div>
 
 
-<p>策略：从用法上来讲很简单，判断现有的趋势，我个人不是很看好这个指标，统计的有点怪。 </p>
+<p>策略：从用法上来讲很简单，判断现有的趋势，我个人不是很看好这个指标，统计的有点怪。</p>
 <h3>2017.12.19 ADX, ADXR</h3>
 <p>通过价格数据算出，里面用到了TR(True Range)，通达信有该指标，可惜TB没有，写一个应该不难。</p>
 <p>作者建议可以过滤趋势，判断什么时候用趋势策略，什么时候用回归策略，ADX大于25是趋势，小于20是回归，</p>
@@ -250,11 +250,19 @@ MA(x, n) = n 天的平均值
 
 <p>应用于指数，老指标，和A/D Line(Breadth)一模一样，这个指标真没啥意义</p>
 <h3>2017.12.22 Accumulation and Distribution (A/D)</h3>
-<p>参与计算：L,C,H,V，成交量也参与了计算，不过没有考虑到跳空缺口，这个是有缺陷的</p>
-<p>数值往上表明强势，往下表明弱势，可以考虑背离的用法，参考的是价量同行的原则</p>
-<p>策略：没有考虑缺口，暂不考虑使用</p>
+<p>看了这么久，就是之前提到的那个A/D，重复</p>
 <h3>2017.12.24 Chaikin Money Flow(CMF)</h3>
+<p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:chaikin_money_flow_cmf">英英详解(文章最后有和其他指标的结合使用)</a></p>
 <p>C,L,H,Vol参与计算，在+-0.1之间信号不明确，大于0.1做多信号，小于-0.1做空信号。缺失跳空缺口的体现</p>
+<p>前半部分和A/D计算是一样的，最后CMF的形成用了20天的平滑</p>
+<div class="highlight"><pre><span></span>  1. Money Flow Multiplier = [(Close  -  Low) - (High - Close)] /(High - Low) 
+
+  2. Money Flow Volume = Money Flow Multiplier x Volume for the Period
+
+  3. 20-period CMF = 20-period Sum of Money Flow Volume / 20 period Sum of Volume 
+</pre></div>
+
+
 <p>策略：和MACD这种类似，不过没有CCI敏感,从图上来讲比CCI更适用，CCI过于敏感</p>
 <h3>2017.12.24 Chaikin Oscillator (CHO)</h3>
 <p><a href="http://blog.csdn.net/zuoyang1990/article/details/71479637">中文详解</a></p>
@@ -1612,11 +1620,11 @@ Williams A/D = Today&#39;s A/D + Yesterday&#39;s Williams A/D
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
         <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
-        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
     </ul>
 </section>
         </article>
