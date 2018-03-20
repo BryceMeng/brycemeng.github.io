@@ -264,13 +264,13 @@
 <p>小于20天均线时，7天内价差变化越大越好，而且方向要是向下的。</p>
 <p>2018.3.16 人肉理解出来竟然要求是缩量下跌7天左右，我去，前面不是有话题下跌10的吗？回头想想，101aplha内部还会有矛盾，说明<strong>只要下跌个7天以上，大概率会上涨</strong>，我去，竟然是这个理。</p>
 <p><strong>#08&nbsp;&nbsp;&nbsp;&nbsp;(-1 * rank(((sum(open,5)<em>sum(returns,5))-delay((sum(open,5)</em>sum(returns,5)),10))))</strong></p>
-<p>以 sum(open,5)*sum(returns,5)为基本计算单元，当前的送去10天前的值，当前面有个-1后，那么就是减去的值越小越好，那么还是跌的越多越好...这已经绕不开越跌越涨的坑了。</p>
+<p>2018.3.19 以 sum(open,5)*sum(returns,5)为基本计算单元，当前的送去10天前的值，当前面有个-1后，那么就是减去的值越小越好，那么还是跌的越多越好...这已经绕不开越跌越涨的坑了。</p>
 <p><strong>#09&nbsp;&nbsp;&nbsp;&nbsp;((0&lt;ts_min(delta(close,1),5)) ? delta(close,1):((ts_max(delta(close,1),5)&lt;0)?delta(close,1):(-1*delta(close,1))))</strong></p>
-<p>条件：ts_min(delta(close,1),5) &gt; 0 -&gt; 5天中最小的价差都是大于的，说明这几天都在涨</p>
-<p>True: delta(close,1) -&gt; 今天的价差，这个值肯定是大于0的</p>
-<p>False: ts_max(delta(close,1),5)&lt;0 ? delta(close,1): -1*delta(close,1)
+<p><strong>条件</strong>：ts_min(delta(close,1),5) &gt; 0 -&gt; 5天中最小的价差都是大于的，说明这几天都在涨</p>
+<p><strong>True</strong>: delta(close,1) -&gt; 今天的价差，这个值肯定是大于0的</p>
+<p><strong>False</strong>: ts_max(delta(close,1),5)&lt;0 ? delta(close,1): -1*delta(close,1)
 这里又是一个3元运算，如果这5天中最大的价差都小于0(跌了5天)返回今天的价差，否则返回今天的价差的反向值</p>
-<p>我去，有点绕，连续上涨或者下跌都给大的权重，涨涨跌跌就不操作，这也能成为alpha？真是计算机算出来的有点反人类</p>
+<p>2018.3.20 我去，有点绕，连续上涨或者下跌都给大的权重，涨涨跌跌就不操作，这也能成为alpha？真是计算机算出来的有点反人类，我猜给大权重不一定是做多，因为美股是可以做空的。</p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
@@ -278,8 +278,8 @@
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
     </ul>
