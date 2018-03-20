@@ -289,7 +289,19 @@ CMO = ((sum1-sum2)/(sum1+sum2)) 100
 <p>动量指标但是没有成交量参与运算，主要是靠每天close的差来进行计算，运用方法就是看长期均线和短期均线形成金死叉来进行判断</p>
 <p>策略：多空力量吧，现在看来看多空的指标太多了，应该找一个测试方法来看准确度</p>
 <h3>2017.12.25 Chaos Gator</h3>
-<p><a href="https://www.ifcmarkets.com/en/ntx-indicators/gator-oscillator">详解</a></p>
+<p><a href="https://www.ifcmarkets.com/en/ntx-indicators/gator-oscillator">详解</a>
+<a href="https://www.forexindicators.net/forex-trading-indicators/gator-oscillator/">公式详解</a></p>
+<div class="highlight"><pre><span></span>Median Price = (High + Low)/2
+
+Jaw (lower moving average) = Smoothed moving average of the median price over 13-period
+Teeth (upper moving average) = Smoothed moving average of median over 8-period
+Lips (middle moving average) = Smoothed moving Average of the median over 5-period
+
+Top bar = Jaw – Teeth
+Bottom bar = – (Absolute value of (Teeth – Lips))
+</pre></div>
+
+
 <p>中间价(High+Low/2)的移动平均线，再平移，参考（2017.12.14 alligator），可以一起使用</p>
 <h3>2017.12.26 CCI</h3>
 <p>这个可是现在的明星策略，有H,L,C参与计算，虽然还是没有把跳空考虑进去。在这篇文章里面算讲得非常详细了，算法不贴出来，网上到处都是，但是里面讲了一个很重要的东西就是<strong>CCI的参数尽量以一个周期的1/3来进行取值最好，周期是指上一个低点到现在这个低点的距离</strong>，这点非常重要。这样还引申出来了一个东西就是怎么计算一个上涨一下跌周期？</p>
@@ -1620,11 +1632,11 @@ Williams A/D = Today&#39;s A/D + Yesterday&#39;s Williams A/D
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
         <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
     </ul>
 </section>
         </article>
