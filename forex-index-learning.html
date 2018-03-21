@@ -304,6 +304,7 @@ Bottom bar = – (Absolute value of (Teeth – Lips))
 
 <p>中间价(High+Low/2)的移动平均线，再平移，参考（2017.12.14 alligator），可以一起使用</p>
 <h3>2017.12.26 CCI</h3>
+<p><a href="https://en.wikipedia.org/wiki/Commodity_channel_index">记住这个公式</a></p>
 <p>这个可是现在的明星策略，有H,L,C参与计算，虽然还是没有把跳空考虑进去。在这篇文章里面算讲得非常详细了，算法不贴出来，网上到处都是，但是里面讲了一个很重要的东西就是<strong>CCI的参数尽量以一个周期的1/3来进行取值最好，周期是指上一个低点到现在这个低点的距离</strong>，这点非常重要。这样还引申出来了一个东西就是怎么计算一个上涨一下跌周期？</p>
 <p>其他的用法就是：</p>
 <ul>
@@ -316,12 +317,17 @@ Bottom bar = – (Absolute value of (Teeth – Lips))
 <p>策略：来判断市场强弱，不过从实际情况来看，在短周期来看有点太敏感</p>
 <h3>2017.12.26 Commodity Selection Index (CSI)</h3>
 <p><a href="http://chart-formations.com/indicators/csi.aspx?cat=momentum">详解</a></p>
+<p><a href="http://forex-indicators.net/trend-indicators/commodity-selection-index">另外一个详解</a></p>
 <p>为短线交易而生，动量型指标，一根线，数值越高，趋势越强。用到了ATR,DMI里面的ADXR指标，参考(2017.12.19 ADX, ADXR)</p>
 <div class="highlight"><pre><span></span>CSI = ( ADXR x ATR14 ) x ( ( V / √M ) x ( 1 / ( 150 + C ) ) ) x 100
+
+V 一跳的价格
+M 美元形式的保证金，应该就是指Close Price乘以保证金率
+C 手续费
 </pre></div>
 
 
-<p>策略：有点复杂资料太少，暂不使用。</p>
+<p>策略：可以先实现再说</p>
 <h3>2017.12.27 Correlation Analysis</h3>
 <p>相关性分析，刚好我在看基础统计学看到了这里，0.7以下为弱相关，0.7以上为强相关，因为都是往右走，所以不存丰负相关。这个确实很重要。</p>
 <p>策略：<strong>套利</strong>和<strong>股票相对于大盘的异动</strong>需要关注。</p>
@@ -1632,11 +1638,11 @@ Williams A/D = Today&#39;s A/D + Yesterday&#39;s Williams A/D
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
     </ul>
 </section>
         </article>
