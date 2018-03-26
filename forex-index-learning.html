@@ -133,6 +133,7 @@
 
 <p>策略：板块或者指数分析。</p>
 <h3>2017.12.11  ASI,SI</h3>
+<p><a href="https://www.tradingview.com/script/PBWY9s8m-Accumulation-Swing-Index/">ASI图示</a></p>
 <p>ASI就是SI累加(cumsum)，主要是用最近几天的最高价，最低价，收盘价等等元素。</p>
 <ul>
 <li>SI 上穿0买入，下穿0卖出（用得少），见后面的(Swing Index)，在0上下震荡的震荡型指标</li>
@@ -208,6 +209,10 @@ A/D(i-1) — value of the Accumulation/Distribution indicator for the previous b
 <p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx">公式详解 "ADX/DMI enthusiasts can click here to download"</a></p>
 <div class="highlight"><pre><span></span>(HLC,p[HLC]) -&gt;(TR1,+DM1,-DM1)-sum-&gt;(TR14,+DM14,-DM14)-&gt;
 (+DI14,-DI14)-&gt;(DI14 diff, DI14 sum)-&gt;DX-ma-&gt;ADX
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>ADXR = (ADX + ADX N periods ago) / 2
 </pre></div>
 
 
@@ -378,9 +383,11 @@ where:
 
 <p>策略：试一下回归</p>
 <h3>2017.12.30 DMI</h3>
-<p>PDI下穿MDI时为一个极点，再上穿时为交易点</p>
-<p>参见 <strong>2017.12.19 ADX, ADXR</strong> </p>
+<p>DMI里面有两条线，DMI+和DMI-，DMI+测量向上运动的动能的，DMI-测量向下运动的动能。DMI+和DMI-就是ADX计算公式里面的+DI14, -DI14</p>
+<p>PDI(DMI+)下穿MDI(DMI-)时为一个极点，再上穿时为交易点。一般adx和adxr组合使用，DMI+和DMI-组合使用。</p>
+<p>参见 <strong>2017.12.19 ADX, ADXR</strong></p>
 <h3>2017.12.30 Disparity Index</h3>
+<p><a href="https://www.mql5.com/en/code/10068">英英解释</a></p>
 <div class="highlight"><pre><span></span><span class="k">[ C - Mov(C,X,MA ) ] / [ Mov(C,X,MA) * 100 ]</span>
 
 <span class="err">//</span> <span class="err">Where</span> <span class="err">X</span> <span class="err">is</span> <span class="err">the</span> <span class="err">number</span> <span class="err">of</span> <span class="err">time</span> <span class="err">periods</span>
@@ -392,7 +399,7 @@ where:
 <p>策略：看起来回归倒是不错，以0为回归线</p>
 <h3>2017.12.31 Displaced Moving Average</h3>
 <p><a href="http://blog.sina.com.cn/s/blog_4e5cbbe50100ck9h.html">中文详解</a></p>
-<p>确实就是后后平移，这样可以减少噪音的干扰</p>
+<p>确实就是把均线向后平移，这样可以减少噪音的干扰，还记得alligator指标吗？用到了这个指标</p>
 <p>策略：如果确实趋势之后应该还是不错的</p>
 <h3>2017.12.31 Double Exponential Moving Average (DEMA)</h3>
 <p>另外一种均线形式，计算公式如下：</p>
@@ -1639,11 +1646,11 @@ Williams A/D = Today&#39;s A/D + Yesterday&#39;s Williams A/D
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
     </ul>
 </section>
         </article>
