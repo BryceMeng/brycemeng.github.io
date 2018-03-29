@@ -252,40 +252,48 @@
 <p><strong>#02&nbsp;&nbsp;&nbsp;&nbsp;(-1 * correlation(rank(delta(log(volume),2)), rank(((close-open)/open)),6))</strong></p>
 <p><a href="https://uqer.io/community/share/576cfa81228e5b747e9dd85a">源码参考链接</a></p>
 <p>delta(log(volume),2) -&gt; log(volume) - log(volume(-2)) -&gt; log(volume/volume(-2)) 这句其实就是计算的2天的成交量变化率</p>
-<p>2018.3.14: 和03类似，但是03是绝对值是对方向，而02是针对变化率的方向，按几何意义加速向上是走的内圆，缓慢向上走的是外圆。和03的意义差不多，放量下跌，缩量上涨，其实这个是行不通的，现实情况应该是放量滞涨要卖的，而这个公式是要买的。</p>
+<p>2018.3.14: 和03类似，但是03是绝对值是对方向，而02是针对变化率的方向，按几何意义加速向上是走的内圆，缓慢向上走的是外圆。和03的意义差不多，放量下跌，缩量上涨，其实这个是行不通的，现实情况应该是放量滞涨要卖的，而这个公式是要买的。<strong>价量关系</strong></p>
 <p><strong>#04&nbsp;&nbsp;&nbsp;&nbsp;(-1 * Ts_Rank(rank(low), 9))</strong></p>
-<p>2018.3.14: 9天内最后一天的最低值如果是最低的说明上涨的概率大，如果是最高的则说明下跌概率大，我也是猜的，我擦</p>
+<p>2018.3.14: 9天内最后一天的最低值如果是最低的说明上涨的概率大，如果是最高的则说明下跌概率大，我也是猜的，我擦，<strong>价格单边变动</strong></p>
 <p><strong>#05&nbsp;&nbsp;&nbsp;&nbsp;(rank((open-(sum(vwap,10)/10)))<em>(-1</em>abs(rank((close - vwap)))))</strong></p>
 <p>2018.3.14 这个很难用语言描述，看起来像是open close的变化方向背离，但是在计算close的时候用了abs，所以在某一种情况下又不是背离，有点复杂，也说明rank或许会有负值，上面对于rank的解读可能会有错，who knows?难道是波动变小，而且总体方向向上的变小才是买入点？</p>
 <p><strong>#06&nbsp;&nbsp;&nbsp;&nbsp;(-1*correlation(open, volume, 10))</strong></p>
-<p>2018.3.15 你妹的，这不和3基本差不多么，只是这个是原始值，03做了个rank</p>
+<p>2018.3.15 你妹的，这不和3基本差不多么，只是这个是原始值，03做了个rank，<strong>价量关系</strong></p>
 <p><strong>#07&nbsp;&nbsp;&nbsp;&nbsp;((adv20&lt;volume)?((-1<em>ts_rank(abs(delta(close,7)),60))</em>sign(delta(close,7))):(-1*1))</strong></p>
 <p>成交量小于20天均线才进行计算，如果大于直接-1，不操作。</p>
 <p>小于20天均线时，7天内价差变化越大越好，而且方向要是向下的。</p>
 <p>2018.3.16 人肉理解出来竟然要求是缩量下跌7天左右，我去，前面不是有话题下跌10的吗？回头想想，101aplha内部还会有矛盾，说明<strong>只要下跌个7天以上，大概率会上涨</strong>，我去，竟然是这个理。</p>
 <p><strong>#08&nbsp;&nbsp;&nbsp;&nbsp;(-1 * rank(((sum(open,5)<em>sum(returns,5))-delay((sum(open,5)</em>sum(returns,5)),10))))</strong></p>
-<p>2018.3.19 以 sum(open,5)*sum(returns,5)为基本计算单元，当前的送去10天前的值，当前面有个-1后，那么就是减去的值越小越好，那么还是跌的越多越好...这已经绕不开越跌越涨的坑了。</p>
+<p>2018.3.19 以 sum(open,5) x sum(returns,5)为基本计算单元，当前的送去10天前的值，当前面有个-1后，那么就是减去的值越小越好，那么还是跌的越多越好...这已经绕不开越跌越涨的坑了。<strong>价格单边变动</strong></p>
 <p><strong>#09&nbsp;&nbsp;&nbsp;&nbsp;((0&lt;ts_min(delta(close,1),5)) ? delta(close,1):((ts_max(delta(close,1),5)&lt;0)?delta(close,1):(-1*delta(close,1))))</strong></p>
 <p><strong>条件</strong>：ts_min(delta(close,1),5) &gt; 0 -&gt; 5天中最小的价差都是大于的，说明这几天都在涨</p>
 <p><strong>True</strong>: delta(close,1) -&gt; 今天的价差，这个值肯定是大于0的</p>
 <p><strong>False</strong>: ts_max(delta(close,1),5)&lt;0 ? delta(close,1): -1*delta(close,1)
 这里又是一个3元运算，如果这5天中最大的价差都小于0(跌了5天)返回今天的价差，否则返回今天的价差的反向值</p>
-<p>2018.3.20 我去，有点绕，连续上涨或者下跌都给大的权重，涨涨跌跌就不操作，这也能成为alpha？真是计算机算出来的有点反人类，我猜给大权重不一定是做多，因为美股是可以做空的。</p>
+<p>2018.3.20 我去，有点绕，连续上涨或者下跌都给大的权重，涨涨跌跌就不操作，这也能成为alpha？真是计算机算出来的有点反人类，我猜给大权重不一定是做多，因为美股是可以做空的。<strong>价格单边变动</strong></p>
 <p><strong>#10&nbsp;&nbsp;&nbsp;&nbsp;rank(((0&lt;ts_min(delta(close,1),4)) ? delta(close,1) : ((ts_max(delta(close,1),4)&lt;0)?delta(close,1):(-1*delta(close,1)))))</strong></p>
 <p><strong>条件</strong>：0&lt;ts_min(delta(close,1),4) 4天内隔天价差都大于0，那就是连续涨4天</p>
 <p><strong>True</strong>: delta(close,1)  取最后一天的价差</p>
 <p><strong>False</strong>: ts_max(delta(close,1),4)&lt;0  ?  delta(close,1) : -1*delta(close,1)  连续跌4天的话，也是最后一天的价差，不然就是价差的反向值</p>
 <p><strong>Final</strong>: 最后做一个rank</p>
-<p>2018.3.21 和09是一样的，从5天变为4天，最后加了个rank</p>
+<p>2018.3.21 和09是一样的，从5天变为4天，最后加了个rank，<strong>价格单边变动</strong></p>
 <p><a href="https://uqer.io/community/share/56f3c074228e5b887ee51258">公式源码</a></p>
 <p><strong>#11&nbsp;&nbsp;&nbsp;&nbsp;((rank(ts_max((vwap-close),3)) + rank(ts_min((vwap - close), 3))) * rank(delta(volume, 3)))</strong></p>
 <p><strong>元素1：</strong> rank(ts_max((vwap-close),3)) <strong>+</strong> rank(ts_min((vwap - close), 3))  vwap-close越大说明成交量越大？(有待考察)，这里max和min相加会抵消</p>
 <p><strong>元素2: </strong> rank(delta(volume, 3)) 这里就是成交量越大，分级越高</p>
 <p><strong>简化版: </strong> 元素1 × 元素2</p>
-<p>2018.3.24 成交量越大越优先买入</p>
+<p>2018.3.24 成交量越大越优先买入, <strong>价量关系</strong></p>
 <p><strong>#12&nbsp;&nbsp;&nbsp;&nbsp;(sign(delta(volume,1))*(-1 * delta(close,1)))</strong></p>
 <p><a href="https://uqer.io/community/share/56f4a475228e5b887fe5123c">公式源码</a></p>
-<p>2018.3.24 又是一个越跌放量越买，上涨缩量卖的策略，这次只是两天。</p>
+<p>2018.3.24 又是一个越跌放量越买，上涨缩量卖的策略，这次只是两天。<strong>价量关系</strong></p>
+<p><strong>#13&nbsp;&nbsp;&nbsp;&nbsp;(-1 * rank(covariance(rank(close), rank(volume), 5)))</strong></p>
+<p>2018.3.26 这个其实很简单，誻5天内价和量的相关性越小越值午操作，比如缩量上涨，还有放量下跌，其实这里面很多alpha的思路都差不多，就是计算方式有点不一样,<strong>价量关系</strong></p>
+<p><strong>#14&nbsp;&nbsp;&nbsp;&nbsp;((-1<em>rank(delta(return,3)))</em>correlation(open,volume,10))</strong></p>
+<p>2018.3.27 开盘价和成交量的方向要一样，每天的收益在减少，操作 <strong>或者</strong> 开盘价和成交量的方向不一样，每天的收益在增加，操作。至于操作是买入还是卖出呢？这个在101alpha里面大家要注意。就这个alpha而言应该是卖出，因为一个是放量滞涨，一个是缩量疯狂往上涨。<strong>价量关系</strong></p>
+<p><strong>#15&nbsp;&nbsp;&nbsp;&nbsp;(-1 * sum(rank(correlation(rank(high), rank(volume), 3)), 3))</strong></p>
+<p>2018.3.28 万变不离其宗，最高价和成交量反着走时操作，<strong>价量关系</strong>。</p>
+<p><strong>#16&nbsp;&nbsp;&nbsp;&nbsp;(-1 * rank(covariance(rank(high), rank(valume), 5)))</strong></p>
+<p>2018.3.29 万变不离其宗，最高价和成交量反着走时操作，和上面一样，只是细节不同 <strong>价量关系</strong>。</p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
@@ -293,9 +301,9 @@
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
     </ul>
 </section>
