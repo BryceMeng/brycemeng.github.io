@@ -515,8 +515,15 @@ b = (nΣ(xy) – (Σx) (Σy)) / (nΣx² – (Σx)²)
 <p>指标值涨4%时买入，据说1993年的回报率非常不错。只看一个价格，就是每周的收盘价。</p>
 <p>策略：长线指标，而且很扯，不用。</p>
 <h3>2018.1.6 Full Stochastic Oscillator (Full STO)</h3>
-<p>fast 和 basic %K 和 %d的计算请参考 Fast Stochastic Oscillator (Fast STO)。basic %k有一个计算周期，slow 是在basik %k基础上做了一个sma，%D是对%k做了一个sma。</p>
-<div class="highlight"><pre><span></span>Slow Stochastic Oscillator:
+<p>fast 和 basic %K 和 %d的计算请参考 Fast Stochastic Oscillator (Fast STO)。basic %k有一个计算周期，slow 是在basic %k基础上做了一个sma，%D是对%k做了一个sma。</p>
+<div class="highlight"><pre><span></span>Fast Stochastic Oscillator:
+
+Fast %K = %K basic calculation
+%K = (Current Close - Lowest Low)/(Highest High - Lowest Low) * 100
+
+Fast %D = 3-period SMA of Fast %K
+
+Slow Stochastic Oscillator:
 
 Slow %K = Fast %K smoothed with 3-period SMA
 Slow %D = 3-period SMA of Slow %K
@@ -561,9 +568,11 @@ Std( Log( C / Ref( C,-1) ),10 ) * Sqrt( 365 )
 <p>策略：结合之前有一个动态计算指标周期的东东一起使用。</p>
 <h3>2018.1.8 Ichimoku Kinko Hyo (IKH)</h3>
 <p><a href="http://www.cnblogs.com/zeroone/archive/2011/08/27/2155320.html">中文详解</a></p>
+<p><a href="https://www.tradesignalonline.com/lexicon/view.aspx?id=Ichimoku+Kinko+Hyo+(IKH)">英文公式</a></p>
+<p><img alt="公式" src="https://www.tradesignalonline.com/Wiki/WikiImage.ashx?png/image/1258-ichimoku.jpg"></p>
 <p>一个日本人30年前写的策略。</p>
 <p>一定周期内的最高价和最低价参与计算，有T(红)K(蓝)A(沙褐色)B(蓟色)C(绿色线)</p>
-<p>策略：看详解里面说很很多种信号，可以把最强的一种信号试试看怎么样</p>
+<p>策略：分为双线交叉，和趋势过滤，趋势过滤延迟有点大，双线交叉会靠谱一些。</p>
 <h3>2018.1.8 Ichimoku Japanese charts</h3>
 <p>还是讲 IKH的，里面的参数原版是9,26,52，因为当时一个交易周是6天，现在为5天，需要把参数修改为7,22,44。其实很多指标都涉及到了<strong>交易周期</strong>，还有一个<strong>涨跌周期</strong>，这两个概念是非常的重要。</p>
 <h3>2018.1.9 Inertia</h3>
@@ -1659,11 +1668,11 @@ Williams A/D = Today&#39;s A/D + Yesterday&#39;s Williams A/D
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
     </ul>
 </section>
         </article>
