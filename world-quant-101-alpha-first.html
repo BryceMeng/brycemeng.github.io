@@ -303,17 +303,42 @@
 <p><strong>C rank(rs_rank((volume/adv20), 5))</strong></p>
 <p>成交量的变化值，上涨越多值越大</p>
 <p>2018.3.30 <strong>价量关系</strong> 10天内下跌，然后最后两天又要往上涨，而且成交量还要涨就买入，卖出判断方式相反 </p>
+<p><strong>#18&nbsp;&nbsp;&nbsp;&nbsp;(-1 * rank(((stddev(abs((close - open)),5) + (close - open)) + correlation(close, open, 10))))</strong></p>
+<p>简化：<strong>-1 * rank( stddev(abs(close - open),5) + (close - open) + correlation(close, open, 10) )</strong></p>
+<p><strong>stddev(abs(close - open),5)</strong></p>
+<p>5天内的波动，不管方向</p>
+<p><strong>close - open</strong></p>
+<p>涨跌幅</p>
+<p><strong>correlation(close, open, 10)</strong></p>
+<p>10天内开盘价和收盘价的关系，关系越小说明有反转，越大说明趋势，(<strong>VIP</strong>)，这个理论挺有意思</p>
+<p>2018.4.3 总结一下就是下跌趋势形成后操作，还要大波动下跌，或者：反转时的波动越大越操作，应该是向上反转，这个式子也有点难解释 <strong>波动，连续下跌，反转</strong></p>
+<p><strong>#19&nbsp;&nbsp;&nbsp;&nbsp;((-1 * sign(((close - delay(close, 7)) + delta(close, 7)))) * (1 + rank((1 + sum(returns, 250)))))</strong></p>
+<p><strong>-1 * sign(2 * delta(close, 7))</strong></p>
+<p>简化下来其实主浊相对于7天前价格是涨了还中跌了，这里有-1明显就是跌了好</p>
+<p><strong>1 + rank(1 + sum(returns, 250))</strong></p>
+<p>一天的收益和，越大越好</p>
+<p>2018.4.3: 总的连接起来，就是1年之内跌得越多越好 <strong>超跌反弹</strong></p>
+<p><strong>#20&nbsp;&nbsp;&nbsp;&nbsp;(((-1*rank((open - delay(high,1)))) * rank((open - delay(close,1)))) * rank((open - delay(low,1))))</strong></p>
+<p>简化：<strong>-1 * rank(open - delay(high,1)) * rank(open - delay(close,1)) * rank(open - delay(low,1))</strong></p>
+<p>2018.4.8 3个乘数，一个-1。3个乘数，分别是O和昨天HLC的差的rank，这个其实不太好描述，阳线高开和阴线低开都会导致得分低，那么阳线低开和阴线高开是会得高分的。<strong>GAP</strong></p>
+<p><strong>#21&nbsp;&nbsp;&nbsp;&nbsp;((((sum(close,8)/8) + stddev(close,8)) &lt; (sum(close,2)/2))?(-1*1):(((sum(close,2)/2)&lt;((sum(close,8)/8) - stddev(close,8)))?1:(((1&lt;(volume/adv20)) || ((volume/adv20) == 1))? 1 : (-1 * 1))))</strong></p>
+<p><strong>sum(close,8)/8 + stddev(close,8) &lt; (sum(close,2)/2)</strong> 8bar周期的boll上轨如果小于2天均线，也就是如果近2天有大的波动，这样返回-1,这样就是不操作。如果没有大的波动再往下判断</p>
+<p><strong>sum(close,2)/2&lt;(sum(close,8)/8) - stddev(close,8)</strong> 2天均线小于8bar周期的下轨，这样返回1,就是操作，如果不满足，就是2天均线在8bar周期的上轨和下轨之间往下判断</p>
+<p><strong>1&lt;(volume/adv20) || (volume/adv20) == 1</strong> 不缩量的话就返回1,操作，缩量返回-1,不操作。</p>
+<p>2018.4.8 也就是放量了但是没有波动太大或者往下有大的波动就操作。这个操作估计是买入。<strong>波动，价量关系</strong></p>
+<p><strong>#22&nbsp;&nbsp;&nbsp;&nbsp;(-1 * (delta(correlation(high, volume, 5), 5) * rank(stddev(close, 20))))</strong></p>
+<p>2018.4.8 波动越大然后价量相关性要相反才能操作。<strong>价量关系</strong></p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
         <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
     </ul>
 </section>
         </article>

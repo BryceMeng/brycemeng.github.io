@@ -577,10 +577,20 @@ Std( Log( C / Ref( C,-1) ),10 ) * Sqrt( 365 )
 <p>还是讲 IKH的，里面的参数原版是9,26,52，因为当时一个交易周是6天，现在为5天，需要把参数修改为7,22,44。其实很多指标都涉及到了<strong>交易周期</strong>，还有一个<strong>涨跌周期</strong>，这两个概念是非常的重要。</p>
 <h3>2018.1.9 Inertia</h3>
 <p><a href="https://www.tradingview.com/script/ODEBlQkx-Inertia-Indicator/">代码实现</a></p>
-<p>平滑后的RVI，只有一根线，用到了波动率，STDEV，看到RVI时，再返回过来看看这个指标。</p>
+<p>RVI平滑后的结果，inertia = ema(RVI,n)，只有一根线，用到了波动率，STDEV，看到RVI时，再返回过来看看这个指标。</p>
 <p>策略：参考RVI <strong>Return</strong></p>
 <h3>2018.1.9 Intraday Momentum (IMI)</h3>
-<p>等看到RSI时再返回，计算方法类似，只是RSI是close和昨天close的计算，而IMI是close和open做计算。</p>
+<p><a href="https://www.tradingview.com/script/3CufgHsc-Indicator-Intrady-Momentum-Index/">公式变种</a></p>
+<p><a href="http://www.danglanglang.com/gupiao/2434">中文详解</a></p>
+<p><a href="https://www.technicalindicators.net/indicators-technical-analysis/173-imi-intraday-momentum-index">英文详解</a></p>
+<p>等看到RSI时再返回，计算方法有一点类似，重点差别在于RSI是close和昨天close的计算，而IMI是close和open做计算。</p>
+<div class="highlight"><pre><span></span><span class="nt">If</span> <span class="nt">Close</span> <span class="nt">price</span> <span class="o">&gt;</span> <span class="nt">Open</span> <span class="nt">price</span><span class="o">:</span> <span class="nt">Gain</span> <span class="o">=</span> <span class="o">(</span><span class="nt">Close</span> <span class="nt">-</span> <span class="nt">Open</span><span class="o">);</span> <span class="nt">Loss</span> <span class="o">=</span> <span class="nt">0</span>
+<span class="nt">If</span> <span class="nt">Close</span> <span class="nt">price</span> <span class="o">&lt;</span> <span class="nt">Open</span> <span class="nt">price</span><span class="o">:</span> <span class="nt">Gain</span> <span class="o">=</span> <span class="nt">0</span><span class="o">;</span> <span class="nt">Loss</span> <span class="o">=</span> <span class="o">(</span><span class="nt">Open</span> <span class="nt">-</span> <span class="nt">Close</span><span class="o">)</span>
+<span class="nt">Sum</span> <span class="nt">up</span> <span class="nt">Gains</span> <span class="nt">and</span> <span class="nt">Losses</span> <span class="nt">for</span> <span class="err">‘</span><span class="nt">n</span><span class="err">’</span> <span class="nt">chosen</span> <span class="nt">days</span> <span class="nt">ago</span>
+<span class="nt">IMI</span> <span class="o">=</span> <span class="nt">100</span> <span class="nt">x</span> <span class="cp">[</span><span class="nx">Gains</span> <span class="o">/</span> <span class="p">(</span><span class="nx">Gains</span> <span class="o">+</span> <span class="nx">Losses</span><span class="p">)</span><span class="cp">]</span>
+</pre></div>
+
+
 <p>策略：用RSI其实更好，计算进了高开和低开的情况。</p>
 <h3>2018.1.10 Kairi</h3>
 <p><a href="https://www.tradingview.com/script/xzRPAboO-Indicator-Kairi-Relative-Index-KRI/">指标源码</a></p>
@@ -1021,7 +1031,7 @@ N - number of calculation periods;
 <p>策略：先找到代码再说。</p>
 <h3>2018.1.26 Parabolic SAR (pSAR)</h3>
 <p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:parabolic_sar">英英详解</a></p>
-<p>计算公式有点复杂，计算上升和下降时的公式不一样，详情请看上面的文章。</p>
+<p>传说中的抛物线指标，计算公式有点复杂，计算上升和下降时的公式不一样，详情请看上面的文章。</p>
 <p>怎么判断反转的趋势呢？在上升趋势中，如果昨天的SAR值大于今天的H，则下降模式启动，反之亦然。</p>
 <p>策略：适用于单边趋势，趋势跟踪得还不错，可以结合过滤器，做单边趋势，反转信号大于3～5个再反向开仓。</p>
 <h3>2018.1.26 Percent Change</h3>
@@ -1195,7 +1205,11 @@ plot(sma(as/bs, len), color=navy)
 <p><a href="https://www.zhihu.com/question/51959474">中文详解</a></p>
 <p>非常常用的指标，30和70是顶线和底线，作为顶部区域和底部区域的分界，还可作背离使用。</p>
 <p>公式里面一个D和U不好理解，请看中文详解，里面第一个答案也是不对的，应该是今天的close和昨天的close做计算，算出量。而IMI指标则是当天的close和open做计算，当然和昨天close做计算是更准确的，因为算进了高开和低开的情况。</p>
-<div class="highlight"><pre><span></span>RSI = 100 - 100 / (1 + U(P,n)/D(P,n)),
+<div class="highlight"><pre><span></span>RSI = 100 - 100 / (1 + RS),
+
+RS = U(P,n)/D(P,n)
+
+RS = SMMA(U,n)/SMMA(D,n)
 
 Where U(P,n) is a moving average of growth of the P price within n periods,
 D(P,n) - is a moving average of falling of the P price within n periods.
@@ -1205,7 +1219,7 @@ D(P,n) - is a moving average of falling of the P price within n periods.
 <p>策略：过滤器使用。</p>
 <h3>2018.2.3 Relative Volatility Index (RVI)</h3>
 <p><a href="https://www.tradingview.com/script/xXETnL9H-Relative-Volatility-Index/">英英详解</a></p>
-<p>RSI的变种，把价格变动换成了标准差， 详见公式，周期默认为10</p>
+<p>RSI的变种，把价格变动换成了标准差， 详见公式，周期默认为10，这是衡量向上和向下波动性的指标</p>
 <div class="highlight"><pre><span></span>Period = input(10, minval=1)
 
 xPrice = close
@@ -1240,8 +1254,9 @@ plot(nRes, color=red, title=&quot;RVI&quot;)
 <p>根据线性回归来进行计算的指标，上面的详解里面非常详细的讲角了R的平方是怎么计算出来的。所以其实该指标就是R的平方，越接近1表明回归越好，越远表明价格在偏离。</p>
 <p>策略：统计学用在这里不知道能不能用，先在软件里面实现该指标。</p>
 <h3>2018.2.5 Schaff Trend Cycle</h3>
-<p>下面有一段关键代码，把macd的柱值算出来，找这个动态period里面的low和high，再进行后面的计算，这个是动态算法。VIP</p>
+<p>下面有一段关键代码，把macd的柱值(均线差值)算出来，再进行更深入的计算，振荡指标。</p>
 <p><a href="https://www.tradingview.com/script/dbxXeuw2-Indicator-Schaff-Trend-Cycle-STC/">公式详解</a></p>
+<p><a href="https://www.technicalindicators.net/indicators-technical-analysis/169-stc-schaff-trend-cycle">公式详解</a></p>
 <div class="highlight"><pre><span></span>stc(length, fastLength, slowLength) =&gt; 
     factor=input(0.5)  
     m = macd(close,fastLength,slowLength)     
@@ -1268,11 +1283,12 @@ plot(nRes, color=red, title=&quot;RVI&quot;)
 <p>用来计算波动率的东西，boll线里面用了标准差。</p>
 <p>策略：非常重要的一个指标，用来计算波动率。</p>
 <h3>2018.2.7 Standard Deviation Channel</h3>
-<p>三条平等线，中间是线性回归线，上下是加减标准差的值</p>
+<p><a href="http://www.incrediblecharts.com/indicators/standard_deviation_channels.php">英英详解</a></p>
+<p>三条平行线，中间是线性回归线(直线)，上下是加减标准差的值，所以这个人工分析会更好，某段时间内一个通道。</p>
 <p>策略：通道就是回归的，不过因为通道有斜率，要考虑向上的通道，做多更好，下下的通道做空更好。</p>
 <h3>2018.2.7 Standard Error</h3>
 <p><a href="http://davidmlane.com/hyperstat/A103735.html">Std Error的计算方法</a></p>
-<p>其实Std Error主要讲的是样本和总体间的误差，但是这里就简单的用下面的公式。</p>
+<p>其实Std Error主要讲的是样本和总体间的误差，但是这里就简单的用下面的公式。SE变大说明偏离之前的航道了，也是一种波动吧，应该叫偏离度。</p>
 <div class="highlight"><pre><span></span>σ/square(N)
 
 σ - 标准差
@@ -1663,16 +1679,37 @@ Williams A/D = Today&#39;s A/D + Yesterday&#39;s Williams A/D
 <p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:zigzag">英英详解</a></p>
 <p>辅助型指标，只是为了减少噪音，画出大趋势，会根据未来的值更改前面的值。</p>
 <p>策略：这是第一个这么辅助型的指标，还不知道怎么用</p>
+<h3>2018.4.8 Kaufman Adaptive Moving Average (KAMA)</h3>
+<p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:kaufman_s_adaptive_moving_average">公式详解</a></p>
+<p>根据波动动计算出来的均线</p>
+<div class="highlight"><pre><span></span>Current KAMA = Prior KAMA + SC x (Price - Prior KAMA)
+
+SC = [ER x (fastest SC - slowest SC) + slowest SC]2
+
+e(2,30):
+SC = [ER x (2/(2+1) - 2/(30+1)) + 2/(30+1)]2
+
+......
+
+ER = Change/Volatility
+
+Change = ABS(Close - Close (10 periods ago))
+
+Volatility = Sum10(ABS(Close - Prior Close))
+</pre></div>
+
+
+<p>策略：简单的均线上穿下穿策略</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
         <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
     </ul>
 </section>
         </article>
