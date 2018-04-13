@@ -123,7 +123,7 @@
                 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=110771&auto=1&height=66"></iframe>
 
 <h3>两个Dataframe都是时间index，但是时间范围不一样，而且列名不一样，想组合在一块儿，用Nan来填充</h3>
-<div class="highlight"><pre><span></span><span class="c1"># 这种方式只能应用于数字</span>
+<div class="highlight"><pre><span></span><span class="c1"># 这种方式只能应用于数字，注意add的方式一样x,y的数字是会相加的，而下面的concat不会，会出现同名列</span>
 
 <span class="n">df1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
@@ -211,9 +211,9 @@
     <ul>
         <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
     </ul>
 </section>
         </article>

@@ -339,6 +339,11 @@
 <p><strong>-1 * delta(close, 3)</strong></p>
 <p>上上式不成立(没有长期缩量)，其实也是相对3天前下跌</p>
 <p>2018.4.10 主要是长期缩量后突然下跌，其实就是缩量吸筹后再最后一调整后上涨，<strong>缩量后深跌</strong>, 不满足条件的选项就是一个下跌后上涨 <strong>超跌反弹</strong></p>
+<p><strong>#25&nbsp;&nbsp;&nbsp;&nbsp;rank(((((-1 * returns) * adv20) * vwap) * (high -close)))</strong></p>
+<p><strong>rank(-1 * returns * adv20 * vwap * (high -close))</strong></p>
+<p>2018.4.11 high是不可能比close低的，这也就表明returns是负的才可能排名高，跌得越多，成交量相对大一点会排名更高<strong>放量下跌</strong></p>
+<p><strong>#26&nbsp;&nbsp;&nbsp;&nbsp;(-1*ts_max(correlation(ts_rank(volume,5), ts_rank(high,5), 5),3))</strong></p>
+<p>2018.4.12 价量背离 <strong>量价背离</strong></p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
@@ -347,9 +352,9 @@
     <ul>
         <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
     </ul>
 </section>
         </article>

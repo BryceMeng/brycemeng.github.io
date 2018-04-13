@@ -1309,6 +1309,7 @@ Lower Standard Error Band: The linear regression line minus 2 standard errors.
 <p>这个在网上的资料没有Standard Error Bands 多，这个的差别就是中间线是根直线，是某一段周期做的线性回归，而不是上个指标里面某个周期里面最后一个点的值（<em>请参考Linear Regression Indicator (LRI)</em>）</p>
 <p>策略：直线通道其实应该没有曲线通道靠谱。</p>
 <h3>2018.2.9 STIX</h3>
+<p><a href="https://www.forexstrategiesresources.com/trading-system-metatrader-4-iv/480-stix-indicator/">公式详解</a></p>
 <p>指数型指标，基于A/D ratio的，做了指数平均。</p>
 <p>>58 严重超买 &gt;56 超买 &lt;45 超卖 &lt;42 严重超卖</p>
 <div class="highlight"><pre><span></span>A/D Ratio = ( Advancing Issues / Advancing Issues-Declining Issues ) *100
@@ -1344,7 +1345,12 @@ m1,m2 - amount of periods of calculation of the moving average.
 
 <p>策略：见使用方法。</p>
 <h3>2018.2.22 Stochastic RSI (Stoch RSI)</h3>
-<p>KD指标和RSI的组合，把KD计算公式中的close换作RSI即可。</p>
+<p><a href="http://www.stockcharts.com/school/doku.php?id=chart_school:technical_indicators:stochrsi">公式详解</a></p>
+<p>振荡指标和RSI的组合。</p>
+<div class="highlight"><pre><span></span>StochRSI = (RSI - Lowest Low RSI) / (Highest High RSI - Lowest Low RSI)
+</pre></div>
+
+
 <p>从图示上来看过于敏感。</p>
 <p>策略：当过滤器使用可能更靠谱一点，比如第几次上穿或者下穿才能做买卖点，因为往往第一次下跌或者上涨都是无效的。</p>
 <h3>2018.2.23 Stoller Average Range Channels (STARC) Bands</h3>
@@ -1388,6 +1394,7 @@ R = (H – L) + 0.25*(C n-1 + O n-1)
 
 <p>策略：计算有点复杂，看图示好像很准，先试试看。上穿0买，下穿0卖。</p>
 <h3>2018.2.24 Time Series Forecast (TSF)</h3>
+<p><a href="http://www.onlinetradingconcepts.com/TechnicalAnalysis/TimeSeriesForecast.html">公式详解</a></p>
 <p>线性回归（最小二乘法），详情见之前的TSF，与线性回归有两点不同：
 1. 周期要短
 2. TSF会把线往后平移，一般是7bar</p>
@@ -1707,9 +1714,9 @@ Volatility = Sum10(ABS(Close - Prior Close))
     <ul>
         <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
-        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
     </ul>
 </section>
         </article>
