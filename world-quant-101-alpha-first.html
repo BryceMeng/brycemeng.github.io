@@ -344,17 +344,20 @@
 <p>2018.4.11 high是不可能比close低的，这也就表明returns是负的才可能排名高，跌得越多，成交量相对大一点会排名更高<strong>放量下跌</strong></p>
 <p><strong>#26&nbsp;&nbsp;&nbsp;&nbsp;(-1*ts_max(correlation(ts_rank(volume,5), ts_rank(high,5), 5),3))</strong></p>
 <p>2018.4.12 价量背离 <strong>量价背离</strong></p>
+<p><strong>#27&nbsp;&nbsp;&nbsp;&nbsp;((0.5 &lt; rank((sum(correlation(rank(volume), rank(vwap), 6), 2)/2.0))) ? (-1*1):1)</strong></p>
+<p><a href="https://uqer.io/community/share/57ad8948228e5b9b94a87d9e">策略源码</a></p>
+<p>2018.4.13 买入负相关排名前一半的月股票 <strong>量价关系</strong></p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
-        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
     </ul>
 </section>
         </article>

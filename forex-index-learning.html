@@ -1423,6 +1423,8 @@ Projected Low = X - Current High
 
 <p>策略：可以做日内，实现。</p>
 <h3>2018.2.25 Trade Volume Index (TVI)</h3>
+<p><a href="https://tradingsim.com/blog/trade-volume-index/">原始公式</a></p>
+<p><a href="https://www.tradingview.com/script/z1Lbt3KQ-RS-Trade-Volume-Index-V1/">公式变种</a></p>
 <p>类似于OBV，价量都参与计算，与OBV的差别就是TVI是日内数据，OBV是Close Price  背离指标，说明是还会用到tick，日内指标，分时图操作，MTV是指最小的价差，这个应该是可以自己定义的，这样价格上涨超过最小价差，加上tick的Volume，下载超过则减去tick的volume。</p>
 <div class="highlight"><pre><span></span>Change = Price - Last Price
 MTV = Minimum Tick Value
@@ -1712,11 +1714,11 @@ Volatility = Sum10(ABS(Close - Prior Close))
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
-        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
     </ul>
 </section>
         </article>
