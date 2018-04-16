@@ -238,6 +238,9 @@
 <p><em>注意不是成交量</em></p>
 <p><strong>Sign(x)</strong></p>
 <p>如果 x &gt; 0，就返回 1，如果 x &lt; 0，则返回 -1，如果 x == 0，返回 0</p>
+<p><strong>scale(x,a)</strong></p>
+<p>scale(x,a) = rescaled x such that sum(abs(x))=a (the default is a=1) 
+将x中的值标准化，使x的绝对值的和为a，默认a=1</p>
 <h3>这101个Alpha</h3>
 <p>这些alpha很难直接盈利，而且这些公式很多是不能直接写在代码中的，需要自己进行改造，和创建卖点，这些公式更多的应该是让我们熟悉一下哪些因素能带来正的收益，而应用到自己的策略里面</p>
 <p><strong>#01&nbsp;&nbsp;&nbsp;&nbsp;(rank(Ts_ArgMax(SignedPower(((returns &lt; 0) ? stddev(returns, 20) : close), 2.), 5)) -
@@ -347,17 +350,19 @@
 <p><strong>#27&nbsp;&nbsp;&nbsp;&nbsp;((0.5 &lt; rank((sum(correlation(rank(volume), rank(vwap), 6), 2)/2.0))) ? (-1*1):1)</strong></p>
 <p><a href="https://uqer.io/community/share/57ad8948228e5b9b94a87d9e">策略源码</a></p>
 <p>2018.4.13 买入负相关排名前一半的月股票 <strong>量价关系</strong></p>
+<p><strong>#28&nbsp;&nbsp;&nbsp;&nbsp;scale(((correlation(adv20,low,5) + ((high+low)/2)) - close))</strong></p>
+<p>2018.4.16 scale会标准化序列中的值使其加起来==1,暂且认为里面的式子值越大越好，<strong>缩量下跌</strong>，操作。 (high+low/2)-close这个值是下跌时比较大，这样correlation(adv20,low,5)中的low大概率是跌的，这样量也要跌corr才是正的。但是缩量下跌肯定是不能完全解释这个式子的，这个要注意。</p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
         <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
     </ul>
 </section>
         </article>
