@@ -352,17 +352,26 @@
 <p>2018.4.13 买入负相关排名前一半的月股票 <strong>量价关系</strong></p>
 <p><strong>#28&nbsp;&nbsp;&nbsp;&nbsp;scale(((correlation(adv20,low,5) + ((high+low)/2)) - close))</strong></p>
 <p>2018.4.16 scale会标准化序列中的值使其加起来==1,暂且认为里面的式子值越大越好，<strong>缩量下跌</strong>，操作。 (high+low/2)-close这个值是下跌时比较大，这样correlation(adv20,low,5)中的low大概率是跌的，这样量也要跌corr才是正的。但是缩量下跌肯定是不能完全解释这个式子的，这个要注意。</p>
+<p><strong>#29&nbsp;&nbsp;&nbsp;&nbsp;(min(product(rank(rank(scale(log(sum(ts_min(rank(rank((-1<em>rank(delta((close-1), 5))))),2),1))))),1),5) + rs_rank(delay((-1</em>returns),6),5))</strong></p>
+<p>2018.4.17 这个有点没人性了啊，计算因子只有close和return，但是中间的意思人工完全没法翻译了。</p>
+<p><strong>#30&nbsp;&nbsp;&nbsp;&nbsp;(((1.0 - rank(((sign((close- delay(close,1))) + sign((delay(close,1) - delay(close,2)))) + sign((delay(close,2)-delay(close,3)))))) * sum(volume,5))/sum(volume,20))</strong></p>
+<p><a href="https://uqer.io/community/share/577f75f0228e5b8a069326dc">源码参考</a></p>
+<p><strong>1.0 - rank(sign(close- delay(close,1)) + sign(delay(close,1) - delay(close,2)) + sign(delay(close,2)-delay(close,3)))</strong></p>
+<p>这部分值越大越好，那就是1.0后面的式子越小越好</p>
+<p><strong>sum(volume,5)/sum(volume,20)</strong></p>
+<p>如果近期放量，值就会变大</p>
+<p>2018.4.18 <strong>放量下跌</strong>就买，而且这里定义了一个<strong>跌的形状，值得参考</strong>，<strong>恐慌性下跌</strong>，就买入</p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
         <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
     </ul>
 </section>
         </article>

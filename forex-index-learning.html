@@ -1519,17 +1519,17 @@ UO = 100 x [(4 x Average7)+(2 x Average14)+Average28]/(4+2+1)
 
 <p>策略：震荡策略当过滤器会比较好。</p>
 <h3>2018.2.28 Upside/Downside Ratio</h3>
-<p><a href="http://www.buyupside.com/stockreturncalculator/upsidedownsideratiocalcinput.php">英英详解</a></p>
-<div class="highlight"><pre><span></span>Upside price potential = percent current price is from high price
-Downside price potential = percent current price is from low price
+<p><a href="https://www.investopedia.com/terms/u/upsidedownsideratio.asp">英英详解</a></p>
+<p>成交量相除，下面那个volume也是计算volume，只不过是相关</p>
+<div class="highlight"><pre><span></span>Advancing Issues / Declining issues
 
-Upside/Downside Ratio = (percent current price is from high price / percent current price is from low price
+Advancing Issues = Total volume traded of securities that closed above their opening price Declining Issues = Total volume traded of securities that closed below their opening price
 </pre></div>
 
 
 <p>策略：板块分析</p>
 <h3>2018.3.1 Upside/Downside Volume</h3>
-<p>指数指标，上升股票的总成交量除以下跌股票的总成交量</p>
+<p>指数指标，上升股票的总成交量减去下跌股票的总成交量</p>
 <p>策略：板块分析</p>
 <h3>2018.3.1 Variable Moving Average (VMA)</h3>
 <p>根据波动率实时调整的均线，还是不错的，VIP，但是VR的算法需要自己确定,可以参考<a href="http://etfhq.com/blog/2011/02/07/kaufmans-efficiency-ratio/">ER算法</a></p>
@@ -1556,7 +1556,11 @@ Divide Step 4 by Step 6:
 </pre></div>
 
 
-<p>策略：背离指标，可做过滤器</p>
+<p>趋势过滤：
+VHF在上升说明是一个趋势，下降表示在震荡
+很高的值代表趋势结束，低的值代表趋势开始(这条应该不太准，上面那条可以做过滤器)</p>
+<p><strong>注意：</strong> 这个n最好是该品种的一个涨跌周期，最觉见的周期是28天
+策略：背离指标，可做过滤器</p>
 <h3>2018.3.2 Volatility indicator</h3>
 <p><a href="https://www.incrediblecharts.com/indicators/volatility_indicators.php">三种振荡指标的解释</a></p>
 <p>波动率是非常有用的东西，标准差，震幅比，atr等等</p>
@@ -1723,11 +1727,11 @@ Volatility = Sum10(ABS(Close - Prior Close))
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
         <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
     </ul>
 </section>
         </article>
