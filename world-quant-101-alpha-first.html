@@ -164,7 +164,7 @@
 <p>A = [29, 12, 5, 7, 10]</p>
 <p>现在，将会为向量里的每个元素按升序分级，最小一级为 0：</p>
 <p>A = [29, 12, 5, 7, 10]</p>
-<p>A' = [4, 3, 0, 1, 2] </p>
+<p>A' = [4, 3, 0, 1, 2]</p>
 <p>每个“等级”再除以（元素个数 - 1）。于是得到：</p>
 <p>Rank (A) = [1.00, 0.75, 0.00, 0.25, 0.50]</p>
 <p>所以您等到了一个从 0 到 1 间距相等的向量。</p>
@@ -194,7 +194,7 @@
 <p><strong>signedpower(x,a)</strong></p>
 <blockquote>
 <p>x^a</p>
-<p>就是x的a次方，我找的中文资料当中，解释为  Sign(x) * (Abs(x)^e) </p>
+<p>就是x的a次方，我找的中文资料当中，解释为  Sign(x) * (Abs(x)^e)</p>
 <p>Sign(x)：如果 x &gt; 0，就返回 1，如果 x &lt; 0，则返回 -1，如果 x == 0，返回 0</p>
 <p>不要把Sign当做sin了哦，np.sign()</p>
 <p>在01号alpha当中的作用是将两数值间的差异放大</p>
@@ -239,9 +239,11 @@
 <p><strong>Sign(x)</strong></p>
 <p>如果 x &gt; 0，就返回 1，如果 x &lt; 0，则返回 -1，如果 x == 0，返回 0</p>
 <p><strong>scale(x,a)</strong></p>
-<p>scale(x,a) = rescaled x such that sum(abs(x))=a (the default is a=1) 
+<p>scale(x,a) = rescaled x such that sum(abs(x))=a (the default is a=1)
 将x中的值标准化，使x的绝对值的和为a，默认a=1</p>
-<h3>这101个Alpha</h3>
+<p><strong>decay_linear(x,d)</strong></p>
+<p>向前d天内的权重移动平均，越靠近现在权重越大，对权重做标准化，使其和为1</p>
+<h2>这101个Alpha</h2>
 <p>这些alpha很难直接盈利，而且这些公式很多是不能直接写在代码中的，需要自己进行改造，和创建卖点，这些公式更多的应该是让我们熟悉一下哪些因素能带来正的收益，而应用到自己的策略里面</p>
 <p><strong>#01&nbsp;&nbsp;&nbsp;&nbsp;(rank(Ts_ArgMax(SignedPower(((returns &lt; 0) ? stddev(returns, 20) : close), 2.), 5)) -
 0.5)</strong></p>
@@ -305,7 +307,7 @@
 <p>价差的排名，这个嵌套有点多，上涨越多值越大</p>
 <p><strong>C rank(rs_rank((volume/adv20), 5))</strong></p>
 <p>成交量的变化值，上涨越多值越大</p>
-<p>2018.3.30 <strong>价量关系</strong> 10天内下跌，然后最后两天又要往上涨，而且成交量还要涨就买入，卖出判断方式相反 </p>
+<p>2018.3.30 <strong>价量关系</strong> 10天内下跌，然后最后两天又要往上涨，而且成交量还要涨就买入，卖出判断方式相反</p>
 <p><strong>#18&nbsp;&nbsp;&nbsp;&nbsp;(-1 * rank(((stddev(abs((close - open)),5) + (close - open)) + correlation(close, open, 10))))</strong></p>
 <p>简化：<strong>-1 * rank( stddev(abs(close - open),5) + (close - open) + correlation(close, open, 10) )</strong></p>
 <p><strong>stddev(abs(close - open),5)</strong></p>
@@ -361,17 +363,26 @@
 <p><strong>sum(volume,5)/sum(volume,20)</strong></p>
 <p>如果近期放量，值就会变大</p>
 <p>2018.4.18 <strong>放量下跌</strong>就买，而且这里定义了一个<strong>跌的形状，值得参考</strong>，<strong>恐慌性下跌</strong>，就买入</p>
+<p><strong>#31&nbsp;&nbsp;&nbsp;&nbsp;((rank(rank(rank(decay_linear((-1<em>rank(rank(delta(close,10)))), 10)))) + rank((-1</em>delta(close,3)))) + sign(scale(correlation(adv20, low, 12))))</strong></p>
+<p>分成3部分相加：</p>
+<p><strong>rank(rank(rank(decay_linear(-1*rank(rank(delta(close,10))), 10))))</strong></p>
+<p><strong>rank((-1*delta(close,3)))</strong></p>
+<p><strong>sign(scale(correlation(adv20, low, 12)))</strong></p>
+<p>2018.4.19 <strong>连续缩量下跌</strong>，前面有放量下跌，应该是短期，而且下跌的程度深，缩量下跌一定要周期长才有买的动力</p>
+<p><strong>#32&nbsp;&nbsp;&nbsp;&nbsp;(scale(((sum(close,7)/7) - close)) + (20*scale(correlation(vwap,delay(close,5), 230))))</strong></p>
+<p>2018.4.21 大体上可以用<strong>缩量下跌</strong>来表示，不过里面很多细节是很难用语言描述出来的</p>
+<h2>这里发现没有，放量下跌和缩量下跌都能成为alpha那么一定在某些细节上会有区别，这可能是里面的关键。</h2>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
     </ul>
 </section>
         </article>

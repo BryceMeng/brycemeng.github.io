@@ -1570,6 +1570,7 @@ VHF在上升说明是一个趋势，下降表示在震荡
 <p>这是个很大的话题，成交量大时代表什么？成交量弱时代表什么？在每个阶段都代表不同的意思。</p>
 <h3>2018.3.3 Chaikin's Volume Accumulation (VAC)</h3>
 <p>Chaikin发明用来改进obv的指标。公式的累积方法和obv是一样，但是obv是整天的成交量，而vac是一部分，哪部分呢？看代码</p>
+<p>但是要注意，这个公式可以写成volume*(close-(high-low))，这样价格的绝对值和成交量的绝对值是参与计算的，数据未经标准化，可能用起来不是很方便。</p>
 <div class="highlight"><pre><span></span>VAC = Volume * ( Close - High + Low / 2 )
 </pre></div>
 
@@ -1587,7 +1588,7 @@ This example is based on closing prices and the default parameter setting (12).
 </pre></div>
 
 
-<p>策略：用来计算阻力支撑位倒是一个不错的东西。（vip）</p>
+<p>策略：用来计算阻力支撑位倒是一个不错的东西，也可以做突破使用（vip）</p>
 <h3>2018.3.4 Volume Oscillator</h3>
 <p>其实就是两根volume均线的差值</p>
 <div class="highlight"><pre><span></span>Percentage Volume Oscillator (PVO):
@@ -1727,11 +1728,11 @@ Volatility = Sum10(ABS(Close - Prior Close))
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
     </ul>
 </section>
         </article>
