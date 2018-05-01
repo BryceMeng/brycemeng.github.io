@@ -372,17 +372,32 @@
 <p><strong>#32&nbsp;&nbsp;&nbsp;&nbsp;(scale(((sum(close,7)/7) - close)) + (20*scale(correlation(vwap,delay(close,5), 230))))</strong></p>
 <p>2018.4.21 大体上可以用<strong>缩量下跌</strong>来表示，不过里面很多细节是很难用语言描述出来的</p>
 <h2>这里发现没有，放量下跌和缩量下跌都能成为alpha那么一定在某些细节上会有区别，这可能是里面的关键。</h2>
+<p><strong>#33&nbsp;&nbsp;&nbsp;&nbsp;rank((-1*((1-(open/close))^1)))</strong></p>
+<p>2018.4.25 这个尖不是异或是次方，在这里1次方是没有意义的，可能是他们做测试时试过N次方。open/close越大越好，这样就表示今天跌得越多，明天涨的可能性越大，因为这个只是一天，所以估计明天的买入也只是一天，不是长久持仓。</p>
+<p><strong>#34&nbsp;&nbsp;&nbsp;&nbsp;rank(((1-rank((stddev(returns,2)/stddev(returns,5)))) + (1-rank(delta(close,1)))))</strong></p>
+<p>2018.4.26 关键是里面的两个rank，这两个rank内的值越小越好。那么就是2天的收益标准差要小于5天的收益标准差，就是要慢慢趋向于平稳，波动越来越小，第二个rank里面表示今天相对于昨天的价差越小越好，负得应该也行，简单来讲就是<strong>波动变小</strong>时操作</p>
+<p><strong>#35&nbsp;&nbsp;&nbsp;&nbsp;((Ts_Rank(volume,32)<em>(1-Ts_Rank(((close+high)-low),16)))</em>(1-Ts_Rank(returns,32)))</strong></p>
+<p>2018.4.27 成交量放大，同时波动越来越小的下跌<strong>价量关系</strong></p>
+<p><strong>#36&nbsp;&nbsp;&nbsp;&nbsp;(((((2.21<em>rank(correlation((close-open),delay(volume,1),15))) + (0.7</em>rank((open-close)))) + (0.73<em>rank(Ts_Rank(delay((-1</em>returns),6),5)))) + rank(abs(correlation(vwap,adv20,6))))+(0.6<em>rank((((sum(close,200)/200)-open)</em>(close-open)))))</strong></p>
+<p>2018.4.28 这个连2.21,0.7都出现了，非常不好用人类语言解释了，分为5块，权重最大的是价量同步，其次为6天前的收益要是负的，然后的上涨的越多越好，最后为低开后的上涨。</p>
+<p><strong>#37&nbsp;&nbsp;&nbsp;&nbsp;(rank(correlation(delay((open-close),1),close,200)) + rank((open-close)))</strong></p>
+<p><a href="https://uqer.io/community/share/5791d499228e5ba29205f474">源码</a></p>
+<p>2018.4.29 我和上面这个源码的解读有点不一样，应该是200天内一直在下跌，但是跌幅越来越小，今天忽然来了一个大跌，后面上涨的概率更大<strong>连续阴跌</strong></p>
+<p><strong>#38&nbsp;&nbsp;&nbsp;&nbsp;((-1<em>rank(Ts_Rank(close,10)))</em>rank((close/open)))</strong></p>
+<p>2018.4.30 10天之内连续下跌，最好最后一天是大阴棒<strong>连续下跌</strong></p>
+<p><strong>#39&nbsp;&nbsp;&nbsp;&nbsp;((-1<em>rank((delta(close,7)</em>(1-rank(decay_linear((volume/adv20),9))))))*(1+rank(sum(returns,250))))</strong></p>
+<p>2018.5.1 250天也就是一年内的总收益越小越好，今天相对于7天前是下跌的，而且9天内成交量开始放大<strong>物极必反,放量下跌</strong></p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
         <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
     </ul>
 </section>
         </article>

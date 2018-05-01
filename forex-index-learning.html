@@ -260,11 +260,11 @@ MA(x, n) = n 天的平均值
 <p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:chaikin_money_flow_cmf">英英详解(文章最后有和其他指标的结合使用)</a></p>
 <p>C,L,H,Vol参与计算，在+-0.1之间信号不明确，大于0.1做多信号，小于-0.1做空信号。缺失跳空缺口的体现</p>
 <p>前半部分和A/D计算是一样的，最后CMF的形成用了20天的平滑</p>
-<div class="highlight"><pre><span></span>  1. Money Flow Multiplier = [(Close  -  Low) - (High - Close)] /(High - Low) 
+<div class="highlight"><pre><span></span>  1. Money Flow Multiplier = [(Close  -  Low) - (High - Close)] /(High - Low)
 
   2. Money Flow Volume = Money Flow Multiplier x Volume for the Period
 
-  3. 20-period CMF = 20-period Sum of Money Flow Volume / 20 period Sum of Volume 
+  3. 20-period CMF = 20-period Sum of Money Flow Volume / 20 period Sum of Volume
 </pre></div>
 
 
@@ -339,7 +339,7 @@ C 手续费
 <h3>2017.12.27 CP Volumentum Trend</h3>
 <p>研发所基于的理论是当市场发生转变时总是伴随着很大的成交量，这个指标非常难找，也没有相关的资料，我找到几个相关的公式</p>
 <ul>
-<li>volumentum-weekly </li>
+<li>volumentum-weekly</li>
 </ul>
 <div class="highlight"><pre><span></span>[Price (End of this week) - Price (End of last week)]*[Avg Week Volume / Avg 6 Mo Volume]
 </pre></div>
@@ -645,7 +645,8 @@ intercept = b = (Σy – mΣx) / n
 <p>用法和均线是一样的，短周期的LRI上穿长周期的LRI做多，反之亦然。<a href="https://www.incrediblecharts.com/indicators/linear_regression_indicator.php">用法详解</a></p>
 <p>策略：看示例，均线上穿的效果比价格均线的交易要好，用4均线做振荡和趋势的判断？</p>
 <h3>2018.1.12 Linear Regression Slope</h3>
-<p>线性回归的斜率(slope)，和LRI一样，取最后一个点的值，公式是上上个的公式。</p>
+<p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:slope">英英详解</a></p>
+<p>震荡指标，线性回归的斜率(slope)，和LRI一样，取最后一个点的值，公式是上上个的公式。</p>
 <p>策略：周期越长延迟越大，周期短了，LR回归又没啥意义，而且没有成交量参与有点失真。</p>
 <h3>2018.1.13 Linear Regression Trendline</h3>
 <p>这其实就是绘制一条指定周期内的线性回归的直线，人工交易可能参考性会更大。</p>
@@ -658,8 +659,9 @@ intercept = b = (Σy – mΣx) / n
 <p>MACD，中国人炒股人人都在看。两根均线为根基进行计算。这里面讲的主要是里面的DIF和DEM线。</p>
 <p>策略：背离和趋势</p>
 <h3>2018.1.14 Moving Average Convergence/Divergence (MACD) Histogram</h3>
+<p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:macd-histogram">英英详解</a></p>
 <p>macd有很强的滞后性，所以研发出来了MACD Histogram来提前预判，其实就是我们常见的图上面的柱状图。</p>
-<div class="highlight"><pre><span></span>DIF: (12-day EMA - 26-day EMA) 
+<div class="highlight"><pre><span></span>DIF: (12-day EMA - 26-day EMA)
 
 Signal Line: 9-day EMA of MACD
 
@@ -674,8 +676,9 @@ MACD Histogram: DIF - Signal Line
 </pre></div>
 
 
-<p>策略：成交量和价格一起参与计算是不靠谱的，因为价格和成交量不是一个数量级的。</p>
+<p>策略：成交量未经标准化和价格一起参与计算是不靠谱的，因为价格和成交量不是一个数量级的。</p>
 <h3>2018.1.15 Mass Index</h3>
+<p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:mass_index">英英详解</a></p>
 <p><img alt="计算公式" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/83bb4433603a5b6024fd56b65f0996a9e504a190"></p>
 <p>专门开发出来用来判断回归点的，可以判断是否有逆转发生，但是不能判断方向。如果有一个超过27再跌回26.5的突起就表明很可能有逆转。</p>
 <p>策略：看图示还蛮准的，可以测试一下这个指标。</p>
@@ -709,14 +712,14 @@ MCL＝AD-BD
 <h3>2018.1.17 Mesa Sine Wave</h3>
 <p><a href="http://www.davenewberg.com/Trading/EhlersCodes.html">John Ehler 的相关指标</a></p>
 <p>sine 正弦波指标，用Median Price为输入进行计算，计算方法太复杂，<a href="http://www.davenewberg.com/Trading/TS_Code/Ehlers_Indicators/SineWave_Ind.html">看这里</a>，用法Sine在LeadSine线下为空，上为多。</p>
-<div class="highlight"><pre><span></span><span class="n">Inputs</span><span class="o">:</span> <span class="n">Price</span><span class="o">((</span><span class="n">H</span><span class="o">+</span><span class="n">L</span><span class="o">)/</span><span class="mi">2</span><span class="o">),</span> <span class="n">alpha</span><span class="o">(.</span><span class="mi">07</span><span class="o">);</span> 
+<div class="highlight"><pre><span></span><span class="n">Inputs</span><span class="o">:</span> <span class="n">Price</span><span class="o">((</span><span class="n">H</span><span class="o">+</span><span class="n">L</span><span class="o">)/</span><span class="mi">2</span><span class="o">),</span> <span class="n">alpha</span><span class="o">(.</span><span class="mi">07</span><span class="o">);</span>
 
 <span class="n">Vars</span><span class="o">:</span> <span class="n">Smooth</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">Cycle</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">I1</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">Q1</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">I2</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">Q2</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">DeltaPhase</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">MedianDelta</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">MaxAmp</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">AmpFix</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">Re</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">Im</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">DC</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span>
 <span class="n">alpha1</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">InstPeriod</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">DCPeriod</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">count</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">SmoothCycle</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">RealPart</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">ImagPart</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span><span class="n">DCPhase</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
 
 <span class="n">Smooth</span> <span class="o">=</span> <span class="o">(</span><span class="n">Price</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">Price</span><span class="o">[</span><span class="mi">1</span><span class="o">]+</span><span class="mi">2</span><span class="o">*</span><span class="n">Price</span><span class="o">[</span><span class="mi">2</span><span class="o">]+</span><span class="n">Price</span><span class="o">[</span><span class="mi">3</span><span class="o">])/</span><span class="mi">6</span><span class="o">;</span>
 <span class="n">Cycle</span> <span class="o">=</span> <span class="o">(</span><span class="mi">1</span><span class="o">-.</span><span class="mi">5</span><span class="o">*</span><span class="n">alpha</span><span class="o">)*(</span><span class="mi">1</span><span class="o">-.</span><span class="mi">5</span><span class="o">*</span><span class="n">alpha</span><span class="o">)*(</span><span class="n">Smooth</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">Smooth</span><span class="o">[</span><span class="mi">1</span><span class="o">]+</span><span class="n">Smooth</span><span class="o">[</span><span class="mi">2</span><span class="o">])+</span><span class="mi">2</span><span class="o">*(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="o">)*</span><span class="n">Cycle</span><span class="o">[</span><span class="mi">1</span><span class="o">]-(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="o">)*(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="o">)*</span><span class="n">Cycle</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
-<span class="n">If</span> <span class="n">CurrentBar</span> <span class="o">&lt;</span><span class="mi">7</span> <span class="n">then</span> <span class="n">Cycle</span><span class="o">=(</span><span class="n">Price</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">Price</span><span class="o">[</span><span class="mi">1</span><span class="o">]+</span><span class="n">Price</span><span class="o">[</span><span class="mi">2</span><span class="o">])/</span><span class="mi">4</span><span class="o">;</span> 
+<span class="n">If</span> <span class="n">CurrentBar</span> <span class="o">&lt;</span><span class="mi">7</span> <span class="n">then</span> <span class="n">Cycle</span><span class="o">=(</span><span class="n">Price</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">Price</span><span class="o">[</span><span class="mi">1</span><span class="o">]+</span><span class="n">Price</span><span class="o">[</span><span class="mi">2</span><span class="o">])/</span><span class="mi">4</span><span class="o">;</span>
 <span class="n">Q1</span><span class="o">=(.</span><span class="mi">0962</span><span class="o">*</span><span class="n">Cycle</span><span class="o">+.</span><span class="mi">5769</span><span class="o">*</span><span class="n">Cycle</span><span class="o">[</span><span class="mi">2</span><span class="o">]-.</span><span class="mi">5769</span><span class="o">*</span><span class="n">Cycle</span><span class="o">[</span><span class="mi">4</span><span class="o">]-.</span><span class="mi">0962</span><span class="o">*</span><span class="n">Cycle</span><span class="o">[</span><span class="mi">6</span><span class="o">])*(.</span><span class="mi">5</span><span class="o">+.</span><span class="mi">08</span><span class="o">*</span><span class="n">InstPeriod</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
 <span class="n">I1</span> <span class="o">=</span> <span class="n">Cycle</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
 <span class="n">If</span> <span class="n">Q1</span><span class="o">&lt;&gt;</span><span class="mi">0</span> <span class="n">and</span> <span class="n">Q1</span><span class="o">[</span><span class="mi">1</span><span class="o">]&lt;&gt;</span><span class="mi">0</span> <span class="n">then</span> <span class="n">DeltaPhase</span><span class="o">=(</span><span class="n">I1</span><span class="sr">/Q1-I1[1]/Q1[1])/(1+I1*I1[1]/</span><span class="o">(</span><span class="n">Q1</span><span class="o">*</span><span class="n">Q1</span><span class="o">[</span><span class="mi">1</span><span class="o">]));</span>
@@ -726,21 +729,21 @@ MCL＝AD-BD
 <span class="n">If</span> <span class="n">MedianDelta</span> <span class="o">=</span><span class="mi">0</span> <span class="n">then</span> <span class="n">DC</span><span class="o">=</span><span class="mi">15</span> <span class="k">else</span> <span class="n">DC</span><span class="o">=</span><span class="mf">6.28318</span><span class="o">/</span><span class="n">MedianDelta</span><span class="o">+.</span><span class="mi">5</span><span class="o">;</span>
 <span class="n">InstPeriod</span><span class="o">=.</span><span class="mi">33</span><span class="o">*</span><span class="n">DC</span><span class="o">+.</span><span class="mi">67</span><span class="o">*</span><span class="n">InstPeriod</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
 <span class="n">Value1</span> <span class="o">=</span> <span class="o">.</span><span class="mi">15</span><span class="o">*</span><span class="n">InstPeriod</span><span class="o">+.</span><span class="mi">85</span><span class="o">*</span><span class="n">Value1</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
-<span class="n">DCPeriod</span> <span class="o">=</span> <span class="n">IntPortion</span><span class="o">(</span><span class="n">Value1</span><span class="o">);</span> 
-<span class="n">RealPart</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> 
-<span class="n">ImagPart</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> 
-<span class="n">For</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">To</span> <span class="n">DCPeriod</span> <span class="o">-</span> <span class="mi">1</span> <span class="n">begin</span> 
-<span class="n">RealPart</span> <span class="o">=</span> <span class="n">RealPart</span> <span class="o">+</span> <span class="n">Sine</span><span class="o">(</span><span class="mi">360</span> <span class="o">*</span> <span class="n">count</span> <span class="o">/</span> <span class="n">DCPeriod</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="n">Cycle</span><span class="o">[</span><span class="n">count</span><span class="o">]);</span> 
-<span class="n">ImagPart</span> <span class="o">=</span> <span class="n">ImagPart</span> <span class="o">+</span> <span class="n">Cosine</span><span class="o">(</span><span class="mi">360</span> <span class="o">*</span> <span class="n">count</span> <span class="o">/</span> <span class="n">DCPeriod</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="n">Cycle</span><span class="o">[</span><span class="n">count</span><span class="o">]);</span> 
-<span class="n">End</span><span class="o">;</span> 
-<span class="n">If</span> <span class="n">AbsValue</span><span class="o">(</span><span class="n">ImagPart</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mf">0.001</span> <span class="n">then</span> <span class="n">DCPhase</span> <span class="o">=</span> <span class="n">Arctangent</span><span class="o">(</span><span class="n">RealPart</span> <span class="o">/</span> <span class="n">ImagPart</span><span class="o">);</span> 
-<span class="n">If</span> <span class="n">AbsValue</span><span class="o">(</span><span class="n">ImagPart</span><span class="o">)</span> <span class="o">&lt;=</span> <span class="mf">0.001</span> <span class="n">then</span> <span class="n">DCPhase</span> <span class="o">=</span> <span class="mi">90</span> <span class="o">*</span> <span class="n">Sign</span><span class="o">(</span><span class="n">RealPart</span><span class="o">);</span> 
+<span class="n">DCPeriod</span> <span class="o">=</span> <span class="n">IntPortion</span><span class="o">(</span><span class="n">Value1</span><span class="o">);</span>
+<span class="n">RealPart</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="n">ImagPart</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="n">For</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">To</span> <span class="n">DCPeriod</span> <span class="o">-</span> <span class="mi">1</span> <span class="n">begin</span>
+<span class="n">RealPart</span> <span class="o">=</span> <span class="n">RealPart</span> <span class="o">+</span> <span class="n">Sine</span><span class="o">(</span><span class="mi">360</span> <span class="o">*</span> <span class="n">count</span> <span class="o">/</span> <span class="n">DCPeriod</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="n">Cycle</span><span class="o">[</span><span class="n">count</span><span class="o">]);</span>
+<span class="n">ImagPart</span> <span class="o">=</span> <span class="n">ImagPart</span> <span class="o">+</span> <span class="n">Cosine</span><span class="o">(</span><span class="mi">360</span> <span class="o">*</span> <span class="n">count</span> <span class="o">/</span> <span class="n">DCPeriod</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="n">Cycle</span><span class="o">[</span><span class="n">count</span><span class="o">]);</span>
+<span class="n">End</span><span class="o">;</span>
+<span class="n">If</span> <span class="n">AbsValue</span><span class="o">(</span><span class="n">ImagPart</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mf">0.001</span> <span class="n">then</span> <span class="n">DCPhase</span> <span class="o">=</span> <span class="n">Arctangent</span><span class="o">(</span><span class="n">RealPart</span> <span class="o">/</span> <span class="n">ImagPart</span><span class="o">);</span>
+<span class="n">If</span> <span class="n">AbsValue</span><span class="o">(</span><span class="n">ImagPart</span><span class="o">)</span> <span class="o">&lt;=</span> <span class="mf">0.001</span> <span class="n">then</span> <span class="n">DCPhase</span> <span class="o">=</span> <span class="mi">90</span> <span class="o">*</span> <span class="n">Sign</span><span class="o">(</span><span class="n">RealPart</span><span class="o">);</span>
 
-<span class="n">DCPhase</span> <span class="o">=</span> <span class="n">DCPhase</span> <span class="o">+</span> <span class="mi">90</span><span class="o">;</span> 
-<span class="n">If</span> <span class="n">ImagPart</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">DCPhase</span> <span class="o">=</span> <span class="n">DCPhase</span> <span class="o">+</span> <span class="mi">180</span><span class="o">;</span> 
-<span class="n">If</span> <span class="n">DCPhase</span> <span class="o">&gt;</span> <span class="mi">315</span> <span class="n">then</span> <span class="n">DCPhase</span> <span class="o">=</span> <span class="n">DCPhase</span> <span class="o">-</span> <span class="mi">360</span><span class="o">;</span> 
+<span class="n">DCPhase</span> <span class="o">=</span> <span class="n">DCPhase</span> <span class="o">+</span> <span class="mi">90</span><span class="o">;</span>
+<span class="n">If</span> <span class="n">ImagPart</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">DCPhase</span> <span class="o">=</span> <span class="n">DCPhase</span> <span class="o">+</span> <span class="mi">180</span><span class="o">;</span>
+<span class="n">If</span> <span class="n">DCPhase</span> <span class="o">&gt;</span> <span class="mi">315</span> <span class="n">then</span> <span class="n">DCPhase</span> <span class="o">=</span> <span class="n">DCPhase</span> <span class="o">-</span> <span class="mi">360</span><span class="o">;</span>
 
-<span class="n">Plot1</span><span class="o">(</span><span class="n">Sine</span><span class="o">(</span><span class="n">DCPhase</span><span class="o">),</span> <span class="s2">&quot;Sine&quot;</span><span class="o">,</span><span class="n">blue</span><span class="o">);</span> 
+<span class="n">Plot1</span><span class="o">(</span><span class="n">Sine</span><span class="o">(</span><span class="n">DCPhase</span><span class="o">),</span> <span class="s2">&quot;Sine&quot;</span><span class="o">,</span><span class="n">blue</span><span class="o">);</span>
 <span class="n">Plot2</span><span class="o">(</span><span class="n">Sine</span><span class="o">(</span><span class="n">DCPhase</span> <span class="o">+</span> <span class="mi">45</span><span class="o">),</span> <span class="s2">&quot;LeadSine&quot;</span><span class="o">,</span><span class="n">green</span><span class="o">);</span>
 </pre></div>
 
@@ -862,7 +865,7 @@ NVI 如果成交量减少，则用上面的公式 ...</p>
 <span class="p">{</span> <span class="n">James</span> <span class="n">Sibbet</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">Demand</span> <span class="n">Index</span> <span class="n">Function</span> <span class="p">}</span>
 <span class="p">{</span> <span class="n">Programmed</span> <span class="n">by</span> <span class="n">David</span> <span class="n">Fenstemaker</span> <span class="p">}</span>
 <span class="p">{</span> <span class="n">The</span> <span class="n">Demand</span> <span class="n">Index</span> <span class="n">combines</span> <span class="n">price</span> <span class="n">and</span> <span class="nb">volume</span> <span class="n">in</span> <span class="p">}</span>
-<span class="p">{</span> <span class="n">such</span> <span class="n">a</span> <span class="n">way</span> <span class="n">that</span> <span class="n">it</span> <span class="n">is</span> <span class="n">often</span> <span class="n">a</span> <span class="n">leading</span> <span class="n">indicator</span> 
+<span class="p">{</span> <span class="n">such</span> <span class="n">a</span> <span class="n">way</span> <span class="n">that</span> <span class="n">it</span> <span class="n">is</span> <span class="n">often</span> <span class="n">a</span> <span class="n">leading</span> <span class="n">indicator</span>
 <span class="p">(</span> <span class="n">of</span> <span class="n">price</span> <span class="n">change</span><span class="o">.</span> <span class="p">}</span>
 
 
@@ -940,7 +943,7 @@ NVI 如果成交量减少，则用上面的公式 ...</p>
 <span class="p">{</span> <span class="n">James</span> <span class="n">Sibbet</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">Demand</span> <span class="n">Index</span> <span class="n">Indicator</span> <span class="p">}</span>
 <span class="p">{</span> <span class="n">Programmed</span> <span class="n">by</span> <span class="n">David</span> <span class="n">Fenstemaker</span> <span class="p">}</span>
 <span class="p">{</span> <span class="n">The</span> <span class="n">Demand</span> <span class="n">Index</span> <span class="n">combines</span> <span class="n">price</span> <span class="n">and</span> <span class="nb">volume</span> <span class="n">in</span> <span class="p">}</span>
-<span class="p">{</span> <span class="n">such</span> <span class="n">a</span> <span class="n">way</span> <span class="n">that</span> <span class="n">it</span> <span class="n">is</span> <span class="n">often</span> <span class="n">a</span> <span class="n">leading</span> 
+<span class="p">{</span> <span class="n">such</span> <span class="n">a</span> <span class="n">way</span> <span class="n">that</span> <span class="n">it</span> <span class="n">is</span> <span class="n">often</span> <span class="n">a</span> <span class="n">leading</span>
 <span class="p">(</span> <span class="n">indicator</span> <span class="n">of</span> <span class="n">price</span> <span class="n">change</span><span class="o">.</span> <span class="p">}</span>
 
 <span class="nt">Inputs</span><span class="o">:</span> <span class="nt">Length</span><span class="o">(</span><span class="nt">5</span><span class="o">);</span>
@@ -957,7 +960,7 @@ NVI 如果成交量减少，则用上面的公式 ...</p>
 <p>上面贴出来的是DMI的公式，因为该公式是由DMI和随机指标(如KD)算出来的，具体的算法找了好久没找着，下面有一个怪怪的公式，也不知道能不能用。</p>
 <div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="err">#</span> <span class="n">BuyP</span><span class="err">和</span><span class="n">SellP</span><span class="err">请参考上面的公式</span>
-    <span class="n">BuyP</span><span class="p">();</span> 
+    <span class="n">BuyP</span><span class="p">();</span>
     <span class="n">SellP</span><span class="p">();</span>
 <span class="p">}</span>
 
@@ -990,7 +993,7 @@ NVI 如果成交量减少，则用上面的公式 ...</p>
 </pre></div>
 
 
-<p>只有一条线，只有价格参与计算，计算出来与波动相关。 </p>
+<p>只有一条线，只有价格参与计算，计算出来与波动相关。</p>
 <p>策略：当过滤器应该可以，先在tb中实现。</p>
 <h3>2018.1.24 On Balance Volume (OBV)</h3>
 <div class="highlight"><pre><span></span>若今日收盤價高於前一交易日收盤價
@@ -1152,10 +1155,10 @@ RWIL=(ref(High,n)-L)/(ATR(n)*Sqrt(n));
 <h3>2018.2.1 Range Expansion Index (REI)</h3>
 <p>看图表上，该指标的方向和价格方向一致，所以就是两条线决定超买和超卖的？</p>
 <p><a href="http://en.verysource.com/code/5074269_1/Tom+DeMark+Range+Expansion+Index+%28TDREI%29.afl.html">英文公式详解</a></p>
-<div class="highlight"><pre><span></span>IF( ( (HI&gt;=LO5 OR HI&gt;=LO6) AND (LO&lt;=HI5 OR LO&lt;=HI6) ) OR ( (HI2&gt;=CL7 OR HI2&gt;=CL8) AND (LO2&lt;=CL7 OR LO2&lt;=CL8) ) ) 
-    THEN 
-        VALUE = HI - HI2 + LO - LO2 
-        ABSVALUE = ABS(HI - HI2) + ABS(LO - LO2) 
+<div class="highlight"><pre><span></span>IF( ( (HI&gt;=LO5 OR HI&gt;=LO6) AND (LO&lt;=HI5 OR LO&lt;=HI6) ) OR ( (HI2&gt;=CL7 OR HI2&gt;=CL8) AND (LO2&lt;=CL7 OR LO2&lt;=CL8) ) )
+    THEN
+        VALUE = HI - HI2 + LO - LO2
+        ABSVALUE = ABS(HI - HI2) + ABS(LO - LO2)
     ELSE
         VALUE = ABSVALUE = 0
 
@@ -1190,12 +1193,12 @@ signal = sma(rmi,sig)
 <p>策略：做过滤器使用。</p>
 <h3>2018.2.2 Comparative Relative Strength (CRS)</h3>
 <p>貌似是做对冲时用的，就是用股票a的价格除以股票b的价格，一般是某支股票除以某个指数，这样可以看出这支股票相对于大盘的强弱。</p>
-<div class="highlight"><pre><span></span>a = tickerid 
-b = input(&quot;SPX500&quot;, type=symbol) 
-as = security(a, period, close) 
-bs = security(b, period, close) 
-plot(as/bs, title=&quot;CRS&quot;, color=gray) 
-len = input(10) 
+<div class="highlight"><pre><span></span>a = tickerid
+b = input(&quot;SPX500&quot;, type=symbol)
+as = security(a, period, close)
+bs = security(b, period, close)
+plot(as/bs, title=&quot;CRS&quot;, color=gray)
+len = input(10)
 plot(sma(as/bs, len), color=navy)
 </pre></div>
 
@@ -1257,16 +1260,16 @@ plot(nRes, color=red, title=&quot;RVI&quot;)
 <p>下面有一段关键代码，把macd的柱值(均线差值)算出来，再进行更深入的计算，振荡指标。</p>
 <p><a href="https://www.tradingview.com/script/dbxXeuw2-Indicator-Schaff-Trend-Cycle-STC/">公式详解</a></p>
 <p><a href="https://www.technicalindicators.net/indicators-technical-analysis/169-stc-schaff-trend-cycle">公式详解</a></p>
-<div class="highlight"><pre><span></span>stc(length, fastLength, slowLength) =&gt; 
+<div class="highlight"><pre><span></span>stc(length, fastLength, slowLength) =&gt;
     factor=input(0.5)  
     m = macd(close,fastLength,slowLength)     
     v1 = lowest(m, length)
     v2 = highest(m, length) - v1    
-    f1 = (v2 &gt; 0 ? ((m - v1) / v2) * 100 : nz(f1[1])) 
-    pf = (na(pf[1]) ? f1 : pf[1] + (factor * (f1 - pf[1]))) 
-    v3 = lowest(pf, length) 
+    f1 = (v2 &gt; 0 ? ((m - v1) / v2) * 100 : nz(f1[1]))
+    pf = (na(pf[1]) ? f1 : pf[1] + (factor * (f1 - pf[1])))
+    v3 = lowest(pf, length)
     v4 = highest(pf, length) - v3     
-    f2 = (v4 &gt; 0 ? ((pf - v3) / v4) * 100 : nz(f2[1])) 
+    f2 = (v4 &gt; 0 ? ((pf - v3) / v4) * 100 : nz(f2[1]))
     pff = (na(pff[1]) ? f2 : pff[1] + (factor * (f2 - pff[1])))
     pff
 </pre></div>
@@ -1277,7 +1280,7 @@ plot(nRes, color=red, title=&quot;RVI&quot;)
 <p>这个就不说了，人人都会用的。</p>
 <p>策略：均线趋势策略。</p>
 <h3>2018.2.6 Slow Stochastic (Slow STO)</h3>
-<p>随机指标，请参考 Full Stochastic Oscillator </p>
+<p>随机指标，请参考 Full Stochastic Oscillator</p>
 <p>策略：见随机指标</p>
 <h3>2018.2.6 Standard Deviation</h3>
 <p>用来计算波动率的东西，boll线里面用了标准差。</p>
@@ -1545,13 +1548,13 @@ VMA = [ { 0.0788 * VR } * Close ] + [ { (1 - 0.078) * VR } * yesterday&#39;s VMA
 <div class="highlight"><pre><span></span>Select the number of periods (n) to include in the indicator. This should be based on the length of the cycle that you are analyzing. The most popular is 28 days (for intermediate cycles).
 Determine the highest closing price (HCP) in n periods.
 Determine the lowest closing price (LCP) in n periods.
-Calculate the range of closing prices in n periods: 
+Calculate the range of closing prices in n periods:
            HCP - LCP
-Next, calculate the movement in closing price for each period: 
+Next, calculate the movement in closing price for each period:
            Closing price [today] - Closing price [yesterday]
-Add up all price movements for n periods, disregarding whether they are up or down: 
+Add up all price movements for n periods, disregarding whether they are up or down:
            Sum of absolute values of ( Close [today] - Close [yesterday] ) for n periods
-Divide Step 4 by Step 6: 
+Divide Step 4 by Step 6:
            VHF = (HCP - LCP) / (Sum of absolute values for n periods)
 </pre></div>
 
@@ -1578,13 +1581,13 @@ VHF在上升说明是一个趋势，下降表示在震荡
 <p>策略：从计算方式来讲会比obv更精细一些，可以和obv进行比对，看哪个效果更好</p>
 <h3>2018.3.4 Volume by Price</h3>
 <p>其实这就是现在一些股软上的筹码分布，计算方法其实很简单，交易价在某个价格区间的bar的成交量加起来即可，某个区间的交易量大说明这里是个调整区，但是不能真正的说明持仓结构，因为有在那个区间买卖的筹码都统计进去了，而且买入的可能在其他价格卖了。</p>
-<div class="highlight"><pre><span></span>There are four steps involved in the calculation. 
-This example is based on closing prices and the default parameter setting (12). 
+<div class="highlight"><pre><span></span>There are four steps involved in the calculation.
+This example is based on closing prices and the default parameter setting (12).
 
   1. Find the high-low range for closing prices for the entire period.  
   2. Divide this range by 12 to create 12 equal price zones.
   3. Total the amount of volume traded within each price zone.  
-  4. Divide the volume into up volume and down volume (optional). 
+  4. Divide the volume into up volume and down volume (optional).
 </pre></div>
 
 
@@ -1728,11 +1731,11 @@ Volatility = Sum10(ABS(Close - Prior Close))
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
         <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
     </ul>
 </section>
         </article>
