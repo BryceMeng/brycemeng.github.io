@@ -228,6 +228,7 @@
 <p><strong>vwap</strong></p>
 <blockquote>
 <p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:vwap_intraday">公式说明</a></p>
+<p><a href="https://uqer.io/community/share/579b04cb228e5ba28e05fe3e">中文说明</a></p>
 </blockquote>
 <div class="highlight"><pre><span></span>Cumulative(Volume x Typical Price)/Cumulative(Volume)
 </pre></div>
@@ -391,17 +392,22 @@
 <p>2018.5.2
 1. high突然放大，但是成交量变小，我操，这不是下下跌的节奏吗？
 2. high突然往下，但是成交量变大，这就是要往上回调的节奏</p>
+<p><strong>#41&nbsp;&nbsp;&nbsp;&nbsp;(((high*low)^0.5)-vwap)</strong></p>
+<p><a href="https://uqer.io/community/share/579b04cb228e5ba28e05fe3e">源码解读</a></p>
+<p><strong>变种:(((high*low)^0.5)-vwap)/close</strong></p>
+<p>2018.5.3 <strong>价量关系</strong>这个公式不大好解释，当前成交量越大，权重越低，但是上篇文章中取反倒是alpha出来了，也就是成交量放大的股票应该被选。</p>
+<p>不过上篇文章里面提到了一个非常有意思的事情就是high*low与绝对值相关，数据没标准化过，变种里面除了一个close之后权重才会更有效。</p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
     </ul>
 </section>
         </article>

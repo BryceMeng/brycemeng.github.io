@@ -842,6 +842,7 @@ NVI 如果成交量减少，则用上面的公式 ...</p>
 <p>用法：有一个NVI的年均线，如果上穿，买入。</p>
 <p>策略：可以把上面的用法实现一下，或者进行bull和bear的判断，但是这种一根线的判断bull和bear不是很靠谱，因为无法判断震荡市。</p>
 <h3>2018.1.22 New Highs - Lows Cumulative</h3>
+<p><a href="https://www.stator-afm.com/tutorial/new-highs-lows-cumulative/">英英详解</a></p>
 <div class="highlight"><pre><span></span>(New Highs - New Lows) + Yesterday&#39;s Indicator value
 </pre></div>
 
@@ -856,6 +857,15 @@ NVI 如果成交量减少，则用上面的公式 ...</p>
 <p>指数型指标。</p>
 <p>策略：人工判断。</p>
 <h3>2018.1.22 New Highs - New Lows</h3>
+<p><a href="http://stockcharts.com/school/doku.php?id=chart_school:market_indicators:net_new_highs">英英详解</a></p>
+<p>一根线(High-Low Line) 和一个柱状体(Net New Highs)</p>
+<div class="highlight"><pre><span></span>Net New Highs = New 52-Week Highs - New 52-Week Lows
+
+# 这个详情请看英英详解，里面有详解的推算
+High-Low Line = Prior Cumulative Net New Highs + Current Net New Highs
+</pre></div>
+
+
 <p>讲解了一下以New Highs 和 New Lows作为计算因子的指标，主要是上面两个。</p>
 <h3>2018.1.23 Norton High/Low Indicator</h3>
 <p><a href="http://www.traderslaboratory.com/forums/coding-forum/6830-demand-index-james-sibbet.html">DMI的easy版本源码</a></p>
@@ -1731,11 +1741,11 @@ Volatility = Sum10(ABS(Close - Prior Close))
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
     </ul>
 </section>
         </article>
