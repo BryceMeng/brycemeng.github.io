@@ -230,7 +230,9 @@
 <p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:vwap_intraday">公式说明</a></p>
 <p><a href="https://uqer.io/community/share/579b04cb228e5ba28e05fe3e">中文说明</a></p>
 </blockquote>
-<div class="highlight"><pre><span></span>Cumulative(Volume x Typical Price)/Cumulative(Volume)
+<div class="highlight"><pre><span></span>Typical Price = (H+L+C)/3
+
+Cumulative(Volume x Typical Price)/Cumulative(Volume)
 </pre></div>
 
 
@@ -394,9 +396,12 @@
 2. high突然往下，但是成交量变大，这就是要往上回调的节奏</p>
 <p><strong>#41&nbsp;&nbsp;&nbsp;&nbsp;(((high*low)^0.5)-vwap)</strong></p>
 <p><a href="https://uqer.io/community/share/579b04cb228e5ba28e05fe3e">源码解读</a></p>
-<p><strong>变种:(((high*low)^0.5)-vwap)/close</strong></p>
-<p>2018.5.3 <strong>价量关系</strong>这个公式不大好解释，当前成交量越大，权重越低，但是上篇文章中取反倒是alpha出来了，也就是成交量放大的股票应该被选。</p>
+<p><strong>变种:(((high*low)^0.5)-vwap)/close</strong> 这个变种的alpha非常不错</p>
+<p>2018.5.3 <strong>价量关系</strong>这个公式不大好解释，当前价格越高，权重越低，但是上篇文章中取反倒是alpha出来了，也就是成交量放大的股票应该被选。</p>
 <p>不过上篇文章里面提到了一个非常有意思的事情就是high*low与绝对值相关，数据没标准化过，变种里面除了一个close之后权重才会更有效。</p>
+<p><strong>#42&nbsp;&nbsp;&nbsp;&nbsp;(rank((vwap-close))/rank((vwap+close)))</strong></p>
+<p><a href="https://uqer.io/community/share/57077863228e5bbbb0f42319">源码解读</a></p>
+<p>2018.5.4 这个公式是一个平衡公式，就是不是一边倒的，close越低越好，但是close越小vwap也越小，这样H和L需要大一些，close相对要小一些，那么买入时应该会以阴线为主。</p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
@@ -405,9 +410,9 @@
     <ul>
         <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
     </ul>
 </section>
         </article>
