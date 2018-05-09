@@ -402,17 +402,23 @@ Cumulative(Volume x Typical Price)/Cumulative(Volume)
 <p><strong>#42&nbsp;&nbsp;&nbsp;&nbsp;(rank((vwap-close))/rank((vwap+close)))</strong></p>
 <p><a href="https://uqer.io/community/share/57077863228e5bbbb0f42319">源码解读</a></p>
 <p>2018.5.4 这个公式是一个平衡公式，就是不是一边倒的，close越低越好，但是close越小vwap也越小，这样H和L需要大一些，close相对要小一些，那么买入时应该会以阴线为主。</p>
+<p><strong>#43&nbsp;&nbsp;&nbsp;&nbsp;(ts_rank((volume/adv20),20)<em>ts_rank((-1</em>delta(close,7)),8))</strong></p>
+<p>2018.5.7 <strong>放量下跌</strong></p>
+<p><strong>#44&nbsp;&nbsp;&nbsp;&nbsp;(-1*correlation(high,rank(volume,)5))</strong></p>
+<p>2018.5.8 <strong>量价关系</strong>要么缩量上涨，要么放量下跌。但是在A股里面缩量上涨一般来讲是危险信号。得实测一下。</p>
+<p><strong>#45&nbsp;&nbsp;&nbsp;&nbsp;(-1<em>((rank((sum(delay(close,5),20)/20))</em>correlation(close,volume,2))*rank(correlation(sum(close,5),sum(close,20),2))))</strong></p>
+<p>2018.5.9 两种情况：高价股一直在下跌，最后两天放量下跌; 高价股一直在上涨，最后两天缩量上涨。里面用到了绝对价格，要注意，不是很靠谱，要么自己加个标准化。<strong>量价关系，长期单边反转</strong></p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
     </ul>
 </section>
         </article>
@@ -443,6 +449,9 @@ Cumulative(Volume x Typical Price)/Cumulative(Volume)
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/android.html">Android</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/can-shu-you-hua.html">参数优化</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="/tag/cheng-shou-zhi-biao.html">成熟指标</a>
@@ -491,6 +500,9 @@ Cumulative(Volume x Typical Price)/Cumulative(Volume)
     </li>
     <li class="list-group-item tag-4">
       <a href="/tag/xin-li-xue.html">心理学</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/yi-chuan-suan-fa.html">遗传算法</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="/tag/yi-wen.html">译文</a>

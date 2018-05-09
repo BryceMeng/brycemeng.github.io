@@ -657,10 +657,11 @@ intercept = b = (Σy – mΣx) / n
 <p><a href="https://baike.baidu.com/item/MACD%E7%BA%BF/4717979">中文详解</a></p>
 <p><a href="https://zh.wikipedia.org/wiki/MACD">wikipadia</a></p>
 <p>MACD，中国人炒股人人都在看。两根均线为根基进行计算。这里面讲的主要是里面的DIF和DEM线。</p>
+<p>这两根线就是均线差和对应的ma</p>
 <p>策略：背离和趋势</p>
 <h3>2018.1.14 Moving Average Convergence/Divergence (MACD) Histogram</h3>
 <p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:macd-histogram">英英详解</a></p>
-<p>macd有很强的滞后性，所以研发出来了MACD Histogram来提前预判，其实就是我们常见的图上面的柱状图。</p>
+<p>macd有很强的滞后性，所以研发出来了MACD Histogram来提前预判，其实就是macd的柱状图。</p>
 <div class="highlight"><pre><span></span>DIF: (12-day EMA - 26-day EMA)
 
 Signal Line: 9-day EMA of MACD
@@ -1021,6 +1022,7 @@ High-Low Line = Prior Cumulative Net New Highs + Current Net New Highs
 <p><img alt="公式" src="http://sinacloud.net/mhblog/2018/01/open10trincalc.png"></p>
 <p>策略：指数指标，板块分析可以用</p>
 <h3>2018.1.25 Oscillator of Moving Average (OsMA)</h3>
+<p><a href="https://freshforex.com/encyclopedia-forex/moving-average-of-oscillator/">英英详解</a></p>
 <div class="highlight"><pre><span></span>OsMA = MACD - SIGNAL
 We remember that:
 MACD = EMA(P, N)-EMA(P, N)
@@ -1032,8 +1034,8 @@ N - number of calculation periods;
 </pre></div>
 
 
-<p>和MACD的用法类似</p>
-<p>策略：强弱判断的过滤器</p>
+<p>其实就是MACD的那根柱状线,MACD包含两根曲线和一根柱状线，曲线是均线差和对应的ema，柱状线是均线差减去ema</p>
+<p>策略：参考MACD</p>
 <h3>2018.1.25 Overbought/Oversold (OB/OS)</h3>
 <ol>
 <li>Consider a moving average with a known period.</li>
@@ -1114,7 +1116,7 @@ where:
 </pre></div>
 
 
-<p>策略: 像心中一样，太快恢复到0，暂不启用</p>
+<p>策略: 像心中一样，太快恢复到0，与波动相关，很难直接应用到策略里面</p>
 <h3>2018.1.29 Price and Volume Trend (PVT)</h3>
 <p>和OBV类似，也是价格上涨量累积，下跌减，但是PVT计算了幅度。</p>
 <div class="highlight"><pre><span></span>[ { (Close - Yesterday&#39;s Close) / Yesterday&#39;s Close } * Volume ] + Yesterday&#39;s PVT
@@ -1742,11 +1744,11 @@ Volatility = Sum10(ABS(Close - Prior Close))
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
     </ul>
 </section>
         </article>
@@ -1777,6 +1779,9 @@ Volatility = Sum10(ABS(Close - Prior Close))
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/android.html">Android</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/can-shu-you-hua.html">参数优化</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="/tag/cheng-shou-zhi-biao.html">成熟指标</a>
@@ -1825,6 +1830,9 @@ Volatility = Sum10(ABS(Close - Prior Close))
     </li>
     <li class="list-group-item tag-4">
       <a href="/tag/xin-li-xue.html">心理学</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/yi-chuan-suan-fa.html">遗传算法</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="/tag/yi-wen.html">译文</a>

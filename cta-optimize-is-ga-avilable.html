@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>心理学 - 雪山</title>
+    <title>CTA多参数优化能用遗传算法吗？ - 雪山</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,16 +10,23 @@
 
     <link href="/images/favicon.png" rel="icon">
 
+<link rel="canonical" href="/cta-optimize-is-ga-avilable.html">
 
-    <meta name="author" content="雪山" />
-    <meta name="keywords" content="心理学" />
+        <meta name="author" content="雪山" />
+        <meta name="keywords" content="量化,遗传算法,参数优化" />
+        <meta name="description" content="今天在做参数优化时发现如果要优化两组以上的参数计算量会非常的大，所以学习了一下遗传算法。" />
 
-    <!-- Open Graph tags -->
         <meta property="og:site_name" content="雪山" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="雪山"/>
-        <meta property="og:url" content=""/>
-        <meta property="og:description" content="雪山"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="CTA多参数优化能用遗传算法吗？"/>
+        <meta property="og:url" content="/cta-optimize-is-ga-avilable.html"/>
+        <meta property="og:description" content="今天在做参数优化时发现如果要优化两组以上的参数计算量会非常的大，所以学习了一下遗传算法。"/>
+        <meta property="article:published_time" content="2018-05-10" />
+            <meta property="article:section" content="量化" />
+            <meta property="article:tag" content="量化" />
+            <meta property="article:tag" content="遗传算法" />
+            <meta property="article:tag" content="参数优化" />
+            <meta property="article:author" content="雪山" />
 
 
     <!-- Bootstrap -->
@@ -68,7 +75,7 @@
                         <li >
                             <a href="/category/ji-zhu.html">技术</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="/category/liang-hua.html">量化</a>
                         </li>
                         <li >
@@ -86,13 +93,72 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="/thanks-to-myself.html">感谢自己的不完美</a></h2>
-                <div class="summary"><p>感谢表姐给我推荐的这本书，我也回顾一下我的人生，而且让我觉得反思生活是一件让人非常愉悦的事情。</p>
-                    <a class="btn btn-default btn-xs" href="/thanks-to-myself.html">more ...</a>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/cta-optimize-is-ga-avilable.html"
+                       rel="bookmark"
+                       title="Permalink to CTA多参数优化能用遗传算法吗？">
+                        CTA多参数优化能用遗传算法吗？
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-05-10T00:50:00+08:00"> 四 10 五月 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/liang-hua.html">量化</a>
+        /
+	<a href="/tag/yi-chuan-suan-fa.html">遗传算法</a>
+        /
+	<a href="/tag/can-shu-you-hua.html">参数优化</a>
+    
+</footer><!-- /.post-info -->                    </div>
                 </div>
-            </article>
-            <hr/>
+                <h2>多参数优化不要刻意逃避</h2>
+<p>资料上都会建议cta策略的<strong>参数越少越好</strong>，最好<strong>小于等于两个</strong>，确实，两个参数最好做优化，两个参数的组合再大能超过10k次？跑回测也不会跑过1天，再做滚动优化和蒙特卡罗模拟另算。我现在两个参数的组合也就在1k次左右，分钟线7年的数据也就3小时不到。</p>
+<p>但是有时不是你想参数少就参数少，比如我用到了atr止损和adx/cci来判断趋势强弱，这时候atr的窗口和adx/cci的窗口用默认的14或者是其他值？经我测试，有时候用其他值会更好，这时候怎么办？假装不知道这回事儿，强制用默认值，还是把atr和adx/cci的窗口也拿过来进行组合测试优化？这时候我的建议是一起进行测试优化，别害怕过拟合，<strong>用默认值和进行优化与过拟合是没有直接关系</strong>的。当然这时候要看一下atr或者adx/cci<strong>和你的主参数有没有直接关系</strong>，如果<strong>相关性</strong>很强就没必要优化，如果相关性不强就立刻拿过来优化。</p>
+<h2>遗传算法靠谱吗？不太靠谱</h2>
+<p>我今天通过一个01背包问题的示例，简单的了解了一个遗传算法，我的总结为：<strong>不断的重组和变异，在有限的计算次数内找到近似的最优值</strong>，这时候想想：如果我有3个参数，每个参数的取值个数都有50个，这样就有50<em>50</em>50=125000个组合需要回测，现在知道为什么建议在2个参数以下了吧，2个参数才2500次，参数的个数增长会导致回测次数指数型增长。如果遗传算法能让我们在25000次回测找到一个近似解也不错啊。那为什么不靠谱呢？</p>
+<ol>
+<li>
+<p>遗传算法有一个<strong>适应函数</strong>，其实就是验证这组参数是否可用，在01背包问题里面很简单，这个组合的重量大于书包的负荷了就不可用，反之可用。那cta回测呢？很难定一个具体的值，要么只能自己假想一个，sharp ratio大于1，倒也不是不行。</p>
+</li>
+<li>
+<p>遗传算法的参数组合是<strong>随机</strong>的，不像我们做cta回测时是连续的，这会导致一个问题，我取的最优解<strong>不一定是在一个连续平面</strong>上。我们在tb或者文华上做回测时，会绘制一个3D图，我们从上面找一块相对较高的连续平面，当中取一点为最优解。遗传不一样了，遗传的优点就在于<strong>随机变化来尽量覆盖全集</strong>，相当于一张低像素和一张高像素，高像素是全集，低像素是遗传后的子集，但是这个子集并不是图片的某一小部分，而是整张图片的浓缩，但是不影响观察。这也就决定了<strong>遗传的离散性非常强</strong>。因为<strong>cta在实际环境中和回测环境往往会发生参数的偏移</strong>，这样要是在离散环境中选的最优值周围并不是连续的，那到生产环境可就玩不动了。</p>
+</li>
+<li>
+<p>如果没有非常确定的适应函数，<strong>迭代的次数</strong>不太容易去拍出来。</p>
+</li>
+</ol>
+<h2>也可以尝试一下</h2>
+<p>当然如果非要用，我觉得也不是不行，定一个迭代的次数，把<strong>回测的结果缓存</strong>，<strong>保留top值</strong>在列表当中，然后再针对top值去做传统的优化，也不是不行，找机会我自己去试试看。</p>
+<p>还有就是这里我<strong>只针对cta参数回测</strong>做了些分析，其他方面，比如：投资组合什么的啊，我还未进行研究。</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
 
         </div>
         <div class="col-sm-3" id="sidebar">
@@ -207,7 +273,7 @@
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 雪山
+         <div class="col-xs-10">&copy; 2018 雪山
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
