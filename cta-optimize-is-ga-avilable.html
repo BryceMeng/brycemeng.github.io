@@ -157,6 +157,9 @@
 <li>
 <p>一定要能<strong>并行计算</strong>，不然单线程能搞死人。</p>
 </li>
+<li>
+<p>或者这样行不行呢？因为我们可以把所有参数都假想为n个二维平面，这样我们在设置初始参数时就先设置成每个二维平面的<strong>均匀采样</strong>，就像把<strong>图片缩小一样的算法</strong>，这样我们的初始集就能大幅增加参数覆盖的全面性，后面再遗传的工作量也会相应变小。</p>
+</li>
 </ol>
 <p>不过我觉得就算这样优化，跑的次数还是会很惊人。</p>
 <p>还有就是这里我<strong>只针对cta参数回测</strong>做了些分析，其他方面，比如：投资组合什么的啊，我还未进行研究。</p>
@@ -165,11 +168,11 @@
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
     </ul>
 </section>
         </article>
