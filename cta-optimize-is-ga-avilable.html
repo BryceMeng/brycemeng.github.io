@@ -143,17 +143,30 @@
 </li>
 </ol>
 <h2>也可以尝试一下</h2>
-<p>当然如果非要用，我觉得也不是不行，定一个迭代的次数，把<strong>回测的结果缓存</strong>，<strong>保留top值</strong>在列表当中，然后再针对top值去做传统的优化，也不是不行，找机会我自己去试试看。</p>
+<p>当然如果非要用，我觉得也不是不行:
+1. 计算一个迭代的次数，先从小的订起，而且把<strong>回测的结果缓存</strong>，如果需要跑新的迭代次数，则可以直接用以前跑过的结果，省去了大量时间</p>
+<ol>
+<li>
+<p><strong>保留top值</strong>在列表当中，然后再针对top值去做传统的优化，也不是不行，找机会我自己去试试看。</p>
+</li>
+<li>
+<p>利用连续的特性，如果某个参数的sharp特别低(可以定其他的适应函数)，则<strong>周围一片的参数组合都设置为不可用</strong>，可以节省不少时间。假如a:5 b:37 c:89 sharp 才0.5则 a:5 b{35~39} c{87~91}; a{3~7} b:37 c{87~91}; a{3~7} b{35~39} c:89 不可用，每次按二维的连续排除</p>
+</li>
+<li>
+<p>一定要能<strong>并行计算</strong>，不然单线程能搞死人。</p>
+</li>
+</ol>
+<p>不过我觉得就算这样优化，跑的次数还是会很惊人。</p>
 <p>还有就是这里我<strong>只针对cta参数回测</strong>做了些分析，其他方面，比如：投资组合什么的啊，我还未进行研究。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
         <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
-        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
         <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
     </ul>
 </section>
