@@ -1188,6 +1188,8 @@ CL7 7天前的Close
 <p>策略：超卖和超买做过滤器</p>
 <h3>2018.2.2 Relative Momentum Index (RMI)</h3>
 <p>close参与计算，相对动量指标，70-90是超买，10-30是超卖</p>
+<p><a href="https://www.marketvolume.com/technicalanalysis/relativemomentumindex.asp">版本1</a>
+<a href="https://www.motivewave.com/studies/relative_momentum_index.htm">版本2</a></p>
 <div class="highlight"><pre><span></span>len = input(20, title=&quot;Length&quot;)
 mom = input(4, title=&quot;Momentum&quot;,minval=0)
 ob = input(70,title=&quot;Overbought&quot;)
@@ -1219,8 +1221,9 @@ plot(sma(as/bs, len), color=navy)
 <p>策略：在股票世界里面会不会有点用，或者把商品期货里面某些相关品种做成指数做为分母。</p>
 <h3>2018.2.3 Relative strength index (RSI)</h3>
 <p><a href="https://www.zhihu.com/question/51959474">中文详解</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Relative_strength_index">wikipedia</a></p>
 <p>非常常用的指标，30和70是顶线和底线，作为顶部区域和底部区域的分界，还可作背离使用。</p>
-<p>公式里面一个D和U不好理解，请看中文详解，里面第一个答案也是不对的，应该是今天的close和昨天的close做计算，算出量。而IMI指标则是当天的close和open做计算，当然和昨天close做计算是更准确的，因为算进了高开和低开的情况。</p>
+<p>公式里面一个D和U不好理解，请看中文详解，里面第一个答案也是不对的，应该是今天的close和昨天的close做计算，算出量，wikipedia才是王道。而IMI指标则是当天的close和open做计算，当然和昨天close做计算是更准确的，因为算进了高开和低开的情况。</p>
 <div class="highlight"><pre><span></span>RSI = 100 - 100 / (1 + RS),
 
 RS = U(P,n)/D(P,n)
@@ -1234,25 +1237,37 @@ D(P,n) - is a moving average of falling of the P price within n periods.
 
 <p>策略：过滤器使用。</p>
 <h3>2018.2.3 Relative Volatility Index (RVI)</h3>
-<p><a href="https://www.tradingview.com/script/xXETnL9H-Relative-Volatility-Index/">英英详解</a></p>
-<p>RSI的变种，把价格变动换成了标准差， 详见公式，周期默认为10，这是衡量向上和向下波动性的指标</p>
-<div class="highlight"><pre><span></span>Period = input(10, minval=1)
+<p><a href="https://www.motivewave.com/studies/relative_volatility_index.htm">公式详解</a></p>
+<p><a href="https://www.tradingview.com/script/xXETnL9H-Relative-Volatility-Index/">变异后的英英详解</a></p>
+<p>RSI的变种，把价格变动换成了标准差，所以要注意，这个是波动率的震荡指标，在指标的顶部区域并不是价格很高，而是连续一个方向的波动率很高，这又与动量相关，波动相关的指标都只能辅助。详见公式，周期默认为10，这是衡量向上和向下波动性的指标</p>
+<div class="highlight"><pre><span></span><span class="o">//</span><span class="nt">input</span> <span class="o">=</span> <span class="nt">price</span><span class="o">,</span> <span class="nt">user</span> <span class="nt">defined</span><span class="o">,</span> <span class="nt">default</span> <span class="nt">is</span> <span class="nt">closing</span> <span class="nt">price</span>
+<span class="o">//</span><span class="nt">method</span> <span class="o">=</span> <span class="nt">moving</span> <span class="nt">average</span><span class="o">,</span> <span class="nt">user</span> <span class="nt">defined</span><span class="o">,</span> <span class="nt">default</span> <span class="nt">is</span> <span class="nt">SMMA</span>
+<span class="o">//</span><span class="nt">smoothPeriod</span> <span class="o">=</span> <span class="nt">user</span> <span class="nt">defined</span><span class="o">,</span> <span class="nt">default</span> <span class="nt">is</span> <span class="nt">14</span>
+<span class="o">//</span><span class="nt">sdPeriod</span> <span class="o">=</span> <span class="nt">user</span> <span class="nt">defined</span><span class="o">,</span> <span class="nt">default</span> <span class="nt">is</span> <span class="nt">10</span>
+<span class="o">//</span><span class="nt">method</span> <span class="o">=</span> <span class="nt">moving</span> <span class="nt">average</span><span class="o">,</span> <span class="nt">user</span> <span class="nt">defined</span><span class="o">,</span> <span class="nt">default</span> <span class="nt">is</span> <span class="nt">SMMA</span>
+<span class="o">//</span><span class="nt">standDev</span> <span class="o">=</span> <span class="nt">standard</span> <span class="nt">deviation</span>
+<span class="o">//</span><span class="nt">diff</span> <span class="o">=</span> <span class="nt">difference</span>
+<span class="o">//</span><span class="nt">MT</span> <span class="o">=</span> <span class="nt">more</span> <span class="nt">than</span>
+<span class="o">//</span><span class="nt">LT</span> <span class="o">=</span> <span class="nt">less</span> <span class="nt">than</span>
+<span class="o">//</span><span class="nt">ma</span> <span class="o">=</span> <span class="nt">moving</span> <span class="nt">average</span><span class="o">,</span> <span class="nt">index</span> <span class="o">=</span> <span class="nt">current</span> <span class="nt">bar</span> <span class="nt">number</span>
 
-xPrice = close
-
-StdDev = stdev(xPrice, Period)
-d = iff(close &gt; close[1], 0, StdDev)
-
-u = iff(close &gt; close[1], StdDev, 0)
-nU = (13 * nz(nU[1],0) + u) / 14
-nD = (13 * nz(nD[1],0) + d) / 14
-
-nRes = 100 * nU / (nU + nD)
-plot(nRes, color=red, title=&quot;RVI&quot;)
+<span class="nt">standDev</span> <span class="o">=</span> <span class="nt">std</span><span class="o">(</span><span class="nt">index</span><span class="o">,</span> <span class="nt">sdPeriod</span><span class="o">,</span> <span class="nt">input</span><span class="o">);</span>
+<span class="nt">diff</span> <span class="o">=</span> <span class="nt">standDev</span> <span class="nt">-</span> <span class="nt">standDev</span><span class="cp">[</span><span class="nx">index</span><span class="o">-</span><span class="mi">1</span><span class="cp">]</span><span class="o">;</span>
+<span class="nt">if</span> <span class="o">(</span><span class="nt">diff</span> <span class="nt">mT</span><span class="o">;</span> <span class="nt">0</span><span class="o">)</span> <span class="nt">up</span> <span class="o">=</span> <span class="nt">diff</span>
+<span class="nt">else</span> <span class="nt">down</span> <span class="o">=</span> <span class="nt">diff</span>
+<span class="nt">avgUp</span> <span class="o">=</span> <span class="nt">ma</span><span class="o">(</span><span class="nt">method</span><span class="o">,</span> <span class="nt">index</span><span class="o">,</span> <span class="nt">smoothPeriod</span><span class="o">,</span> <span class="nt">up</span><span class="o">);</span>
+<span class="nt">avgDown</span> <span class="o">=</span> <span class="nt">ma</span><span class="o">(</span><span class="nt">method</span><span class="o">,</span> <span class="nt">index</span><span class="o">,</span> <span class="nt">smoothPeriod</span><span class="o">,</span> <span class="nt">down</span><span class="o">);</span>
+<span class="nt">rs</span> <span class="o">=</span> <span class="nt">avgUp</span> <span class="o">/</span> <span class="nt">avgDown</span><span class="o">;</span>
+<span class="nt">Plot</span><span class="o">:</span> <span class="nt">RVI</span> <span class="o">=</span> <span class="nt">100</span> <span class="nt">-</span> <span class="o">(</span> <span class="nt">100</span> <span class="o">/</span> <span class="o">(</span><span class="nt">1</span> <span class="o">+</span> <span class="nt">rs</span><span class="o">));</span>
+<span class="o">//</span><span class="nt">Signals</span>
+<span class="nt">highSell</span> <span class="o">=</span> <span class="nt">rvi</span> <span class="nt">for</span> <span class="nt">last</span> <span class="nt">sell</span> <span class="nt">signal</span><span class="o">,</span> <span class="nt">reset</span> <span class="nt">to</span> <span class="nt">max_negative</span> <span class="nt">at</span> <span class="nt">each</span>  <span class="nt">buy</span> <span class="nt">signal</span><span class="o">;</span>
+<span class="nt">lowBuy</span> <span class="o">=</span> <span class="nt">rvi</span> <span class="nt">for</span> <span class="nt">last</span> <span class="nt">buy</span> <span class="nt">signal</span><span class="o">,</span> <span class="nt">reset</span> <span class="nt">to</span> <span class="nt">max_positive</span> <span class="nt">at</span> <span class="nt">each</span> <span class="nt">sell</span> <span class="nt">signal</span><span class="o">;</span>
+<span class="nt">sell</span> <span class="o">=</span> <span class="o">(</span><span class="nt">rvi</span> <span class="nt">MT</span> <span class="nt">topGuide</span><span class="o">)</span> <span class="nt">AND</span> <span class="o">(</span><span class="nt">prevRvi</span> <span class="nt">MT</span> <span class="nt">rvi</span><span class="o">)</span>  <span class="nt">AND</span> <span class="o">(</span><span class="nt">rvi</span> <span class="nt">MT</span> <span class="nt">highSell</span><span class="o">);</span>
+<span class="nt">buy</span> <span class="o">=</span> <span class="o">(</span><span class="nt">rvi</span> <span class="nt">LT</span> <span class="nt">bottomGuide</span> <span class="nt">AND</span> <span class="nt">prevRvi</span> <span class="nt">LT</span> <span class="nt">rvi</span><span class="o">)</span> <span class="nt">AND</span> <span class="o">(</span><span class="nt">rvi</span> <span class="nt">LT</span> <span class="nt">lowBuy</span><span class="o">);</span>
 </pre></div>
 
 
-<p>用法：</p>
+<p>用法(有待考察，这个用法应该是不行的,要结合价格使用)：</p>
 <ol>
 <li>在RVI大于50时购买</li>
 <li>在小于50时卖</li>
@@ -1261,7 +1276,7 @@ plot(nRes, color=red, title=&quot;RVI&quot;)
 <li>小于40时关闭多仓</li>
 <li>大于60时关闭空仓</li>
 </ol>
-<p>策略：就按照上面的用法进行操作</p>
+<p>策略：与价格指标结合使用，低波动时开仓，高波动时要离场</p>
 <h3>2018.2.4 Ribbon Study</h3>
 <p>用很多条均线作分析。</p>
 <p>策略：倒是可以极端一点，多条均线，方向全部一样才开仓，只要有一条交叉就空仓。</p>
@@ -1744,11 +1759,11 @@ Volatility = Sum10(ABS(Close - Prior Close))
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/behind-of-investment.html">投资的背后</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
     </ul>
 </section>
         </article>

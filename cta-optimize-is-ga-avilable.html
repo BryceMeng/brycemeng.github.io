@@ -152,7 +152,7 @@
 <p><strong>保留top值</strong>在列表当中，然后再针对top值去做传统的优化，也不是不行，找机会我自己去试试看。</p>
 </li>
 <li>
-<p>利用连续的特性，如果某个参数的sharp特别低(可以定其他的适应函数)，则<strong>周围一片的参数组合都设置为不可用</strong>，可以节省不少时间。假如a:5 b:37 c:89 sharp 才0.5则 a:5 b{35~39} c{87~91}; a{3~7} b:37 c{87~91}; a{3~7} b{35~39} c:89 不可用，每次按二维的连续排除</p>
+<p>利用连续的特性，如果某个参数的sharp特别低(可以定其他的适应函数)，则<strong>周围一片的参数组合都设置为不可用</strong>，可以节省不少时间。假如a:5 b:37 c:89 sharp 才0.5则 a:5 b{35~39} c{87~91}; a{3~7} b:37 c{87~91}; a{3~7} b{35~39} c:89 不可用，每次按二维的连续排除，而且如果离limit值太远的可以排除的范围更大一些</p>
 </li>
 <li>
 <p>一定要能<strong>并行计算</strong>，不然单线程能搞死人。</p>
@@ -168,11 +168,11 @@
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/behind-of-investment.html">投资的背后</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
     </ul>
 </section>
         </article>

@@ -410,7 +410,7 @@ Cumulative(Volume x Typical Price)/Cumulative(Volume)
 <p>2018.5.9 两种情况：高价股一直在下跌，最后两天放量下跌; 高价股一直在上涨，最后两天缩量上涨。里面用到了绝对价格，要注意，不是很靠谱，要么自己加个标准化。<strong>量价关系，长期单边反转</strong></p>
 <p><strong>#46&nbsp;&nbsp;&nbsp;&nbsp;((0.25&lt;(((delay(close,20)-delay(close,10))/10) - ((delay(close,10)-close)/10)))?(-1<em>1):(((((delay(close,20) - delay(close,10))/10) - ((delay(close,10) - close)/10))&lt;0)?1:((-1</em>1)*(close-delay(close,1)))))</strong></p>
 <p>2018.5.12</p>
-<p><strong>××delay(close,20)-delay(close,10) - delay(close,10)-close &lt;= 2.5</strong></p>
+<p><strong>delay(close,20)-delay(close,10) - delay(close,10)-close &lt;= 2.5</strong></p>
 <p>这个式子要满足，分为两段20~10 10~0：</p>
 <ol>
 <li>第一段上涨，第二段要么涨的幅度不能太大，要么下跌</li>
@@ -419,17 +419,22 @@ Cumulative(Volume x Typical Price)/Cumulative(Volume)
 <p>注意这个式子里面用的绝对值2.5,20天的价差才这么一点，说明主要要求的是最近20天<strong>波动越来越小</strong></p>
 <p><strong>#47&nbsp;&nbsp;&nbsp;&nbsp;((((rank((1/close))<em>volume)/adv20) * ((high</em>rank((high-close)))/(sum(high,5)/5))) - rank((vwap-delay(vwap,5))))</strong></p>
 <p>2018.5.12 又有价格的绝对值，价格价，成交量慢慢放大<strong>量价关系</strong></p>
+<p><strong>#48&nbsp;&nbsp;&nbsp;&nbsp;(indneutralize(((correlation(delta(close,1), delta(delay(close,1),1),250)*delta(close,1))/close),IndClass.subindustry)/sum(((delta(close,1)/delay(close,1))^2),250))</strong></p>
+<p>2018.6.4 其实这条很早就分析了的，但是里面有一条IndClass.subindustry没法玩，所以查了很久的资料，工夫不负有心人，在quantopian里面找到了，但是这个行业数据是由一家公司(MoningStar)提供的，而且只有美股的，国内是没法用了</p>
+<p><strong>#49&nbsp;&nbsp;&nbsp;&nbsp;(((((delay(close,20) - delay(close,10))/10)-((delay(close,10) - close)/10)) &lt; (-1<em>0.1))?1:((-1</em>1)*(close-delay(close,1))))</strong></p>
+<p><strong>(delay(close,20) - delay(close,10)) - (delay(close,10) - close) &lt; -1? 1 :-1*(close-delay(close,1))</strong></p>
+<p>2018.6.4 直接用了价格，这其实是不合理的。最好的alpha出现在深跌10天，再缓跌10天，这样结果是大于1的</p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/behind-of-investment.html">投资的背后</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
     </ul>
 </section>
         </article>
