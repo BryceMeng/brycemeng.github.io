@@ -163,16 +163,23 @@
 </ol>
 <p>不过我觉得就算这样优化，跑的次数还是会很惊人。</p>
 <p>还有就是这里我<strong>只针对cta参数回测</strong>做了些分析，其他方面，比如：投资组合什么的啊，我还未进行研究。</p>
+<h2>Bayesian 贝叶斯</h2>
+<h3>2018.6.5</h3>
+<p>中间花了两个多星期的时间搞了下贝叶斯优化，确实比遗传算法还要好，和我上面的思路类似，只是用了科学的方法，遗传是纯随机的，所以有可能某片区域在0.8以下，其实这片区域都可以放弃的，但是遗传还是有可能变种到那边去，但是贝叶斯就不一样，可以把这片区域过滤掉。</p>
+<p>为什么呢？因为bayesian要求这些变量符合高斯过程，高斯过程就是连续随机变量，有固定的期望和标准差，这里面其实<strong>连续</strong>是重点，不是这个点是-1下一个点就是1了，因为在cta回测里面严格符合高斯过程不大可能，但是<strong>连续</strong>这个特征非常符合</p>
+<p>说说我这两个星期的感悟，现有的框架，我测试了3个，有一个没有bayesian，而是tpe但是结果不能收敛，直接放弃。</p>
+<p>另两两个其实结果都还不错，有一个支持并发，有一个不支持，但这个不支持的有mm问题的参数调节，很实用的功能。最后测试下来，这个支持并发的很容易到局部最优，而且参数特别容易重复，而且并行的功能也支持得一般，8线程同时不大可能跑得满，所以放弃了。</p>
+<p>最后改造了那个支持mm参数调节的，改成并行即可，结果还可以，后续找时间再落地。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/behind-of-investment.html">投资的背后</a></li>
     </ul>
 </section>
         </article>

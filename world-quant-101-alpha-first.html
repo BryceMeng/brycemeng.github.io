@@ -21,7 +21,7 @@
         <meta property="og:title" content="WorldQuant 101Alpha"/>
         <meta property="og:url" content="/world-quant-101-alpha-first.html"/>
         <meta property="og:description" content="最近思路有点闭塞，看一看这篇论文，希望对思路有所帮助"/>
-        <meta property="article:published_time" content="2018-05-12" />
+        <meta property="article:published_time" content="2018-06-05" />
             <meta property="article:section" content="量化" />
             <meta property="article:tag" content="量化" />
             <meta property="article:author" content="雪山" />
@@ -108,7 +108,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-05-12T16:59:00+08:00"> 六 12 五月 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-06-05T16:39:00+08:00"> 二 05 六月 2018</time>
     </span>
 
 
@@ -424,17 +424,19 @@ Cumulative(Volume x Typical Price)/Cumulative(Volume)
 <p><strong>#49&nbsp;&nbsp;&nbsp;&nbsp;(((((delay(close,20) - delay(close,10))/10)-((delay(close,10) - close)/10)) &lt; (-1<em>0.1))?1:((-1</em>1)*(close-delay(close,1))))</strong></p>
 <p><strong>(delay(close,20) - delay(close,10)) - (delay(close,10) - close) &lt; -1? 1 :-1*(close-delay(close,1))</strong></p>
 <p>2018.6.4 直接用了价格，这其实是不合理的。最好的alpha出现在深跌10天，再缓跌10天，这样结果是大于1的</p>
+<p><strong>#50&nbsp;&nbsp;&nbsp;&nbsp;(-1*ts_max(rank(correlation(rank(volume), rank(vwap), 5)),5))</strong></p>
+<p>2018.6.5 volume和vwap负相关越大越好，放量下跌or缩量上涨<strong>价量关系 </strong></p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/behind-of-investment.html">投资的背后</a></li>
     </ul>
 </section>
         </article>

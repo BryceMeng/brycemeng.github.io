@@ -21,7 +21,7 @@
         <meta property="og:title" content="成熟指标库慢啃"/>
         <meta property="og:url" content="/forex-index-learning.html"/>
         <meta property="og:description" content="还是要把成熟指标熟悉起来，起码在脑子里知道某个指标是干啥的"/>
-        <meta property="article:published_time" content="2018-05-11" />
+        <meta property="article:published_time" content="2018-06-04" />
             <meta property="article:section" content="量化" />
             <meta property="article:tag" content="量化" />
             <meta property="article:tag" content="成熟指标" />
@@ -109,7 +109,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-05-11T19:34:00+08:00"> 五 11 五月 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-06-04T19:34:00+08:00"> 一 04 六月 2018</time>
     </span>
 
 
@@ -205,6 +205,7 @@ A/D(i-1) — value of the Accumulation/Distribution indicator for the previous b
 <p>策略：从用法上来讲很简单，判断现有的趋势，我个人不是很看好这个指标，统计的有点怪。</p>
 <h3>2017.12.19 ADX, ADXR</h3>
 <p>通过价格数据算出，里面用到了TR(True Range)，通达信有该指标，可惜TB没有，写一个应该不难。</p>
+<p>这个里面用到了TR，是波动，所以这个指标值可与价格的高低没有直接关系，只是说值越大，趋势越强，值越小，趋势越小</p>
 <p>作者建议可以过滤趋势，判断什么时候用趋势策略，什么时候用回归策略，ADX大于25是趋势，小于20是回归，</p>
 <p><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx">公式详解 "ADX/DMI enthusiasts can click here to download"</a></p>
 <div class="highlight"><pre><span></span>(HLC,p[HLC]) -&gt;(TR1,+DM1,-DM1)-sum-&gt;(TR14,+DM14,-DM14)-&gt;
@@ -1759,11 +1760,11 @@ Volatility = Sum10(ABS(Close - Prior Close))
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/behind-of-investment.html">投资的背后</a></li>
     </ul>
 </section>
         </article>
