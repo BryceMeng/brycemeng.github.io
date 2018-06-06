@@ -120,7 +120,7 @@
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=110771&auto=1&height=66"></iframe>
+                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=444267928&auto=1&height=66"></iframe>
 
 <h3>两个Dataframe都是时间index，但是时间范围不一样，而且列名不一样，想组合在一块儿，用Nan来填充</h3>
 <div class="highlight"><pre><span></span><span class="c1"># 这种方式只能应用于数字，注意add的方式一样x,y的数字是会相加的，而下面的concat不会，会出现同名列</span>
@@ -204,16 +204,22 @@
 <p>要用loc:</p>
 <div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sig_positive&#39;</span><span class="p">],</span> <span class="n">posA_idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
+
+
+<p>过滤器是支持逻辑运算的</p>
+<div class="highlight"><pre><span></span><span class="c1"># We can add multiple boolean conditions by using the logical operators &amp;, |, and ~ (and, or, and not, respectively) again!</span>
+<span class="n">prices</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">prices</span><span class="o">.</span><span class="n">MCD</span> <span class="o">&gt;</span> <span class="n">prices</span><span class="o">.</span><span class="n">WFM</span><span class="p">)</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">prices</span><span class="o">.</span><span class="n">SHAK</span><span class="o">.</span><span class="n">isnull</span><span class="p">()]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
-        <li><a href="/behind-of-investment.html">投资的背后</a></li>
     </ul>
 </section>
         </article>
