@@ -426,17 +426,24 @@ Cumulative(Volume x Typical Price)/Cumulative(Volume)
 <p>2018.6.4 直接用了价格，这其实是不合理的。最好的alpha出现在深跌10天，再缓跌10天，这样结果是大于1的</p>
 <p><strong>#50&nbsp;&nbsp;&nbsp;&nbsp;(-1*ts_max(rank(correlation(rank(volume), rank(vwap), 5)),5))</strong></p>
 <p>2018.6.5 volume和vwap负相关越大越好，放量下跌or缩量上涨<strong>价量关系 </strong></p>
+<p><strong>#51&nbsp;&nbsp;&nbsp;&nbsp;(((((delay(close,20) - delay(close,10))/10) - ((delay(close,10) - close)/10))&lt;(-1<em>0.05))?1:((-1</em>1)*(close-delay(close,1))))</strong></p>
+<p><strong>(delay(close,20) - delay(close,10)) - (delay(close,10) - close)&lt; -0.5 ? 1 : -1*(close-delay(close,1))</strong></p>
+<p>2018.6.6 md的，这和49是一模一样的，只是参数不一样，101alpha有点特别水</p>
+<p><strong>#52&nbsp;&nbsp;&nbsp;&nbsp;((((-1<em>ts_min(low,5)) + delay(ts_min(low,5),5)) * rank(((sum(returns,240) - sum(returns,20))/220)))</em>ts_rank(volume,5))</strong></p>
+<p>2018.6.7 最近一年的收益率要大，最近放量，但是收益率下降，简单来讲就是中期调整 <strong>价量关系,中期调整</strong></p>
+<p><strong>#53&nbsp;&nbsp;&nbsp;&nbsp;(-1*delta((((close-low)-(high-close))/(close-low)),9))</strong></p>
+<p>2018.6.8 9天前的某根bar，震幅要大，而且还要是下跌的。怎么看这个alpha都不靠谱。</p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
+        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
     </ul>
 </section>
         </article>

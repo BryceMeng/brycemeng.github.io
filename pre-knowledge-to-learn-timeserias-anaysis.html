@@ -166,9 +166,9 @@
 <p><a href="https://www.zhihu.com/question/30113132/answer/247404483">实例讲解，可以同时看看上面其他的回答</a></p>
 <p><a href="https://www.zhihu.com/question/20064721">概念性的，看第一个回答</a></p>
 <p><a href="http://www.risklatte.com/Articles/QuantitativeFinance/QF163.php">用积分的概念讲解，我也不是特别理解</a></p>
-<p><strong>平衡序列</strong></p>
+<h2>平稳序列</h2>
 <p>简单来讲就是一条放平了的直线，但允许有波动，<strong>均值</strong>和<strong>标准差</strong>一直不变。做后面所有的分析都要基于平稳序列，如果股票价格是平稳序列，世界将会怎样？均值不变，那么肯定做回归策略，必定赚钱。</p>
-<p><strong>协整</strong></p>
+<h2>协整</h2>
 <p><a href="https://www.joinquant.com/post/1810?tag=algorithm">利用协整套利</a></p>
 <p>股票价格为非平稳序列，y为某支股票，x为某支股票，但是</p>
 <blockquote>
@@ -194,16 +194,53 @@ r为协整系数</p>
 
 
 <p>找到股票名对应的coef则为系数，const为常量，这里不用管</p>
+<h2>正态分布</h2>
+<p>正统的概念我就不写了，这里主要讲3方面</p>
+<h3>Skewness（偏度）</h3>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="kn">as</span> <span class="nn">stats</span>
+
+<span class="c1"># symmetric distribution has skew 0</span>
+<span class="n">skewness</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">skew</span><span class="p">(</span><span class="n">returns</span><span class="p">)</span>
+</pre></div>
+
+
+<p>主要是讲那个尖是在正常的左边，还是右边</p>
+<p>左边是负偏(Negatively) mean &lt; median &lt; mode，但是skew值是大于0的</p>
+<p>右边是正偏(Positively skewed) mean &gt; median &gt; mode，skew值是小于0</p>
+<h3>Kurtosis（峰度）</h3>
+<p><img alt="峰度" src="http://sinacloud.net/mhblog/2018/06/normal_distribution.png"></p>
+<p>峰度 kurtosis 大于0说明是有尖峰和肥尾的</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="kn">as</span> <span class="nn">stats</span>
+
+<span class="c1"># kurtosis 0 is normal</span>
+<span class="n">kurtosis</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">(</span><span class="n">returns</span><span class="p">)</span>
+</pre></div>
+
+
+<ul>
+<li>kurtosis &gt; 0 leptokurtic</li>
+<li>kurtosis &lt; 0 platykurtic</li>
+</ul>
+<h3>检测是否符合正态分布</h3>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.stattools</span> <span class="kn">import</span> <span class="n">jarque_bera</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">pvalue</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">returns</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">pvalue</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s1">&#39;The returns are likely normal.&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s1">&#39;The returns are likely not normal.&#39;</span>
+</pre></div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
+        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
     </ul>
 </section>
         </article>
