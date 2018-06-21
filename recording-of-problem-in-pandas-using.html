@@ -171,7 +171,14 @@
 <div class="highlight"><pre><span></span><span class="n">dataframe</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
 <span class="c1"># 一般取结果数组里面的[0,1]用作相关系数[这里有样例](https://www.ricequant.com/community/topic/2039//3)，如果打不开就点击&quot;克隆研究&quot;</span>
-<span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> 
+<span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># 上面的是常规相关系统</span>
+<span class="c1"># spearman相关系数，会先把数据做rank再做计算，如果变化量不一样，方向相同，这样算出来的相关性会比常规的要大</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="kn">as</span> <span class="nn">stats</span>
+<span class="n">r_s</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">spearmanr</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
+<span class="n">r_s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># 相关系统-1~1</span>
+<span class="n">r_s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># p-value 小于0.05说明相关，大于0.05说明不相关</span>
 </pre></div>
 
 
@@ -215,11 +222,11 @@
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
-        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/behind-of-investment.html">投资的背后</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
     </ul>
 </section>
         </article>

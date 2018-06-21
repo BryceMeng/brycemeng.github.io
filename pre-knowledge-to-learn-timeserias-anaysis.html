@@ -168,6 +168,16 @@
 <p><a href="http://www.risklatte.com/Articles/QuantitativeFinance/QF163.php">用积分的概念讲解，我也不是特别理解</a></p>
 <h2>平稳序列</h2>
 <p>简单来讲就是一条放平了的直线，但允许有波动，<strong>均值</strong>和<strong>标准差</strong>一直不变。做后面所有的分析都要基于平稳序列，如果股票价格是平稳序列，世界将会怎样？均值不变，那么肯定做回归策略，必定赚钱。</p>
+<p><strong>检测方法 Dickey-Fuller test</strong></p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">adfuller</span>
+
+<span class="c1"># Compute the p-value of the Dickey-Fuller statistic to test the null hypothesis that yw has a unit root</span>
+<span class="k">print</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">yw</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># 小于0.05则是平稳序列</span>
+</pre></div>
+
+
 <h2>协整</h2>
 <p><a href="https://www.joinquant.com/post/1810?tag=algorithm">利用协整套利</a></p>
 <p>股票价格为非平稳序列，y为某支股票，x为某支股票，但是</p>
@@ -224,23 +234,97 @@ r为协整系数</p>
 <h3>检测是否符合正态分布</h3>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.stattools</span> <span class="kn">import</span> <span class="n">jarque_bera</span>
 
-<span class="n">_</span><span class="p">,</span> <span class="n">pvalue</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">returns</span><span class="p">)</span>
+<span class="c1"># 这里的kurtosis值，标准是3</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">pvalue</span><span class="p">,</span> <span class="n">skewness</span><span class="p">,</span> <span class="n">kurtosis</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">returns</span><span class="p">)</span>
+
 
 <span class="k">if</span> <span class="n">pvalue</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">:</span>
     <span class="k">print</span> <span class="s1">&#39;The returns are likely normal.&#39;</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="k">print</span> <span class="s1">&#39;The returns are likely not normal.&#39;</span>
 </pre></div>
+
+
+<h3>检测异方差(残差没有固定的方差，不服从正态分布)</h3>
+<div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">pvalue1</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">diagnostic</span><span class="o">.</span><span class="n">het_breushpagan</span><span class="p">(</span><span class="n">residuals1</span><span class="p">,</span> <span class="n">xs_with_constant</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">pvalue2</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">diagnostic</span><span class="o">.</span><span class="n">het_breushpagan</span><span class="p">(</span><span class="n">residuals2</span><span class="p">,</span> <span class="n">xs_with_constant</span><span class="p">)</span>
+<span class="c1"># pvalue1 normal  pvalue2 unnormal</span>
+<span class="k">print</span> <span class="s2">&quot;p-value for residuals1 being heteroskedastic&quot;</span><span class="p">,</span> <span class="n">pvalue1</span>
+<span class="k">print</span> <span class="s2">&quot;p-value for residuals2 being heteroskedastic&quot;</span><span class="p">,</span> <span class="n">pvalue2</span>
+<span class="c1"># 应该是0.05大于就是服从正态分布，小于不服从，暂时不能确定是不是这样判断</span>
+<span class="n">p</span><span class="o">-</span><span class="n">value</span> <span class="k">for</span> <span class="n">residuals1</span> <span class="n">being</span> <span class="n">heteroskedastic</span> <span class="mf">0.740534744151</span>
+<span class="n">p</span><span class="o">-</span><span class="n">value</span> <span class="k">for</span> <span class="n">residuals2</span> <span class="n">being</span> <span class="n">heteroskedastic</span> <span class="mf">3.85868174966e-06</span>
+
+<span class="c1"># 异方差调整</span>
+<span class="n">slr2</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+
+
+<h3>检测残差的自相关性</h3>
+<div class="highlight"><pre><span></span><span class="c1"># Load pricing data for an asset</span>
+<span class="n">start</span> <span class="o">=</span> <span class="s1">&#39;2014-01-01&#39;</span>
+<span class="n">end</span> <span class="o">=</span> <span class="s1">&#39;2015-01-01&#39;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">get_pricing</span><span class="p">(</span><span class="s1">&#39;DAL&#39;</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="n">end</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+<span class="c1"># Regress pricing data against time</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">regression</span><span class="o">.</span><span class="n">linear_model</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+
+
+<p>在summary中有一项是 <a href="http://bbs.pinggu.org/thread-490487-1-1.html">Durbin-Watson</a></p>
+<p>DW是0&lt;D&lt;4,统计学意义如下：</p>
+<ul>
+<li>当残差与自变量互为独立时，D=2 或 DW 越接近2，判断无自相关性把握越大。</li>
+<li>当相邻两点的残差为正相关时，D&lt;2，DW 越接近于0，正自相关性越强。</li>
+<li>当相邻两点的残差为负相关时，D&gt;2，DW 越接近于4，负自相关性越强。</li>
+</ul>
+<h3>某序列的自相关性</h3>
+<div class="highlight"><pre><span></span><span class="c1"># 参考 https://blog.csdn.net/u010414589/article/details/49622625</span>
+
+<span class="n">r</span><span class="p">,</span> <span class="n">prices_qstats</span><span class="p">,</span> <span class="n">prices_qstat_pvalues</span> <span class="o">=</span> <span class="n">statsmodels</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">stattools</span><span class="o">.</span><span class="n">acf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">qstat</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># 部分自相关</span>
+<span class="n">prices_qstat_pvalues</span> <span class="o">=</span> <span class="n">statsmodels</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">stattools</span><span class="o">.</span><span class="n">pacf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># prices_qstat_pvalues 里面有每一lag的pvalues，小于0.05则就是自相关，否则不是自相关</span>
+<span class="c1"># 因为在某个序列里面也可能出现某一段自相关性强，某一段不强，所以是一个序列的pvalue，而不是一个</span>
+</pre></div>
+
+
+<h3>失效模式的标准误(std err)调整</h3>
+<p>存在异方差，且异方差形式未知时，而且残差或者自变量还有可能自相关，这时候可以用newey-west对结果进行调整，因为本来有异方差时模式是要失效的，调整后还是可以取其中的值进行参考的，让它更具有统计意义</p>
+<div class="highlight"><pre><span></span><span class="c1"># Regress pricing data against time</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">regression</span><span class="o">.</span><span class="n">linear_model</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="o">...</span>
+
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+
+<span class="c1"># Find the covariance matrix of the coefficients</span>
+<span class="n">cov_mat</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">sandwich_covariance</span><span class="o">.</span><span class="n">cov_hac</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># Print the standard errors of each coefficient from the original model and from the adjustment</span>
+<span class="k">print</span> <span class="s1">&#39;Old standard errors:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">bse</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">model</span><span class="o">.</span><span class="n">bse</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">print</span> <span class="s1">&#39;Adjusted standard errors:&#39;</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">cov_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">cov_mat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+
+<h3>多重共线性(自变量相关)</h3>
+<p><strong>基本检测</strong>： 如果R平方值很高(模型好)但是t-statistics小(参数不准确)，说明，模型可信度高，但是参数的预测不准确，这样有可能就是多重共线性。</p>
+<p><strong>进一步检测</strong>：去掉某自变量，看会不会在不影响R平方值的情况下而提高t-statistics</p>
+<p>其实把自变量做一个相关性检测也是一项基本检测。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
-        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/behind-of-investment.html">投资的背后</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
     </ul>
 </section>
         </article>

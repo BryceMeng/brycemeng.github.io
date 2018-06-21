@@ -246,6 +246,8 @@ Cumulative(Volume x Typical Price)/Cumulative(Volume)
 将x中的值标准化，使x的绝对值的和为a，默认a=1</p>
 <p><strong>decay_linear(x,d)</strong></p>
 <p>向前d天内的权重移动平均，越靠近现在权重越大，对权重做标准化，使其和为1</p>
+<p><strong>cap</strong></p>
+<p>market cap，市场容量，其实就是某支股票的市值</p>
 <h2>这101个Alpha</h2>
 <p>这些alpha很难直接盈利，而且这些公式很多是不能直接写在代码中的，需要自己进行改造，和创建卖点，这些公式更多的应该是让我们熟悉一下哪些因素能带来正的收益，而应用到自己的策略里面</p>
 <p><strong>#01&nbsp;&nbsp;&nbsp;&nbsp;(rank(Ts_ArgMax(SignedPower(((returns &lt; 0) ? stddev(returns, 20) : close), 2.), 5)) -
@@ -433,17 +435,33 @@ Cumulative(Volume x Typical Price)/Cumulative(Volume)
 <p>2018.6.7 最近一年的收益率要大，最近放量，但是收益率下降，简单来讲就是中期调整 <strong>价量关系,中期调整</strong></p>
 <p><strong>#53&nbsp;&nbsp;&nbsp;&nbsp;(-1*delta((((close-low)-(high-close))/(close-low)),9))</strong></p>
 <p>2018.6.8 9天前的某根bar，震幅要大，而且还要是下跌的。怎么看这个alpha都不靠谱。</p>
+<p><strong>#54&nbsp;&nbsp;&nbsp;&nbsp;((-1<em>((low-close)</em>(open^5)))/((low-high)*(close^5)))</strong></p>
+<p>2018.6.9 这是一个需要均衡的公式，不是一边倒的，不好解释，不过这个alpha只参考了一天的数据，需要注意。</p>
+<p><strong>#55&nbsp;&nbsp;&nbsp;&nbsp;(-1*correlation(rank(((close-ts_min(low,12)) / (ts_max(high,12)-ts_min(low,12)))), rank(volume), 6))</strong></p>
+<p>2018.6.11 两个变量之间的关系，第一个变量是我在最近12天的震荡区间中的位置，越低值越小，第二个就是成交量，简单来讲就是价格和成交量正相关即可<strong>量价关系</strong></p>
+<p><strong>#56&nbsp;&nbsp;&nbsp;&nbsp;(0-(1<em>(rank((sum(returns,10)/sum(sum(returns,2),3)))</em>rank((returns*cap)))))</strong></p>
+<p>2018.6.13 cap是股票市值，这个参与计算我也是醉了，绝对值，简单来讲就是市值小的，而且最近收益小的，<strong>物及必反,小市值</strong></p>
+<p><strong>#57&nbsp;&nbsp;&nbsp;&nbsp;(0-(1*((close-vwap)/decay_linear(rank(ts_argmax(close,30)),2))))</strong></p>
+<p>2018.6.13 放量上涨<strong>价量关系</strong></p>
+<p><strong>#58&nbsp;&nbsp;&nbsp;&nbsp;(-1*Ts_Rank(decay_linear(correlation(IndNeutralize(vwap, IndClass.sector),volume,,3.92795), 7.89291), 5.50322))</strong></p>
+<p>2018.6.14 含有 IndClass.sector 基本面因子，无法分析</p>
+<p><strong>#59&nbsp;&nbsp;&nbsp;&nbsp;(-1<em>Ts_Rank(decay_linear(correlation(IndNeutralize(((vwap</em>0.728317)+(vwap*(1-0.728317))), IndClass.industry),volume,4.25197),16.2289),8.19648))</strong></p>
+<p>2018.6.17 含有 IndClass.sector 基本面因子，无法分析</p>
+<p><strong>#60&nbsp;&nbsp;&nbsp;&nbsp;(0-(1<em>((2</em>scale(rank(((((close-low)-(high-close))/(high-close))*volume))))-scale(rank(ts_argmax(close,10))))))</strong></p>
+<p>2018.6.18 今天有上影线的阴线，无下影线，成交量要小，收盘价10天内越高越好，是不是表示上涨过程中的调整，然后高上影线洗盘，然后成交量不大说明洗盘很成功<strong>洗盘</strong></p>
+<p><strong>#61&nbsp;&nbsp;&nbsp;&nbsp;(rank((vwap-ts_min(vwap,16.1219))) &lt; rank(correlation(vwap,adv180,17.9282)))</strong></p>
+<p>2018.6.19 价量正相关，同时最近价格要下跌 <strong>量价关系</strong></p>
 <p>未完待续...</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
-        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/behind-of-investment.html">投资的背后</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
     </ul>
 </section>
         </article>

@@ -169,17 +169,18 @@
 <p>为什么呢？因为bayesian要求这些变量符合高斯过程，高斯过程就是连续随机变量，有固定的期望和标准差，这里面其实<strong>连续</strong>是重点，不是这个点是-1下一个点就是1了，因为在cta回测里面严格符合高斯过程不大可能，但是<strong>连续</strong>这个特征非常符合</p>
 <p>说说我这两个星期的感悟，现有的框架，我测试了3个，有一个没有bayesian，而是tpe但是结果不能收敛，直接放弃。</p>
 <p>另两两个其实结果都还不错，有一个支持并发，有一个不支持，但这个不支持的有mm问题的参数调节，很实用的功能。最后测试下来，这个支持并发的很容易到局部最优，而且参数特别容易重复，而且并行的功能也支持得一般，8线程同时不大可能跑得满，所以放弃了。</p>
+<p>而且这些框架都是连续变量来测试的，当然这也是正常的，正态分布本来就是连续的，但是有个问题就是我的计划是参数A[1,2,3,4,5] B[5,6,7,8,9]，这样组合才25个，万一连续了，我计算的量就要翻个好几番，如果要缩减我的计算时间我就只能用离散量来计算，那么就会出现框架出来的参数组{A:0.8, B:5.1} 和 {A:0.91, B:5.2} 计算出来的结果是一样的{A:1, B:5}，但是其实是不一样的，所以这是会影响计算结果的，so，我自己加了控制变量组的产生，只产生int也就是离散量，这样减少了回测的次数，也不至于给框架一个错误的结果</p>
 <p>最后改造了那个支持mm参数调节的，改成并行即可，结果还可以，后续找时间再落地。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
-        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/behind-of-investment.html">投资的背后</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
     </ul>
 </section>
         </article>

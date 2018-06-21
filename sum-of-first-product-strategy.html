@@ -165,6 +165,16 @@ bidPrice1 = 3801
 <p><strong>4. 坑：python自带的logger是阻塞的</strong></p>
 <p>我调试过logger的代码，是阻塞的，这和传统的log4net完全不一样，log4net可以疯狂的写log,log4net有专门的线程负责写日志，所以效率非常高。</p>
 <p>我已经找到方法，通过共享内存的方式异步写日志了，不过考虑到时间投入就没实现，现在的策略还没到IO的瓶颈，不过SSD还是必要的哈，不然IO真可能成为瓶颈。</p>
+<h2>代码需要注意的地方</h2>
+<p><strong>vtEngine.py -&gt; class PositionDetail</strong></p>
+<ol>
+<li>这个类是管理每个合约对应的仓位的，在策略开始前会查询订单的回报，在我的试验中，上期所有点坑，因为上期所分平昨和平今，如果在订单成交回报中昨天的某条没过来，就会导致昨天的pos是负数，这是不可能的，因为vnpy里面分了long和short只可能是正数</li>
+<li>里面我的SHFE平今平昨模式是我硬编码的，交易其他合约时要注意</li>
+</ol>
+<p><strong>策略文件 OnOrder</strong></p>
+<p>回测时是orderId，实盘又是VOrderId</p>
+<p><strong>历史数据</strong></p>
+<p>如果回测用的主连，就用主连的历史数据，不要取当前主力数据取个半年的就会出问题，因为可能1个月前的主力合约不是当前主力合约</p>
 <h2>总结</h2>
 <p>这次实盘花了大概4天的时间，每天早上8点到晚上11点，非常的辛苦，不过这是值得的，加油，干</p>
             </div>
@@ -172,11 +182,11 @@ bidPrice1 = 3801
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
-        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/behind-of-investment.html">投资的背后</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
     </ul>
 </section>
         </article>
