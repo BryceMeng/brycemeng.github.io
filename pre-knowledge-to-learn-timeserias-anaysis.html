@@ -353,16 +353,48 @@ r为协整系数</p>
 <p><strong>基本检测</strong>： 如果R平方值很高(模型好)但是t-statistics小(参数不准确)，说明，模型可信度高，但是参数的预测不准确，这样有可能就是多重共线性。</p>
 <p><strong>进一步检测</strong>：去掉某自变量，看会不会在不影响R平方值的情况下而提高t-statistics</p>
 <p>其实把自变量做一个相关性检测也是一项基本检测。</p>
+<h3>判断某一时间序列的加归特性</h3>
+<p>方法：Hurst exponent ， 用法见代码里面的注释</p>
+<div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Hurst exponent helps test whether the time series is:</span>
+<span class="sd">    (1) A Random Walk (H ~ 0.5)</span>
+<span class="sd">    (2) Trending (H &gt; 0.5)</span>
+<span class="sd">    (3) Mean reverting (H &lt; 0.5)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">hurst</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">sid</span><span class="p">):</span>
+    <span class="c1"># Gathers all the prices that you need</span>
+    <span class="n">gather_prices</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+    <span class="c1"># Checks whether data exists</span>
+    <span class="n">data_gathered</span> <span class="o">=</span> <span class="n">gather_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">data_gathered</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span>    
+
+    <span class="n">tau</span><span class="p">,</span> <span class="n">lagvec</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="c1"># Step through the different lags</span>
+    <span class="k">for</span> <span class="n">lag</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>  
+        <span class="c1"># Produce price different with lag</span>
+        <span class="n">pp</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">past_prices</span><span class="p">[</span><span class="n">lag</span><span class="p">:],</span><span class="n">context</span><span class="o">.</span><span class="n">past_prices</span><span class="p">[:</span><span class="o">-</span><span class="n">lag</span><span class="p">])</span>
+        <span class="c1"># Write the different lags into a vector</span>
+        <span class="n">lagvec</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span>
+        <span class="c1"># Calculate the variance of the difference</span>
+        <span class="n">tau</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">pp</span><span class="p">)))</span>
+    <span class="c1"># Linear fit to a double-log graph to get power</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">lagvec</span><span class="p">),</span><span class="n">numpy</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">tau</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># Calculate hurst</span>
+    <span class="n">hurst</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span>
+
+    <span class="k">return</span> <span class="n">hurst</span>
+</pre></div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/cta-optimize-is-ga-avilable.html">CTA多参数优化能用遗传算法吗？</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
         <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
         <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
-        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
     </ul>
 </section>
         </article>
