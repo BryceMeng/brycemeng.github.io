@@ -246,17 +246,38 @@ r为协整系数</p>
 
 
 <h3>检测异方差(残差没有固定的方差，不服从正态分布)</h3>
-<div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">pvalue1</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">diagnostic</span><span class="o">.</span><span class="n">het_breushpagan</span><span class="p">(</span><span class="n">residuals1</span><span class="p">,</span> <span class="n">xs_with_constant</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="c1"># Artificially create dataset with changing variance around a line</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">xs</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="o">.</span><span class="mi">5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+
+<span class="c1"># Perform linear regression</span>
+<span class="n">slr2</span> <span class="o">=</span> <span class="n">regression</span><span class="o">.</span><span class="n">linear_model</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y2</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">fit2</span> <span class="o">=</span> <span class="n">slr2</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">slr2</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">xs</span>
+
+<span class="o">...</span>
+
+<span class="n">residuals1</span> <span class="o">=</span> <span class="n">y1</span><span class="o">-</span><span class="n">fit1</span>
+<span class="n">residuals2</span> <span class="o">=</span> <span class="n">y2</span><span class="o">-</span><span class="n">fit2</span>
+
+<span class="n">xs_with_constant</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">pvalue1</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">diagnostic</span><span class="o">.</span><span class="n">het_breushpagan</span><span class="p">(</span><span class="n">residuals1</span><span class="p">,</span> <span class="n">xs_with_constant</span><span class="p">)</span>
 <span class="n">_</span><span class="p">,</span> <span class="n">pvalue2</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">diagnostic</span><span class="o">.</span><span class="n">het_breushpagan</span><span class="p">(</span><span class="n">residuals2</span><span class="p">,</span> <span class="n">xs_with_constant</span><span class="p">)</span>
 <span class="c1"># pvalue1 normal  pvalue2 unnormal</span>
 <span class="k">print</span> <span class="s2">&quot;p-value for residuals1 being heteroskedastic&quot;</span><span class="p">,</span> <span class="n">pvalue1</span>
 <span class="k">print</span> <span class="s2">&quot;p-value for residuals2 being heteroskedastic&quot;</span><span class="p">,</span> <span class="n">pvalue2</span>
-<span class="c1"># 应该是0.05大于就是服从正态分布，小于不服从，暂时不能确定是不是这样判断</span>
+<span class="c1"># 大于0.05就是服从正态分布,残差不是异方差</span>
 <span class="n">p</span><span class="o">-</span><span class="n">value</span> <span class="k">for</span> <span class="n">residuals1</span> <span class="n">being</span> <span class="n">heteroskedastic</span> <span class="mf">0.740534744151</span>
 <span class="n">p</span><span class="o">-</span><span class="n">value</span> <span class="k">for</span> <span class="n">residuals2</span> <span class="n">being</span> <span class="n">heteroskedastic</span> <span class="mf">3.85868174966e-06</span>
 
+<span class="c1"># 异方差越明显说明可能不是性关系，如果没有异方差可能就是线性关系</span>
+
 <span class="c1"># 异方差调整</span>
 <span class="n">slr2</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">Y_heteroscedastic</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">breusch_pagan_p</span> <span class="o">=</span> <span class="n">smd</span><span class="o">.</span><span class="n">het_breushpagan</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 
 
@@ -294,6 +315,23 @@ r为协整系数</p>
 </pre></div>
 
 
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.stats.diagnostic</span> <span class="kn">as</span> <span class="nn">smd</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">Y_autocorrelated</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">B0</span><span class="p">,</span> <span class="n">B1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">params</span>
+<span class="n">residuals</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">resid</span>
+
+<span class="n">ljung_box</span> <span class="o">=</span> <span class="n">smd</span><span class="o">.</span><span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">&quot;Lagrange Multiplier Statistics:&quot;</span><span class="p">,</span> <span class="n">ljung_box</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">P-values:&quot;</span><span class="p">,</span> <span class="n">ljung_box</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+<span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">ljung_box</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">&quot;The residuals are autocorrelated.&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s2">&quot;The residuals are not autocorrelated.&quot;</span>
+</pre></div>
+
+
 <h3>失效模式的标准误(std err)调整</h3>
 <p>存在异方差，且异方差形式未知时，而且残差或者自变量还有可能自相关，这时候可以用newey-west对结果进行调整，因为本来有异方差时模式是要失效的，调整后还是可以取其中的值进行参考的，让它更具有统计意义</p>
 <div class="highlight"><pre><span></span><span class="c1"># Regress pricing data against time</span>
@@ -320,11 +358,11 @@ r为协整系数</p>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/behind-of-investment.html">投资的背后</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/cta-optimize-is-ga-avilable.html">CTA多参数优化能用遗传算法吗？</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
     </ul>
 </section>
         </article>

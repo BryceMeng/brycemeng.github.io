@@ -124,6 +124,7 @@
 
 <h3>两个Dataframe都是时间index，但是时间范围不一样，而且列名不一样，想组合在一块儿，用Nan来填充</h3>
 <div class="highlight"><pre><span></span><span class="c1"># 这种方式只能应用于数字，注意add的方式一样x,y的数字是会相加的，而下面的concat不会，会出现同名列</span>
+<span class="c1"># 注意，如果某个index df2中没有，是会以Nan方式填充，并不会以fill_value的值填充</span>
 
 <span class="n">df1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
@@ -222,11 +223,11 @@
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/behind-of-investment.html">投资的背后</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/cta-optimize-is-ga-avilable.html">CTA多参数优化能用遗传算法吗？</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
     </ul>
 </section>
         </article>
