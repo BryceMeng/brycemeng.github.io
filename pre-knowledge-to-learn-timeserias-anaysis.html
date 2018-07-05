@@ -129,7 +129,7 @@
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=33705671&auto=1&height=66"></iframe>
+                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=26522014&auto=1&height=66"></iframe>
 
 <p>不管是高频数据还是中低频数据都是标准的<strong>时间序列数据</strong>，而且看知乎上确实有一些机构用时间序列的回归方法做到了盈利，所以为了进一步发展决定还是学习一下，其实书早就已经买了，但是之前翻了两页，公式啥的太多了一看就头晕，这两天决定突破一下，你知道这种专业的书籍不是看书就行的，最好是有懂行的人帮你讲，可是术业有专攻，很多我认识的朋友 不是搞这个领域的，木有办法，现在还是靠度娘吧。</p>
 <p>现在把我这两天学习到的成果以最简单的方式程现出来，有些我就直接贴链接了</p>
@@ -147,6 +147,22 @@
 <p>不讲数据含义了，对现在的我来讲意义不大，主要是描述两组变量变化的方向是否一致，一致就是正数，不相关（<em>一个往北，一个往东或者是西</em>）就是0,负相关（<em>一个往东一个往西</em>）就是负数，但是纯的协方差计算出来的值意义不是特别大，因为很可能两组变量变化的方向一致，但是量不一样，这样会导致数值计算出来特别大，这样就引申出来了相关系数的概念，协方差/标准差的积，这样算出来是在-1~1之间，可以很好的量化出两组数据的相关性。</p>
 <p>我这么一两句讲的不是很透彻，来看看大神的讲解：</p>
 <p><a href="https://www.zhihu.com/question/20852004/answer/134902061">非常形象的讲解</a></p>
+<p>相关系数分两种：Pearson（皮尔逊） 和 Spearman Rank（斯皮尔曼等级）相关系数</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="kn">as</span> <span class="nn">stats</span>
+
+<span class="c1"># Pearson</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="c1"># Spearman 将数据先做rank，也就是分等级( [1.2, 3.4, 1.3] -&gt; [1,3,2] )再做 Pearson</span>
+<span class="n">r_s</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">spearmanr</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="k">print</span> <span class="s1">&#39;Spearman Rank Coefficient: &#39;</span><span class="p">,</span> <span class="n">r_s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span> <span class="s1">&#39;p-value: &#39;</span><span class="p">,</span> <span class="n">r_s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># p-value 常规用法 小于 0.05 说明存在相关性， 反之说明没相关性</span>
+</pre></div>
+
+
 <h2>矩</h2>
 <p>不是矩阵哦，符号是<strong>E(x)</strong>，期望值(Expectation)，基础概念，很多地方要用到，<strong>标准差是二阶中心矩</strong>，一阶就是均值(期望值)</p>
 <p>我不罗嗦了，来大神：</p>
@@ -353,8 +369,8 @@ r为协整系数</p>
 <p><strong>基本检测</strong>： 如果R平方值很高(模型好)但是t-statistics小(参数不准确)，说明，模型可信度高，但是参数的预测不准确，这样有可能就是多重共线性。</p>
 <p><strong>进一步检测</strong>：去掉某自变量，看会不会在不影响R平方值的情况下而提高t-statistics</p>
 <p>其实把自变量做一个相关性检测也是一项基本检测。</p>
-<h3>判断某一时间序列的加归特性</h3>
-<p>方法：Hurst exponent ， 用法见代码里面的注释</p>
+<h3>判断某一时间序列的回归特性</h3>
+<p>方法：<a href="https://en.wikipedia.org/wiki/Hurst_exponent">Hurst exponent</a> ， 用法见代码里面的注释</p>
 <div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Hurst exponent helps test whether the time series is:</span>
 <span class="sd">    (1) A Random Walk (H ~ 0.5)</span>
@@ -385,16 +401,24 @@ r为协整系数</p>
 
     <span class="k">return</span> <span class="n">hurst</span>
 </pre></div>
+
+
+<h3>置信区间</h3>
+<p>置信区间的产生要是数据符合正态分布，或者t分布才有意义</p>
+<div class="highlight"><pre><span></span><span class="n">heights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">POPULATION_MU</span><span class="p">,</span> <span class="n">POPULATION_SIGMA</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="n">SE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">heights</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">interval</span><span class="p">(</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mean_height</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">SE</span><span class="p">)</span>
+</pre></div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
         <li><a href="/cta-optimize-is-ga-avilable.html">CTA多参数优化能用遗传算法吗？</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
-        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
+        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
     </ul>
 </section>
         </article>
