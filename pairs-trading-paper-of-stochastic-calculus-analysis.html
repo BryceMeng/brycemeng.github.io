@@ -147,7 +147,7 @@
 <p>\(k(\theta -X(t)) \) 是瞬间价差的变化，\(\theta \)是长期需要回复到的平均值，也可以说是期望值，k表示回复平均的速度，\(\eta \)是波动，标准差。</p>
 <p>看到这里知道为什么用Ornstein-Uhlenbeck过程了吧，因为配对交易就是价差回归的一个过程，这个OU过程就是一个均值回归的一个过程，刚好一致。</p>
 <h3>股票A</h3>
-<p>根据 (2)(3)(4) 和 伊藤引理，可以求出</p>
+<p>上面只给出了股票B的随机微分方程，所以根据 (2)(3)(4) 和 伊藤引理，可以求出</p>
 <p>$$dA(t)=(\mu +k(\theta - X(t)) + \frac {1}{2}\eta^2+\rho\delta\eta)A(t)dt+\delta A(t)dZ(t)+\eta A(t)dW(t) \qquad (5)$$</p>
 <p>作者就一句话就出来了，我的计算过程如下：</p>
 <p>对 (3) 式两边同时求微分</p>
@@ -157,10 +157,10 @@
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
     </ul>
 </section>
         </article>
