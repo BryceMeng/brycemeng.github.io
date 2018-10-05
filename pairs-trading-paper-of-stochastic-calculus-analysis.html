@@ -131,24 +131,31 @@
 <h1>二. 把问题公式化</h1>
 <h2>定义资产</h2>
 <h3>无风险利率r的资产</h3>
-<p>$$dM(t)=rM(t)dt$$</p>
+<p>$$dM(t)=rM(t)dt \qquad (1)$$</p>
 <p>为什么是这个样子的呢？</p>
 <p>因为 \(M(t)=e^rt \quad\Rightarrow\quad M'(t)=re^rt=rM(t) \quad\Rightarrow\quad M'(t)=\frac{dM(t)}{dt}=rM(t)\)</p>
 <p>其实上面是求一个微分方程，我是根据经验猜出来的</p>
-<p>股票A和股票B，其中股票B是遵守<strong>几何布朗运动(GBM)</strong>的资产</p>
-<p>$$dB(t)=\mu B(t)dt+\delta B(t)dZ(t)$$</p>
+<h3>股票A和股票B</h3>
+<p>其中股票B是遵守<strong>几何布朗运动(GBM)</strong>的资产</p>
+<p>$$dB(t)=\mu B(t)dt+\delta B(t)dZ(t) \qquad (2)$$</p>
 <p>其中\(\mu \)是漂移量，\(\delta \)是波动，Z(t)是一个标准的布朗运动。</p>
 <p>这里要注意，GBM和标准的BM是不一样的，他们求微分所对应的伊藤公式也是不一样的。</p>
+<h3>股价对数的差(spread)</h3>
+<p>$$X(t)=ln(A(t))-ln(B(t)) \qquad (3)$$</p>
+<p>假定 X(t) 遵守 <a href="https://en.wikipedia.org/wiki/Ornstein%E2%80%93Uhlenbeck_process"><strong>Ornstein-Uhlenbeck process</strong></a></p>
+<p>$$dX(t)=k(\theta -X(t))dt+\eta dW(t) \qquad (4)$$</p>
+<p>\(k(\theta -X(t)) \) 是瞬间价差的变化，\(\theta \)是长期需要回复到的平均值，也可以说是期望值，k表示回复平均的速度，\(\eta \)是波动，标准差。</p>
+<p>看到这里知道为什么用Ornstein-Uhlenbeck过程了吧，因为配对交易就是价差回归的一个过程，这个OU过程就是一个均值回归的一个过程，刚好一致。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
     </ul>
 </section>
         </article>
