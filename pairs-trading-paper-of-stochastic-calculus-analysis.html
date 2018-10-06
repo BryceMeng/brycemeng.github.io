@@ -152,9 +152,9 @@
 <p>作者就一句话就出来了，我的计算过程如下：</p>
 <p>对 (3) 式两边同时求微分</p>
 <p>$$
-dX(t) = dln(A(t)) + dln(B(t))\\
+dX(t) = dln(A(t)) - dln(B(t))\\
 \Downarrow\\
-dX(t) = \frac {d(A(t))}{A(t)} + dln(B(t))
+dX(t) = \frac {d(A(t))}{A(t)} - dln(B(t))
 $$</p>
 <p>这里注意，\(ln(B(t))\)里面的因子是布朗运动，不是普通的微分，得用伊藤引理来求微分，而且要注意，GBM是伊藤过程，不是标准的BM，伊藤引理引用的公式是不一样的</p>
 <p>下面来求 \(dln(B(t))\)</p>
@@ -164,6 +164,14 @@ dln(B(t))&amp;=f'(B(t))dB(t)+ \frac{1}{2}f''(B(t))B(t)^2{\delta}^2dt\\
 &amp;= {\mu}dt+{\delta}dZ(t)-\frac{1}{2}{\delta}^2dt\\
 &amp;= ({\mu}-\frac{1}{2}{\delta}^2)dt+{\delta}dZ(t)
 \end{split}\end{equation}</p>
+<p>再来求 \(dA(t)\)</p>
+<p>$$
+k(\theta -X(t))dt+{\eta}dW(t)=\frac {d(A(t))}{A(t)}-({\mu}-\frac{1}{2}{\delta}^2)dt-{\delta}dZ(t)\\
+\Downarrow\\
+\frac {d(A(t))}{A(t)}=(k(\theta -X(t))+{\mu}-\frac{1}{2}{\delta}^2)dt+{\eta}dW(t)+{\delta}dZ(t)\\
+\Downarrow\\
+d(A(t))=(k(\theta -X(t))+{\mu}-\frac{1}{2}{\delta}^2)A(t)dt+{\eta}A(t)dW(t)+{\delta}A(t)dZ(t)
+$$</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
@@ -172,7 +180,7 @@ dln(B(t))&amp;=f'(B(t))dB(t)+ \frac{1}{2}f''(B(t))B(t)^2{\delta}^2dt\\
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
         <li><a href="/nature-distribution.html">自然分布</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
-        <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
     </ul>
 </section>
