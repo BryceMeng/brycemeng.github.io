@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>量化中的一些注意细节(数据) - 雪山</title>
+    <title>数学分析的一些感悟 - 雪山</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,20 +10,21 @@
 
     <link href="/images/favicon.png" rel="icon">
 
-<link rel="canonical" href="/details-in-quant.html">
+<link rel="canonical" href="/some-idea-of-functional-analysis.html">
 
         <meta name="author" content="雪山" />
-        <meta name="keywords" content="量化" />
-        <meta name="description" content="量化中的一些注意细节（数据）" />
+        <meta name="keywords" content="量化,数学" />
+        <meta name="description" content="有些东西不记录下来会忘记的" />
 
         <meta property="og:site_name" content="雪山" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="量化中的一些注意细节(数据)"/>
-        <meta property="og:url" content="/details-in-quant.html"/>
-        <meta property="og:description" content="量化中的一些注意细节（数据）"/>
-        <meta property="article:published_time" content="2017-08-10" />
+        <meta property="og:title" content="数学分析的一些感悟"/>
+        <meta property="og:url" content="/some-idea-of-functional-analysis.html"/>
+        <meta property="og:description" content="有些东西不记录下来会忘记的"/>
+        <meta property="article:published_time" content="2018-11-13" />
             <meta property="article:section" content="量化" />
             <meta property="article:tag" content="量化" />
+            <meta property="article:tag" content="数学" />
             <meta property="article:author" content="雪山" />
 
 
@@ -95,10 +96,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/details-in-quant.html"
+                    <a href="/some-idea-of-functional-analysis.html"
                        rel="bookmark"
-                       title="Permalink to 量化中的一些注意细节(数据)">
-                        量化中的一些注意细节(数据)
+                       title="Permalink to 数学分析的一些感悟">
+                        数学分析的一些感悟
                     </a>
                 </h1>
             </header>
@@ -108,7 +109,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-08-10T16:30:00+08:00"> 四 10 八月 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-11-13T08:50:00+08:00"> 二 13 十一月 2018</time>
     </span>
 
 
@@ -117,17 +118,19 @@
 
 <span class="label label-default">Tags</span>
 	<a href="/tag/liang-hua.html">量化</a>
+        /
+	<a href="/tag/shu-xue.html">数学</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <ol>
-<li>
-<p><strong>CZCE毫秒问题</strong>。我现在主要是存储ctp的tick数据，也用tick数据进行回测，现在国内的tick数据是1秒钟两条，上期基本是0和500毫秒时各一条，大商所好像会随机性强一点，不过也是带毫秒的，但是郑商所是不带毫秒的，其实对实盘影响还好，但是对回测数据的存储非常恼火，我现在是做了处理，在毫秒那儿我自己增加了10毫秒。</p>
-</li>
-<li>
-<p><strong>CZCE非交易时段发出tick数据</strong>。暂未实盘验证，可以在策略里加上时间过滤。</p>
-</li>
-</ol>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<h2>Lp空间和可积的关系</h2>
+<p>Lp空间是<strong>p次可积函数</strong>的集合，定义如下：</p>
+<p>$${\displaystyle {\mathcal {L}}^{p}(S,\mu )=\left{f;\;|f|<em S>{p}=\left({\int </em>|f|^{p}\;\mathrm {d} \mu }\right)^{\frac {1}{p}}&lt;\infty \right}}$$</p>
+<p>为什么是一个定积分的值小于无穷呢？因为积分值无穷大是不可积的，这个在《金融随机分析2》 p13可以看到类似的东西</p>
+<p>所以<strong>积分的值为有限值即为可积</strong>，这样也必然是收敛的，不收敛的值必然会到无穷大</p>
+<p>所以<strong>p次可积函数的集合</strong>这个概念是不是就好理解一些了</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">

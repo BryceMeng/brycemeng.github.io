@@ -156,7 +156,7 @@ dX(t) = dln(A(t)) - dln(B(t))\\
 \Downarrow\\
 dX(t) = \frac {d(A(t))}{A(t)} - dln(B(t))
 $$</p>
-<p>这里注意，\(ln(B(t))\)里面的因子是布朗运动，不是普通的微分，得用伊藤引理来求微分，而且要注意，GBM是伊藤过程，不是标准的BM，伊藤引理引用的公式是不一样的</p>
+<p>这里注意，\(ln(B(t))\)里面的因子是布朗运动，不是普通的微分，得用伊藤引理来求微分，而且要注意，<a href="https://zh.wikipedia.org/zh-hans/%E5%87%A0%E4%BD%95%E5%B8%83%E6%9C%97%E8%BF%90%E5%8A%A8">GBM(链接里面有对应的伊藤公式)</a>是伊藤过程，不是标准的BM，伊藤引理引用的公式是不一样的</p>
 <p>下面来求 \(dln(B(t))\)</p>
 <p>\begin{equation}\begin{split}
 dln(B(t))&amp;=f'(B(t))dB(t)+ \frac{1}{2}f''(B(t))B(t)^2{\delta}^2dt\\
@@ -177,16 +177,17 @@ $$</p>
 {\eta}^2+2{\rho}{\delta}{\eta}+{\delta}^2=0
 $$</p>
 <p>其中\({\rho}\)是\(Z(t)\)和\(W(t)\)的相关系数，满足\(dZ(t)dW(t)={\rho}dt\)，然后论文中说\({\rho}{\delta}{\eta}\)来自于\(Z(t)\)和\(W(t)\)的协方差，其他我就推导不出来了。。。。。。</p>
+<p>去学习优化控制了，微积分搞死人啊。。。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/nature-distribution.html">自然分布</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
     </ul>
 </section>
         </article>
@@ -239,7 +240,7 @@ $$</p>
     <li class="list-group-item tag-4">
       <a href="/tag/hifi.html">hifi</a>
     </li>
-    <li class="list-group-item tag-1">
+    <li class="list-group-item tag-2">
       <a href="/tag/ji-zhu.html">技术</a>
     </li>
     <li class="list-group-item tag-4">
@@ -262,6 +263,9 @@ $$</p>
     </li>
     <li class="list-group-item tag-4">
       <a href="/tag/shi-jian-xu-lie.html">时间序列</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/shu-xue.html">数学</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="/tag/tong-ji.html">统计</a>

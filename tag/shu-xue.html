@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>量化中的一些注意细节(数据) - 雪山</title>
+    <title>数学 - 雪山</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,21 +10,16 @@
 
     <link href="/images/favicon.png" rel="icon">
 
-<link rel="canonical" href="/details-in-quant.html">
 
-        <meta name="author" content="雪山" />
-        <meta name="keywords" content="量化" />
-        <meta name="description" content="量化中的一些注意细节（数据）" />
+    <meta name="author" content="雪山" />
+    <meta name="keywords" content="数学" />
 
+    <!-- Open Graph tags -->
         <meta property="og:site_name" content="雪山" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="量化中的一些注意细节(数据)"/>
-        <meta property="og:url" content="/details-in-quant.html"/>
-        <meta property="og:description" content="量化中的一些注意细节（数据）"/>
-        <meta property="article:published_time" content="2017-08-10" />
-            <meta property="article:section" content="量化" />
-            <meta property="article:tag" content="量化" />
-            <meta property="article:author" content="雪山" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="雪山"/>
+        <meta property="og:url" content=""/>
+        <meta property="og:description" content="雪山"/>
 
 
     <!-- Bootstrap -->
@@ -73,7 +68,7 @@
                         <li >
                             <a href="/category/ji-zhu.html">技术</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="/category/liang-hua.html">量化</a>
                         </li>
                         <li >
@@ -91,57 +86,13 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="/details-in-quant.html"
-                       rel="bookmark"
-                       title="Permalink to 量化中的一些注意细节(数据)">
-                        量化中的一些注意细节(数据)
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-08-10T16:30:00+08:00"> 四 10 八月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/liang-hua.html">量化</a>
-    
-</footer><!-- /.post-info -->                    </div>
+            <article>
+                <h2><a href="/some-idea-of-functional-analysis.html">数学分析的一些感悟</a></h2>
+                <div class="summary"><p>有些东西不记录下来会忘记的</p>
+                    <a class="btn btn-default btn-xs" href="/some-idea-of-functional-analysis.html">more ...</a>
                 </div>
-                <ol>
-<li>
-<p><strong>CZCE毫秒问题</strong>。我现在主要是存储ctp的tick数据，也用tick数据进行回测，现在国内的tick数据是1秒钟两条，上期基本是0和500毫秒时各一条，大商所好像会随机性强一点，不过也是带毫秒的，但是郑商所是不带毫秒的，其实对实盘影响还好，但是对回测数据的存储非常恼火，我现在是做了处理，在毫秒那儿我自己增加了10毫秒。</p>
-</li>
-<li>
-<p><strong>CZCE非交易时段发出tick数据</strong>。暂未实盘验证，可以在策略里加上时间过滤。</p>
-</li>
-</ol>
-            </div>
-            <!-- /.entry-content -->
-<section class="well" id="related-posts">
-    <h4>Related Posts:</h4>
-    <ul>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
-    </ul>
-</section>
-        </article>
-    </section>
+            </article>
+            <hr/>
 
         </div>
         <div class="col-sm-3" id="sidebar">
