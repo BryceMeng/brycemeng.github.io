@@ -134,16 +134,39 @@ $$</p>
 <p>为什么是一个定积分的值小于无穷呢？因为积分值无穷大是不可积的，这个在《金融随机分析2》 p13可以看到类似的东西</p>
 <p>所以<strong>积分的值为有限值即为可积</strong>，这样也必然是收敛的，不收敛的值必然会到无穷大</p>
 <p>所以<strong>p次可积函数的集合</strong>这个概念是不是就好理解一些了</p>
+<p><strong>那么函数与集合之间又有什么关系呢？</strong></p>
+<p>这是个好问题，下面就是一个函数集合</p>
+<p>$$
+{\displaystyle a=({\frac {1}{n}})_{n\in \mathbb {N} ^{*}}=\left(1,{\frac {1}{2}},{\frac {1}{3}},\cdots ,{\frac {1}{n}},\cdots \right)}
+$$</p>
+
+<p>下面是范数的公式，p就是Lp中的p，不同的Lp空间范数公式是不同的，关键点就在于p</p>
+<p>$$
+{\displaystyle \|(x_{n})_{n\in \mathbb {N} }\|_{p}=\left(|x_{1}|^{p}+|x_{2}|^{p}+\dotsb +|x_{n}|^{p}+|x_{n+1}|^{p}+\dotsb \right)^{\frac {1}{p}}=\left(\sum _{n\in \mathbb {N} }|x_{n}|^{p}\right)^{\frac {1}{p}}.}
+$$</p>
+
+<p>所以在\({\displaystyle \ell ^{1}}\)里面a数列的范数是\({\displaystyle 1+{\frac {1}{2}}+{\frac {1}{3}}+\cdots +{\frac {1}{n}}+\cdots }\)</p>
+<p>在\({\displaystyle \ell ^{2}}\)里面a数列的范数是\({\displaystyle 1+{\frac {1}{2^{2}}}+{\frac {1}{3^{2}}}+\cdots +{\frac {1}{n^{2}}}+\cdots }\)</p>
+<p>\({\displaystyle \ell ^{1}} \ell ^{1}\)空间，所有绝对收敛级数列构成的空间；
+\({\displaystyle \ell ^{2}} \ell^2\)空间，所有平方收敛级数列构成的空间；
+\({\displaystyle \ell ^{\infty }} \ell ^{\infty }\)空间，所有有界数列构成的空间。</p>
+<p>看到一个关键词没有，级数，看看下面的一些实例，是不是级数(数列)可以和函数相关联，是不是所有的函数都能通过<strong>幂级数</strong>来表达，这样<strong>数列</strong>和<strong>函数</strong>间的关系貌似就很微妙了。不过这种关系是我自己猜测的。</p>
+<p>$$
+e^x = 1+x+\frac{1}{2!}x^2+\frac{1}{3!}x^3+...+\frac{1}{n!}x^n ,x\in(-\infty,+\infty)\\
+ln(1+x) = x - \frac{1}{2}x^2+\frac{1}{3}x^3-\frac{1}{4}x^2+...+\frac{(-1)^{n-1}}{n}x^{n}+..., x\in(-1,1] \\
+sinx = x - \frac{1}{3!}x^3+\frac{1}{5!}x^5 +...+ (-1)^n\frac{1}{(2n+1)!}x^{2n+1}+...,x\in(-\infty,+\infty)\\
+cosx = 1 - \frac{1}{2!}x^2+\frac{1}{4!}x^4 +...+ (-1)^n\frac{1}{(2n)!}x^{2n}+...,x\in(-\infty,+\infty)\\
+$$</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/nature-distribution.html">自然分布</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
         <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
         <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
     </ul>
 </section>
         </article>
