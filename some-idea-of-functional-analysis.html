@@ -159,16 +159,35 @@ ln(1+x) = x - \frac{1}{2}x^2+\frac{1}{3}x^3-\frac{1}{4}x^2+...+\frac{(-1)^{n-1}}
 sinx = x - \frac{1}{3!}x^3+\frac{1}{5!}x^5 +...+ (-1)^n\frac{1}{(2n+1)!}x^{2n+1}+...,x\in(-\infty,+\infty)\\
 cosx = 1 - \frac{1}{2!}x^2+\frac{1}{4!}x^4 +...+ (-1)^n\frac{1}{(2n)!}x^{2n}+...,x\in(-\infty,+\infty)\\
 $$</p>
+
+<h2>picard 逐次逼近法</h2>
+<p>参考： <a href="https://en.wikipedia.org/wiki/Picard%E2%80%93Lindel%C3%B6f_theorem">wikipedia</a>，
+<a href="https://baike.baidu.com/item/%E7%9A%AE%E5%8D%A1%E9%80%90%E6%AC%A1%E9%80%BC%E8%BF%91%E6%B3%95/19035027">Baidu picard 逐次逼近法</a></p>
+<p>之前在看动态优化时看到一些证明解的存在及唯一性的证法看得我特别头晕，在两本书中发现了共同点</p>
+<blockquote>
+<p>《常微分方程》-&gt; p62 <br>
+《动态规划方法与HJB方程》-&gt; p15</p>
+</blockquote>
+<p>在《常微分方程》书中找到了答案，其实是一个套路(<strong><em>一套已经既定的理论</em></strong>)，这套证明ODE解的存在唯一性的方法就是<strong>picard 逐次逼近法</strong></p>
+<p>详细过程建议可以看wikipedia，Baidu那个参考只有流程。流程如下：</p>
+<p>$$
+\left\{ \begin{array} { l } { \frac { d y } { d x } = f ( x , y ) } \\ { y \left( x _ { 0 } \right) = y _ { 0 } } \end{array} \right.
+$$</p>
+
+<p>初值问题转化为等价的积分方程</p>
+<p>$$
+y = y _ { 0 } + \int _ { x _ { 0 } } ^ { x } f ( x , y ) d x
+$$</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
     </ul>
 </section>
         </article>
