@@ -229,9 +229,24 @@ dX(t)dX(t) &= \alpha^{2}dtdt + \eta^{2}dW(t)dW(t) + 2\alpha\eta dW(t)dt\\
 &= 0 + \eta^{2}dt + 0\\
 &= \eta^{2}dt\\
 \end{align}\\
-
+\Downarrow\\
 \frac{1}{2}B(t)dX(t)dX(t) = \frac{1}{2}B(t)\eta^{2}dt
 $$</p>
+
+<p>把上面的结果进行整合，把104式中和式的第1项和第2项展开可得</p>
+<p>$$
+d A ( t ) = e ^ { x (t) } (\mu B(t)dt+\sigma B(t)dZ(t)+B(t)\alpha dt+\eta B(t)dW(t)+
+\rho\sigma\eta B(t)dt+\frac{1}{2}B(t)\eta^{2}dt)\\
+\Downarrow\\
+dA(t)=e^{x(t)}B(t)(\mu dt+\sigma dZ(t)+\alpha dt+\eta dW(t)+
+\rho\sigma\eta dt+\frac{1}{2}\eta^{2}dt)\\
+\Downarrow\\
+dA(t)=A(t)((\mu +\alpha + \rho\sigma\eta + \frac{1}{2}\eta^{2})dt+\sigma dZ(t)+\eta dW(t))\\
+\Downarrow\\
+dA(t)=(\mu +k(\theta - X(t)) + \rho\sigma\eta + \frac{1}{2}\eta^{2})A(t)dt+\sigma A(t)dZ(t)+\eta A(t)dW(t) \qquad (5)
+$$</p>
+
+<p>这样就推到了论文上的5式。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
@@ -241,7 +256,7 @@ $$</p>
         <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
         <li><a href="/behind-of-investment.html">投资的背后</a></li>
         <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
-        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
     </ul>
 </section>
         </article>
