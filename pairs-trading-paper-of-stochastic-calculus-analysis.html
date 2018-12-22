@@ -179,25 +179,25 @@ $$</p>
 \rho \delta \eta = - \frac { 1 } { 2 } \left( \delta ^ { 2 } + \eta ^ { 2 } \right)
 $$</p>
 <p>其中\({\rho}\)是\(Z(t)\)和\(W(t)\)的相关系数，满足\(dZ(t)dW(t)={\rho}dt\)，然后论文中说\({\rho}{\delta}{\eta}\)来自于\(Z(t)\)和\(W(t)\)的协方差，这个等式成立吗？我是找了各种资料也不知道这个等式是否成立，或者为什么成立。。。。。。</p>
-<p>之前的思路是错的，但是我不打算删掉，接下来才是正确的思路</p>
+<p><strong>之前的思路是错的，但是我不打算删掉，接下来才是正确的思路</strong></p>
 <p>核心思路就是通过B(t)和X(t)来确定A(t)的随机微分方程，因为B和X是已知的。那么会有人讲，A和B都是stock price，不能都定义成GBM吗？如果A也定义成GBM，那么A、B、X间形成不了等式的关系，所以通过B、X来确定A是一个很好的思路。</p>
 <p>那么上面的求解思路有什么问题呢？我把A当成普通随机过程了，我怎么知道A里面不含布朗运动呢？只要含布朗运动的微分方程，做微分的链式展开时就和普通的链式展开法则不一样的。所以把A写成B和X的表达式再做Ito展开才是正解。为什么要做Ito展开呢？因为A的表达示里面有B和X，而B和X是已知的Ito过程，所以如果展开必然用Ito展开。</p>
 <p>对3式做变换</p>
 <p>
-\begin{array} { c } { A ( t ) = e ^ { x ( t ) } B ( t ) }  \qquad (101) \\\\
+{ c } { A ( t ) = e ^ { x ( t ) } B ( t ) }  \qquad (101) \\\\
 \Downarrow\\\\ 
-{ d A ( t ) = d \left( e ^ { x ( t ) } B ( t ) \right) }  \qquad (102) \end{array}
+{ d A ( t ) = d \left( e ^ { x ( t ) } B ( t ) \right) }  \qquad (102)
 </p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
-        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
         <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
     </ul>
 </section>
         </article>
