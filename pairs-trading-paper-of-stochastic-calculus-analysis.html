@@ -207,7 +207,7 @@ $$</p>
 <p>对104中的部分进行拆解分析</p>
 <p>$$
 \begin{equation}
-k ( \theta - x ( t ) ) = \alpha\\\\
+set k ( \theta - x ( t ) ) = \alpha\\\\
 \begin{split}
 d B ( t ) d x ( t ) &= \alpha \mu B ( t ) d t d t + \mu \eta B(t) dW(t) dt + \alpha\sigma dZ(t)dt + B(t)\sigma\eta dW(t)dZ(t)\\\\
 &= 0+0+0+B(t)\sigma\eta dW(t)dZ(t)\\\\
@@ -215,16 +215,23 @@ d B ( t ) d x ( t ) &= \alpha \mu B ( t ) d t d t + \mu \eta B(t) dW(t) dt + \al
 \end{split}
 \end{equation}
 $$</p>
+
+<p>这里用到了随机分析里面很重要的一些等式(<strong><em>金融随机分析 第二卷(中文版) 式4.4.12</em></strong>)</p>
+<p>$$
+d W ( t ) d W ( t ) = d t , \quad d t d W ( t ) = d W ( t ) d t = 0 , \quad d t d t = 0 
+$$</p>
+
+<p>最后一步用到了\(dW(t)dZ(t)=\rho dt\)，由论文中给出</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
         <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
     </ul>
 </section>
         </article>
