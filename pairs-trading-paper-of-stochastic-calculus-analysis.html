@@ -179,27 +179,35 @@ $$</p>
 \rho \delta \eta = - \frac { 1 } { 2 } \left( \delta ^ { 2 } + \eta ^ { 2 } \right)
 $$</p>
 <p>其中\({\rho}\)是\(Z(t)\)和\(W(t)\)的相关系数，满足\(dZ(t)dW(t)={\rho}dt\)，然后论文中说\({\rho}{\delta}{\eta}\)来自于\(Z(t)\)和\(W(t)\)的协方差，这个等式成立吗？我是找了各种资料也不知道这个等式是否成立，或者为什么成立。。。。。。</p>
-<p><strong>之前的思路是错的，但是我不打算删掉，接下来才是正确的思路</strong></p>
+<p><strong>之前的思路是错的，但是我不打算删掉，接下来才是正确的思路，非常感谢知乎大神（消****）的指点</strong></p>
 <p>核心思路就是通过B(t)和X(t)来确定A(t)的随机微分方程，因为B和X是已知的。那么会有人讲，A和B都是stock price，不能都定义成GBM吗？如果A也定义成GBM，那么A、B、X间形成不了等式的关系，所以通过B、X来确定A是一个很好的思路。</p>
 <p>那么上面的求解思路有什么问题呢？我把A当成普通随机过程了，我怎么知道A里面不含布朗运动呢？只要含布朗运动的微分方程，做微分的链式展开时就和普通的链式展开法则不一样的。所以把A写成B和X的表达式再做Ito展开才是正解。为什么要做Ito展开呢？因为A的表达示里面有B和X，而B和X是已知的Ito过程，所以如果展开必然用Ito展开。</p>
 <p>对3式做变换</p>
 <p>$$
-{ c } { A ( t ) = e ^ { x ( t ) } B ( t ) }  \qquad (101) \\\\
+{ A ( t ) = e ^ { x ( t ) } B ( t ) }  \qquad (101) \\\\
 \Downarrow\\\\ 
 { d A ( t ) = d \left( e ^ { x ( t ) } B ( t ) \right) }  \qquad (102)
 $$</p>
 
 <p>接下来的目标就是从102式推导到5式</p>
+<p>$$
+d A ( t ) = e ^ { x (t) } d B ( t ) + B ( t ) e ^ { x (t) } d x + e ^ {(x)} d B ( t ) d x ( t ) + \frac { 1 } { 2 } B ( t ) e ^ { x (t) } d x ( t ) d x ( t ) \qquad (103)
+$$</p>
+
+<p>到103式怎么来的呢？这就是随机分析里面的核心之一：<strong>伊藤展开</strong>，单元和多元的都很重要，下面列出本文中用到的二元伊藤展开公式，二元就是B和X(<strong><em>金融随机分析 第二卷(中文版) 定理4.6.2</em></strong>)</p>
+<p>$$
+\begin{aligned} d f ( t , X , Y ) = f _ { t } d t + f _ { x } d X + f _ { y } d Y + \frac { 1 } { 2 } f _ { x x } d X d X + f _ { x y } d X d Y + \frac { 1 } { 2 } f _ { y y } d Y d Y \end{aligned}
+$$</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
         <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></li>
     </ul>
 </section>
         </article>
