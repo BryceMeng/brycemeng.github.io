@@ -278,7 +278,10 @@ A ^ { v } G ( t , y ) : = G _ { t } ( t , y ) + 0,5 \sum _ { i , j = 1 } ^ { n }
 G ( T , x , r ) = x ^ { \gamma }
 $$</p>
 
-<p>推导这个式子应该是在另外一本书中 <em>《》</em></p>
+<p>推导这个式子应该是在另外一本书中 <em>《Controlled_Markov_Processes_and_Viscosity_Solutions》</em>，好吧，就不深入研究了，能找到这个式子已经很不容易了。</p>
+<p>$$
+\begin{aligned} Y ( t ) & = ( X ( t ) , r ( t ) ) ^ { \prime } \\ \Lambda ( t , x , r , \pi ) & = ( x ( \pi \zeta \sigma + r ) , a ) ^ { \prime } \\ \Sigma ( t , x , r , \pi ) & = ( x \pi \sigma , b ) ^ { \prime } \\ \Sigma ^ { * } ( t , x , r , \pi ) & = \left( \begin{array} { c c } { x ^ { 2 } \pi ^ { 2 } \sigma ^ { 2 } } & { b x \pi \sigma } \\ { b x \pi \sigma ^ { 2 } } & { b x \pi \sigma } \\ { b x \pi \sigma } & { b ^ { 2 } } \end{array} \right) \\ A ^ { \pi } G ( t , x , r ) = & G _ { t } + 0,5 \left( x ^ { 2 } \pi ^ { 2 } \sigma ^ { 2 } G _ { x x } + 2 x \pi b \sigma G _ { x r } + b ^ { 2 } G _ { r r } \right) \\ & + x ( \pi \zeta \sigma + r ) G _ { x } + a G _ { r } \end{aligned}
+$$</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
@@ -286,9 +289,9 @@ $$</p>
     <ul>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
-        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
     </ul>
 </section>
         </article>
