@@ -247,7 +247,7 @@ dA(t)=(\mu +k(\theta - X(t)) + \rho\sigma\eta + \frac{1}{2}\eta^{2})A(t)dt+\sigm
 $$</p>
 
 <p>这样就推到了论文上的5式。</p>
-<p><strong>纠正8式</strong></p>
+<p><strong>纠正8式</strong>，dW(t)前面少了个参数h，推导就是把各式代入进去，太简单了，这里就不写了</p>
 <p>$$
 d V ( t ) =  V ( t ) { [ h ( t ) ( k ( \theta - X ( t ) ) + \frac { 1 } { 2 } \eta ^ { 2 } + \rho \sigma \eta)  + r ] d t + \eta d W ( t ) } 
 $$</p>
@@ -265,16 +265,21 @@ $$</p></p>
 <p>先吐个槽，看这篇论文之前完全不懂优化控制这块的东西，就连微积分都不懂，花了老大精力刷了ODE，入门了一下PDE，SDE没有看，然后优化控制，从变分法，Pontryagin极大值原理到HJB动态规划。</p>
 <p>结束这一套知识体系的建立后我又拿起这篇论文，发现这里面的HJB是基于SDE二阶的，而我之前看的是基于ODE一阶的，好吧，买了一本随机过程刷了里面的二阶HJB，又拿起论文一看。。。这篇论文里面的控制变量是二维的，我看过的所有的书中都未曾提及。肿么办？</p>
 <p>在有点焦急和丧气的时候发现了论文里面某个点对另外一篇论文 <em>《A Stochastic Control Approach to Portfolio Problems With Stochastic Interest Rates》</em> 的引用，看到了里面对二维控制变量HJB的解释，终于找到你了。今天刷完了，也把论文中的HJB推导出来了，那一刻差点感冒。</p>
+<p>$$
+d Y ( t ) = \Lambda ( t , Y ( t ) , u ( t ) ) d t + \Sigma ( t , Y ( t ) , u ( t ) ) d W ( t )
+$$</p>
+
+<p>上面这个议程是状态方程，多维的，我们要按照这个样子把Y(t)=(V(t),X(t))按照这个样子写出来，求出\(\Lambda and \Sigma \)的表达式</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
         <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/some-idea-of-functional-analysis.html">数学分析的一些感悟</a></li>
     </ul>
 </section>
         </article>
