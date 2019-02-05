@@ -269,17 +269,24 @@ $$</p></p>
 d Y ( t ) = \Lambda ( t , Y ( t ) , u ( t ) ) d t + \Sigma ( t , Y ( t ) , u ( t ) ) d W ( t )
 $$</p>
 
-<p>上面这个议程是状态方程，多维的，我们要按照这个样子把Y(t)=(V(t),X(t))按照这个样子写出来，求出\(\Lambda 和 \Sigma \)的表达式</p>
+<p>上面这个议程是状态方程，多维的，我们要按照这个样子把Y(t)=(V(t),X(t))按照这个样子写出来，求出\(\Lambda 和 \Sigma \)的表达式。然后求出HJB方程如下：</p>
+<p>$$
+A ^ { v } G ( t , y ) : = G _ { t } ( t , y ) + 0,5 \sum _ { i , j = 1 } ^ { n } \Sigma _ { i j } ^ { * } ( t , y , v ) \cdot G _ { y _ { i } y _ { j } } ( t , y ) + \sum _ { i = 1 } ^ { n } \Lambda _ { i } ( t , y , v ) \cdot G _ { y _ { i } } ( t , y )
+\\
+\sup _ { | \pi | \leq \delta } A ^ { \pi } G ( t , x , r ) = 0
+\\
+G ( T , x , r ) = x ^ { \gamma }
+$$</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
-        <li><a href="/future-open-interest.html">期货持仓量</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
     </ul>
 </section>
         </article>
