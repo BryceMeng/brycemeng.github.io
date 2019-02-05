@@ -247,17 +247,34 @@ dA(t)=(\mu +k(\theta - X(t)) + \rho\sigma\eta + \frac{1}{2}\eta^{2})A(t)dt+\sigm
 $$</p>
 
 <p>这样就推到了论文上的5式。</p>
+<p><strong>纠正8式</strong></p>
+<p>$$
+\begin{aligned} d V ( t ) = & V ( t ) \left\{ \left[ h ( t ) \left( k ( \theta - X ( t ) ) + \frac { 1 } { 2 } \eta ^ { 2 } + \rho \sigma \eta \right) \right. \right.  + r ] d t + \eta d W ( t ) \} \end{aligned}
+$$</p>
+
+<p>更正后8式：</p>
+<p>$$
+\begin{aligned} d V ( t ) = & V ( t ) \left\{ \left[ h ( t ) \left( k ( \theta - X ( t ) ) + \frac { 1 } { 2 } \eta ^ { 2 } + \rho \sigma \eta \right) \right. \right.  + r ] d t + h\eta d W ( t ) \} \end{aligned}
+$$</p>
+
+<p>所以更正后的 dV(t)为：
+<p>$$
+\begin{aligned} d V ( t ) = &amp; V ( t ) \left( \left( h ( t ) \left( k ( \theta - X ( t ) ) + \frac { 1 } { 2 } \eta ^ { 2 } \right. \right. \right.  + \rho \sigma \eta ) + r ) d t + h\eta d W ( t ) ) \end{aligned}
+$$</p></p>
 <h1>三. 建立优化方程(HJB)</h1>
+<p>先吐个槽，看这篇论文之前完全不懂优化控制这块的东西，就连微积分都不懂，花了老大精力刷了ODE，入门了一下PDE，SDE没有看，然后优化控制，从变分法，Pontryagin极大值原理到HJB动态规划。</p>
+<p>结束这一套知识体系的建立后我又拿起这篇论文，发现这里面的HJB是基于SDE二阶的，而我之前看的是基于ODE一阶的，好吧，买了一本随机过程刷了里面的二阶HJB，又拿起论文一看。。。这篇论文里面的控制变量是二维的，我看过的所有的书中都未曾提及。肿么办？</p>
+<p>在有点焦急和丧气的时候发现了论文里面某个点对另外一篇论文 <em>《A Stochastic Control Approach to Portfolio Problems With Stochastic Interest Rates》</em> 的引用，看到了里面对二维控制变量HJB的解释，终于找到你了。今天刷完了，也把论文中的HJB推导出来了，那一刻差点感冒。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
         <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/some-idea-of-functional-analysis.html">数学分析的一些感悟</a></li>
     </ul>
 </section>
         </article>
