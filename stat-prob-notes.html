@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Elite3 - 雪山</title>
+    <title>统计小计 - 雪山</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,16 +10,23 @@
 
     <link href="/images/favicon.png" rel="icon">
 
+<link rel="canonical" href="/stat-prob-notes.html">
 
-    <meta name="author" content="雪山" />
-    <meta name="keywords" content="Elite3" />
+        <meta name="author" content="雪山" />
+        <meta name="keywords" content="量化,统计,数学" />
+        <meta name="description" content="统计学中遇到的一些东西" />
 
-    <!-- Open Graph tags -->
         <meta property="og:site_name" content="雪山" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="雪山"/>
-        <meta property="og:url" content=""/>
-        <meta property="og:description" content="雪山"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="统计小计"/>
+        <meta property="og:url" content="/stat-prob-notes.html"/>
+        <meta property="og:description" content="统计学中遇到的一些东西"/>
+        <meta property="article:published_time" content="2019-02-23" />
+            <meta property="article:section" content="量化" />
+            <meta property="article:tag" content="量化" />
+            <meta property="article:tag" content="统计" />
+            <meta property="article:tag" content="数学" />
+            <meta property="article:author" content="雪山" />
 
 
     <!-- Bootstrap -->
@@ -68,7 +75,7 @@
                         <li >
                             <a href="/category/ji-zhu.html">技术</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="/category/liang-hua.html">量化</a>
                         </li>
                         <li >
@@ -86,13 +93,61 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></h2>
-                <div class="summary"><p>EdgeRouter Lite 3配置实例，这是一款性能非常高，但非常难配的路由器</p>
-                    <a class="btn btn-default btn-xs" href="/edgerouter-lite-3-config.html">more ...</a>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/stat-prob-notes.html"
+                       rel="bookmark"
+                       title="Permalink to 统计小计">
+                        统计小计
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2019-02-23T11:32:00+08:00"> 六 23 二月 2019</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/liang-hua.html">量化</a>
+        /
+	<a href="/tag/tong-ji.html">统计</a>
+        /
+	<a href="/tag/shu-xue.html">数学</a>
+    
+</footer><!-- /.post-info -->                    </div>
                 </div>
-            </article>
-            <hr/>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<h2>Population Stability Index (PSI) 稳定度指标</h2>
+<p>$$P S I = \sum \left( f _ { \text { development } } ^ { i } - f _ { \text {validation} } ^ { i } \right) * \ln \left( f _ { \text {development} } ^ { i } / f _ { \text {validation} } ^ { i } \right)$$</p>
+<p>概念简单，表明某时刻某群体真实值和预测模型间的偏离度。</p>
+<p>study: <a href="http://ucanalytics.com/blogs/population-stability-index-psi-banking-case-study/">Bank case PSI</a>, <a href="http://manuge.com/population-stability-index/">PSI</a></p>
+<p>实际策略：<a href="http://www.priceactionlab.com/Blog/2017/10/dow-30-weekly-mean-reversion-strategy/">PSI5 mean reversion</a></p>
+<p>这个策略没有源码和思路，只是说是用的统计学教科书中关于股价的公式来做的，而且是用的PSI回归模型，我猜是用的PSI计算的一个指标，偏离多少必回归，然后开仓。</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/some-idea-of-functional-analysis.html">数学分析的一些感悟</a></li>
+        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
 
         </div>
         <div class="col-sm-3" id="sidebar">
@@ -210,7 +265,7 @@
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2017 雪山
+         <div class="col-xs-10">&copy; 2019 雪山
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
