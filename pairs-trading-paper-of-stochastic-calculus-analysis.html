@@ -126,7 +126,7 @@
 
 <h1>一. 介绍</h1>
 <p><a href="https://en.wikipedia.org/wiki/Pairs_trade"><strong>pairs trading wiki</strong></a></p>
-<p><a href="http://101.96.10.63/folk.ntnu.no/skoge/prost/proceedings/acc08/data/papers/0479.pdf"><strong>论文下载</strong></a></p>
+<p><a href="https://folk.ntnu.no/skoge/prost/proceedings/acc08/data/papers/0479.pdf"><strong>论文下载</strong></a></p>
 <p>这篇论文是可以从 <strong>wikipedia</strong> 上的 <strong>pairs trading</strong> 词条里面的 <strong>Model-based pairs trading</strong> 部分找到，说明这只是一篇入门级的论文。但是真TM难啊，我苦苦读了接近两个月的<strong>金融随机分析</strong>就是为了看懂这篇论文，现在还在补基础数学......</p>
 <h1>二. 把问题公式化</h1>
 <h2>定义资产</h2>
@@ -312,16 +312,40 @@ $$</p>
 
 <h1>四. 求解析解</h1>
 <p>对14式求解，最终是求最优解h</p>
+<p>时隔1个多月，发现看之的东西都有点忘了，最近把机器学习全部刷了一篇，花几天时间梳理一下做些输出，顺便把之前的这篇Q入门神作写完。</p>
+<p>按论文[5]中的方法把value function G写成如下形式，具体原因暂时不深究了</p>
+<p>$$ 
+G(t, v, x)=f(t, x) v^{\gamma} \qquad (15)
+ $$</p>
+
+<p>这样就有终点条件：</p>
+<p>
+$$ 
+f(T, x)=1 \quad \forall x \qquad (16)
+ $$
+</p>
+
+<p>为什么呢？因为之前10式告诉我们终点条件为：\(v^{\gamma}\)</p>
+<p>这里重点介绍一下17式，这里主要的数学点就是偏微分，偏微分主要考虑的是参数中含有的变量，看15式，G的参数含有t,v,x，f的参数含有t,x，参数含有的变量才能做微分，不然微分的值就是0</p>
+<p>那么14式如何到17式呢？先把G对t,v,vv,xx,x,vx的偏微分求出来，其中vv,xx,vx是二阶偏微分</p>
+<p>
+$$
+G_t = v^{\gamma} f_t \qquad G_v=\gamma \nu^{\gamma -1} f
+$$
+$$
+G_vv = \gamma (\gamma -1)fv^{\gamma -2} \qquad G_xx=\nu^{\gamma } f_{xx}
+$$
+</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
-        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/stat-prob-notes.html">统计小计</a></li>
     </ul>
 </section>
         </article>
