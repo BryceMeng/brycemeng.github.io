@@ -346,15 +346,32 @@ $$
 \begin{array}{l}{(\gamma-1) \eta^{2} f f_{t}-\frac{1}{2} \gamma \eta^{4} f_{x}^{2}-\frac{1}{2} \gamma b^{2} f^{2}-\frac{1}{2} \gamma \eta^{4} f f_{x}} \\ {\quad-\gamma \rho \sigma \eta^{3} f f_{x}+\frac{1}{2}(\gamma-1) \eta^{4} f f_{x x}} \\ {\quad+\gamma(\gamma-1) r \eta^{2} f^{2}+k(x-\theta) \eta^{2} f f_{x}=0}\end{array} \qquad (17)
  $$
 </p>
+
+<p>后面的我就不敢算了，计算量太大了。。。后面想学一下matlab计算一下的，被一朋友劝放弃了，哈哈。</p>
+<p>然后我们就直接到解 h</p>
+<p>
+$$ 
+\begin{array}{l}{\alpha(t)=\frac{k(1-\sqrt{1-\gamma})}{2 \eta^{2}}.} \\ {\left\{1+\frac{2 \sqrt{1-\gamma}}{1-\sqrt{1-\gamma}-(1+\sqrt{1-\gamma}) \exp \left(\frac{2 k(T-t)}{\sqrt{1-\gamma}}\right)}\right\}}\end{array} \qquad (24)
+ $$
+
+$$ 
+\begin{array}{c}{\beta(t)=\frac{1}{2 \eta^{2}\left[(1-\sqrt{1-\gamma})-(1+\sqrt{1-\gamma}) \exp \left(\frac{2 k(T-t)}{\sqrt{1-\gamma}}\right)\right]}.} \\ {\left\{\gamma \sqrt{1-\gamma}\left(\eta^{2}+2 \rho \sigma \eta\right)\left[1-\exp \left(\frac{2 k(T-t)}{\sqrt{1-\gamma}}\right)\right]^{2}\right.} \\ {-\gamma\left(\eta^{2}+2 \rho \sigma \eta+2 k \theta\right)\left[1-\exp \left(\frac{2 k(T-t)}{\sqrt{1-\gamma}}\right)\right]}
+\end{array} \qquad (25)
+ $$
+
+$$ 
+h^{*}(t, x)=\frac{1}{1-\gamma}\left[\beta(t)+2 x \alpha(t)-\frac{k(x-\theta)}{\eta^{2}}+\frac{\rho \sigma}{\eta}+\frac{1}{2}\right] \qquad (28)
+$$
+</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
         <li><a href="/stat-prob-notes.html">统计小计</a></li>
     </ul>
 </section>
