@@ -124,6 +124,12 @@
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <p>其实我刚刷完ISL的时候我就有种相见恨晚的感觉，但是还是把一些基础完全刷完了再动工，因为这样可能会思路多一些吧。ESL我暂时不打算刷了，现在是实用性的，等需要深入某个算法的时候再看也不迟。</p>
+<h2>判别模型和生成模型</h2>
+<p><a href="https://blog.csdn.net/qq_20011607/article/details/81744614">参考资料</a></p>
+<p>其实现有算法里面除了bayesian算法，还有LDA和QDA很像生成模型，其他大部分都是送别模型。</p>
+<p>生成模型得假设自变量的分布是有规律的，当然大部分就是gaussian分布。这样就会用用现有的数据估算自变量的模型，再用bayesian去计算条件概率，来进行边界决策。</p>
+<p>判别模型就没有这个估计，是什么就是什么。</p>
+<p>从现在的算法来看，判别模型貌似居多，可能x符合gaussian的并不是很多。是不是可以先云自变量进行模型判定再选择模型呢？</p>
 <h2>抽样的有放回和无放回</h2>
 <p><a href="https://zhuanlan.zhihu.com/p/47922595">知乎的参考</a></p>
 <p>用bagging做集成学习时，抽样是用的有放回抽样，boosting没有抽样这一步，每一轮的训练集不变，保是每轮中样本的权重发生了变化。</p>
@@ -140,18 +146,35 @@
 </ol>
 <p>bagging用在比较强，容易过拟合的模型上，比如决策树，为了降低variance
 boosting是可能过拟合的，用在容易欠拟合的模型上(当然这只是建议)</p>
-<p>Ada boosting是对boosting的升级，基本原理一样，调整权重的算法不一样。Ada boosting有一个神秘的现象，就是增加轮数后，train error已经不再将低了，但是test error还有可能继续降低。</p>
+<p><strong>Ada boosting</strong>是对boosting的升级，基本原理一样，调整权重的算法不一样。一共有T轮，每轮的结果的权重又不一样，最后把T轮的结果加起来。</p>
+<p>Ada boosting有一个神秘的现象，就是增加轮数后，train error已经不再将低了，但是test error还有可能继续降低。svm也有类似的效果。</p>
 <p><img alt="Ada Boost" src="http://sinacloud.net/mhblog/2019/04/adaboost_train_test_error.png"></p>
+<p><strong>Gradient Boosting</strong>和boosting一样，也是每轮更新模型，但是要用Gradient Descent云minimize一个cost function。</p>
+<h2>svd</h2>
+<p>
+$$ 
+A=U \Lambda U^{-1}=U \Lambda U^{T}
+$$
+$$ 
+\begin{aligned} A x_{1} &=\lambda_{1} x_{1} \\ A x_{2} &=\lambda_{2} x_{2} \\ & \ldots \\ A x_{m} &=\lambda_{m} x_{m} \end{aligned}
+$$
+$$ 
+U=\left[ \begin{array}{llll}{x_{1}} & {x_{2}} & {\cdots} & {x_{m}}\end{array}\right]
+$$
+$$ 
+\Lambda=\left[ \begin{array}{ccc}{\lambda_{1}} & {\cdots} & {0} \\ {\vdots} & {\ddots} & {\vdots} \\ {0} & {\cdots} & {\lambda_{m}}\end{array}\right]
+ $$
+</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/stat-prob-notes.html">统计小计</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
     </ul>
 </section>
         </article>
