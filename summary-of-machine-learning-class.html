@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>译文 - 雪山</title>
+    <title>机器学习刷课总结 - 雪山</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,16 +10,22 @@
 
     <link href="/images/favicon.png" rel="icon">
 
+<link rel="canonical" href="/summary-of-machine-learning-class.html">
 
-    <meta name="author" content="雪山" />
-    <meta name="keywords" content="译文" />
+        <meta name="author" content="雪山" />
+        <meta name="keywords" content="量化,机器学习" />
+        <meta name="description" content="最近刷了一些机器学习的课程，做一些简单的总结" />
 
-    <!-- Open Graph tags -->
         <meta property="og:site_name" content="雪山" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="雪山"/>
-        <meta property="og:url" content=""/>
-        <meta property="og:description" content="雪山"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="机器学习刷课总结"/>
+        <meta property="og:url" content="/summary-of-machine-learning-class.html"/>
+        <meta property="og:description" content="最近刷了一些机器学习的课程，做一些简单的总结"/>
+        <meta property="article:published_time" content="2019-03-29" />
+            <meta property="article:section" content="量化" />
+            <meta property="article:tag" content="量化" />
+            <meta property="article:tag" content="机器学习" />
+            <meta property="article:author" content="雪山" />
 
 
     <!-- Bootstrap -->
@@ -68,7 +74,7 @@
                         <li >
                             <a href="/category/ji-zhu.html">技术</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="/category/liang-hua.html">量化</a>
                         </li>
                         <li >
@@ -86,20 +92,70 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="/play-ab-test-by-react-planout.html">[译]用React和PlanOut来做产品的AB测试</a></h2>
-                <div class="summary"><p>用React和PlanOut来做产品的AB测试，AB测试其实概念很早就出来了，但是最近才被facebook用到极致。</p>
-                    <a class="btn btn-default btn-xs" href="/play-ab-test-by-react-planout.html">more ...</a>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/summary-of-machine-learning-class.html"
+                       rel="bookmark"
+                       title="Permalink to 机器学习刷课总结">
+                        机器学习刷课总结
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2019-03-29T21:32:00+08:00"> 五 29 三月 2019</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/liang-hua.html">量化</a>
+        /
+	<a href="/tag/ji-qi-xue-xi.html">机器学习</a>
+    
+</footer><!-- /.post-info -->                    </div>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/how-to-be-data-driven-cop.html">[译]如何（为什么）成为一家数据驱动型的公司？</a></h2>
-                <div class="summary"><p>如何（为什么）成为一家数据驱动型的公司？翻译的一篇文章，主题非常好，成为数据型驱动公司的先驱是facebook，这将成为以后公司发展的方向。</p>
-                    <a class="btn btn-default btn-xs" href="/how-to-be-data-driven-cop.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
+                <p>其实我刚刷完ISL的时候我就有种相见恨晚的感觉，但是还是把一些基础完全刷完了再动工，因为这样可能会思路多一些吧。ESL我暂时不打算刷了，现在是实用性的，等需要深入某个算法的时候再看也不迟。</p>
+<h2>抽样的有放回和无放回</h2>
+<p><a href="https://zhuanlan.zhihu.com/p/47922595">知乎的参考</a></p>
+<p>用bagging做集成学习时，抽样是用的有放回抽样，boosting没有抽样这一步，每一轮的训练集不变，保是每轮中样本的权重发生了变化。</p>
+<ol>
+<li>
+<p>Bagging + 决策树 = 随机森林</p>
+</li>
+<li>
+<p>AdaBoost + 决策树 = 提升树</p>
+</li>
+<li>
+<p>Gradient Boosting + 决策树 = GBDT</p>
+</li>
+</ol>
+<p>bagging用在比较强，容易过拟合的模型上，比如决策树，为了降低variance
+boosting是可能过拟合的，用在容易欠拟合的模型上(当然这只是建议)</p>
+<p>Ada boosting是对boosting的升级，基本原理一样，调整权重的算法不一样。Ada boosting有一个神秘的现象，就是增加轮数后，train error已经不再将低了，但是test error还有可能继续降低。</p>
+<p><img alt="Ada Boost" src="http://sinacloud.net/mhblog/2019/04/adaboost_train_test_error.png"></p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/stat-prob-notes.html">统计小计</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
 
         </div>
         <div class="col-sm-3" id="sidebar">
@@ -220,7 +276,7 @@
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 雪山
+         <div class="col-xs-10">&copy; 2019 雪山
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
