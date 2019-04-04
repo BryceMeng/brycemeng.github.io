@@ -123,7 +123,9 @@
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>其实我刚刷完ISL的时候我就有种相见恨晚的感觉，但是还是把一些基础完全刷完了再动工，因为这样可能会思路多一些吧。ESL我暂时不打算刷了，现在是实用性的，等需要深入某个算法的时候再看也不迟。</p>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<p>其实我刚刷完ISL的时候我就有种相见恨晚的感觉，但是还是把一些基础完全刷完了再动工，因为这样可能会思路多一些吧。ESL我暂时不打算刷了，现在是实用性的，等需要深入某个算法的时候再看也不迟。</p>
 <h2>判别模型和生成模型</h2>
 <p><a href="https://blog.csdn.net/qq_20011607/article/details/81744614">参考资料</a></p>
 <p>其实现有算法里面除了bayesian算法，还有LDA和QDA很像生成模型，其他大部分都是送别模型。</p>
@@ -151,6 +153,7 @@ boosting是可能过拟合的，用在容易欠拟合的模型上(当然这只�
 <p><img alt="Ada Boost" src="http://sinacloud.net/mhblog/2019/04/adaboost_train_test_error.png"></p>
 <p><strong>Gradient Boosting</strong>和boosting一样，也是每轮更新模型，但是要用Gradient Descent云minimize一个cost function。</p>
 <h2>svd</h2>
+<p><a href="http://www.cnblogs.com/LeftNotEasy/archive/2011/01/19/svd-and-applications.html">参考资料</a></p>
 <p>
 $$ 
 A=U \Lambda U^{-1}=U \Lambda U^{T}
@@ -165,16 +168,21 @@ $$
 \Lambda=\left[ \begin{array}{ccc}{\lambda_{1}} & {\cdots} & {0} \\ {\vdots} & {\ddots} & {\vdots} \\ {0} & {\cdots} & {\lambda_{m}}\end{array}\right]
  $$
 </p>
+
+<p>上面是<strong>特征值分解(EVD)</strong>，前提是A为对称陈，就是A等于A的转置。下面是SVD，不知道怎么推出来的：</p>
+<p>$$ 
+A=Q \Lambda Q^{T}
+$$</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/behind-of-investment.html">投资的背后</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/stat-prob-notes.html">统计小计</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
     </ul>
 </section>
         </article>
