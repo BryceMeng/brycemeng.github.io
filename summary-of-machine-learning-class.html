@@ -126,12 +126,20 @@
                 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
 <p>其实我刚刷完ISL的时候我就有种相见恨晚的感觉，但是还是把一些基础完全刷完了再动工，因为这样可能会思路多一些吧。ESL我暂时不打算刷了，现在是实用性的，等需要深入某个算法的时候再看也不迟。</p>
+<h2>方差(variance)和偏差(bias)</h2>
+<p><strong>方差</strong>：其实就是波动，比如好的枪打在靶上，方差小，集中在小圈里面，差的枪，集中在大圈里面。</p>
+<p><strong>偏差</strong>：其实就是离靶心有多远。</p>
+<p><strong>偏差</strong>可以用train set的原始值和模型预测值做一个统计，所有差值的平方除以样本个数(MSE)。</p>
+<p><strong>方差</strong>可以用test set上的MSE来进行统计。</p>
+<p>集成学习的方法如bagging用到了一个点：多组观测值预测出来的值做平均会大大降低方差(test set)，最重要的是会大在降低偏差，多个离靶心远的值的平均离靶心越来越近(ISL p45)。</p>
 <h2>判别模型和生成模型</h2>
 <p><a href="https://blog.csdn.net/qq_20011607/article/details/81744614">参考资料</a> (也可参考lee hongyi 2007 lec5)</p>
 <p>其实现有算法里面除了bayesian算法，还有LDA和QDA很像生成模型，其他大部分都是送别模型。</p>
 <p>生成模型得假设自变量的分布是有规律的，当然大部分就是gaussian分布。这样就会用用现有的数据估算自变量的模型，再用bayesian去计算条件概率，来进行边界决策。关键看P(x_n|y)</p>
 <p>判别模型就没有这个估计，是什么就是什么。</p>
 <p>从现在的算法来看，判别模型貌似居多，可能x符合gaussian的并不是很多。是不是可以先云自变量进行模型判定再选择模型呢？</p>
+<p>在数据很多的情况下，其实判别模型可能更好，如果x真的很符合gaussian分布，数据也不多，那么生成模型可能更好。</p>
+<p><strong>* 注意</strong> data noise很大，可能生成模型也不错，如收益率</p>
 <h2>抽样的有放回和无放回</h2>
 <p><a href="https://zhuanlan.zhihu.com/p/47922595">知乎的参考</a></p>
 <p>用bagging做集成学习时，抽样是用的有放回抽样，boosting没有抽样这一步，每一轮的训练集不变，保是每轮中样本的权重发生了变化。</p>
@@ -200,16 +208,37 @@ $$</p>
 <li>word2vec 假设30*300的矩阵，每一行是一个词，每行连起来就是一篇文章，再做CNN，CNN的Filter一定要覆盖300,整个宽度，因为一行是一个整体词，不可分割。疑问：CNN做NLP?</li>
 <li>可自行维护对上涨或者下跌有影响的词库，自己做2vec，只用库里面的词，其他全当停止词扔掉</li>
 </ul>
+<h2>激活函数</h2>
+<p>貌似sigmoid已经不太看好了，用relu的居多</p>
+<h2>cost function</h2>
+<p>分类要用 cross entropy，其实logstic分类方法就是用的cross entropy，回归才用MSE类似的function。</p>
+<p>而logstic可以想像成sigmoid网络里面的一个神经元。</p>
+<h2>sklearn</h2>
+<p>这个库确实是非常NB的，可惜现在不支持gpu，gpu主要是支持并行矩阵运算，如果把模型改到gpu可能成本过高。</p>
+<p>这个库里面有minimize方法，很全的，如果自己写一些算法做优化可以直接用。</p>
+<h2>NN layer</h2>
+<p>一般来讲分类问题最后一层用softmax会好一些，因为它的输出在0~1之间，很像概率。</p>
+<h2>keras</h2>
+<p>keras 是 tensorflow 的封装，应该还是比较广，看一下最近出的一张图：</p>
+<p><img alt="kaggle竞赛2016年来最常用的框架" src="http://sinacloud.net/mhblog/2019/04/kaggle_most_common_framework.jpg"></p>
+<p>下面是一些应用技巧：</p>
+<p><strong>fit中的batch_size和nb_epoch</strong></p>
+<p>这就是实践和理论的差距，在实践DNN时其实是分批跑的，就是batch。</p>
+<p>batch_size = 500，说明一个batch里面的sample是500个，至于有多少个batch，keras自动处理了，我也不知道具体算法。应该是数据量除以500取整+1吧，最后一个batch可能会少一点</p>
+<p>epoch是什么呢？把整个batch跑过一轮叫一个epoch，一般跑个20epoch差不多了。</p>
+<p>还有个参数叫shuffle，如果为true，则每次跑epoch前会把sample随机打乱。</p>
+<h2>tips</h2>
+<p>用类聚的方法先对目标进行分类或许是一个不错的方法</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
-        <li><a href="/some-idea-of-functional-analysis.html">数学分析的一些感悟</a></li>
-        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
+        <li><a href="/stat-prob-notes.html">统计小计</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
     </ul>
 </section>
         </article>
