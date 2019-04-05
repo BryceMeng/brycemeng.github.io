@@ -213,6 +213,10 @@ $$</p>
 <p>两种结合最好啦</p>
 <p><strong>Q learning</strong></p>
 <p>Q learning是基于value的。</p>
+<p>基于state做出action，转到下一个state，并获得reward。</p>
+<p><strong>state</strong>: 最值是要注意，不能直接取价格，因为价格从5～10块这样在12块时，机器无法做出决策，因为以前12块没出现过。一定要标准化，或者这种标准化方法：close/SMA</p>
+<p><strong>action</strong>: buy,shell,hold</p>
+<p><strong>reward</strong>: 直接用daily return会收敛的快一些，用总收益可能比较难算</p>
 <h2>激活函数</h2>
 <p>貌似sigmoid已经不太看好了，用relu的居多</p>
 <h2>cost function</h2>
@@ -239,11 +243,11 @@ $$</p>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
+        <li><a href="/pairs-trading-paper-of-stochastic-calculus-analysis.html">配对交易的一篇随机分析入门论文分析</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/stat-prob-notes.html">统计小计</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
     </ul>
 </section>
         </article>
