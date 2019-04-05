@@ -208,6 +208,11 @@ $$</p>
 <li>word2vec 假设30*300的矩阵，每一行是一个词，每行连起来就是一篇文章，再做CNN，CNN的Filter一定要覆盖300,整个宽度，因为一行是一个整体词，不可分割。疑问：CNN做NLP?</li>
 <li>可自行维护对上涨或者下跌有影响的词库，自己做2vec，只用库里面的词，其他全当停止词扔掉</li>
 </ul>
+<h2>RL</h2>
+<p>强化学习分两类，一类是基于policy的，就是去learn一个actor((\pi))直接告诉你做什么action，另一类是基于value的，去learn一个actor告诉我们什么操作对应value是多少，当然value越大越好，还是越小越好，或者随机取对应的action，都是我们自己定的。</p>
+<p>两种结合最好啦</p>
+<p><strong>Q learning</strong></p>
+<p>Q learning是基于value的。</p>
 <h2>激活函数</h2>
 <p>貌似sigmoid已经不太看好了，用relu的居多</p>
 <h2>cost function</h2>
@@ -235,10 +240,10 @@ $$</p>
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="/trading-systems-reading-note.html">Trading Systems</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/stat-prob-notes.html">统计小计</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
     </ul>
 </section>
         </article>
