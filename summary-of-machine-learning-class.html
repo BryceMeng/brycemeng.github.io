@@ -211,12 +211,21 @@ $$</p>
 <h2>RL</h2>
 <p>强化学习分两类，一类是基于policy的，就是去learn一个actor(\(\pi \))直接告诉你做什么action，另一类是基于value(\(V(\pi )\))的，去learn一个actor告诉我们什么操作对应value是多少，当然value越大越好，还是越小越好，或者随机取对应的action，都是我们自己定的。</p>
 <p>两种结合最好啦</p>
-<p><strong>Q learning</strong></p>
-<p>Q learning是基于value的。</p>
+<h3>带模型(model based)和不带模型(model free)</h3>
+<p>这里面最重要的就是模型是什么的模型？ T[s,a,s'] state转换模型，R[s,a] reward模型</p>
+<p>还记得gbm和ou过程吗？能否应用于此呢？嗯，得好好测测。</p>
+<h3>Q learning</h3>
+<p>Q learning是基于value的model free方法。</p>
 <p>基于state做出action，转到下一个state，并获得reward。</p>
 <p><strong>state</strong>: 最值是要注意，不能直接取价格，因为价格从5～10块这样在12块时，机器无法做出决策，因为以前12块没出现过。一定要标准化，或者这种标准化方法：close/SMA</p>
 <p><strong>action</strong>: buy,shell,hold</p>
 <p><strong>reward</strong>: 直接用daily return会收敛的快一些，用总收益可能比较难算</p>
+<p>然后就是state是连续值的问题，我想先把state分成间隔，用数字表示，再把所有的state组合在一块儿。比如 标准化后的close: 0.87 -&gt; 9 , stdev: 34 -&gt;7 ，组合就是97</p>
+<p>Q是model free，是基于纯经验的，专家说效果不好，这个嘛得实测一下才行。</p>
+<h3>dyna</h3>
+<p>dyna 是model free和model based的混合模型，在Q的执行中会学习T和R，s'和r会从T和R中产生，再update Q table。</p>
+<p>学T模型貌似就是:Sa往Sb转换的次数/总的转换次数 对的，就是一个转换概率</p>
+<p>学习R模型请看 ML 4 trading udacity lec 27 Dyna，有一种简单的示例：\( R^{\prime}[s, a]=(1-\alpha) R[s, a]+\alpha \cdot r \)</p>
 <h2>激活函数</h2>
 <p>貌似sigmoid已经不太看好了，用relu的居多</p>
 <h2>cost function</h2>
@@ -243,9 +252,9 @@ $$</p>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/pairs-trading-paper-of-stochastic-calculus-analysis.html">配对交易的一篇随机分析入门论文分析</a></li>
         <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
+        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/stat-prob-notes.html">统计小计</a></li>
     </ul>
