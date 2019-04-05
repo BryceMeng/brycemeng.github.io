@@ -226,6 +226,10 @@ $$</p>
 <p>dyna 是model free和model based的混合模型，在Q的执行中会学习T和R，s'和r会从T和R中产生，再update Q table。</p>
 <p>学T模型貌似就是:Sa往Sb转换的次数/总的转换次数 对的，就是一个转换概率</p>
 <p>学习R模型请看 ML 4 trading udacity lec 27 Dyna，有一种简单的示例：\( R^{\prime}[s, a]=(1-\alpha) R[s, a]+\alpha \cdot r \)</p>
+<h3>一些比较有用的方法</h3>
+<p>DDPG，Dueling DQN，noisy net 请看<a href="https://arxiv.org/abs/1710.02298">Rainbow</a> 这篇论文对RL中的一些方法都做了比对和combine。</p>
+<p>A3C 是可以并行计算的混合模型，还可以处理连续问题，还不错，可以深入一下，请参考<a href="https://zhuanlan.zhihu.com/p/32596470">这篇文章</a></p>
+<p>高级应用请再重看 lee hongyi RL ("Q-learning(Advanced Tips)")</p>
 <h2>激活函数</h2>
 <p>貌似sigmoid已经不太看好了，用relu的居多</p>
 <h2>cost function</h2>
@@ -253,10 +257,10 @@ $$</p>
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
-        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/stat-prob-notes.html">统计小计</a></li>
+        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
     </ul>
 </section>
         </article>
