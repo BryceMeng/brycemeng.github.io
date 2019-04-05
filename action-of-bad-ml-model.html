@@ -123,7 +123,24 @@
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p><img alt="ML遇到问题了怎么办" src="http://sinacloud.net/mhblog/2019/04/ML_problem.jpg"></p>
+                <p>请参考：lee hongyi 2007 lec 9-1</p>
+<p><img alt="ML遇到问题了怎么办" src="http://sinacloud.net/mhblog/2019/04/ML_problem.jpg"></p>
+<h2>更换activation function</h2>
+<p><strong>sigmoid</strong>的缺点：
+- 在多层NN时，backpropagation会有点问题
+- sigmoid 的特性决定，输入的变化很大时，其实越到后面输出的变化就越小</p>
+<p><strong>relu</strong>:</p>
+<p>现在是主力激活函数，虽然relu本身是线性函数，但是多层复合组合起来并不是线性模型</p>
+<p><strong>maxout</strong>:</p>
+<p>这个是动态的激活函数，貌似很厉害，再云深入了解一下。</p>
+<h2>Adaptive learning rate</h2>
+<p>自适应学习速率</p>
+<p><strong>adagrad</strong> 还不错，但是鲁棒性不强</p>
+<p><strong>rmsprop(froot mean square prop)</strong> 推荐，带权重自动调整learning rate</p>
+<p><strong>adam</strong>，最后上场，带动量特性，现在最常用。adam = Rmsprop + momentum</p>
+<h2>early stopping</h2>
+<p><img alt="early stopping" src="http://sinacloud.net/mhblog/2019/04/early_stopping.png"></p>
+<p>一张图解释一切，其实就是传统机器学习方法的方差和偏差均衡的问题。调整的参数是epoch的轮数。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
