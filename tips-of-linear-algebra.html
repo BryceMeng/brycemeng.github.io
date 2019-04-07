@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>期货持仓量 - 雪山</title>
+    <title>线代的一些tips - 雪山</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,21 +10,21 @@
 
     <link href="/images/favicon.png" rel="icon">
 
-<link rel="canonical" href="/future-open-interest.html">
+<link rel="canonical" href="/tips-of-linear-algebra.html">
 
         <meta name="author" content="雪山" />
-        <meta name="keywords" content="量化,持仓量" />
-        <meta name="description" content="期货持仓量的分析" />
+        <meta name="keywords" content="量化,数学" />
+        <meta name="description" content="一些线代的tips" />
 
         <meta property="og:site_name" content="雪山" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="期货持仓量"/>
-        <meta property="og:url" content="/future-open-interest.html"/>
-        <meta property="og:description" content="期货持仓量的分析"/>
-        <meta property="article:published_time" content="2018-01-16" />
+        <meta property="og:title" content="线代的一些tips"/>
+        <meta property="og:url" content="/tips-of-linear-algebra.html"/>
+        <meta property="og:description" content="一些线代的tips"/>
+        <meta property="article:published_time" content="2019-04-07" />
             <meta property="article:section" content="量化" />
             <meta property="article:tag" content="量化" />
-            <meta property="article:tag" content="持仓量" />
+            <meta property="article:tag" content="数学" />
             <meta property="article:author" content="雪山" />
 
 
@@ -96,10 +96,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/future-open-interest.html"
+                    <a href="/tips-of-linear-algebra.html"
                        rel="bookmark"
-                       title="Permalink to 期货持仓量">
-                        期货持仓量
+                       title="Permalink to 线代的一些tips">
+                        线代的一些tips
                     </a>
                 </h1>
             </header>
@@ -109,7 +109,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-01-16T17:34:00+08:00"> 二 16 一月 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2019-04-07T18:32:00+08:00"> 日 07 四月 2019</time>
     </span>
 
 
@@ -119,56 +119,26 @@
 <span class="label label-default">Tags</span>
 	<a href="/tag/liang-hua.html">量化</a>
         /
-	<a href="/tag/chi-cang-liang.html">持仓量</a>
+	<a href="/tag/shu-xue.html">数学</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>今天看到一篇分析外汇持仓量的分析，里面涉及到某支品种的持仓量，有<strong>商业做多</strong>和<strong>商业做空</strong>的持仓量比对，这样可以看出一些大机构对多空的看法，我后来想期货里面能不能也这么分析呢？</p>
-<p>后来仔细一分析，其实持仓量是相对的，多持仓量和空持仓量一定是一样的，下面我们做一个简单的模拟：</p>
-<table>
-<thead>
-<tr>
-<th>动作</th>
-<th>多仓100</th>
-<th>空仓100</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>多开10 空开10</td>
-<td>110</td>
-<td>110</td>
-</tr>
-<tr>
-<td>多开10 多平10</td>
-<td>110</td>
-<td>110</td>
-</tr>
-<tr>
-<td>空开10 空平10</td>
-<td>110</td>
-<td>110</td>
-</tr>
-<tr>
-<td>多平10 空平10</td>
-<td>100</td>
-<td>100</td>
-</tr>
-</tbody>
-</table>
-<p>经过模拟成交分析，确实是多空永远是一样的。所以还是要看大机构和散户间的博弈。</p>
-<p>下面的扩展阅读讲述了成交量的变化和持仓量的变化还是会有一定的关系。</p>
-<p><a href="https://zhuanlan.zhihu.com/p/31585934">扩展阅读</a></p>
+                <h2>projection matrix(投影矩阵)</h2>
+<p>求解代性回归时用到，先不求胜解吧，直接看性质：</p>
+<ol>
+<li>symmetric 对称 \( A=A^T \)</li>
+<li>idempotent 幂等 \( A=A^n \)</li>
+</ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="/some-idea-of-functional-analysis.html">数学分析的一些感悟</a></li>
+        <li><a href="/stat-prob-notes.html">统计小计</a></li>
         <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
         <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/recording-of-problem-in-pandas-using.html">pandas应用问题记录</a></li>
-        <li><a href="/pairs-trading-paper-of-stochastic-calculus-analysis.html">配对交易的一篇随机分析入门论文分析</a></li>
     </ul>
 </section>
         </article>
