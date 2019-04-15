@@ -192,6 +192,13 @@ $$</p>
 <p>Autoencoder 是可逆的，encode 就是降维过程，decode是解码(升维)过程。PCA是特殊的线性Autoencoder模式。</p>
 <p>用NN去寻找好的encoder，把decode出来的X~ 和原有的X进行对比，做一个cost function云进行优化</p>
 <p><img alt="Autoencoder with NN" src="http://sinacloud.net/mhblog/2019/04/Autoencoder_NN.jpg"></p>
+<h2>clustering</h2>
+<p>k++ mean 好于 k mean，数据标准化或者数据美白能帮助 这些算法，对于计算距离的算法，数据标准化是必需的。</p>
+<p><strong>下面是一些常用的距离算法：</strong></p>
+<p><img alt="Distance Metric" src="http://sinacloud.net/mhblog/2019/04/Distance_Hierarchical_Clustering_Algorithms.jpg"></p>
+<p><strong>一些cluster之间的距离算法：</strong></p>
+<p><img alt="Set Distance Metric" src="http://sinacloud.net/mhblog/2019/04/Set_Distance_Clustering.jpg"></p>
+<p>金融资产很多是多层结构，如板块划分，这个类聚用多层的类聚算法可能更好。Agglomerative Hierarchical Clustering</p>
 <h2>NLP</h2>
 <p>用这个主要是通过新闻，社交网络的信息(weibo，雪球等等)对涨跌的影响。</p>
 <p>X：某时间段内或者某时间点的新闻(如果有人工标记会大幅提高性能)</p>
@@ -272,10 +279,10 @@ $$</p>
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/action-of-bad-ml-model.html">机器学习模型效果不好了怎么办？</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
+        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
     </ul>
 </section>
         </article>
