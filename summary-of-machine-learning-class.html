@@ -192,6 +192,13 @@ $$</p>
 <p>Autoencoder 是可逆的，encode 就是降维过程，decode是解码(升维)过程。PCA是特殊的线性Autoencoder模式。</p>
 <p>用NN去寻找好的encoder，把decode出来的X~ 和原有的X进行对比，做一个cost function云进行优化</p>
 <p><img alt="Autoencoder with NN" src="http://sinacloud.net/mhblog/2019/04/Autoencoder_NN.jpg"></p>
+<h2>Latent Variables Model</h2>
+<p>中间出现个<a href="https://www.zhihu.com/question/24524693">隐变量模型</a>，对应的模型是LFM(Latent Factor Model)，可能LFM是基于概率，而PCA不是的。LFM是interpret，PCA是represent。这个有空再细看吧。</p>
+<p><a href="https://site.douban.com/182577/widget/notes/10567212/note/271336847/">参考1</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Latent_variable_model">参考2</a></p>
+<p><img alt="Models of Sequential Data" src="http://sinacloud.net/mhblog/2019/04/Models_of_Sequential_Data.jpg"></p>
+<h2>HMM</h2>
+<p><a href="https://www.cnblogs.com/skyme/p/4651331.html">详细解释</a></p>
 <h2>clustering</h2>
 <p>k++ mean 好于 k mean，数据标准化或者数据美白能帮助 这些算法，对于计算距离的算法，数据标准化是必需的。</p>
 <p><strong>下面是一些常用的距离算法：</strong></p>
@@ -282,7 +289,7 @@ $$</p>
         <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
-        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
+        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
     </ul>
 </section>
         </article>
