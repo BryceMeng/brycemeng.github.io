@@ -186,6 +186,9 @@ $$</p>
 <p>SVD的统计意义就是PCA降维，特征重表示</p>
 <h2>降维</h2>
 <p>PCA <a href="http://www.cnblogs.com/pinard/p/6239403.html">原理篇</a> <a href="https://www.cnblogs.com/pinard/p/6243025.html">实操篇</a></p>
+<p>PCA的使用在实操篇里面已经讲得很好了，有一点我又实测了一下，就是关于PCA().components_，从原理分析，其实PCA只是做了坐标旋转，如果PCA不指定n_components参数的话，其实就是把坐标旋转后的所有信息都保存下来了，如果n_components等于2,那么就是提取前两个方差比较大的维度，数据和投影其实是一样的。</p>
+<p>那么components_里面的东西倒底是什么呢？其实就是每个维度的主成分载荷，row是维度，如果取方差最大的维度就是components_[0]。</p>
+<p>取了之后呢？可以把该维度的PCA数值算出来，和PCA().transform(X)出来的结果是一样的。公式具体可以参考 ISL中文 P158 6.19</p>
 <p><img alt="PCA vs tSNE" src="http://sinacloud.net/mhblog/2019/04/PCA_to_tSNE.jpg"></p>
 <p>tSNE 是基于模型的，当然大部分的资产收益率是接近 Gaussian 的，最多是用于可视化，可能降维效果一般般。</p>
 <p>Autoencoder或许还不错</p>
@@ -288,7 +291,7 @@ $$</p>
     <ul>
         <li><a href="/action-of-bad-ml-model.html">机器学习模型效果不好了怎么办？</a></li>
         <li><a href="/nature-distribution.html">自然分布</a></li>
-        <li><a href="/pairs-trading-paper-of-stochastic-calculus-analysis.html">配对交易的一篇随机分析入门论文分析</a></li>
+        <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
         <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
     </ul>
