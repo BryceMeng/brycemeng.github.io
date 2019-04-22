@@ -306,7 +306,9 @@ $$</p>
 <p>分段低阶函数(bspline中4阶(最高3次幂)比较常用)连接来模拟曲线， 每段的函数是基函数的线性组合，基函数是一套，但是系数不一样，替代高阶函数，其实在ISL中的非线性模型中也有提到</p>
 <p>bspline 用到的基函数是Cox - de Boor算法，ISL样条回归里面用到的是一些简单的多项式或者其他。</p>
 <p>bspline同时也是一个pip库，在scipy里面也有实现</p>
-<div class="highlight"><pre><span></span><span class="n">X_min</span> <span class="o">=</span> <span class="mf">4.45</span>
+<div class="highlight"><pre><span></span><span class="c1"># https://github.com/johntfoster/bspline</span>
+
+<span class="n">X_min</span> <span class="o">=</span> <span class="mf">4.45</span>
 <span class="n">X_max</span> <span class="o">=</span> <span class="mf">66.78</span>
 
 <span class="n">p</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># order of spline (as-is; 3 = cubic, 4: B-spline?)</span>
@@ -329,7 +331,7 @@ $$</p>
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/action-of-bad-ml-model.html">机器学习模型效果不好了怎么办？</a></li>
-        <li><a href="/nature-distribution.html">自然分布</a></li>
+        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
         <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
