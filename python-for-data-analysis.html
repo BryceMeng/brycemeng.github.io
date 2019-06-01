@@ -153,6 +153,30 @@ dtype: object
 <li>ndarray自带很多统计函数 sum, mean, std等等</li>
 <li>当然np最nb的功能就是<strong>数组间的混合运算</strong>，这也是在pandas里面用得最多的功能</li>
 </ol>
+<h2>这是一段傅立叶变换的示例代码</h2>
+<p>其中 np.fft.fft 和 np.fft.ifft 是变换和逆变换，为关键函数</p>
+<div class="highlight"><pre><span></span><span class="n">data_FT</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="n">close_fft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data_FT</span><span class="p">[</span><span class="s1">&#39;GS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
+<span class="n">fft_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;fft&#39;</span><span class="p">:</span> <span class="n">close_fft</span><span class="p">})</span>
+<span class="n">fft_df</span><span class="p">[</span><span class="s1">&#39;absolute&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fft_df</span><span class="p">[</span><span class="s1">&#39;fft&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">fft_df</span><span class="p">[</span><span class="s1">&#39;angle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fft_df</span><span class="p">[</span><span class="s1">&#39;fft&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">fft_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">fft_df</span><span class="p">[</span><span class="s1">&#39;fft&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">num_</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+    <span class="n">fft_list_m10</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">fft_list</span><span class="p">)</span>
+    <span class="n">fft_list_m10</span><span class="p">[</span><span class="n">num_</span><span class="p">:</span><span class="o">-</span><span class="n">num_</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">fft_list_m10</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Fourier transform with {} components&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_FT</span><span class="p">[</span><span class="s1">&#39;GS&#39;</span><span class="p">],</span>  <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Real&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Days&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;USD&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Figure 3: Goldman Sachs (close) stock prices &amp; Fourier transforms&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+
 <h2>Pandas</h2>
 <p>主要数据类型为Series和DataFrame，pandas的容错型很强，功能要复杂很多，我这里只讲有点意思的吧，常见的我就不记录了</p>
 <ol>
@@ -205,11 +229,11 @@ pct_change  计算百分数变化
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/tips-of-linear-algebra.html">线代的一些tips</a></li>
-        <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/pairs-trading-paper-of-stochastic-calculus-analysis.html">配对交易的一篇随机分析入门论文分析</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/some-finace-english-word.html">一些英文</a></li>
         <li><a href="/lagged-data-efferct-to-ml-regression.html">滞后数据对回归的影响</a></li>
+        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
     </ul>
 </section>
         </article>

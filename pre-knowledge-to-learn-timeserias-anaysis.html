@@ -373,6 +373,7 @@ r为协整系数</p>
 <p>其实把自变量做一个相关性检测也是一项基本检测。</p>
 <h3>判断某一时间序列的回归特性</h3>
 <p>方法：<a href="https://en.wikipedia.org/wiki/Hurst_exponent">Hurst exponent</a> ， 用法见代码里面的注释</p>
+<p>这个指标与分形有关，可能不是这么用的，具体看 <a href="https://zhuanlan.zhihu.com/p/38282038">带你正确理解 Hurst 指数和分数布朗运动</a></p>
 <div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Hurst exponent helps test whether the time series is:</span>
 <span class="sd">    (1) A Random Walk (H ~ 0.5)</span>
@@ -411,15 +412,33 @@ r为协整系数</p>
 <span class="n">SE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">heights</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">interval</span><span class="p">(</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mean_height</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">SE</span><span class="p">)</span>
 </pre></div>
+
+
+<h3>ARIMA</h3>
+<p>做时序预测，要为平稳序列，下面为使用方法，理论请看书。</p>
+<div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">values</span>
+<span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.66</span><span class="p">)</span>
+<span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">size</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">size</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)]</span>
+<span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">train</span><span class="p">]</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ARIMA</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">model_fit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">model_fit</span><span class="o">.</span><span class="n">forecast</span><span class="p">()</span>
+    <span class="n">yhat</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">yhat</span><span class="p">)</span>
+    <span class="n">obs</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
+</pre></div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/stat-prob-notes.html">统计小计</a></li>
-        <li><a href="/tips-of-linear-algebra.html">线代的一些tips</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/pairs-trading-paper-of-stochastic-calculus-analysis.html">配对交易的一篇随机分析入门论文分析</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/some-finace-english-word.html">一些英文</a></li>
         <li><a href="/lagged-data-efferct-to-ml-regression.html">滞后数据对回归的影响</a></li>
     </ul>
 </section>
