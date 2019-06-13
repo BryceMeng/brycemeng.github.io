@@ -137,18 +137,22 @@
 <h2>QQ 图</h2>
 <p>判定是否为正态分布 (scipy.stats.probplot)</p>
 <p><a href="https://blog.csdn.net/hzwwpgmwy/article/details/79178485">理论参考</a></p>
-<p><img alt="正态分布QQ图" src="https://img-blog.csdn.net/20180127094755302?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHp3d3BnbXd5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p>
-<p><img alt="普通QQ图" src="https://img-blog.csdn.net/20180127110316573?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHp3d3BnbXd5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p>
+<p><img alt="正态分布QQ图" src="http://sinacloud.net/mhblog/2019/06/qq1.png"></p>
+<p><img alt="普通QQ图" src="http://sinacloud.net/mhblog/2019/06/qq2.png"></p>
+<h2>期望值的近似</h2>
+<p>在强化学习中需要知道某个action后导致的tao，这个tao就是后面一系列的动作(episode)，需要知道出现某个action后产生tao的概率。然后把每种tao产生的reward乘以tao出现的概率，求期望值，其实就是加权平均嘛</p>
+<p>这个很难计算的，这样就可以用如下方法来近似，直接用这个action玩N次游戏，把所有的reward加起来，除以N，即可近似出这个期望值</p>
+<p><img alt="近似公式" src="http://sinacloud.net/mhblog/2019/06/probAppx.png"></p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/tips-of-linear-algebra.html">线代的一些tips</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/tips-of-linear-algebra.html">线代的一些tips</a></li>
         <li><a href="/some-idea-of-functional-analysis.html">数学分析的一些感悟</a></li>
         <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
-        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
+        <li><a href="/my-quant-live-started.html">我的量化交易</a></li>
     </ul>
 </section>
         </article>
