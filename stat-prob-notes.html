@@ -172,7 +172,8 @@ pairs.panels<span class="p">(</span>u<span class="p">)</span>
 <h2>价格变化分布</h2>
 <p><em>(取自于Advanced ML in Finance page 27)</em></p>
 <p><strong>固定时间内的价格变化</strong></p>
-<p>这个一直是高斯分布，其实最贴切的应该是 <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.893.2254&amp;rep=rep1&amp;type=pdf">Generalized Pareto Distribution</a></p>
+<p>这个一直是高斯分布，其实最贴切的应该是 <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.893.2254&amp;rep=rep1&amp;type=pdf">Generalized Pareto Distribution</a>，最能匹配尖峰肥尾。</p>
+<p>GPD对应的R包<a href="https://www.rdocumentation.org/packages/SpatialExtremes/versions/2.0-7">下载</a></p>
 <p>但是这个分布貌似只有一边，非对称，难道要把正收益和abs(负收益)分开匹配？</p>
 <p><strong>固定成交量(额)内的价格变化</strong></p>
 <p>高斯分布</p>
@@ -185,7 +186,7 @@ pairs.panels<span class="p">(</span>u<span class="p">)</span>
         <li><a href="/tips-of-linear-algebra.html">线代的一些tips</a></li>
         <li><a href="/some-idea-of-functional-analysis.html">数学分析的一些感悟</a></li>
         <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="/action-of-bad-ml-model.html">机器学习模型效果不好了怎么办？</a></li>
     </ul>
 </section>
         </article>
