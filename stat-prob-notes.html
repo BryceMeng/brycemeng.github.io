@@ -167,16 +167,25 @@ u <span class="o">&lt;-</span> pnorm<span class="p">(</span>z<span class="p">)</
 pairs.panels<span class="p">(</span>u<span class="p">)</span>
 <span class="c1"># 这里显示的就是均匀分布</span>
 </pre></div>
+
+
+<h2>价格变化分布</h2>
+<p><em>(取自于Advanced ML in Finance page 27)</em></p>
+<p><strong>固定时间内的价格变化</strong></p>
+<p>这个一直是高斯分布，其实最贴切的应该是 <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.893.2254&amp;rep=rep1&amp;type=pdf">Generalized Pareto Distribution</a></p>
+<p>但是这个分布貌似只有一边，非对称，难道要把正收益和abs(负收益)分开匹配？</p>
+<p><strong>固定成交量(额)内的价格变化</strong></p>
+<p>高斯分布</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/tips-of-linear-algebra.html">线代的一些tips</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/tips-of-linear-algebra.html">线代的一些tips</a></li>
         <li><a href="/some-idea-of-functional-analysis.html">数学分析的一些感悟</a></li>
         <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
-        <li><a href="/action-of-bad-ml-model.html">机器学习模型效果不好了怎么办？</a></li>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
     </ul>
 </section>
         </article>
