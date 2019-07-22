@@ -144,12 +144,13 @@
 <p>这个很难计算的，这样就可以用如下方法来近似，直接用这个action玩N次游戏，把所有的reward加起来，除以N，即可近似出这个期望值</p>
 <p><img alt="近似公式" src="http://sinacloud.net/mhblog/2019/06/probAppx.png"></p>
 <h2>正态分布 -&gt; 均匀分布</h2>
-<p>一个正态分布的向量 通过正态分布的CDF进行转换就可以得到均匀分布</p>
+<p>一个正态分布的向量 通过对应正态分布的CDF进行转换就可以得到均匀分布</p>
 <div class="highlight"><pre><span></span><span class="kn">library</span><span class="p">(</span>MASS<span class="p">)</span>
 <span class="kp">set.seed</span><span class="p">(</span><span class="m">100</span><span class="p">)</span>
 
 m <span class="o">&lt;-</span> <span class="m">3</span>
 n <span class="o">&lt;-</span> <span class="m">2000</span>
+<span class="c1"># 产生mu=0 std=1的互有相关性的正态分布的3维向量</span>
 sigma <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">0.4</span><span class="p">,</span> <span class="m">0.2</span><span class="p">,</span>
                   <span class="m">0.4</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">-0.8</span><span class="p">,</span>
                   <span class="m">0.2</span><span class="p">,</span> <span class="m">-0.8</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> 
