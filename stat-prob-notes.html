@@ -21,7 +21,7 @@
         <meta property="og:title" content="统计小计"/>
         <meta property="og:url" content="/stat-prob-notes.html"/>
         <meta property="og:description" content="统计学中遇到的一些东西"/>
-        <meta property="article:published_time" content="2019-02-23" />
+        <meta property="article:published_time" content="2019-08-04" />
             <meta property="article:section" content="量化" />
             <meta property="article:tag" content="量化" />
             <meta property="article:tag" content="统计" />
@@ -110,7 +110,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2019-02-23T11:32:00+08:00"> 六 23 二月 2019</time>
+        <i class="fa fa-calendar"></i><time datetime="2019-08-04T11:32:00+08:00"> 日 04 八月 2019</time>
     </span>
 
 
@@ -144,7 +144,7 @@
 <p>这个很难计算的，这样就可以用如下方法来近似，直接用这个action玩N次游戏，把所有的reward加起来，除以N，即可近似出这个期望值</p>
 <p><img alt="近似公式" src="http://sinacloud.net/mhblog/2019/06/probAppx.png"></p>
 <h2>正态分布 -&gt; 均匀分布</h2>
-<p>一个正态分布的向量 通过对应正态分布的CDF进行转换就可以得到均匀分布</p>
+<p>一个正态分布的向量 通过对应正态分布的CDF进行转换就可以得到均匀分布 <a href="https://en.wikipedia.org/wiki/Probability_integral_transform">概率积分变换</a></p>
 <div class="highlight"><pre><span></span><span class="kn">library</span><span class="p">(</span>MASS<span class="p">)</span>
 <span class="kp">set.seed</span><span class="p">(</span><span class="m">100</span><span class="p">)</span>
 
@@ -194,13 +194,20 @@ install.packages<span class="p">(</span><span class="s">&quot;Rsafd&quot;</span>
 <p>这个GPD只能分析尾巴，中间部分如果符合正态是不需要分析的。而且是只能分析右尾，分析左尾得把数据做abs</p>
 <p><strong>固定成交量(额)内的价格变化</strong></p>
 <p>高斯分布</p>
+<h2>copula</h2>
+<p>必须要细致的看一下 <a href="https://en.wikipedia.org/wiki/Copula_(probability_theory)">wikipedia</a></p>
+<p>概念不必再描述，注意点：</p>
+<ol>
+<li>前提是时间序列要是<strong>平稳</strong>且<strong>连续</strong>的，如果有自相关，可能计算出来的copula是错误的</li>
+<li>分类： gaussian, archimedean(阿基米德), student-t 。 其中 archimedean 含 有很多子类(Clayton, Gumbel, Grank)</li>
+</ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/tips-of-linear-algebra.html">线代的一些tips</a></li>
         <li><a href="/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="/tips-of-linear-algebra.html">线代的一些tips</a></li>
         <li><a href="/some-idea-of-functional-analysis.html">数学分析的一些感悟</a></li>
         <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
         <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
