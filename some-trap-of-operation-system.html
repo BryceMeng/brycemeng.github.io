@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Elite3 - 雪山</title>
+    <title>一些系统上的坑 - 雪山</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,16 +10,23 @@
 
     <link href="/images/favicon.png" rel="icon">
 
+<link rel="canonical" href="/some-trap-of-operation-system.html">
 
-    <meta name="author" content="雪山" />
-    <meta name="keywords" content="Elite3" />
+        <meta name="author" content="雪山" />
+        <meta name="keywords" content="坑,系统,Ubuntu" />
+        <meta name="description" content="不想折腾就用windows吧..." />
 
-    <!-- Open Graph tags -->
         <meta property="og:site_name" content="雪山" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="雪山"/>
-        <meta property="og:url" content=""/>
-        <meta property="og:description" content="雪山"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="一些系统上的坑"/>
+        <meta property="og:url" content="/some-trap-of-operation-system.html"/>
+        <meta property="og:description" content="不想折腾就用windows吧..."/>
+        <meta property="article:published_time" content="2019-08-06" />
+            <meta property="article:section" content="技术" />
+            <meta property="article:tag" content="坑" />
+            <meta property="article:tag" content="系统" />
+            <meta property="article:tag" content="Ubuntu" />
+            <meta property="article:author" content="雪山" />
 
 
     <!-- Bootstrap -->
@@ -65,7 +72,7 @@
                         <li >
                             <a href="/category/android.html">Android</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="/category/ji-zhu.html">技术</a>
                         </li>
                         <li >
@@ -86,13 +93,50 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></h2>
-                <div class="summary"><p>EdgeRouter Lite 3配置实例，这是一款性能非常高，但非常难配的路由器</p>
-                    <a class="btn btn-default btn-xs" href="/edgerouter-lite-3-config.html">more ...</a>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/some-trap-of-operation-system.html"
+                       rel="bookmark"
+                       title="Permalink to 一些系统上的坑">
+                        一些系统上的坑
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2019-08-06T21:12:00+08:00"> 二 06 八月 2019</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/keng.html">坑</a>
+        /
+	<a href="/tag/xi-tong.html">系统</a>
+        /
+	<a href="/tag/ubuntu.html">Ubuntu</a>
+    
+</footer><!-- /.post-info -->                    </div>
                 </div>
-            </article>
-            <hr/>
+                <h3>Ubuntu 更新显卡驱动后，鼠标键盘失灵</h3>
+<div class="highlight"><pre><span></span>sudo apt install xserver-xorg-input-all
+</pre></div>
+
+
+<p>记住，现在ubuntu 18.04 安装完后默认是没有SSH Server的，一定要先把这个装好，不然远程操作不了电脑，只能用recover模式，会麻烦一些</p>
+<p>如果没特征需求就用windows吧，可控性还是要高很多，而且win10也有WSL，ubuntu的适配性太差了，我有时想买新的笔记本都不敢买，万一ubuntu没有对应设备的驱动，启不......</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
 
         </div>
         <div class="col-sm-3" id="sidebar">
@@ -228,7 +272,7 @@
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2017 雪山
+         <div class="col-xs-10">&copy; 2019 雪山
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
