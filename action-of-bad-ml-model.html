@@ -131,6 +131,7 @@
 - sigmoid 的特性决定，输入的变化很大时，其实越到后面输出的变化就越小</p>
 <p><strong>relu</strong>:</p>
 <p>现在是主力激活函数，虽然relu本身是线性函数，但是多层复合组合起来并不是线性模型</p>
+<p>注意： relu是可能导致某节点weight为0的，减慢学习速率是可以缓解这个问题的</p>
 <p><strong>maxout</strong>:</p>
 <p>这个是动态的激活函数，貌似很厉害，再云深入了解一下。</p>
 <h2>Adaptive learning rate</h2>
@@ -146,13 +147,15 @@
 <p>在传统的统计学方法就是岭回归和lasso回归，岭是l2，lasso是l1，这个貌似用在DNN上效果不如在传统方法上明显</p>
 <h2>Dropout(随机丢掉一些神经元)</h2>
 <p>这不就是传统方法上的bagging吗？</p>
+<h2>batch normalization</h2>
+<p><a href="Batch normalization">相关解释</a> 解决梯度爆炸</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/summary-of-machine-learning-class.html">机器学习刷课总结</a></li>
         <li><a href="/reinforcement-learning.html">强化学习</a></li>
+        <li><a href="/summary-of-machine-learning-class.html">机器学习刷课总结</a></li>
         <li><a href="/some-traps-of-stock-prices-predicted.html">股价预测的陷阱</a></li>
         <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
         <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
