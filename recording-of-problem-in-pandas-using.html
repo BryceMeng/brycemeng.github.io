@@ -184,6 +184,16 @@
 
 
 <p>经测试，上面两个函数计算的数值是一样的</p>
+<h4>lagged 相关</h4>
+<p>这算是相关系数的一个子项目，传统的相关系数有一个问题就是一旦某一组数据有延迟就不能识别他们的相关性</p>
+<p>其实是有方法的，时间序列分析方法里面有一个 <strong>VAR，向量自回归</strong>就可以进行检测，还有一种方法<strong>格兰杰因果检验</strong></p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">grangercausalitytests</span>
+
+<span class="n">grangercausalitytests</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">]],</span> <span class="n">maxlag</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+
+<p>其实回头想想，自己写一个也很容易，循环一下测试传统相关系数就行</p>
 <h3>取某些行，但是索引里面还有不存在的key</h3>
 <p>reindex(key_list).dropna()</p>
 <h3>把原来的索引取消，转为正常数据列</h3>
@@ -280,7 +290,7 @@
         <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
         <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
         <li><a href="/action-of-bad-ml-model.html">机器学习模型效果不好了怎么办？</a></li>
-        <li><a href="/tips-of-linear-algebra.html">线代的一些tips</a></li>
+        <li><a href="/summary-of-machine-learning-class.html">机器学习刷课总结</a></li>
         <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
     </ul>
 </section>
