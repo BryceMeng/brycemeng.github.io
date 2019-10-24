@@ -215,12 +215,18 @@
 
 <h3>boolean过滤器的使用</h3>
 <p>尽量不要使用老方法了，如：</p>
-<div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="nb">filter</span><span class="p">]][</span><span class="n">poxA_idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="highlight"><pre><span></span><span class="c1"># pandas </span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="nb">filter</span><span class="p">]][</span><span class="n">poxA_idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 
 
 <p>要用loc:</p>
 <div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sig_positive&#39;</span><span class="p">],</span> <span class="n">posA_idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># numpy 下的逻辑运算</span>
+<span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(,)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(,)</span>
 </pre></div>
 
 
