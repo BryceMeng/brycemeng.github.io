@@ -120,20 +120,26 @@
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>一直没深入看一下kalman，今天查阅了很多资料，终于找到一个很形象很具体的解说</p>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<p>一直没深入看一下kalman，今天查阅了很多资料，终于找到一个很形象很具体的解说</p>
 <p><a href="https://www.zhihu.com/question/23971601/answer/839664224">如何通俗并尽可能详细地解释卡尔曼滤波？ - 云羽落的回答 - 知乎</a></p>
 <p><a href="https://ww2.mathworks.cn/videos/understanding-kalman-filters-part-3-optimal-state-estimator--1490710645421.html">matlab原版</a></p>
-<p>其实解释起来不复杂
-1. 预测变量x, 但是有两个x,怎讲？因为x的真实值我们是永远不知道的，就算温度计测出来的温度也有误差哦。\( y_k \) 测量值，温度计测出来的，\( \hat{x}^{-}_k \) 这是通过数学模型估算出来的值，\( \hat{x}_k \) 就是kalman最优估算值，需要得到的值</p>
+<p>其实解释起来不复杂</p>
 <ol>
 <li>
-<p>有两个协方差，和上面对应，一个测量R，一个模型估算\( P^{-}_k \)，kalman最优估算值是\( P_k \)</p>
+<p>预测变量x, 但是有两个x,怎讲？因为x的真实值我们是永远不知道的，就算温度计测出来的温度也有误差哦。\( y_k \) <strong>测量值</strong>，温度计测出来的，\( \hat{x}^{-}_k \) 这是通过<strong>数学模型估算</strong>出来的值，\( \hat{x}_k \) 就是<strong>kalman最优估算</strong>值，需要得到的值</p>
+</li>
+<li>
+<p>有两个协方差，和上面对应，一个<strong>测量</strong>R，一个<strong>模型估算</strong>\( P^{-}_k \)，<strong>kalman最优估</strong>算值是\( P_k \)</p>
 </li>
 <li>
 <p>有一个增益K，就是通过两个协方差计算而来，其实简单来讲就是把<strong>测量值</strong> 和 <strong>模型估算值</strong> 做一个中和</p>
 </li>
 <li>
-<p>当然，可以用多个传感器来提高精确度</p>
+<p>注意：
+    a. 当然，可以用多个传感器来提高精确度
+    b. 普通</p>
 </li>
 </ol>
 <p><img alt="kalman" src="http://sinacloud.net/mhblog/2019/11/2019-11-04_kalman01.png"></p>
@@ -143,10 +149,10 @@
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
+        <li><a href="/ctp-archive-future-tick.html">用CTP接口实现期货交易明细分析(1)</a></li>
         <li><a href="/reinforcement-learning.html">强化学习</a></li>
         <li><a href="/action-of-bad-ml-model.html">机器学习模型效果不好了怎么办？</a></li>
-        <li><a href="/tips-of-linear-algebra.html">线代的一些tips</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="/summary-of-machine-learning-class.html">机器学习刷课总结</a></li>
     </ul>
 </section>
         </article>
