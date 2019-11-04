@@ -132,7 +132,7 @@
 <p>预测变量x, 但是有两个x,怎讲？因为x的真实值我们是永远不知道的，就算温度计测出来的温度也有误差哦。\( y_k \) <strong>测量值</strong>，温度计测出来的，\( \hat{x}^{-}_k \) 这是通过<strong>数学模型估算</strong>出来的值，\( \hat{x}_k \) 就是<strong>kalman最优估算</strong>值，需要得到的值</p>
 </li>
 <li>
-<p>有两个协方差，和上面对应，一个<strong>测量</strong>R，一个<strong>模型估算</strong>\( P^{-}_k \)，<strong>kalman最优估</strong>算值是\( P_k \)</p>
+<p>有两个协方差，和上面对应，一个<strong>测量</strong>R，一个<strong>模型估算</strong>\( P^{-}_k \)，<strong>kalman最优估</strong>算值是\( P_k \)。Q对应transition_covariance(pykalman)，Q是mean为0，方差为Q的高斯分布，pykalman中的这个参数命名有点问题，这个不是协方差，其实就是P在变化时的一个噪声，应该是variance。而P是描述状态变量间(多维)关系的，初始P为initial_state_covariance(pykalman)。R和P不一样，R和Q功能一样，为observation_covariance(pykalman)。</p>
 </li>
 <li>
 <p>有一个增益K，就是通过两个协方差计算而来，其实简单来讲就是把<strong>测量值</strong> 和 <strong>模型估算值</strong> 做一个中和</p>
@@ -152,7 +152,7 @@
 <li>\( A_t \) 就是 transition_matrices ，状态转移矩阵</li>
 <li>\( B_t \) 是 contral_matrices 控制矩阵</li>
 <li>\( C_t \) 是 状态转移矩阵，从state到observation的线性计算矩阵,observation_matrices</li>
-<li>\( \epsilon_{t} \) 对应上上图的Q，图中的解释为Rt可能是另外的公式，那么\( \delta_{t} \) 就是对应上上图的R了，图中的解释为Qt是另外的公式</li>
+<li>\( \epsilon_{t} \) 对应上上图的Q，transition_covariance，图中的解释为Rt可能是另外的公式，那么\( \delta_{t} \) 就是对应上上图的R了，observation_covariance，图中的解释为Qt是另外的公式</li>
 </ol>
 <h2>实例</h2>
 <p><a href="https://www.quantopian.com/lectures/kalman-filters">实例 notebook 展示</a></p>
