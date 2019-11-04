@@ -124,7 +124,16 @@
 <p><a href="https://www.zhihu.com/question/23971601/answer/839664224">如何通俗并尽可能详细地解释卡尔曼滤波？ - 云羽落的回答 - 知乎</a></p>
 <p><a href="https://ww2.mathworks.cn/videos/understanding-kalman-filters-part-3-optimal-state-estimator--1490710645421.html">matlab原版</a></p>
 <p>其实解释起来不复杂
-1. 预测变量x, 但是有两个x,怎讲？因为x的真实值我们是永远不知道的，就算温度计测出来的温度也有误差哦。\( y_k \) 测量值，温度计测出来的，\( \hat{x}^{-}_k \) 这是通过数学模型估算出来的值，\( \hat{x}_k \) 就是最优估算值，需要得到的值</p>
+1. 预测变量x, 但是有两个x,怎讲？因为x的真实值我们是永远不知道的，就算温度计测出来的温度也有误差哦。\( y_k \) 测量值，温度计测出来的，\( \hat{x}^{-}_k \) 这是通过数学模型估算出来的值，\( \hat{x}_k \) 就是kalman最优估算值，需要得到的值</p>
+<ol>
+<li>
+<p>有两个协方差，和上面对应，一个测量R，一个模型估算\( P^{-}_k \)，kalman最优估算值是\( P_k \)</p>
+</li>
+<li>
+<p>有一个增益K，就是通过两个协方差计算而来，其实简单来讲就是把<strong>测量值</strong> 和 <strong>模型估算值</strong> 做一个中和</p>
+</li>
+</ol>
+<p><img alt="kalman" src="http://sinacloud.net/mhblog/2019/11/2019-11-04_kalman01.png"></p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
