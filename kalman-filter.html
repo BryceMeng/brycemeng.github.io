@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>雪山</title>
+    <title>kalman - 雪山</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,15 +10,21 @@
 
     <link href="/images/favicon.png" rel="icon">
 
-<link rel="canonical" href="">
-        <meta name="author" content="雪山" />
+<link rel="canonical" href="/kalman-filter.html">
 
-    <!-- Open Graph tags -->
+        <meta name="author" content="雪山" />
+        <meta name="keywords" content="量化" />
+        <meta name="description" content="kalman 真头痛" />
+
         <meta property="og:site_name" content="雪山" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="雪山"/>
-        <meta property="og:url" content=""/>
-        <meta property="og:description" content="雪山"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="kalman"/>
+        <meta property="og:url" content="/kalman-filter.html"/>
+        <meta property="og:description" content="kalman 真头痛"/>
+        <meta property="article:published_time" content="2019-11-04" />
+            <meta property="article:section" content="量化" />
+            <meta property="article:tag" content="量化" />
+            <meta property="article:author" content="雪山" />
 
 
     <!-- Bootstrap -->
@@ -67,7 +73,7 @@
                         <li >
                             <a href="/category/ji-zhu.html">技术</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="/category/liang-hua.html">量化</a>
                         </li>
                         <li >
@@ -85,95 +91,55 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="/python-for-data-analysis.html">利用Python进行数据分析</a></h2>
-                <div class="summary"><p>《利用Python进行数据分析》的一点总结</p>
-                    <a class="btn btn-default btn-xs" href="/python-for-data-analysis.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></h2>
-                <div class="summary"><p>最近听了一个julyedu上的股票量化的课程，做了个记录</p>
-                    <a class="btn btn-default btn-xs" href="/stock-quantitative-knowledge.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/back-of-laicigou.html">莱茨狗背后</a></h2>
-                <div class="summary"><p>莱茨狗背后</p>
-                    <a class="btn btn-default btn-xs" href="/back-of-laicigou.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/future-open-interest.html">期货持仓量</a></h2>
-                <div class="summary"><p>期货持仓量的分析</p>
-                    <a class="btn btn-default btn-xs" href="/future-open-interest.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/nature-distribution.html">自然分布</a></h2>
-                <div class="summary"><p>自然分布存在于世间万事万物，这也让我在最近的学习中体会到了数学之美。我又想到了查理芒格提到的，多学习一些普世科学，不要局限于一个领域内，会对我们有非常大的帮助。</p>
-                    <a class="btn btn-default btn-xs" href="/nature-distribution.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></h2>
-                <div class="summary"><p>第一个策略上线运行了3天亏损60，不过这个过程是必要和值得的</p>
-                    <a class="btn btn-default btn-xs" href="/sum-of-first-product-strategy.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></h2>
-                <div class="summary"><p>MongoDb 总共14年的期货tick数据导入踩坑历程</p>
-                    <a class="btn btn-default btn-xs" href="/mongodb-data-insert-trap.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/car-control-practice.html">谈谈汽车的操控 - 实操</a></h2>
-                <div class="summary"><p>从身边的细节发现生活的美 - 汽车的操控</p>
-                    <a class="btn btn-default btn-xs" href="/car-control-practice.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/car-control-theory.html">谈谈汽车的操控 - 理论</a></h2>
-                <div class="summary"><p>从身边的细节发现生活的美 - 汽车的操控</p>
-                    <a class="btn btn-default btn-xs" href="/car-control-theory.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/hifi-talk-is-car-hifi.html">Hifi - 车载音响能变Hifi吗？</a></h2>
-                <div class="summary"><p>我们的原厂车载音响能变成Hifi吗？</p>
-                    <a class="btn btn-default btn-xs" href="/hifi-talk-is-car-hifi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/kalman-filter.html"
+                       rel="bookmark"
+                       title="Permalink to kalman">
+                        kalman
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2019-11-04T18:18:00+08:00"> 一 04 十一月 2019</time>
+    </span>
 
-        <ul class="pagination">
-                <li class="prev"><a href="/index2.html">&laquo;</a>
-                </li>
-                    <li class=""><a
-                            href="/index.html">1</a></li>
-                    <li class=""><a
-                            href="/index2.html">2</a></li>
-                    <li class="active"><a
-                            href="/index3.html">3</a></li>
-                    <li class=""><a
-                            href="/index4.html">4</a></li>
-                    <li class=""><a
-                            href="/index5.html">5</a></li>
-                    <li class=""><a
-                            href="/index6.html">6</a></li>
-                <li class="next"><a
-                        href="/index4.html">&raquo;</a></li>
-        </ul>
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/liang-hua.html">量化</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>一直没深入看一下kalman，今天查阅了很多资料，终于找到一个很形象很具体的解说</p>
+<p><a href="https://www.zhihu.com/question/23971601/answer/839664224">如何通俗并尽可能详细地解释卡尔曼滤波？ - 云羽落的回答 - 知乎</a></p>
+<p><a href="https://ww2.mathworks.cn/videos/understanding-kalman-filters-part-3-optimal-state-estimator--1490710645421.html">matlab原版</a></p>
+<p>其实解释起来不复杂
+1. 预测变量x, 但是有两个x,怎讲？因为x的真实值我们是永远不知道的，就算温度计测出来的温度也有误差哦。\( y_k \) 测量值，温度计测出来的，\( \hat{x}^{-}_k \) 这是通过数学模型估算出来的值，\( \hat{x}_k \) 就是最优估算值，需要得到的值</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
+        <li><a href="/reinforcement-learning.html">强化学习</a></li>
+        <li><a href="/action-of-bad-ml-model.html">机器学习模型效果不好了怎么办？</a></li>
+        <li><a href="/summary-of-machine-learning-class.html">机器学习刷课总结</a></li>
+        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
