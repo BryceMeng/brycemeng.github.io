@@ -219,6 +219,70 @@ datetime<br>
 2013-01-12 3.08 8.02 6.336 10.2<br>
 2013-01-13 5.38 3.80 5.492 10.2<br></p>
 </blockquote>
+<p>测试发现 stride的速度很快，不过concat的速度很慢，pandas的各路操作确实是慢，不知有什么方法能优化一下</p>
+<p>pandas concat group 这一路操作太慢了，无法接受，又改了一版纯numpy的，速度快很多</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">roll_np</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">apply_func</span><span class="p">:</span> <span class="nb">callable</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">return_col_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    rolling with multiple columns on 2 dim pd.Dataframe</span>
+<span class="sd">    * the result can apply the function which can return pd.Series with multiple columns</span>
+
+<span class="sd">    call apply function with numpy ndarray</span>
+<span class="sd">    :param return_col_num: 返回的列数</span>
+<span class="sd">    :param apply_func:</span>
+<span class="sd">    :param df:</span>
+<span class="sd">    :param window</span>
+<span class="sd">    :param kwargs:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># move index to values</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+
+    <span class="n">dim0</span><span class="p">,</span> <span class="n">dim1</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">stride0</span><span class="p">,</span> <span class="n">stride1</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">strides</span>
+
+    <span class="n">stride_values</span> <span class="o">=</span> <span class="n">stride</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="n">dim0</span> <span class="o">-</span> <span class="p">(</span><span class="n">window</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">window</span><span class="p">,</span> <span class="n">dim1</span><span class="p">),</span> <span class="p">(</span><span class="n">stride0</span><span class="p">,</span> <span class="n">stride0</span><span class="p">,</span> <span class="n">stride1</span><span class="p">))</span>
+
+    <span class="n">result_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">dim0</span><span class="p">,</span> <span class="n">return_col_num</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">stride_values</span><span class="p">,</span> <span class="n">window</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># values : col 1 is index, other is value</span>
+        <span class="n">result_values</span><span class="p">[</span><span class="n">idx</span><span class="p">,]</span> <span class="o">=</span> <span class="n">apply_func</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result_values</span>
+</pre></div>
+
+
+<p>测试运行结果：</p>
+<div class="highlight"><pre><span></span><span class="n">return_values</span> <span class="o">=</span> <span class="n">tableRollNp</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">own_func_np</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;C_mean_np&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">return_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;C+D_np&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">return_values</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+
+
+<blockquote>
+<p>C D C_mean_np C+D_np<br>
+datetime<br>
+2013-01-01 1.60 5.40 NaN NaN<br>
+2013-01-02 4.10 3.20 NaN NaN<br>
+2013-01-03 2.70 8.80 2.800000 7.3<br>
+2013-01-04 4.90 3.60 3.900000 8.1<br>
+2013-01-05 5.40 12.60 4.333333 9.0<br>
+2013-01-06 1.30 9.30 3.866667 9.0<br>
+2013-01-07 6.60 11.80 4.433333 15.9<br>
+2013-01-08 9.60 8.90 5.833333 18.5<br>
+2013-01-09 3.50 4.60 6.566667 14.2<br>
+2013-01-10 5.40 1.90 6.166667 11.5<br>
+2013-01-11 10.10 0.10 6.333333 10.2<br>
+2013-01-12 3.08 8.02 6.193333 10.2<br>
+2013-01-13 5.38 3.80 6.186667 10.2<br></p>
+</blockquote>
+<p>结果和pandas那一版一样。但是中间处理 index，结果什么的需要自己切一下numpy二维矩阵，这个应该是小case吧。</p>
+<p>回头看看代码，其实里面最重要的函数就是stride，这也是numpy的核心，为什么速度这么快的核心。numpy的数据在内存中是连续存储的，所以numpy的底层操作是直接进行对内存进行寻址访问，stride告诉我们加一行，加一列需要加的内存地址是多少。这样访问是飞快的。</p>
+<p>所以对numpy操作时，进行slice操作是对原数组进行的操作，速度快；尽量不要重新生存数组，尽量不要做类似append的操作，这样内存会反复拷贝，就慢了。</p>
+<p>我改的这几个函数通用性不高，大家可以自己diy一下。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
@@ -227,8 +291,8 @@ datetime<br>
         <li><a href="/cta-optimize-is-ga-avilable.html">CTA多参数优化能用遗传算法吗？</a></li>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
         <li><a href="/action-of-bad-ml-model.html">机器学习模型效果不好了怎么办？</a></li>
+        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
     </ul>
 </section>
         </article>
