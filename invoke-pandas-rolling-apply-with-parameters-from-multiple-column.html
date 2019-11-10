@@ -250,6 +250,16 @@ datetime<br>
         <span class="n">result_values</span><span class="p">[</span><span class="n">idx</span><span class="p">,]</span> <span class="o">=</span> <span class="n">apply_func</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">result_values</span>
+
+<span class="k">def</span> <span class="nf">own_func_np</span><span class="p">(</span><span class="n">narr</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param narr:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="n">narr</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">narr</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 </pre></div>
 
 
@@ -292,7 +302,7 @@ datetime<br>
         <li><a href="/future-open-interest.html">期货持仓量</a></li>
         <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
         <li><a href="/action-of-bad-ml-model.html">机器学习模型效果不好了怎么办？</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/reinforcement-learning.html">强化学习</a></li>
     </ul>
 </section>
         </article>
