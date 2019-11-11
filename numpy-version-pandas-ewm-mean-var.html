@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>第一个策略上线总结 - 雪山</title>
+    <title>numpy pandas ewm mean/var - 雪山</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,18 +10,18 @@
 
     <link href="/images/favicon.png" rel="icon">
 
-<link rel="canonical" href="/sum-of-first-product-strategy.html">
+<link rel="canonical" href="/numpy-version-pandas-ewm-mean-var.html">
 
         <meta name="author" content="雪山" />
         <meta name="keywords" content="量化" />
-        <meta name="description" content="第一个策略上线运行了3天亏损60，不过这个过程是必要和值得的" />
+        <meta name="description" content="numpy 的速度真的好快" />
 
         <meta property="og:site_name" content="雪山" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="第一个策略上线总结"/>
-        <meta property="og:url" content="/sum-of-first-product-strategy.html"/>
-        <meta property="og:description" content="第一个策略上线运行了3天亏损60，不过这个过程是必要和值得的"/>
-        <meta property="article:published_time" content="2017-12-29" />
+        <meta property="og:title" content="numpy pandas ewm mean/var"/>
+        <meta property="og:url" content="/numpy-version-pandas-ewm-mean-var.html"/>
+        <meta property="og:description" content="numpy 的速度真的好快"/>
+        <meta property="article:published_time" content="2019-11-11" />
             <meta property="article:section" content="量化" />
             <meta property="article:tag" content="量化" />
             <meta property="article:author" content="雪山" />
@@ -95,10 +95,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/sum-of-first-product-strategy.html"
+                    <a href="/numpy-version-pandas-ewm-mean-var.html"
                        rel="bookmark"
-                       title="Permalink to 第一个策略上线总结">
-                        第一个策略上线总结
+                       title="Permalink to numpy pandas ewm mean/var">
+                        numpy pandas ewm mean/var
                     </a>
                 </h1>
             </header>
@@ -108,7 +108,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-12-29T21:34:00+08:00"> 五 29 十二月 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2019-11-11T11:11:00+08:00"> 一 11 十一月 2019</time>
     </span>
 
 
@@ -120,63 +120,46 @@
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>首先说上这个策略的</p>
-<h2>目的：</h2>
-<p><strong>1. 验证实盘的撮合成交机制</strong>。</p>
-<p>这个策略是分钟级的，调试下来稳定在1天平均交易6次，实际跑下来也确实如此。在回测时其实是很稳定的<strong>亏钱</strong>的，有人问我，你是不是疯了，不，我没疯。因为我看中了稳，表现在曲线上就是曲线的斜率非常稳，这样如果是盈利的，那也会非常的稳，风险小，面对各种突涨突跌的冲击也很稳，其实说下来就是高频交易的特点啦。为什么亏损策略我还要坚持试呢？因为测试和simnow时成交的规则是很严格的，只能主动成交，不能被动成交。</p>
-<p>比如：现在</p>
-<div class="highlight"><pre><span></span>askPrice1 = 3802 
-bidPrice1 = 3801 
+                <p>Reference: <a href="https://stackoverflow.com/questions/42869495/numpy-version-of-exponential-weighted-moving-average-equivalent-to-pandas-ewm">stack overflow</a></p>
+<p>其实pandas ewm已经很好用了，除了有点慢，也不是很慢，为什么我要搞个numpy的版本呢？</p>
+<p>因为期货主连数据回测时有个最大的问题就是<strong>合约切换</strong>，那个切换时的<strong>价格跳动</strong>是无效的，会产生<strong>虚假信号</strong>，但是如果直接把回测数据做前复权，如果是价差策略，早期的价差会非常不准确。而且在实盘时用pandas不断的<strong>append数据，那是罪恶</strong>，所以干脆搞个numpy的版本。</p>
+<p>我是用的Reference里面的代码改的，但不是最高票答案，而是 james 的答案，james 的答案<strong>准确度非常的高，思路清晰</strong>，james 是直接把rolling的结果全部计算出来了，而我只需要<strong>计算单个值</strong>，所以改出来后的代码也是很快的，不需要像高票答案一样把速度做到极致，然而 adjust=True 的情况下又没有做出来。</p>
+<p>然后 var 就直接参考的 pandas 的文档做的计算，很简单。</p>
+<p>简单讲一个ewm(指数加权移动)，把指数和加权结合起来，我曾经在ML中用ewm的mean做过测试，ewm预测价格的效果确实要好一些。ewm有个span的参数可以供我们计算移动平均，移动方差使用，但是要注意<strong>span并不是window</strong>，window是只取window大小的数据，但是<strong>span=10是可以取1000甚至更多的数据</strong>参与计算的，只是由span计算出alpha，来改变里面权重的计算方法而已。</p>
+<p>下面代码的计算结果和pandas的一模一样，非常棒，在我自己的numpy rolling中计算简直不要太快。</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_ewma</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">window</span><span class="p">):</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">window</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">w0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">w0</span><span class="o">**</span><span class="n">p</span>
+
+    <span class="n">ewm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">w</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">ewm</span>
+
+<span class="k">def</span> <span class="nf">my_ewvar</span><span class="p">(</span><span class="n">ewma</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">window</span><span class="p">):</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">window</span><span class="p">)</span>
+
+    <span class="n">w0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">w0</span> <span class="o">**</span> <span class="n">p</span>
+
+    <span class="n">with_bias</span> <span class="o">=</span> <span class="n">my_ewma</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">window</span><span class="p">)</span> <span class="o">-</span> <span class="n">ewma</span> <span class="o">**</span> <span class="mi">2</span>
+
+    <span class="n">scaler</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">**</span> <span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="n">w</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">with_bias</span> <span class="o">*</span> <span class="n">scaler</span>
+
+<span class="n">ewma_np</span> <span class="o">=</span> <span class="n">my_ewma</span><span class="p">(</span><span class="n">ibm</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">windowSize</span><span class="p">)</span>
+
+<span class="n">ewmvar_np</span> <span class="o">=</span> <span class="n">my_ewvar</span><span class="p">(</span><span class="n">ewma_np</span><span class="p">,</span> <span class="n">ibm</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">windowSize</span><span class="p">)</span>
 </pre></div>
-
-
-<p>我现在下一个3801的买单，是不会成交的，一定要下3801的单子才能成交，当然这是在simnow和回测的情况下。</p>
-<p>但是在实盘是有可能等到有个用3801的价格short方向砸给我的，这时</p>
-<div class="highlight"><pre><span></span>askPrice1 = 3802
-bidPrice1 = 3801
-只是 lastPrice = 3801
-</pre></div>
-
-
-<p>实际跑了几天，确实胜率比测试下来要高，但是由于......还是暂停了。</p>
-<p><strong>2. 测试实盘系统稳定性</strong></p>
-<p>因为该策略1天平均交易6次，能碰到各种情况，所以对系统是一个比较好的测试，实际下来也确实发现了不少的问题，这个也算成长了不少。</p>
-<h2>撤下原因</h2>
-<p><strong>1. 盈亏比太低</strong></p>
-<p>0.3 我开始还抱有一点幻想，不过经过科学分析和实际测试，这么低的盈亏比确实不能实盘。这个策略是第次交易固定盈11.5元左右，也就是两个价差（<em>与实际商品价格相关</em>），但是我的止损最大是15个价差，也就是160元，最后也是这个15点的止损让我撤下了这个策略。</p>
-<h2>经验总结</h2>
-<p><strong>1. 所有细节一定要想清楚</strong></p>
-<p>有人工干预的和没人工干预的相差非常大，自动化运行时可能会出现各种情况，单被拒，没成交，回报延迟，等等，有人在旁边很好办，人工下单即可，没有人在旁边就要考虑到各种情况。</p>
-<p>而且还有上交所的<strong>平今</strong>和<strong>平昨</strong>，非常的坑，我有一个单过了30分钟都没成交，最终还是我人工空掉的，不然后果很严重。</p>
-<p>最好做阻塞的操作，比如我先撤个单，再下个单，你就等撤单的回报过来后再下单，这样比较靠谱，如果直接下两个单，在一些未知情况下还不知道出现什么状况。</p>
-<p><strong>2. 生产部署要单独的机器</strong></p>
-<p>千万不可一边开发，一边还在机器上跑策略，不过我相信也没人这样干。</p>
-<p>我的软配置：</p>
-<ul>
-<li>Ubuntu 16.04 LTS Server版，没图形界面，非常清爽，而且系统崩溃的概率要低一些。我在安装过程中碰到了不能更新apt的情况，我把我开发机上的/etc/apt/sources.list拷上去就行。</li>
-<li>用的1000M网线连接的路由器，不要用wifi</li>
-<li>安装sshd服务，可以console，又可以sftp，非常方便</li>
-<li>自己写了个conrtab脚本，定时开启cta和关闭cta</li>
-<li>相关日志输出到指定目录，我可以远程在ssh上面监控</li>
-<li>务必用SSD，可以看第4点</li>
-</ul>
-<p><strong>3. vnpy可以无图形</strong></p>
-<p>其实vnpy的cta无图形运行脚本是可以无图形的，但是需要qt包，但是server版上是没有这个包的，去安装个qt包？不。把相关cta引用到的库的qt和matlib引用去掉就行，我已经成功无qt包跑起来了。</p>
-<p><strong>4. 坑：python自带的logger是阻塞的</strong></p>
-<p>我调试过logger的代码，是阻塞的，这和传统的log4net完全不一样，log4net可以疯狂的写log,log4net有专门的线程负责写日志，所以效率非常高。</p>
-<p>我已经找到方法，通过共享内存的方式异步写日志了，不过考虑到时间投入就没实现，现在的策略还没到IO的瓶颈，不过SSD还是必要的哈，不然IO真可能成为瓶颈。</p>
-<h2>代码需要注意的地方</h2>
-<p><strong>vtEngine.py -&gt; class PositionDetail</strong></p>
-<ol>
-<li>这个类是管理每个合约对应的仓位的，在策略开始前会查询订单的回报，在我的试验中，上期所有点坑，因为上期所分平昨和平今，如果在订单成交回报中昨天的某条没过来，就会导致昨天的pos是负数，这是不可能的，因为vnpy里面分了long和short只可能是正数</li>
-<li>里面我的SHFE平今平昨模式是我硬编码的，交易其他合约时要注意</li>
-</ol>
-<p><strong>策略文件 OnOrder</strong></p>
-<p>回测时是orderId，实盘又是VOrderId</p>
-<p><strong>历史数据</strong></p>
-<p>如果回测用的主连，就用主连的历史数据，不要取当前主力数据取个半年的就会出问题，因为可能1个月前的主力合约不是当前主力合约</p>
-<h2>总结</h2>
-<p>这次实盘花了大概4天的时间，每天早上8点到晚上11点，非常的辛苦，不过这是值得的，加油，干</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
