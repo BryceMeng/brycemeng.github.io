@@ -127,7 +127,39 @@
 <p>然后 var 就直接参考的 pandas 的文档做的计算，很简单。</p>
 <p>简单讲一个ewm(指数加权移动)，把指数和加权结合起来，我曾经在ML中用ewm的mean做过测试，ewm预测价格的效果确实要好一些。ewm有个span的参数可以供我们计算移动平均，移动方差使用，但是要注意<strong>span并不是window</strong>，window是只取window大小的数据，但是<strong>span=10是可以取1000甚至更多的数据</strong>参与计算的，只是由span计算出alpha，来改变里面权重的计算方法而已。</p>
 <p>下面代码的计算结果和pandas的一模一样，非常棒，在我自己的numpy rolling中计算简直不要太快。</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_ewma</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">window</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="c1"># 原版 rolling ewma 代码，做参考用，可以借鉴其中的weight及各程矩阵构造思路，还不错</span>
+<span class="k">def</span> <span class="nf">ewma</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Returns the exponentially weighted moving average of x.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    x : array-like</span>
+<span class="sd">    alpha : float {0 &lt;= alpha &lt;= 1}</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    --------</span>
+<span class="sd">    ewma: numpy array</span>
+<span class="sd">          the exponentially weighted moving average</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Coerce x to an array</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span>
+
+    <span class="c1"># Create an initial weight matrix of (1-alpha), and a matrix of powers</span>
+    <span class="c1"># to raise the weights by</span>
+    <span class="n">w0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="n">n</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+    <span class="c1"># Create the weight matrix</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tril</span><span class="p">(</span><span class="n">w0</span><span class="o">**</span><span class="n">p</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Calculate the ewma</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">[::</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">w</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">my_ewma</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">window</span><span class="p">):</span>
 
     <span class="n">n</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span>
     <span class="n">alpha</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">window</span><span class="p">)</span>
@@ -165,11 +197,11 @@
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
         <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
         <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
         <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
         <li><a href="/invoke-pandas-rolling-apply-with-parameters-from-multiple-column.html">DataFrame rolling apply 多列 return 多列</a></li>
-        <li><a href="/summary-of-machine-learning-class.html">机器学习刷课总结</a></li>
     </ul>
 </section>
         </article>
