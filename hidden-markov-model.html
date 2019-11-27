@@ -126,15 +126,29 @@
 <p>然后《Advanced_Algorithmic_Trading》 中章节 （Hidden Markov Models）和（Market Regime Detection with Hidden Markov Models using QSTrader）也做了比较详细的解释。</p>
 <p>前面一节用的R，后面这一节用了Python，可以借鉴。</p>
 <p>注意一点就是，很多代码直接把所有历史数据代入模型，要注意有没有使用未来数据。这个我自己也还没有进行验证。</p>
+<p>看python代码里面有这么一代，应该是没有用到未来数据的，但是regime switch总是有延迟的，这个东西可能没法避免，如果刚好延迟的节奏不好，可能会比没有filter更差</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">determine_regime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">price_handler</span><span class="p">,</span> <span class="n">sized_order</span><span class="p">):</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Determines the predicted regime by making a prediction</span>
+<span class="sd">on the adjusted closing returns from the price handler</span>
+<span class="sd">object and then taking the final entry integer as</span>
+<span class="sd">the &quot;hidden regime state&quot;.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">returns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">(</span>
+<span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">price_handler</span><span class="o">.</span><span class="n">adj_close_returns</span><span class="p">)]</span>
+<span class="p">)</span>
+<span class="n">hidden_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmm_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">returns</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">return</span> <span class="n">hidden_state</span>
+</pre></div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
-        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
         <li><a href="/some-traps-of-stock-prices-predicted.html">股价预测的陷阱</a></li>
         <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
         <li><a href="/tips-of-linear-algebra.html">线代的一些tips</a></li>
     </ul>
 </section>
