@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>雪山</title>
+    <title>HMM 稳形马尔科夫 - 雪山</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,15 +10,21 @@
 
     <link href="/images/favicon.png" rel="icon">
 
-<link rel="canonical" href="">
-        <meta name="author" content="雪山" />
+<link rel="canonical" href="/hidden-markov-model.html">
 
-    <!-- Open Graph tags -->
+        <meta name="author" content="雪山" />
+        <meta name="keywords" content="量化" />
+        <meta name="description" content="HMM 进行 regime switch 的识别" />
+
         <meta property="og:site_name" content="雪山" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="雪山"/>
-        <meta property="og:url" content=""/>
-        <meta property="og:description" content="雪山"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="HMM 稳形马尔科夫"/>
+        <meta property="og:url" content="/hidden-markov-model.html"/>
+        <meta property="og:description" content="HMM 进行 regime switch 的识别"/>
+        <meta property="article:published_time" content="2019-11-27" />
+            <meta property="article:section" content="量化" />
+            <meta property="article:tag" content="量化" />
+            <meta property="article:author" content="雪山" />
 
 
     <!-- Bootstrap -->
@@ -67,7 +73,7 @@
                         <li >
                             <a href="/category/ji-zhu.html">技术</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="/category/liang-hua.html">量化</a>
                         </li>
                         <li >
@@ -85,95 +91,56 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="/car-control-practice.html">谈谈汽车的操控 - 实操</a></h2>
-                <div class="summary"><p>从身边的细节发现生活的美 - 汽车的操控</p>
-                    <a class="btn btn-default btn-xs" href="/car-control-practice.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/car-control-theory.html">谈谈汽车的操控 - 理论</a></h2>
-                <div class="summary"><p>从身边的细节发现生活的美 - 汽车的操控</p>
-                    <a class="btn btn-default btn-xs" href="/car-control-theory.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/hifi-talk-is-car-hifi.html">Hifi - 车载音响能变Hifi吗？</a></h2>
-                <div class="summary"><p>我们的原厂车载音响能变成Hifi吗？</p>
-                    <a class="btn btn-default btn-xs" href="/hifi-talk-is-car-hifi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/hifi-talk-4-4.html">Hifi - 蝰蛇音效 (4/4)</a></h2>
-                <div class="summary"><p>我眼中的Hifi，来说说蝰蛇音效</p>
-                    <a class="btn btn-default btn-xs" href="/hifi-talk-4-4.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/hifi-talk-4-3.html">Hifi - 怎么买设备？(3/4)</a></h2>
-                <div class="summary"><p>说说我眼中的Hifi，设备购买篇</p>
-                    <a class="btn btn-default btn-xs" href="/hifi-talk-4-3.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/hifi-talk-4-2.html">Hifi - 声音输出经过哪些设备？(2/4)</a></h2>
-                <div class="summary"><p>说说我眼中的Hifi，原理解释篇</p>
-                    <a class="btn btn-default btn-xs" href="/hifi-talk-4-2.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/born-to-poor-note.html">《生而贫穷》书记</a></h2>
-                <div class="summary"><p>最近无心做自己的事情，看了这本书，随便写写</p>
-                    <a class="btn btn-default btn-xs" href="/born-to-poor-note.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/feel-low-stickers.html">心情低落吐槽贴</a></h2>
-                <div class="summary"><p>真不想发这篇贴，算了，还是吐一个吧，不建议点进去观看</p>
-                    <a class="btn btn-default btn-xs" href="/feel-low-stickers.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></h2>
-                <div class="summary"><p>阅读英文书箱的小工具，主要是进行格式化，方便拷贝到google translate进行翻译</p>
-                    <a class="btn btn-default btn-xs" href="/formar-tools-in-reading-quant-book.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></h2>
-                <div class="summary"><p>量化中的一些注意细节（tick数据合成分钟级数据）</p>
-                    <a class="btn btn-default btn-xs" href="/details-in-quant-tick2min.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/hidden-markov-model.html"
+                       rel="bookmark"
+                       title="Permalink to HMM 稳形马尔科夫">
+                        HMM 稳形马尔科夫
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2019-11-27T11:11:00+08:00"> 三 27 十一月 2019</time>
+    </span>
 
-        <ul class="pagination">
-                <li class="prev"><a href="/index3.html">&laquo;</a>
-                </li>
-                    <li class=""><a
-                            href="/index.html">1</a></li>
-                    <li class=""><a
-                            href="/index2.html">2</a></li>
-                    <li class=""><a
-                            href="/index3.html">3</a></li>
-                    <li class="active"><a
-                            href="/index4.html">4</a></li>
-                    <li class=""><a
-                            href="/index5.html">5</a></li>
-                    <li class=""><a
-                            href="/index6.html">6</a></li>
-                <li class="next"><a
-                        href="/index5.html">&raquo;</a></li>
-        </ul>
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/liang-hua.html">量化</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p><strong>regime switch</strong> 简单来讲就是时间序列发生了结构性的变化，例子：牛市和熊市的切换就是regime switch。</p>
+<p>理论最好的解释知乎上已经有了<a href="https://zhuanlan.zhihu.com/p/27907806"><strong>隐马尔科夫模型</strong> - farewell的文章</a></p>
+<p>其实隐性变量才是里面的那条链，然后通过Z到显性变量X进行转移。</p>
+<p>然后《Advanced_Algorithmic_Trading》 中章节 （Hidden Markov Models）和（Market Regime Detection with Hidden Markov Models using QSTrader）也做了比较详细的解释。</p>
+<p>前面一节用的R，后面这一节用了Python，可以借鉴。</p>
+<p>注意一点就是，很多代码直接把所有历史数据代入模型，要注意有没有使用未来数据。这个我自己也还没有进行验证。</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/basis-of-stochastic-calculus-for-finance.html">金融随机分析学习的基础</a></li>
+        <li><a href="/forex-index-learning.html">成熟指标库慢啃</a></li>
+        <li><a href="/some-traps-of-stock-prices-predicted.html">股价预测的陷阱</a></li>
+        <li><a href="/world-quant-101-alpha-first.html">WorldQuant 101Alpha</a></li>
+        <li><a href="/tips-of-linear-algebra.html">线代的一些tips</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
