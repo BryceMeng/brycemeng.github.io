@@ -194,6 +194,11 @@
 
 
 <p>其实回头想想，自己写一个也很容易，循环一下测试传统相关系数就行</p>
+<h3>SearchSorted</h3>
+<p>这个函数 numpy 中有，在 pandas 中也有，当然 pandas 应该就是用的 numpy 实现的</p>
+<p><a href="https://zhuanlan.zhihu.com/p/37197845">详细解释</a></p>
+<p>我其实经常碰到这个场景，金融时间序列数据，我想找一个离某个时间点最近的数据，但是这个时间又没有存在于数据中，，所以用.loc是定位不到的，这时候就用到 searchsoreted 函数了</p>
+<p>具体怎么用，看<a href="https://zhuanlan.zhihu.com/p/37197845">详细解释</a>吧</p>
 <h3>取某些行，但是索引里面还有不存在的key</h3>
 <p>reindex(key_list).dropna()</p>
 <h3>把原来的索引取消，转为正常数据列</h3>
@@ -373,7 +378,7 @@
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
+        <li><a href="/stock-quantitative-knowledge.html">股票市场量化知识普及</a></li>
         <li><a href="/invoke-pandas-rolling-apply-with-parameters-from-multiple-column.html">DataFrame rolling apply 多列 return 多列</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
         <li><a href="/kalman-filter.html">kalman</a></li>
