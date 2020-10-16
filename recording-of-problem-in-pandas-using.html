@@ -197,6 +197,7 @@
 <h3>SearchSorted</h3>
 <p>这个函数 numpy 中有，在 pandas 中也有，当然 pandas 应该就是用的 numpy 实现的</p>
 <p><a href="https://zhuanlan.zhihu.com/p/37197845">详细解释</a></p>
+<p>原理很简单，其实就是把查找的元素假装插入数组后的 index(从0开始)。如：[1,2,3,4,5,6] 查找 4, 这样可以放在3和4中间，结果是3，放在4和5中间，结果是3或者4由参数side控制。当然最好原始数组排过序，不然会发生什么事情可能是不可预知的。</p>
 <p>我其实经常碰到这个场景，金融时间序列数据，我想找一个离某个时间点最近的数据，但是这个时间又没有存在于数据中，，所以用.loc是定位不到的，这时候就用到 searchsoreted 函数了</p>
 <p>具体怎么用，看<a href="https://zhuanlan.zhihu.com/p/37197845">详细解释</a>吧</p>
 <h3>取某些行，但是索引里面还有不存在的key</h3>
@@ -378,8 +379,8 @@
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/action-of-bad-ml-model.html">机器学习模型效果不好了怎么办？</a></li>
         <li><a href="/some-idea-of-functional-analysis.html">数学分析的一些感悟</a></li>
+        <li><a href="/action-of-bad-ml-model.html">机器学习模型效果不好了怎么办？</a></li>
         <li><a href="/kalman-filter.html">kalman</a></li>
         <li><a href="/sum-of-first-product-strategy.html">第一个策略上线总结</a></li>
         <li><a href="/formar-tools-in-reading-quant-book.html">阅读英文书箱的小工具</a></li>
