@@ -128,7 +128,7 @@
 <ul>
 <li>python 非常好用，但是注意一点，计算密集型是非常不适合的，我们可以用python写一些操作或者IO型的代码，但是计算密集一定是c++。所以我今年用C++写了一套cta回测框架(数据分块train/test,各种stoploss)，太好用了，关键是特别的快。</li>
 <li>单品种多空分开，pairs trading 按 band 分开。非常重要，我今年在up band中的操作有一个还不错的盈利，但是接下来来了一个down band的开仓，但是一下就回撤了很多。我立马去分析了一下up/down band的历史情况，发现down band的sharpe很低，回撤很大，所以我就把该策略的down band给去掉了。原理很简单，多空应该在大部分情况下的特征是不一样的。</li>
-<li>进行stoploss的优化时，尽量容忍大一点的回撤而且最好用atr，当然商品期货有个特点就是振荡行情居多。而且要细致。我上个星期末出现了一个策略的stoploss，这样就形成了单腿风险，我今天立刻把我当时stoploss的优化数据拿出来一看，我操，我当时选的参数就是瞎选的，我再经过比对，选了atr止损，盈利概率更大。</li>
+<li>进行stoploss的优化时，最好用atr，要严格按照参数高原的原则选，振荡特性的品种尽量选择大点的参数，当然商品期货有个特点就是振荡行情居多。要细致。我上个星期末出现了一个策略的stoploss，这样就形成了单腿风险，我今天立刻把我当时stoploss的优化数据拿出来一看，我操，我当时选的参数就是瞎选的，我再经过比对，选了atr止损，盈利概率更大。</li>
 </ul>
             </div>
             <!-- /.entry-content -->
@@ -137,9 +137,9 @@
     <ul>
         <li><a href="/some-finace-english-word.html">一些英文</a></li>
         <li><a href="/cta-optimize-is-ga-avilable.html">CTA多参数优化能用遗传算法吗？</a></li>
+        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
         <li><a href="/kalman-filter.html">kalman</a></li>
         <li><a href="/action-of-bad-ml-model.html">机器学习模型效果不好了怎么办？</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
     </ul>
 </section>
         </article>
