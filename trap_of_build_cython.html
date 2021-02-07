@@ -122,7 +122,8 @@
                 </div>
                 <h2>找不到相关符号</h2>
 <p>因为 cython 链接用到的库在 ~/Anaconda3/lib 中，包括 libstdc++.so，一般来讲这个和/usr/lib/x86_64***/libstdc++.so 的版本是不一样的，看他们后面的链接目标文件名中有详细的版本号</p>
-<p>所以链接时用到的库和运行时用到的库是不一样的，会导致符号表不一样，如：新版本中删除了某个函数，这样在运行时就会出现找不到符号表</p>
+<p>所以链接时用到的库和运行时用到的库是不一样的，会导致符号表不一样，如：新版本中新增了某个函数，这样在运行时加载的老库就会出现找不到符号表</p>
+<p>为什么会这样？编译时会同时加载这两个libstdc++.so文件，新版本中有个newfunc。编译的头文件是系统的新stl库，链接时会先找老so文件里，找不到就会找新的so文件，因为是share的，找到了后就会把文件名和函数名记录在输出文件的符号表中。这里有个问题就是只记录文件名，没有记录文件的路径，当然这也是合理的。当python程序运行时会优先找~/Anaconda3/lib中的库，找到libstdc++.so文件了，这样就不会再找系统库中的so文件。所以相应会找符号表中的函数名，当然newfunc就找不到，出现了错误。</p>
 <p><strong>解决方案</strong>:把python的c++库保持和系统版本一致就行</p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> ~/Anaconda3/lib
 mv libstdc++.so.6 libstdc++.so.6.bak
@@ -133,16 +134,80 @@ ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 ./libstdc++.so
 <span class="c1"># 再查看一下当前stdc++库的情况</span>
 ll libstdc++*
 </pre></div>
+
+
+<h2>cython 单线程编译慢</h2>
+<p>cython 是自己调用的 gcc 一个一个顺序编译的，在官方文档里面其实有一个nthreads，但是这个貌似仅限于编译多个extension时才有用。反正我是没有搞成功。</p>
+<p>所以用了cmake来编译cython的接口。</p>
+<p>其实python本身可以直接调用c++的库，只要函数名有一定的规范即可。cython其实只是在这个当中做了一个桥梁，把python数据和c++连接起来，自己创建了一套pyx pyd的语法，最后把pyx pyd都翻译成cpp，再编译成so文件。</p>
+<p>然后python直接import就行。流程：</p>
+<ol>
+<li>pyx接口（python调用的文件）文件编译成cpp文件</li>
+<li>编译成o文件（可以并行）</li>
+<li>链接成最终的so文件</li>
+</ol>
+<p>我的纯c++项目用的cmake管理，默认就开了并行编译。cython编译这一套，看似简单，其实操作还是挺复杂，所以有个现成的库，做的还不错 <a href="https://github.com/scikit-build/scikit-build">scikit-build</a></p>
+<ol>
+<li>安装必要的工具</li>
+</ol>
+<div class="highlight"><pre><span></span>pip install scikit-build
+pip install ninja   <span class="c1"># 支持并行编译的快速编译工具</span>
+</pre></div>
+
+
+<ol>
+<li>建立setup文件，把setup类改成scikit-build</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skbuild</span> <span class="kn">import</span> <span class="n">setup</span>  <span class="c1"># This line replaces &#39;from setuptools import setup&#39;</span>
+</pre></div>
+
+
+<ol>
+<li>完善包的信息</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;hello-cython&quot;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.2.3&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;a minimal example package (cython version)&quot;</span><span class="p">,</span>
+    <span class="n">author</span><span class="o">=</span><span class="s1">&#39;The scikit-build team&#39;</span><span class="p">,</span>
+    <span class="n">license</span><span class="o">=</span><span class="s2">&quot;MIT&quot;</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;hello&#39;</span><span class="p">],</span> <span class="c1"># 当前目录要有一个名为hello的package(带__init__.py的文件夹)</span>
+    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cython&#39;</span><span class="p">],</span>
+    <span class="n">tests_require</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pytest&#39;</span><span class="p">],</span> <span class="c1"># 可以去掉</span>
+    <span class="n">setup_requires</span><span class="o">=</span><span class="n">setup_requires</span> <span class="c1"># 可以去掉</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<ol>
+<li>生成CMakeLists.txt</li>
+</ol>
+<p>只讲新的东西，文件前面部分要加上下面这两句</p>
+<div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">PythonExtensions</span> <span class="s">REQUIRED</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">Cython</span> <span class="s">REQUIRED</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="nb">add_cython_target</span><span class="p">(</span><span class="s">_hello</span> <span class="s">CXX</span><span class="p">)</span>
+<span class="nb">add_library</span><span class="p">(</span><span class="s">_hello</span> <span class="s">MODULE</span> <span class="o">${</span><span class="nv">_hello</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">python_extension_module</span><span class="p">(</span><span class="s">_hello</span><span class="p">)</span>
+<span class="nb">install</span><span class="p">(</span><span class="s">TARGETS</span> <span class="s">_hello</span> <span class="s">LIBRARY</span> <span class="s">DESTINATION</span> <span class="s">hello</span><span class="p">)</span>
+</pre></div>
+
+
+<p><strong>add_cython_target(_hello CXX)</strong>这一句很重要，作用主就是把_hello.pyx编译成cpp文件</p>
+<p>最后 install 中的 hello 要和 setup 信息中 packages 名一样才行。</p>
+<p>好啦，复杂点的项目我已经测试过了，都可以，比cython自带的编译快了不止一点点，默认是并行编译。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/hifi-talk-4-4.html">Hifi - 蝰蛇音效 (4/4)</a></li>
-        <li><a href="/hifi-talk-is-car-hifi.html">Hifi - 车载音响能变Hifi吗？</a></li>
-        <li><a href="/car-control-theory.html">谈谈汽车的操控 - 理论</a></li>
-        <li><a href="/back-of-laicigou.html">莱茨狗背后</a></li>
+        <li><a href="/car-control-practice.html">谈谈汽车的操控 - 实操</a></li>
         <li><a href="/hifi-talk-4-3.html">Hifi - 怎么买设备？(3/4)</a></li>
+        <li><a href="/car-control-theory.html">谈谈汽车的操控 - 理论</a></li>
+        <li><a href="/solution_jet_brains_slow.html">JetBrains 一套卡顿的解决办法</a></li>
+        <li><a href="/back-of-laicigou.html">莱茨狗背后</a></li>
     </ul>
 </section>
         </article>
