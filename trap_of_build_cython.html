@@ -125,7 +125,7 @@
 <p>所以链接时用到的库和运行时用到的库是不一样的，会导致符号表不一样，如：新版本中新增了某个函数，这样在运行时加载的老库就会出现找不到符号表</p>
 <p>为什么会这样？编译时会同时加载这两个libstdc++.so文件，新版本中有个newfunc。编译的头文件是系统的新stl库，链接时会先找老so文件里，找不到就会找新的so文件，因为是share的，找到了后就会把文件名和函数名记录在输出文件的符号表中。这里有个问题就是只记录文件名，没有记录文件的路径，当然这也是合理的。当python程序运行时会优先找~/Anaconda3/lib中的库，找到libstdc++.so文件了，这样就不会再找系统库中的so文件。所以相应会找符号表中的函数名，当然newfunc就找不到，出现了错误。</p>
 <p><strong>解决方案</strong>:把python的c++库保持和系统版本一致就行</p>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ~/Anaconda3/lib
+<div class="highlight"><pre><span></span><span class="nb">cd</span> ~/anaconda3/lib
 mv libstdc++.so.6 libstdc++.so.6.bak
 mv libstdc++.so libstdc++.so.bak
 ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 ./libstdc++.so.6
@@ -197,17 +197,17 @@ pip install ninja   <span class="c1"># 支持并行编译的快速编译工具</
 
 <p><strong>add_cython_target(_hello CXX)</strong>这一句很重要，作用主就是把_hello.pyx编译成cpp文件</p>
 <p>最后 install 中的 hello 要和 setup 信息中 packages 名一样才行。</p>
-<p>好啦，复杂点的项目我已经测试过了，都可以，比cython自带的编译快了不止一点点，默认是并行编译。</p>
+<p>复杂点的项目我已经测试过了，都可以，比cython自带的编译快了不止一点点，默认是并行编译。</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/hifi-talk-4-2.html">Hifi - 声音输出经过哪些设备？(2/4)</a></li>
         <li><a href="/car-control-practice.html">谈谈汽车的操控 - 实操</a></li>
         <li><a href="/hifi-talk-4-3.html">Hifi - 怎么买设备？(3/4)</a></li>
         <li><a href="/solution_jet_brains_slow.html">JetBrains 一套卡顿的解决办法</a></li>
         <li><a href="/back-of-laicigou.html">莱茨狗背后</a></li>
+        <li><a href="/hifi-talk-4-2.html">Hifi - 声音输出经过哪些设备？(2/4)</a></li>
     </ul>
 </section>
         </article>
