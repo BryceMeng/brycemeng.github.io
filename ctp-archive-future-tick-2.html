@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>用CTP接口实现期货交易明细分析(2) - 雪山</title>
+    <title>用CTP接口实现期货交易明细分析(2) - TechLoveDeath</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <link href="/images/favicon.png" rel="icon">
+    <link href="http://menghao.org/images/favicon.png" rel="icon">
 
-<link rel="canonical" href="/ctp-archive-future-tick-2.html">
+<link rel="canonical" href="http://menghao.org/ctp-archive-future-tick-2.html">
 
         <meta name="author" content="雪山" />
         <meta name="keywords" content="量化" />
         <meta name="description" content="用CTP接口实现期货交易明细分析第二篇，细节决定一切" />
 
-        <meta property="og:site_name" content="雪山" />
+        <meta property="og:site_name" content="TechLoveDeath" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="用CTP接口实现期货交易明细分析(2)"/>
-        <meta property="og:url" content="/ctp-archive-future-tick-2.html"/>
+        <meta property="og:url" content="http://menghao.org/ctp-archive-future-tick-2.html"/>
         <meta property="og:description" content="用CTP接口实现期货交易明细分析第二篇，细节决定一切"/>
         <meta property="article:published_time" content="2017-01-18" />
             <meta property="article:section" content="量化" />
@@ -27,34 +27,22 @@
             <meta property="article:author" content="雪山" />
 
 
+
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://menghao.org/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://menghao.org/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
-
-
+    <link href="http://menghao.org/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://menghao.org/theme/css/style.css" type="text/css"/>
 
 
-
-    <!-- baidu Statistics -->
-	<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?a7cd0e317621471e586bf369894135aa";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-	</script>
 
 
 </head>
 <body>
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -62,25 +50,25 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand">
-<img class="img-responsive pull-left gap-right" src="/images/favicon.png" width="24"/> 雪山            </a>
+            <a href="http://menghao.org/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="http://menghao.org/images/favicon.png" width="24"/> TechLoveDeath            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                         <li >
-                            <a href="/category/android.html">Android</a>
+                            <a href="http://menghao.org/category/android.html">Android</a>
                         </li>
                         <li >
-                            <a href="/category/ji-zhu.html">技术</a>
+                            <a href="http://menghao.org/category/ji-zhu.html">技术</a>
                         </li>
                         <li class="active">
-                            <a href="/category/liang-hua.html">量化</a>
+                            <a href="http://menghao.org/category/liang-hua.html">量化</a>
                         </li>
                         <li >
-                            <a href="/category/music.html">Music</a>
+                            <a href="http://menghao.org/category/music.html">Music</a>
                         </li>
                         <li >
-                            <a href="/category/ri-chang.html">日常</a>
+                            <a href="http://menghao.org/category/ri-chang.html">日常</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -89,8 +77,11 @@
         <!-- /.navbar-collapse -->
     </div>
 </div> <!-- /.navbar -->
+
 <!-- Banner -->
 <!-- End Banner -->
+
+<!-- Content Container -->
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
@@ -98,7 +89,7 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/ctp-archive-future-tick-2.html"
+                    <a href="http://menghao.org/ctp-archive-future-tick-2.html"
                        rel="bookmark"
                        title="Permalink to 用CTP接口实现期货交易明细分析(2)">
                         用CTP接口实现期货交易明细分析(2)
@@ -119,7 +110,7 @@
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/liang-hua.html">量化</a>
+	<a href="http://menghao.org/tag/liang-hua.html">量化</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -132,125 +123,122 @@
 <h3>Tick数据长啥样？</h3>
 <p>把SDK下载下来什么都知道了，我是直接在vn.py项目当中找的头文件，在ThostFtdcUserApiStruct.h文件中找到名为CThostFtdcDepthMarketDataField的结构体，里面的解释已经很详细了。</p>
 <p>我把下面段代码放在了python文件的注释里面了，方便编写时查看</p>
-<div class="highlight"><pre><span></span><span class="c1">///深度行情</span>
-<span class="k">struct</span> <span class="n">CThostFtdcDepthMarketDataField</span>
+<div class="highlight"><pre><span></span><code><span class="c1">///深度行情</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">CThostFtdcDepthMarketDataField</span>
 <span class="p">{</span>
-    <span class="c1">///交易日</span>
-    <span class="n">TThostFtdcDateType</span>  <span class="n">TradingDay</span><span class="p">;</span>
-    <span class="c1">///合约代码</span>
-    <span class="n">TThostFtdcInstrumentIDType</span>  <span class="n">InstrumentID</span><span class="p">;</span>
-    <span class="c1">///交易所代码</span>
-    <span class="n">TThostFtdcExchangeIDType</span>    <span class="n">ExchangeID</span><span class="p">;</span>
-    <span class="c1">///合约在交易所的代码</span>
-    <span class="n">TThostFtdcExchangeInstIDType</span>    <span class="n">ExchangeInstID</span><span class="p">;</span>
-    <span class="c1">///最新价</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">LastPrice</span><span class="p">;</span>
-    <span class="c1">///上次结算价</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">PreSettlementPrice</span><span class="p">;</span>
-    <span class="c1">///昨收盘</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">PreClosePrice</span><span class="p">;</span>
-    <span class="c1">///昨持仓量</span>
-    <span class="n">TThostFtdcLargeVolumeType</span>   <span class="n">PreOpenInterest</span><span class="p">;</span>
-    <span class="c1">///今开盘</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">OpenPrice</span><span class="p">;</span>
-    <span class="c1">///最高价</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">HighestPrice</span><span class="p">;</span>
-    <span class="c1">///最低价</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">LowestPrice</span><span class="p">;</span>
-    <span class="c1">///数量</span>
-    <span class="n">TThostFtdcVolumeType</span>    <span class="n">Volume</span><span class="p">;</span>
-    <span class="c1">///成交金额</span>
-    <span class="n">TThostFtdcMoneyType</span> <span class="n">Turnover</span><span class="p">;</span>
-    <span class="c1">///持仓量</span>
-    <span class="n">TThostFtdcLargeVolumeType</span>   <span class="n">OpenInterest</span><span class="p">;</span>
-    <span class="c1">///今收盘</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">ClosePrice</span><span class="p">;</span>
-    <span class="c1">///本次结算价</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">SettlementPrice</span><span class="p">;</span>
-    <span class="c1">///涨停板价</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">UpperLimitPrice</span><span class="p">;</span>
-    <span class="c1">///跌停板价</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">LowerLimitPrice</span><span class="p">;</span>
-    <span class="c1">///昨虚实度</span>
-    <span class="n">TThostFtdcRatioType</span> <span class="n">PreDelta</span><span class="p">;</span>
-    <span class="c1">///今虚实度</span>
-    <span class="n">TThostFtdcRatioType</span> <span class="n">CurrDelta</span><span class="p">;</span>
-    <span class="c1">///最后修改时间</span>
-    <span class="n">TThostFtdcTimeType</span>  <span class="n">UpdateTime</span><span class="p">;</span>
-    <span class="c1">///最后修改毫秒</span>
-    <span class="n">TThostFtdcMillisecType</span>  <span class="n">UpdateMillisec</span><span class="p">;</span>
-    <span class="c1">///申买价一</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">BidPrice1</span><span class="p">;</span>
-    <span class="c1">///申买量一</span>
-    <span class="n">TThostFtdcVolumeType</span>    <span class="n">BidVolume1</span><span class="p">;</span>
-    <span class="c1">///申卖价一</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">AskPrice1</span><span class="p">;</span>
-    <span class="c1">///申卖量一</span>
-    <span class="n">TThostFtdcVolumeType</span>    <span class="n">AskVolume1</span><span class="p">;</span>
-    <span class="c1">///申买价二</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">BidPrice2</span><span class="p">;</span>
-    <span class="c1">///申买量二</span>
-    <span class="n">TThostFtdcVolumeType</span>    <span class="n">BidVolume2</span><span class="p">;</span>
-    <span class="c1">///申卖价二</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">AskPrice2</span><span class="p">;</span>
-    <span class="c1">///申卖量二</span>
-    <span class="n">TThostFtdcVolumeType</span>    <span class="n">AskVolume2</span><span class="p">;</span>
-    <span class="c1">///申买价三</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">BidPrice3</span><span class="p">;</span>
-    <span class="c1">///申买量三</span>
-    <span class="n">TThostFtdcVolumeType</span>    <span class="n">BidVolume3</span><span class="p">;</span>
-    <span class="c1">///申卖价三</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">AskPrice3</span><span class="p">;</span>
-    <span class="c1">///申卖量三</span>
-    <span class="n">TThostFtdcVolumeType</span>    <span class="n">AskVolume3</span><span class="p">;</span>
-    <span class="c1">///申买价四</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">BidPrice4</span><span class="p">;</span>
-    <span class="c1">///申买量四</span>
-    <span class="n">TThostFtdcVolumeType</span>    <span class="n">BidVolume4</span><span class="p">;</span>
-    <span class="c1">///申卖价四</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">AskPrice4</span><span class="p">;</span>
-    <span class="c1">///申卖量四</span>
-    <span class="n">TThostFtdcVolumeType</span>    <span class="n">AskVolume4</span><span class="p">;</span>
-    <span class="c1">///申买价五</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">BidPrice5</span><span class="p">;</span>
-    <span class="c1">///申买量五</span>
-    <span class="n">TThostFtdcVolumeType</span>    <span class="n">BidVolume5</span><span class="p">;</span>
-    <span class="c1">///申卖价五</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">AskPrice5</span><span class="p">;</span>
-    <span class="c1">///申卖量五</span>
-    <span class="n">TThostFtdcVolumeType</span>    <span class="n">AskVolume5</span><span class="p">;</span>
-    <span class="c1">///当日均价</span>
-    <span class="n">TThostFtdcPriceType</span> <span class="n">AveragePrice</span><span class="p">;</span>
-    <span class="c1">///业务日期</span>
-    <span class="n">TThostFtdcDateType</span>  <span class="n">ActionDay</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///交易日</span>
+<span class="w">    </span><span class="n">TThostFtdcDateType</span><span class="w">  </span><span class="n">TradingDay</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///合约代码</span>
+<span class="w">    </span><span class="n">TThostFtdcInstrumentIDType</span><span class="w">  </span><span class="n">InstrumentID</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///交易所代码</span>
+<span class="w">    </span><span class="n">TThostFtdcExchangeIDType</span><span class="w">    </span><span class="n">ExchangeID</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///合约在交易所的代码</span>
+<span class="w">    </span><span class="n">TThostFtdcExchangeInstIDType</span><span class="w">    </span><span class="n">ExchangeInstID</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///最新价</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">LastPrice</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///上次结算价</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">PreSettlementPrice</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///昨收盘</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">PreClosePrice</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///昨持仓量</span>
+<span class="w">    </span><span class="n">TThostFtdcLargeVolumeType</span><span class="w">   </span><span class="n">PreOpenInterest</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///今开盘</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">OpenPrice</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///最高价</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">HighestPrice</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///最低价</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">LowestPrice</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///数量</span>
+<span class="w">    </span><span class="n">TThostFtdcVolumeType</span><span class="w">    </span><span class="n">Volume</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///成交金额</span>
+<span class="w">    </span><span class="n">TThostFtdcMoneyType</span><span class="w"> </span><span class="n">Turnover</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///持仓量</span>
+<span class="w">    </span><span class="n">TThostFtdcLargeVolumeType</span><span class="w">   </span><span class="n">OpenInterest</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///今收盘</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">ClosePrice</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///本次结算价</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">SettlementPrice</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///涨停板价</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">UpperLimitPrice</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///跌停板价</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">LowerLimitPrice</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///昨虚实度</span>
+<span class="w">    </span><span class="n">TThostFtdcRatioType</span><span class="w"> </span><span class="n">PreDelta</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///今虚实度</span>
+<span class="w">    </span><span class="n">TThostFtdcRatioType</span><span class="w"> </span><span class="n">CurrDelta</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///最后修改时间</span>
+<span class="w">    </span><span class="n">TThostFtdcTimeType</span><span class="w">  </span><span class="n">UpdateTime</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///最后修改毫秒</span>
+<span class="w">    </span><span class="n">TThostFtdcMillisecType</span><span class="w">  </span><span class="n">UpdateMillisec</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申买价一</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">BidPrice1</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申买量一</span>
+<span class="w">    </span><span class="n">TThostFtdcVolumeType</span><span class="w">    </span><span class="n">BidVolume1</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申卖价一</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">AskPrice1</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申卖量一</span>
+<span class="w">    </span><span class="n">TThostFtdcVolumeType</span><span class="w">    </span><span class="n">AskVolume1</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申买价二</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">BidPrice2</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申买量二</span>
+<span class="w">    </span><span class="n">TThostFtdcVolumeType</span><span class="w">    </span><span class="n">BidVolume2</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申卖价二</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">AskPrice2</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申卖量二</span>
+<span class="w">    </span><span class="n">TThostFtdcVolumeType</span><span class="w">    </span><span class="n">AskVolume2</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申买价三</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">BidPrice3</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申买量三</span>
+<span class="w">    </span><span class="n">TThostFtdcVolumeType</span><span class="w">    </span><span class="n">BidVolume3</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申卖价三</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">AskPrice3</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申卖量三</span>
+<span class="w">    </span><span class="n">TThostFtdcVolumeType</span><span class="w">    </span><span class="n">AskVolume3</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申买价四</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">BidPrice4</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申买量四</span>
+<span class="w">    </span><span class="n">TThostFtdcVolumeType</span><span class="w">    </span><span class="n">BidVolume4</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申卖价四</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">AskPrice4</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申卖量四</span>
+<span class="w">    </span><span class="n">TThostFtdcVolumeType</span><span class="w">    </span><span class="n">AskVolume4</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申买价五</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">BidPrice5</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申买量五</span>
+<span class="w">    </span><span class="n">TThostFtdcVolumeType</span><span class="w">    </span><span class="n">BidVolume5</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申卖价五</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">AskPrice5</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///申卖量五</span>
+<span class="w">    </span><span class="n">TThostFtdcVolumeType</span><span class="w">    </span><span class="n">AskVolume5</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///当日均价</span>
+<span class="w">    </span><span class="n">TThostFtdcPriceType</span><span class="w"> </span><span class="n">AveragePrice</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">///业务日期</span>
+<span class="w">    </span><span class="n">TThostFtdcDateType</span><span class="w">  </span><span class="n">ActionDay</span><span class="p">;</span>
 <span class="p">};</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>Tick间哪些数据会发生变化？</h3>
 <p>为什么要关注发生变化了的数据呢？我想是因为在编写tick级策略时，当每个tick数据到来时肯定是在发生了变化的数据上做文章，所以关注这一块数据肯定是没错的，而且看期软的成交明细数据，每一条记录的每一种数据都在发生变化，对的，变化才意味着价值。</p>
 <p>怎么去找？其实是可以直接拿期软里面显示的数据来得到结果的，但是我为了科学的去得到结果，我还是在程序里面是写了一个函数去作比对，少拍脑袋多用科学的方式找数据会比较好。</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">CompareDepthMarketData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;做tick数据的前后比较&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">PreDepthMarketData</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">CompareDepthMarketData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;做tick数据的前后比较&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">PreDepthMarketData</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">PreDepthMarketData</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
-                <span class="k">print</span> <span class="n">key</span> <span class="o">+</span> <span class="s1">&#39;: pre-&gt;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; now-&gt;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                <span class="nb">print</span> <span class="n">key</span> <span class="o">+</span> <span class="s1">&#39;: pre-&gt;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; now-&gt;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">PreDepthMarketData</span> <span class="o">=</span> <span class="n">data</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>我在实盘时打了很多的数据，然后综合期软明细数据的需求，得出了图中的结果。</p>
 <h3>哪些数据可以应用到成交明细的显示？</h3>
 <p>其实就是上一步分析出来的数据，但是<strong>成交性质</strong>可没有哦？请看下一节</p>
-<div class="highlight"><pre><span></span><span class="c1"># 最终需要的tick方向 (output1)</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 最终需要的tick方向 (output1)</span>
 <span class="n">tick_type_enum</span> <span class="o">=</span> <span class="n">enum</span><span class="p">(</span><span class="n">OPENLONG</span><span class="o">=</span><span class="s2">&quot;OpenLong&quot;</span><span class="p">,</span> <span class="n">OPENSHORT</span><span class="o">=</span><span class="s2">&quot;OpenShort&quot;</span><span class="p">,</span> <span class="n">OPENDOUBLE</span><span class="o">=</span><span class="s2">&quot;OpenDouble&quot;</span><span class="p">,</span>
                       <span class="n">CLOSELONG</span><span class="o">=</span><span class="s2">&quot;CloseLong&quot;</span><span class="p">,</span> <span class="n">CLOSESHORT</span><span class="o">=</span><span class="s2">&quot;CloseShort&quot;</span><span class="p">,</span> <span class="n">CLOSEDOUBLE</span><span class="o">=</span><span class="s2">&quot;CloseDouble&quot;</span><span class="p">,</span>
                       <span class="n">EXCHANGELONG</span><span class="o">=</span><span class="s2">&quot;ExchangeLong&quot;</span><span class="p">,</span> <span class="n">EXCHANGESHORT</span><span class="o">=</span><span class="s2">&quot;ExchangeShort&quot;</span><span class="p">,</span>
                       <span class="n">OPENUNKOWN</span><span class="o">=</span><span class="s2">&quot;OpenUnkown&quot;</span><span class="p">,</span> <span class="n">CLOSEUNKOWN</span><span class="o">=</span><span class="s2">&quot;CloseUnkown&quot;</span><span class="p">,</span> <span class="n">EXCHANGEUNKOWN</span><span class="o">=</span><span class="s2">&quot;ExchangeUnkown&quot;</span><span class="p">,</span>
                       <span class="n">UNKOWN</span><span class="o">=</span><span class="s2">&quot;Unkown&quot;</span><span class="p">,</span> <span class="n">NOCHANGE</span><span class="o">=</span><span class="s2">&quot;NoChange&quot;</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>成交性质是啥？有现成的数据可以直接使用吗？</h3>
 <p>这里就会涉及到一些期货的基础知识了，我不引述太多。我直接说结论：</p>
@@ -261,7 +249,7 @@
 <p>如果是股票就简单多了，但是期货中引入了开仓和平仓的概念，所以这一块会复杂一些，话说我花了几个晚上的时间才搞清楚。</p>
 <p>举一个 双平 和 多平 的实例的实例（商品期货，成交量是双边统计），其他就可以引申（这里可以分析出持仓量和成交量的关系）：</p>
 <p><strong>成交2 持仓 -2 双平</strong></p>
-<div class="highlight"><pre><span></span>就是说，有2手成交（成交量），这2手的仓差都是“—”的，也就是都是平仓单，其中1手多头平仓，1手空头平仓。(双边统计？)
+<div class="highlight"><pre><span></span><code>就是说，有2手成交（成交量），这2手的仓差都是“—”的，也就是都是平仓单，其中1手多头平仓，1手空头平仓。(双边统计？)
 双平意思好理解，这个都懂，但红色和蓝色是有区别的，红色的是空头主动平仓，和挂单平多仓的成交，对价格上涨有促进作用；蓝色的是多头主动平仓，对价格下跌有好处。举个通俗的例子：你有两手多玉米，想平仓，此时状态：
 卖1：1767
 买1：1766
@@ -275,11 +263,10 @@
 价格 现手 状态 仓差 
 1767 4 双平（红色） -4 
 这时是外盘增加4，内盘不动
-</pre></div>
-
+</code></pre></div>
 
 <p><strong>成交 92 持仓 -62 多平</strong></p>
-<div class="highlight"><pre><span></span>如果是双边统计，那么应该是92/2=46手单边，主动发起的动作是多平，而且为46手，这样对手单肯定也为46手，加起来就是92手，这就是双边统计，两边的成交都算做成交量，这点和股票和股指期货是不一样的。
+<div class="highlight"><pre><span></span><code>如果是双边统计，那么应该是92/2=46手单边，主动发起的动作是多平，而且为46手，这样对手单肯定也为46手，加起来就是92手，这就是双边统计，两边的成交都算做成交量，这点和股票和股指期货是不一样的。
 这时候想想，哪种类型的单可以和多平进行成交？
 多开 和 空平 (我怎么知道？看此段分析的最后) 
 如果对手单全部是多开，这样持仓量是不变的，成交性质应该是多换。但是这里持仓量少了62手，除了多平会导致减少46手，对手单也导致减少了(62-46)=16手，这里可以判定肯定会有空平的单子夹在里面，有多少呢？
@@ -292,15 +279,14 @@ y = 31
 这里是我自己的一个小诀窍，其实期货买卖只有4种动作：
 多开(买合约)，多平(卖合约)，空开(卖合约)，空平(买合约)
 这样多平是卖合约，对手就是买合约：多开和空平
-</pre></div>
-
+</code></pre></div>
 
 <h3>持仓量变化和成交量有什么关系？</h3>
 <p>持仓量变化有3种(<strong>input1</strong>)</p>
 <p>开仓（持仓量增加），空仓（持仓量减少），换仓（持仓量不变)</p>
-<div class="highlight"><pre><span></span><span class="nd">@staticmethod</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@staticmethod</span>
 <span class="k">def</span> <span class="nf">get_open_interest_delta_forward</span><span class="p">(</span><span class="n">open_interest_delta</span><span class="p">,</span> <span class="n">volume_delta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;根据成交量的差和持仓量的差来获取仓位变化的方向</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;根据成交量的差和持仓量的差来获取仓位变化的方向</span>
 <span class="sd">        return: open_interest_delta_forward_enum</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">open_interest_delta</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">volume_delta</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -318,8 +304,7 @@ y = 31
         <span class="k">else</span><span class="p">:</span>
             <span class="n">local_open_interest_delta_forward</span> <span class="o">=</span> <span class="n">open_interest_delta_forward_enum</span><span class="o">.</span><span class="n">CLOSE</span>
     <span class="k">return</span> <span class="n">local_open_interest_delta_forward</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>持仓量与成交量的关系貌似在上一节已经分析出来了，但是持仓量和成交价格（多空）的关系又如何呢？如果我现在通过持仓量的增加来判断是开仓，没问题，那是多开还是空开呢？这时候需要了解下期货订单撮合成交的机制。</p>
 <p>参考：<a href="https://www.zhihu.com/question/31803940">期货的撮合交易是如何成交的，市价单及限价单的成交机制？ - 量化交易 - 知乎</a></p>
@@ -329,9 +314,9 @@ y = 31
 <li>价格在bid1 price或者bid1 price之下，则为卖合约（多平，空开）</li>
 </ul>
 <p>清晰了之后才能用代码写出来，注意我做这个计算时，是以上个tick的数据为准，再以该tick数据为参考，由于我们的tick只是快照，这个算法其实是不准确的。</p>
-<div class="highlight"><pre><span></span><span class="nd">@staticmethod</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@staticmethod</span>
 <span class="k">def</span> <span class="nf">get_order_forward</span><span class="p">(</span><span class="n">last_price</span><span class="p">,</span> <span class="n">ask_price1</span><span class="p">,</span> <span class="n">bid_price1</span><span class="p">,</span> <span class="n">pre_last_price</span><span class="p">,</span> <span class="n">pre_ask_price1</span><span class="p">,</span> <span class="n">pre_bid_price1</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;获取成交的区域，根据当前tick的成交价和上个tick的ask和bid价格进行比对</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;获取成交的区域，根据当前tick的成交价和上个tick的ask和bid价格进行比对</span>
 <span class="sd">       return: order_forward_enum</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">TickAnalysis</span><span class="o">.</span><span class="n">float_bigger_equal</span><span class="p">(</span><span class="n">last_price</span><span class="p">,</span> <span class="n">pre_ask_price1</span><span class="p">):</span>
@@ -347,14 +332,13 @@ y = 31
             <span class="n">local_order_forward</span> <span class="o">=</span> <span class="n">order_forward_enum</span><span class="o">.</span><span class="n">MIDDLE</span>
 
     <span class="k">return</span> <span class="n">local_order_forward</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>其实分析到这里，我们可以发现从成交量，持仓量，还有成交价格可以算出那8种成交性质，代码请看本文最后一段。</p>
 <h3>对手单是什么？为什么要分析他，期软上都没有？</h3>
 <p>啥呀？上面的两部分已经把这个问题已经分解完了，我还说啥...为什么要分析他？</p>
 <p>我是这么想的，这个行业是精细活，不分析清楚我不舒服。哈哈</p>
-<div class="highlight"><pre><span></span><span class="c1"># 只与计算对手单的组成相关，只有4种tick类型才需要计算对手单的组成</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 只与计算对手单的组成相关，只有4种tick类型才需要计算对手单的组成</span>
 <span class="n">handicap_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">tick_type_enum</span><span class="o">.</span><span class="n">OPENLONG</span><span class="p">:</span> <span class="p">{</span><span class="n">opponent_key_enum</span><span class="o">.</span><span class="n">OPPOSITE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">CLOSELONG</span><span class="p">,</span>
                                            <span class="n">opponent_key_enum</span><span class="o">.</span><span class="n">SIMILAR</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">OPENSHORT</span><span class="p">},</span>
                  <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">OPENSHORT</span><span class="p">:</span> <span class="p">{</span><span class="n">opponent_key_enum</span><span class="o">.</span><span class="n">OPPOSITE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">CLOSESHORT</span><span class="p">,</span>
@@ -364,8 +348,7 @@ y = 31
                  <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">CLOSESHORT</span><span class="p">:</span> <span class="p">{</span><span class="n">opponent_key_enum</span><span class="o">.</span><span class="n">OPPOSITE</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">OPENSHORT</span><span class="p">,</span>
                                              <span class="n">opponent_key_enum</span><span class="o">.</span><span class="n">SIMILAR</span><span class="p">:</span> <span class="n">tick_type_enum</span><span class="o">.</span><span class="n">CLOSELONG</span><span class="p">}</span>
                  <span class="p">}</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>用Python的字典把对手单的对应关系做了描述</p>
 <p>最后这部分代码是核心，简单来讲就是 <strong>f (input1, input2) = output1：</strong></p>
@@ -374,7 +357,7 @@ y = 31
 <li>根据价格算出多空</li>
 <li>根据仓位变化性质和多空算出那8种成交性质</li>
 </ol>
-<div class="highlight"><pre><span></span><span class="c1"># 根据 open_interest_delta_forward_enum 和 order_forward_enum 计算出tick类型的字典</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 根据 open_interest_delta_forward_enum 和 order_forward_enum 计算出tick类型的字典</span>
 <span class="n">tick_type_cal_dict</span> <span class="o">=</span> <span class="p">{</span>
     <span class="n">open_interest_delta_forward_enum</span><span class="o">.</span><span class="n">NONE</span><span class="p">:</span>
         <span class="p">{</span>
@@ -431,17 +414,17 @@ y = 31
                                         <span class="n">tick_type_key_enum</span><span class="o">.</span><span class="n">TICKCOLOR</span><span class="p">:</span> <span class="n">tick_color_enum</span><span class="o">.</span><span class="n">WHITE</span><span class="p">}</span>
         <span class="p">},</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/some-idea-of-functional-analysis.html">数学分析的一些感悟</a></li>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
+        <li><a href="http://menghao.org/some_exp_of_two_arg_strategy.html">最近的一些经验总结</a></li>
+        <li><a href="http://menghao.org/AdvFinML-Standard-Bars.html">AdvFinML - Standard Bars</a></li>
+        <li><a href="http://menghao.org/something-about-financial-analysis.html">财务分析相关</a></li>
+        <li><a href="http://menghao.org/hidden-markov-model.html">HMM 稳形马尔科夫</a></li>
+        <li><a href="http://menghao.org/numpy-version-pandas-ewm-mean-var.html">numpy pandas ewm mean/var</a></li>
     </ul>
 </section>
         </article>
@@ -465,109 +448,109 @@ y = 31
 
 <!-- Sidebar/Tag Cloud -->
 <li class="list-group-item">
-  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <a href="http://menghao.org/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
   <ul class="list-group list-inline tagcloud" id="tags">
     <li class="list-group-item tag-3">
-      <a href="/tag/adb.html">adb</a>
+      <a href="http://menghao.org/tag/adb.html">adb</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/advfinml.html">AdvFinML</a>
+      <a href="http://menghao.org/tag/advfinml.html">AdvFinML</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/android.html">Android</a>
+      <a href="http://menghao.org/tag/android.html">Android</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/can-shu-you-hua.html">参数优化</a>
+      <a href="http://menghao.org/tag/can-shu-you-hua.html">参数优化</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/cheng-shou-zhi-biao.html">成熟指标</a>
+      <a href="http://menghao.org/tag/cheng-shou-zhi-biao.html">成熟指标</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/chi-cang-liang.html">持仓量</a>
+      <a href="http://menghao.org/tag/chi-cang-liang.html">持仓量</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/elite3.html">Elite3</a>
+      <a href="http://menghao.org/tag/elite3.html">Elite3</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/fifthcircle.html">fifthcircle</a>
+      <a href="http://menghao.org/tag/fifthcircle.html">fifthcircle</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/gai-lu.html">概率</a>
+      <a href="http://menghao.org/tag/gai-lu.html">概率</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/gu-piao.html">股票</a>
+      <a href="http://menghao.org/tag/gu-piao.html">股票</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/hifi.html">hifi</a>
+      <a href="http://menghao.org/tag/hifi.html">hifi</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/ji-qi-xue-xi.html">机器学习</a>
+      <a href="http://menghao.org/tag/ji-qi-xue-xi.html">机器学习</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/ji-zhu.html">技术</a>
+      <a href="http://menghao.org/tag/ji-zhu.html">技术</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/keng.html">坑</a>
+      <a href="http://menghao.org/tag/keng.html">坑</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/lai-ci-gou.html">莱茨狗</a>
+      <a href="http://menghao.org/tag/lai-ci-gou.html">莱茨狗</a>
     </li>
     <li class="list-group-item tag-1">
-      <a href="/tag/liang-hua.html">量化</a>
+      <a href="http://menghao.org/tag/liang-hua.html">量化</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/lu-you-qi.html">路由器</a>
+      <a href="http://menghao.org/tag/lu-you-qi.html">路由器</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/mongodb.html">mongodb</a>
+      <a href="http://menghao.org/tag/mongodb.html">mongodb</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/monkey.html">monkey</a>
+      <a href="http://menghao.org/tag/monkey.html">monkey</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/music.html">Music</a>
+      <a href="http://menghao.org/tag/music.html">Music</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/qi-huo.html">期货</a>
+      <a href="http://menghao.org/tag/qi-huo.html">期货</a>
     </li>
     <li class="list-group-item tag-1">
-      <a href="/tag/ri-chang.html">日常</a>
+      <a href="http://menghao.org/tag/ri-chang.html">日常</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/shi-jian-xu-lie.html">时间序列</a>
+      <a href="http://menghao.org/tag/shi-jian-xu-lie.html">时间序列</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/shu-xue.html">数学</a>
+      <a href="http://menghao.org/tag/shu-xue.html">数学</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/tong-ji.html">统计</a>
+      <a href="http://menghao.org/tag/tong-ji.html">统计</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/ubuntu.html">Ubuntu</a>
+      <a href="http://menghao.org/tag/ubuntu.html">Ubuntu</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/wu-du-quan.html">五度圈</a>
+      <a href="http://menghao.org/tag/wu-du-quan.html">五度圈</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/xi-tong.html">系统</a>
+      <a href="http://menghao.org/tag/xi-tong.html">系统</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/xin-li-xue.html">心理学</a>
+      <a href="http://menghao.org/tag/xin-li-xue.html">心理学</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/yi-chuan-suan-fa.html">遗传算法</a>
+      <a href="http://menghao.org/tag/yi-chuan-suan-fa.html">遗传算法</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/yi-wen.html">译文</a>
+      <a href="http://menghao.org/tag/yi-wen.html">译文</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/ying-wen.html">英文</a>
+      <a href="http://menghao.org/tag/ying-wen.html">英文</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/yu-le.html">娱乐</a>
+      <a href="http://menghao.org/tag/yu-le.html">娱乐</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/za-tan.html">杂谈</a>
+      <a href="http://menghao.org/tag/za-tan.html">杂谈</a>
     </li>
   </ul>
 </li>
@@ -589,11 +572,13 @@ y = 31
         </div>
     </div>
 </div>
+<!-- End Content Container -->
+
 <footer>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2022 雪山
+         <div class="col-xs-10">&copy; 2022 Bryce
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -601,13 +586,14 @@ y = 31
       </div>
    </div>
 </footer>
-<script src="/theme/js/jquery.min.js"></script>
+<script src="http://menghao.org/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
+<script src="http://menghao.org/theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+<script src="http://menghao.org/theme/js/respond.min.js"></script>
+
 
 
 

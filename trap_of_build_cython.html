@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Cython 编译的坑 - 雪山</title>
+    <title>Cython 编译的坑 - TechLoveDeath</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <link href="/images/favicon.png" rel="icon">
+    <link href="http://menghao.org/images/favicon.png" rel="icon">
 
-<link rel="canonical" href="/trap_of_build_cython.html">
+<link rel="canonical" href="http://menghao.org/trap_of_build_cython.html">
 
         <meta name="author" content="雪山" />
         <meta name="keywords" content="日常" />
         <meta name="description" content="Cython 编译的坑" />
 
-        <meta property="og:site_name" content="雪山" />
+        <meta property="og:site_name" content="TechLoveDeath" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Cython 编译的坑"/>
-        <meta property="og:url" content="/trap_of_build_cython.html"/>
+        <meta property="og:url" content="http://menghao.org/trap_of_build_cython.html"/>
         <meta property="og:description" content="Cython 编译的坑"/>
         <meta property="article:published_time" content="2021-02-06" />
             <meta property="article:section" content="日常" />
@@ -27,34 +27,22 @@
             <meta property="article:author" content="雪山" />
 
 
+
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://menghao.org/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://menghao.org/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
-
-
+    <link href="http://menghao.org/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://menghao.org/theme/css/style.css" type="text/css"/>
 
 
-
-    <!-- baidu Statistics -->
-	<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?a7cd0e317621471e586bf369894135aa";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-	</script>
 
 
 </head>
 <body>
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -62,25 +50,25 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand">
-<img class="img-responsive pull-left gap-right" src="/images/favicon.png" width="24"/> 雪山            </a>
+            <a href="http://menghao.org/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="http://menghao.org/images/favicon.png" width="24"/> TechLoveDeath            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                         <li >
-                            <a href="/category/android.html">Android</a>
+                            <a href="http://menghao.org/category/android.html">Android</a>
                         </li>
                         <li >
-                            <a href="/category/ji-zhu.html">技术</a>
+                            <a href="http://menghao.org/category/ji-zhu.html">技术</a>
                         </li>
                         <li >
-                            <a href="/category/liang-hua.html">量化</a>
+                            <a href="http://menghao.org/category/liang-hua.html">量化</a>
                         </li>
                         <li >
-                            <a href="/category/music.html">Music</a>
+                            <a href="http://menghao.org/category/music.html">Music</a>
                         </li>
                         <li class="active">
-                            <a href="/category/ri-chang.html">日常</a>
+                            <a href="http://menghao.org/category/ri-chang.html">日常</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -89,8 +77,11 @@
         <!-- /.navbar-collapse -->
     </div>
 </div> <!-- /.navbar -->
+
 <!-- Banner -->
 <!-- End Banner -->
+
+<!-- Content Container -->
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
@@ -98,7 +89,7 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/trap_of_build_cython.html"
+                    <a href="http://menghao.org/trap_of_build_cython.html"
                        rel="bookmark"
                        title="Permalink to Cython 编译的坑">
                         Cython 编译的坑
@@ -119,7 +110,7 @@
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/ri-chang.html">日常</a>
+	<a href="http://menghao.org/tag/ri-chang.html">日常</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -128,16 +119,15 @@
 <p>所以链接时用到的库和运行时用到的库是不一样的，会导致符号表不一样，如：新版本中新增了某个函数，这样在运行时加载的老库就会出现找不到符号表</p>
 <p>为什么会这样？编译时会同时加载这两个libstdc++.so文件，新版本中有个newfunc。编译的头文件是系统的新stl库，链接时会先找老so文件里，找不到就会找新的so文件，因为是share的，找到了后就会把文件名和函数名记录在输出文件的符号表中。这里有个问题就是只记录文件名，没有记录文件的路径，当然这也是合理的。当python程序运行时会优先找~/Anaconda3/lib中的库，找到libstdc++.so文件了，这样就不会再找系统库中的so文件。所以相应会找符号表中的函数名，当然newfunc就找不到，出现了错误。</p>
 <p><strong>解决方案</strong>:把python的c++库保持和系统版本一致就行</p>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ~/anaconda3/lib
-mv libstdc++.so.6 libstdc++.so.6.bak
-mv libstdc++.so libstdc++.so.bak
-ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 ./libstdc++.so.6
-ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 ./libstdc++.so
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/anaconda3/lib
+mv<span class="w"> </span>libstdc++.so.6<span class="w"> </span>libstdc++.so.6.bak
+mv<span class="w"> </span>libstdc++.so<span class="w"> </span>libstdc++.so.bak
+ln<span class="w"> </span>-s<span class="w"> </span>/usr/lib/x86_64-linux-gnu/libstdc++.so.6<span class="w"> </span>./libstdc++.so.6
+ln<span class="w"> </span>-s<span class="w"> </span>/usr/lib/x86_64-linux-gnu/libstdc++.so.6<span class="w"> </span>./libstdc++.so
 
 <span class="c1"># 再查看一下当前stdc++库的情况</span>
-ll libstdc++*
-</pre></div>
-
+ll<span class="w"> </span>libstdc++*
+</code></pre></div>
 
 <h2>cython 单线程编译慢</h2>
 <p>cython 是自己调用的 gcc 一个一个顺序编译的，在官方文档里面其实有一个nthreads，但是这个貌似仅限于编译多个extension时才有用。反正我是没有搞成功。</p>
@@ -153,22 +143,20 @@ ll libstdc++*
 <ol>
 <li>安装必要的工具</li>
 </ol>
-<div class="highlight"><pre><span></span>pip install scikit-build
-pip install ninja   <span class="c1"># 支持并行编译的快速编译工具</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>scikit-build
+pip<span class="w"> </span>install<span class="w"> </span>ninja<span class="w">   </span><span class="c1"># 支持并行编译的快速编译工具</span>
+</code></pre></div>
 
 <ol>
 <li>建立setup文件，把setup类改成scikit-build</li>
 </ol>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skbuild</span> <span class="kn">import</span> <span class="n">setup</span>  <span class="c1"># This line replaces &#39;from setuptools import setup&#39;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">skbuild</span> <span class="kn">import</span> <span class="n">setup</span>  <span class="c1"># This line replaces &#39;from setuptools import setup&#39;</span>
+</code></pre></div>
 
 <ol>
 <li>完善包的信息</li>
 </ol>
-<div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="n">setup</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;hello-cython&quot;</span><span class="p">,</span>
     <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.2.3&quot;</span><span class="p">,</span>
     <span class="n">description</span><span class="o">=</span><span class="s2">&quot;a minimal example package (cython version)&quot;</span><span class="p">,</span>
@@ -179,24 +167,21 @@ pip install ninja   <span class="c1"># 支持并行编译的快速编译工具</
     <span class="n">tests_require</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pytest&#39;</span><span class="p">],</span> <span class="c1"># 可以去掉</span>
     <span class="n">setup_requires</span><span class="o">=</span><span class="n">setup_requires</span> <span class="c1"># 可以去掉</span>
 <span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <ol>
 <li>生成CMakeLists.txt</li>
 </ol>
 <p>只讲新的东西，文件前面部分要加上下面这两句</p>
-<div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">PythonExtensions</span> <span class="s">REQUIRED</span><span class="p">)</span>
-<span class="nb">find_package</span><span class="p">(</span><span class="s">Cython</span> <span class="s">REQUIRED</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">find_package</span><span class="p">(</span><span class="s">PythonExtensions</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">Cython</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span><span class="nb">add_cython_target</span><span class="p">(</span><span class="s">_hello</span> <span class="s">CXX</span><span class="p">)</span>
-<span class="nb">add_library</span><span class="p">(</span><span class="s">_hello</span> <span class="s">MODULE</span> <span class="o">${</span><span class="nv">_hello</span><span class="o">}</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nb">add_cython_target</span><span class="p">(</span><span class="s">_hello</span><span class="w"> </span><span class="s">CXX</span><span class="p">)</span>
+<span class="nb">add_library</span><span class="p">(</span><span class="s">_hello</span><span class="w"> </span><span class="s">MODULE</span><span class="w"> </span><span class="o">${</span><span class="nv">_hello</span><span class="o">}</span><span class="p">)</span>
 <span class="nb">python_extension_module</span><span class="p">(</span><span class="s">_hello</span><span class="p">)</span>
-<span class="nb">install</span><span class="p">(</span><span class="s">TARGETS</span> <span class="s">_hello</span> <span class="s">LIBRARY</span> <span class="s">DESTINATION</span> <span class="s">hello</span><span class="p">)</span>
-</pre></div>
-
+<span class="nb">install</span><span class="p">(</span><span class="s">TARGETS</span><span class="w"> </span><span class="s">_hello</span><span class="w"> </span><span class="s">LIBRARY</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">hello</span><span class="p">)</span>
+</code></pre></div>
 
 <p><strong>add_cython_target(_hello CXX)</strong>这一句很重要，作用主就是把_hello.pyx编译成cpp文件</p>
 <p>最后 install 中的 hello 要和 setup 信息中 packages 名一样才行。</p>
@@ -206,11 +191,11 @@ pip install ninja   <span class="c1"># 支持并行编译的快速编译工具</
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/hifi-talk-4-2.html">Hifi - 声音输出经过哪些设备？(2/4)</a></li>
-        <li><a href="/car-control-theory.html">谈谈汽车的操控 - 理论</a></li>
-        <li><a href="/solution_jet_brains_slow.html">JetBrains 一套卡顿的解决办法</a></li>
-        <li><a href="/hifi-talk-4-4.html">Hifi - 蝰蛇音效 (4/4)</a></li>
-        <li><a href="/first-post.html">欢迎来到我的博客</a></li>
+        <li><a href="http://menghao.org/solution_jet_brains_slow.html">JetBrains 一套卡顿的解决办法</a></li>
+        <li><a href="http://menghao.org/back-of-laicigou.html">莱茨狗背后</a></li>
+        <li><a href="http://menghao.org/car-control-practice.html">谈谈汽车的操控 - 实操</a></li>
+        <li><a href="http://menghao.org/car-control-theory.html">谈谈汽车的操控 - 理论</a></li>
+        <li><a href="http://menghao.org/hifi-talk-is-car-hifi.html">Hifi - 车载音响能变Hifi吗？</a></li>
     </ul>
 </section>
         </article>
@@ -234,109 +219,109 @@ pip install ninja   <span class="c1"># 支持并行编译的快速编译工具</
 
 <!-- Sidebar/Tag Cloud -->
 <li class="list-group-item">
-  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <a href="http://menghao.org/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
   <ul class="list-group list-inline tagcloud" id="tags">
     <li class="list-group-item tag-3">
-      <a href="/tag/adb.html">adb</a>
+      <a href="http://menghao.org/tag/adb.html">adb</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/advfinml.html">AdvFinML</a>
+      <a href="http://menghao.org/tag/advfinml.html">AdvFinML</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/android.html">Android</a>
+      <a href="http://menghao.org/tag/android.html">Android</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/can-shu-you-hua.html">参数优化</a>
+      <a href="http://menghao.org/tag/can-shu-you-hua.html">参数优化</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/cheng-shou-zhi-biao.html">成熟指标</a>
+      <a href="http://menghao.org/tag/cheng-shou-zhi-biao.html">成熟指标</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/chi-cang-liang.html">持仓量</a>
+      <a href="http://menghao.org/tag/chi-cang-liang.html">持仓量</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/elite3.html">Elite3</a>
+      <a href="http://menghao.org/tag/elite3.html">Elite3</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/fifthcircle.html">fifthcircle</a>
+      <a href="http://menghao.org/tag/fifthcircle.html">fifthcircle</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/gai-lu.html">概率</a>
+      <a href="http://menghao.org/tag/gai-lu.html">概率</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/gu-piao.html">股票</a>
+      <a href="http://menghao.org/tag/gu-piao.html">股票</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/hifi.html">hifi</a>
+      <a href="http://menghao.org/tag/hifi.html">hifi</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/ji-qi-xue-xi.html">机器学习</a>
+      <a href="http://menghao.org/tag/ji-qi-xue-xi.html">机器学习</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/ji-zhu.html">技术</a>
+      <a href="http://menghao.org/tag/ji-zhu.html">技术</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/keng.html">坑</a>
+      <a href="http://menghao.org/tag/keng.html">坑</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/lai-ci-gou.html">莱茨狗</a>
+      <a href="http://menghao.org/tag/lai-ci-gou.html">莱茨狗</a>
     </li>
     <li class="list-group-item tag-1">
-      <a href="/tag/liang-hua.html">量化</a>
+      <a href="http://menghao.org/tag/liang-hua.html">量化</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/lu-you-qi.html">路由器</a>
+      <a href="http://menghao.org/tag/lu-you-qi.html">路由器</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/mongodb.html">mongodb</a>
+      <a href="http://menghao.org/tag/mongodb.html">mongodb</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/monkey.html">monkey</a>
+      <a href="http://menghao.org/tag/monkey.html">monkey</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/music.html">Music</a>
+      <a href="http://menghao.org/tag/music.html">Music</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/qi-huo.html">期货</a>
+      <a href="http://menghao.org/tag/qi-huo.html">期货</a>
     </li>
     <li class="list-group-item tag-1">
-      <a href="/tag/ri-chang.html">日常</a>
+      <a href="http://menghao.org/tag/ri-chang.html">日常</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/shi-jian-xu-lie.html">时间序列</a>
+      <a href="http://menghao.org/tag/shi-jian-xu-lie.html">时间序列</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/shu-xue.html">数学</a>
+      <a href="http://menghao.org/tag/shu-xue.html">数学</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/tong-ji.html">统计</a>
+      <a href="http://menghao.org/tag/tong-ji.html">统计</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/ubuntu.html">Ubuntu</a>
+      <a href="http://menghao.org/tag/ubuntu.html">Ubuntu</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/wu-du-quan.html">五度圈</a>
+      <a href="http://menghao.org/tag/wu-du-quan.html">五度圈</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/xi-tong.html">系统</a>
+      <a href="http://menghao.org/tag/xi-tong.html">系统</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/xin-li-xue.html">心理学</a>
+      <a href="http://menghao.org/tag/xin-li-xue.html">心理学</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/yi-chuan-suan-fa.html">遗传算法</a>
+      <a href="http://menghao.org/tag/yi-chuan-suan-fa.html">遗传算法</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/yi-wen.html">译文</a>
+      <a href="http://menghao.org/tag/yi-wen.html">译文</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/ying-wen.html">英文</a>
+      <a href="http://menghao.org/tag/ying-wen.html">英文</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/yu-le.html">娱乐</a>
+      <a href="http://menghao.org/tag/yu-le.html">娱乐</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/za-tan.html">杂谈</a>
+      <a href="http://menghao.org/tag/za-tan.html">杂谈</a>
     </li>
   </ul>
 </li>
@@ -358,11 +343,13 @@ pip install ninja   <span class="c1"># 支持并行编译的快速编译工具</
         </div>
     </div>
 </div>
+<!-- End Content Container -->
+
 <footer>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2022 雪山
+         <div class="col-xs-10">&copy; 2022 Bryce
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -370,13 +357,14 @@ pip install ninja   <span class="c1"># 支持并行编译的快速编译工具</
       </div>
    </div>
 </footer>
-<script src="/theme/js/jquery.min.js"></script>
+<script src="http://menghao.org/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
+<script src="http://menghao.org/theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+<script src="http://menghao.org/theme/js/respond.min.js"></script>
+
 
 
 

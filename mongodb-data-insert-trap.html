@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>MongoDb数据导入踩坑记录 - 雪山</title>
+    <title>MongoDb数据导入踩坑记录 - TechLoveDeath</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <link href="/images/favicon.png" rel="icon">
+    <link href="http://menghao.org/images/favicon.png" rel="icon">
 
-<link rel="canonical" href="/mongodb-data-insert-trap.html">
+<link rel="canonical" href="http://menghao.org/mongodb-data-insert-trap.html">
 
         <meta name="author" content="雪山" />
         <meta name="keywords" content="量化,mongodb" />
         <meta name="description" content="MongoDb 总共14年的期货tick数据导入踩坑历程" />
 
-        <meta property="og:site_name" content="雪山" />
+        <meta property="og:site_name" content="TechLoveDeath" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="MongoDb数据导入踩坑记录"/>
-        <meta property="og:url" content="/mongodb-data-insert-trap.html"/>
+        <meta property="og:url" content="http://menghao.org/mongodb-data-insert-trap.html"/>
         <meta property="og:description" content="MongoDb 总共14年的期货tick数据导入踩坑历程"/>
         <meta property="article:published_time" content="2017-11-17" />
             <meta property="article:section" content="量化" />
@@ -28,34 +28,22 @@
             <meta property="article:author" content="雪山" />
 
 
+
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://menghao.org/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://menghao.org/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
-
-
+    <link href="http://menghao.org/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://menghao.org/theme/css/style.css" type="text/css"/>
 
 
-
-    <!-- baidu Statistics -->
-	<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?a7cd0e317621471e586bf369894135aa";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-	</script>
 
 
 </head>
 <body>
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -63,25 +51,25 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand">
-<img class="img-responsive pull-left gap-right" src="/images/favicon.png" width="24"/> 雪山            </a>
+            <a href="http://menghao.org/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="http://menghao.org/images/favicon.png" width="24"/> TechLoveDeath            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                         <li >
-                            <a href="/category/android.html">Android</a>
+                            <a href="http://menghao.org/category/android.html">Android</a>
                         </li>
                         <li >
-                            <a href="/category/ji-zhu.html">技术</a>
+                            <a href="http://menghao.org/category/ji-zhu.html">技术</a>
                         </li>
                         <li class="active">
-                            <a href="/category/liang-hua.html">量化</a>
+                            <a href="http://menghao.org/category/liang-hua.html">量化</a>
                         </li>
                         <li >
-                            <a href="/category/music.html">Music</a>
+                            <a href="http://menghao.org/category/music.html">Music</a>
                         </li>
                         <li >
-                            <a href="/category/ri-chang.html">日常</a>
+                            <a href="http://menghao.org/category/ri-chang.html">日常</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -90,8 +78,11 @@
         <!-- /.navbar-collapse -->
     </div>
 </div> <!-- /.navbar -->
+
 <!-- Banner -->
 <!-- End Banner -->
+
+<!-- Content Container -->
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
@@ -99,7 +90,7 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/mongodb-data-insert-trap.html"
+                    <a href="http://menghao.org/mongodb-data-insert-trap.html"
                        rel="bookmark"
                        title="Permalink to MongoDb数据导入踩坑记录">
                         MongoDb数据导入踩坑记录
@@ -120,9 +111,9 @@
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/liang-hua.html">量化</a>
+	<a href="http://menghao.org/tag/liang-hua.html">量化</a>
         /
-	<a href="/tag/mongodb.html">mongodb</a>
+	<a href="http://menghao.org/tag/mongodb.html">mongodb</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -138,10 +129,9 @@
 <h2>插入方式</h2>
 <p>大概在两个星期前，买了03年到现在的商品期货的tick数据，不过只有15年和以后的才是ctp格式，所以我还需要写两个导入程序，我是先写的15年前的，其实我走错了一步，应该先写15年后的，这样和我现在的数据（17年）能连接起来，不然我2004年的导好了，是用不了的。不过当时我确实没想到，我用错了数据插入方法后，速度会如此的慢，也是有点超出我的想像。</p>
 <p>我先写的老数据（15年前）的导入，其实程序不复杂，就是把tick里面的细节处理好就行，然后在插入时我用了</p>
-<div class="highlight"><pre><span></span><span class="n">flt</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">tick_data</span><span class="o">.</span><span class="n">datetime</span><span class="p">}</span>
-<span class="n">DES_DB</span><span class="p">[</span><span class="n">collection_name</span><span class="p">]</span><span class="o">.</span><span class="n">update_one</span><span class="p">(</span><span class="n">flt</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;$set&#39;</span><span class="p">:</span> <span class="n">tick_data</span><span class="o">.</span><span class="n">__dict__</span><span class="p">},</span> <span class="n">upsert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">flt</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">tick_data</span><span class="o">.</span><span class="n">datetime</span><span class="p">}</span>
+<span class="n">DES_DB</span><span class="p">[</span><span class="n">collection_name</span><span class="p">]</span><span class="o">.</span><span class="n">update_one</span><span class="p">(</span><span class="n">flt</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;$set&#39;</span><span class="p">:</span> <span class="n">tick_data</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">},</span> <span class="n">upsert</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
 
 <p>这句话是从vnpy老版本的数据收集器里面扒下来的，当时的场景是收集实时数据，数据量不是很大，这样写是没有问题的，还可以防止日期重复的数据产生。但是我现在数据量压缩包都是50个G，所以还是不能直接用，我昨天实在受不了之后其实是先切换的SSD，发现还是慢，所以才想到了是不是插入方式的问题。</p>
 <p>后来查了一些资料，我改用了insert_many，10000条一轮，但是该函数少了一个check主键datetime的问题，不过我在导入之前已经判断了相邻datetime重复的问题，所以出现datetime重复的概率应该不是很大。</p>
@@ -157,11 +147,11 @@
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/some-idea-of-functional-analysis.html">数学分析的一些感悟</a></li>
-        <li><a href="/details-in-quant-tick2min.html">量化中的一些注意细节(min数据合成逻辑)</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="http://menghao.org/some_exp_of_two_arg_strategy.html">最近的一些经验总结</a></li>
+        <li><a href="http://menghao.org/AdvFinML-Standard-Bars.html">AdvFinML - Standard Bars</a></li>
+        <li><a href="http://menghao.org/something-about-financial-analysis.html">财务分析相关</a></li>
+        <li><a href="http://menghao.org/hidden-markov-model.html">HMM 稳形马尔科夫</a></li>
+        <li><a href="http://menghao.org/numpy-version-pandas-ewm-mean-var.html">numpy pandas ewm mean/var</a></li>
     </ul>
 </section>
         </article>
@@ -185,109 +175,109 @@
 
 <!-- Sidebar/Tag Cloud -->
 <li class="list-group-item">
-  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <a href="http://menghao.org/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
   <ul class="list-group list-inline tagcloud" id="tags">
     <li class="list-group-item tag-3">
-      <a href="/tag/adb.html">adb</a>
+      <a href="http://menghao.org/tag/adb.html">adb</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/advfinml.html">AdvFinML</a>
+      <a href="http://menghao.org/tag/advfinml.html">AdvFinML</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/android.html">Android</a>
+      <a href="http://menghao.org/tag/android.html">Android</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/can-shu-you-hua.html">参数优化</a>
+      <a href="http://menghao.org/tag/can-shu-you-hua.html">参数优化</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/cheng-shou-zhi-biao.html">成熟指标</a>
+      <a href="http://menghao.org/tag/cheng-shou-zhi-biao.html">成熟指标</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/chi-cang-liang.html">持仓量</a>
+      <a href="http://menghao.org/tag/chi-cang-liang.html">持仓量</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/elite3.html">Elite3</a>
+      <a href="http://menghao.org/tag/elite3.html">Elite3</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/fifthcircle.html">fifthcircle</a>
+      <a href="http://menghao.org/tag/fifthcircle.html">fifthcircle</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/gai-lu.html">概率</a>
+      <a href="http://menghao.org/tag/gai-lu.html">概率</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/gu-piao.html">股票</a>
+      <a href="http://menghao.org/tag/gu-piao.html">股票</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/hifi.html">hifi</a>
+      <a href="http://menghao.org/tag/hifi.html">hifi</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/ji-qi-xue-xi.html">机器学习</a>
+      <a href="http://menghao.org/tag/ji-qi-xue-xi.html">机器学习</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/ji-zhu.html">技术</a>
+      <a href="http://menghao.org/tag/ji-zhu.html">技术</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/keng.html">坑</a>
+      <a href="http://menghao.org/tag/keng.html">坑</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/lai-ci-gou.html">莱茨狗</a>
+      <a href="http://menghao.org/tag/lai-ci-gou.html">莱茨狗</a>
     </li>
     <li class="list-group-item tag-1">
-      <a href="/tag/liang-hua.html">量化</a>
+      <a href="http://menghao.org/tag/liang-hua.html">量化</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/lu-you-qi.html">路由器</a>
+      <a href="http://menghao.org/tag/lu-you-qi.html">路由器</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/mongodb.html">mongodb</a>
+      <a href="http://menghao.org/tag/mongodb.html">mongodb</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/monkey.html">monkey</a>
+      <a href="http://menghao.org/tag/monkey.html">monkey</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/music.html">Music</a>
+      <a href="http://menghao.org/tag/music.html">Music</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/qi-huo.html">期货</a>
+      <a href="http://menghao.org/tag/qi-huo.html">期货</a>
     </li>
     <li class="list-group-item tag-1">
-      <a href="/tag/ri-chang.html">日常</a>
+      <a href="http://menghao.org/tag/ri-chang.html">日常</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/shi-jian-xu-lie.html">时间序列</a>
+      <a href="http://menghao.org/tag/shi-jian-xu-lie.html">时间序列</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/shu-xue.html">数学</a>
+      <a href="http://menghao.org/tag/shu-xue.html">数学</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/tong-ji.html">统计</a>
+      <a href="http://menghao.org/tag/tong-ji.html">统计</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/ubuntu.html">Ubuntu</a>
+      <a href="http://menghao.org/tag/ubuntu.html">Ubuntu</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/wu-du-quan.html">五度圈</a>
+      <a href="http://menghao.org/tag/wu-du-quan.html">五度圈</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/xi-tong.html">系统</a>
+      <a href="http://menghao.org/tag/xi-tong.html">系统</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/xin-li-xue.html">心理学</a>
+      <a href="http://menghao.org/tag/xin-li-xue.html">心理学</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/yi-chuan-suan-fa.html">遗传算法</a>
+      <a href="http://menghao.org/tag/yi-chuan-suan-fa.html">遗传算法</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/yi-wen.html">译文</a>
+      <a href="http://menghao.org/tag/yi-wen.html">译文</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/ying-wen.html">英文</a>
+      <a href="http://menghao.org/tag/ying-wen.html">英文</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/yu-le.html">娱乐</a>
+      <a href="http://menghao.org/tag/yu-le.html">娱乐</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/za-tan.html">杂谈</a>
+      <a href="http://menghao.org/tag/za-tan.html">杂谈</a>
     </li>
   </ul>
 </li>
@@ -309,11 +299,13 @@
         </div>
     </div>
 </div>
+<!-- End Content Container -->
+
 <footer>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2022 雪山
+         <div class="col-xs-10">&copy; 2022 Bryce
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -321,13 +313,14 @@
       </div>
    </div>
 </footer>
-<script src="/theme/js/jquery.min.js"></script>
+<script src="http://menghao.org/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
+<script src="http://menghao.org/theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+<script src="http://menghao.org/theme/js/respond.min.js"></script>
+
 
 
 

@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>[译]用React和PlanOut来做产品的AB测试 - 雪山</title>
+    <title>[译]用React和PlanOut来做产品的AB测试 - TechLoveDeath</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <link href="/images/favicon.png" rel="icon">
+    <link href="http://menghao.org/images/favicon.png" rel="icon">
 
-<link rel="canonical" href="/play-ab-test-by-react-planout.html">
+<link rel="canonical" href="http://menghao.org/play-ab-test-by-react-planout.html">
 
         <meta name="author" content="雪山" />
         <meta name="keywords" content="技术,译文" />
         <meta name="description" content="用React和PlanOut来做产品的AB测试，AB测试其实概念很早就出来了，但是最近才被facebook用到极致。" />
 
-        <meta property="og:site_name" content="雪山" />
+        <meta property="og:site_name" content="TechLoveDeath" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="[译]用React和PlanOut来做产品的AB测试"/>
-        <meta property="og:url" content="/play-ab-test-by-react-planout.html"/>
+        <meta property="og:url" content="http://menghao.org/play-ab-test-by-react-planout.html"/>
         <meta property="og:description" content="用React和PlanOut来做产品的AB测试，AB测试其实概念很早就出来了，但是最近才被facebook用到极致。"/>
         <meta property="article:published_time" content="2015-11-01" />
             <meta property="article:section" content="技术" />
@@ -28,34 +28,22 @@
             <meta property="article:author" content="雪山" />
 
 
+
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://menghao.org/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://menghao.org/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
-
-
+    <link href="http://menghao.org/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://menghao.org/theme/css/style.css" type="text/css"/>
 
 
-
-    <!-- baidu Statistics -->
-	<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?a7cd0e317621471e586bf369894135aa";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-	</script>
 
 
 </head>
 <body>
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -63,25 +51,25 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand">
-<img class="img-responsive pull-left gap-right" src="/images/favicon.png" width="24"/> 雪山            </a>
+            <a href="http://menghao.org/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="http://menghao.org/images/favicon.png" width="24"/> TechLoveDeath            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                         <li >
-                            <a href="/category/android.html">Android</a>
+                            <a href="http://menghao.org/category/android.html">Android</a>
                         </li>
                         <li class="active">
-                            <a href="/category/ji-zhu.html">技术</a>
+                            <a href="http://menghao.org/category/ji-zhu.html">技术</a>
                         </li>
                         <li >
-                            <a href="/category/liang-hua.html">量化</a>
+                            <a href="http://menghao.org/category/liang-hua.html">量化</a>
                         </li>
                         <li >
-                            <a href="/category/music.html">Music</a>
+                            <a href="http://menghao.org/category/music.html">Music</a>
                         </li>
                         <li >
-                            <a href="/category/ri-chang.html">日常</a>
+                            <a href="http://menghao.org/category/ri-chang.html">日常</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -90,8 +78,11 @@
         <!-- /.navbar-collapse -->
     </div>
 </div> <!-- /.navbar -->
+
 <!-- Banner -->
 <!-- End Banner -->
+
+<!-- Content Container -->
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
@@ -99,7 +90,7 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/play-ab-test-by-react-planout.html"
+                    <a href="http://menghao.org/play-ab-test-by-react-planout.html"
                        rel="bookmark"
                        title="Permalink to [译]用React和PlanOut来做产品的AB测试">
                         [译]用React和PlanOut来做产品的AB测试
@@ -120,9 +111,9 @@
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/ji-zhu.html">技术</a>
+	<a href="http://menghao.org/tag/ji-zhu.html">技术</a>
         /
-	<a href="/tag/yi-wen.html">译文</a>
+	<a href="http://menghao.org/tag/yi-wen.html">译文</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -144,70 +135,67 @@
 <p>第二，基于同一套代码定义和实施用户界面的实验变得更容易而且很少出现Bug，我们现在运行的大部分实验都是这样。自从PlanOut部署更适应我们之后把实验集成在标准的单页面APP里面变得非常容易。每一个实验为了实施合适的随机化实验都需要一套输入的集合，但是如果在服务端部署PlanOut，在实验初始化时就需要把参数定义好。我们的部署允许输入在单页面程序引导时注册而非初始化时，这样可以允许我们的一些实验类的初始化和实验输入的注册进行分离。这样可以很容易的使各种扩展的服务相互作用，而且能最小化日志的重复。</p>
 <h1>用PlanOut去测试传播特性</h1>
 <p>一个案例是我们在SideKick上尝试去影响传播邀请发送的质量和数量。作为Sidekick的免费用户，如果他发送注册邀请给他的朋友，而且他的朋友接受了邀请，他们都会获得一个月的无限制的通知服务。一个使用户发送邀请的巨大驱动力是该组件（邀请发送组件）能让用户一键邀请。我们的这个实验是通过改变该组件的相关参数能否让用户发送更多的邀请。在该实验中我们不想让付费用户参与，所以我们把付费用户排除在外（也不会对他们进行日志记录）。我们对免费用户进行了2x3的实验（两个测试点，一个测试点有2种属性，另一个测试点有3种属性），这两个点是建议邀请发送的数目和显示给邀请方账户的建议话述。我们把建议邀请发送的数据做为测试点是为了去测试真正发送邀请的数据是否会按照建议的那样去增长还是是否存在一个点这个数字的建议对实际的发送量根本无影响或者还有负面的影响。另外一个测试点是在邀请按钮上显示两种不同的文字，上面显示一种是自私的动机（邀请）和无私的动机（礼物）。代码如下：</p>
-<div class="highlight"><pre><span></span><span class="c1">//InviteSuggestionsExp.js hosted with ❤ by GitHub</span>
+<div class="highlight"><pre><span></span><code><span class="c1">//InviteSuggestionsExp.js hosted with ❤ by GitHub</span>
 
-<span class="kr">class</span> <span class="nx">InviteSuggestions</span> <span class="kr">extends</span> <span class="nx">Experiment</span> <span class="p">{</span>
-  <span class="c1">//do some logger configuration</span>
+<span class="kd">class</span><span class="w"> </span><span class="nx">InviteSuggestions</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Experiment</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">//do some logger configuration</span>
 
-  <span class="nx">setup</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">setName</span><span class="p">(</span><span class="err">‘</span><span class="nx">InviteSuggestions</span><span class="err">’</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="nx">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">setName</span><span class="p">(</span><span class="err">‘</span><span class="nx">InviteSuggestions</span><span class="err">’</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 
-  <span class="nx">assign</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">args</span><span class="p">.</span><span class="nx">paying_user</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="nx">params</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="err">‘</span><span class="nx">suggestionCount</span><span class="err">’</span><span class="p">,</span> <span class="k">new</span> <span class="nx">PlanOut</span><span class="p">.</span><span class="nx">Ops</span><span class="p">.</span><span class="nx">Random</span><span class="p">.</span><span class="nx">UniformChoice</span><span class="p">(</span><span class="nx">choices</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="nx">unit</span><span class="o">=</span><span class="nx">user_id</span><span class="p">));</span>
-    <span class="nx">params</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="err">‘</span><span class="nx">inviteText</span><span class="err">’</span><span class="p">,</span> <span class="k">new</span> <span class="nx">PlanOut</span><span class="p">.</span><span class="nx">Ops</span><span class="p">.</span><span class="nx">Random</span><span class="p">.</span><span class="nx">UniformChoice</span><span class="p">(</span><span class="nx">choices</span><span class="o">=</span><span class="p">[</span><span class="err">‘</span><span class="nx">Invite</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="nx">Gift</span><span class="err">’</span><span class="p">],</span> <span class="nx">unit</span><span class="o">=</span><span class="nx">user_id</span><span class="p">));</span>
-  <span class="p">}</span>
-<span class="p">};</span> 
-</pre></div>
-
+<span class="w">  </span><span class="nx">assign</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">args</span><span class="p">.</span><span class="nx">paying_user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">params</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="err">‘</span><span class="nx">suggestionCount</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PlanOut</span><span class="p">.</span><span class="nx">Ops</span><span class="p">.</span><span class="nx">Random</span><span class="p">.</span><span class="nx">UniformChoice</span><span class="p">(</span><span class="nx">choices</span><span class="o">=</span><span class="p">[</span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">],</span><span class="w"> </span><span class="nx">unit</span><span class="o">=</span><span class="nx">user_id</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">params</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="err">‘</span><span class="nx">inviteText</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PlanOut</span><span class="p">.</span><span class="nx">Ops</span><span class="p">.</span><span class="nx">Random</span><span class="p">.</span><span class="nx">UniformChoice</span><span class="p">(</span><span class="nx">choices</span><span class="o">=</span><span class="p">[</span><span class="err">‘</span><span class="nx">Invite</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="nx">Gift</span><span class="err">’</span><span class="p">],</span><span class="w"> </span><span class="nx">unit</span><span class="o">=</span><span class="nx">user_id</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span><span class="w"> </span>
+</code></pre></div>
 
 <p>执行一项测试需要定义实验和进行适当的部署，我们会需要一种方式自然的从实验定义到实验的部署。在HubSpot大部分的客户端Javascript应用我们使用的React框架实现其View层，自从我们开始实施一些实验，我们自然的找到了一种方式在React框架上无逢的实施实验。结果是产生了一个小型的库 <a href="https://github.com/HubSpot/react-experiments">[react-experiments]</a>。</p>
 <h1>React实验系统介绍</h1>
 <p>这个库的核心是它建立一个单对单的映射，从PlanOut的实验参数映射到React组件的Props（<strong><em>React里从父节点传递到子节点的数据称为 props，是属性（properties）的缩写</em></strong>），而且为了一个特定的用户用随机化实验的分配当作合适的组件的props。这把PlanOut的参数当作变量优雅的集成了进来。这个结果让定义和部署间的连接变更更易理解，使得不至于有难以捉摸的Bug让实验失效，而且使实验不断的实施而不是不断的积累无用的东西。让我们来看看实施上文提到的实验有多容易用React。</p>
 <p>这是实施实验之前的代码：</p>
-<div class="highlight"><pre><span></span><span class="c1">//invite-suggestions.jsx hosted with ❤ by GitHub</span>
-<span class="kr">const</span> <span class="nx">InviteSuggestions</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
-  <span class="nx">getDefaultProps</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">{</span> 
-      <span class="nx">numSuggestionsToShow</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="nx">inviteButtonText</span><span class="o">:</span> <span class="kc">null</span>
-    <span class="p">};</span>
-  <span class="p">},</span>
+<div class="highlight"><pre><span></span><code><span class="c1">//invite-suggestions.jsx hosted with ❤ by GitHub</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">InviteSuggestions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">getDefaultProps</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">      </span><span class="nx">numSuggestionsToShow</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">inviteButtonText</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">},</span>
 
-  <span class="nx">renderInviteSuggestions</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kr">const</span> <span class="nx">suggestions</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">suggestions</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">numSuggestionsToShow</span><span class="p">);</span>
-    <span class="k">return</span> <span class="nx">suggestions</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">suggestion</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="p">(</span>
-        <span class="o">&lt;</span><span class="nx">InviteSuggestion</span>
-      <span class="nx">inviteButtonText</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">inviteButtonText</span><span class="p">}</span>
-          <span class="nx">suggestion</span><span class="o">=</span><span class="p">{</span><span class="nx">suggestion</span><span class="p">}</span> 
-        <span class="o">/&gt;</span>
-      <span class="p">);</span>
-     <span class="p">});</span>
-  <span class="p">},</span>
+<span class="w">  </span><span class="nx">renderInviteSuggestions</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">suggestions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">suggestions</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">numSuggestionsToShow</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">suggestions</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">suggestion</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">InviteSuggestion</span>
+<span class="w">      </span><span class="nx">inviteButtonText</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">inviteButtonText</span><span class="p">}</span>
+<span class="w">          </span><span class="nx">suggestion</span><span class="o">=</span><span class="p">{</span><span class="nx">suggestion</span><span class="p">}</span><span class="w"> </span>
+<span class="w">        </span><span class="o">/&gt;</span>
+<span class="w">      </span><span class="p">);</span>
+<span class="w">     </span><span class="p">});</span>
+<span class="w">  </span><span class="p">},</span>
 
-  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">numSuggestionsToShow</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span> <span class="p">}</span>
-    <span class="k">return</span> <span class="p">(</span>
-      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
-    <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">renderInviteSuggestions</span><span class="p">()}</span>
-      <span class="o">&lt;</span><span class="err">/div&gt;</span>
-    <span class="p">);</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="nx">render</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">numSuggestionsToShow</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">renderInviteSuggestions</span><span class="p">()}</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 
-<span class="kr">export</span> <span class="k">default</span> <span class="nx">InviteSuggestions</span><span class="p">;</span>
-</pre></div>
-
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">InviteSuggestions</span><span class="p">;</span>
+</code></pre></div>
 
 <p>现在，去实施该实验需要做的是用下面的代码替换上面代码的最后一行</p>
-<div class="highlight"><pre><span></span><span class="c1">//invite-suggestions-exp.jsx hosted with ❤ by GitHub</span>
-<span class="kr">export</span> <span class="k">default</span> <span class="nx">parametrize</span><span class="p">(</span><span class="nx">InviteSuggestionsExperiment</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;suggestionCount&#39;</span><span class="p">,</span> <span class="s1">&#39;inviteText&#39;</span><span class="p">],</span> <span class="nx">InviteSuggestions</span><span class="p">);</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="c1">//invite-suggestions-exp.jsx hosted with ❤ by GitHub</span>
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">parametrize</span><span class="p">(</span><span class="nx">InviteSuggestionsExperiment</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;suggestionCount&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;inviteText&#39;</span><span class="p">],</span><span class="w"> </span><span class="nx">InviteSuggestions</span><span class="p">);</span>
+</code></pre></div>
 
 <p>该库的基础是一个参数化的组件，它使其余的库的能力更有力。比如，一个高序的参数化组件当所有的props在同一个组件当中时是一个非常方便的封装。当你想在一个组件中实施一个实验而又发现感兴趣的props又在子组件当中时，你可以直接使用参数化组件的基类，联合子组件相关的高序附着实验参数组件一起使用去提供心要的props的参数化。下面是一个利用参数化组件随同高序附着实验参数组件的实例。</p>
 <p>附着实验参数组件和高序参数化组件都为实验提供了强大的抽象性。在某些情况下，我们想去做完整的重新设计在不同的设计之间去设置不同区间的参数。对于这些实验，react实验系统提供了一套AB测试组件，提供一套方法在你的组件当中去定义不同的参数。这些开放的API能显而易见的让读者通过代码发现可以通过实验发现若干变量和这些变量导致的行为之间的关系。这个组件，类似于高序的组件，同时又是一个基于参数化组件的非常方便的封装。</p>
@@ -222,11 +210,11 @@ PlanOut是Facebook研发的一套AB测试框架，也是开源项目<a href="htt
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/how-to-be-data-driven-cop.html">[译]如何（为什么）成为一家数据驱动型的公司？</a></li>
-        <li><a href="/adb-support-monkey.html">让Adb.exe支持Monkey</a></li>
-        <li><a href="/android-adb-talk.html">Android Adb调试功能漫谈</a></li>
-        <li><a href="/tech-meet-content.html">当技术遇到内容</a></li>
-        <li><a href="/train-for-scrum.html">我的一次敏捷培训</a></li>
+        <li><a href="http://menghao.org/how-to-be-data-driven-cop.html">[译]如何（为什么）成为一家数据驱动型的公司？</a></li>
+        <li><a href="http://menghao.org/tech-meet-content.html">当技术遇到内容</a></li>
+        <li><a href="http://menghao.org/get-screen-from-android-dev.html">从Android设备获取实时截屏(adb)</a></li>
+        <li><a href="http://menghao.org/adb-support-monkey.html">让Adb.exe支持Monkey</a></li>
+        <li><a href="http://menghao.org/android-adb-talk.html">Android Adb调试功能漫谈</a></li>
     </ul>
 </section>
         </article>
@@ -250,109 +238,109 @@ PlanOut是Facebook研发的一套AB测试框架，也是开源项目<a href="htt
 
 <!-- Sidebar/Tag Cloud -->
 <li class="list-group-item">
-  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <a href="http://menghao.org/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
   <ul class="list-group list-inline tagcloud" id="tags">
     <li class="list-group-item tag-3">
-      <a href="/tag/adb.html">adb</a>
+      <a href="http://menghao.org/tag/adb.html">adb</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/advfinml.html">AdvFinML</a>
+      <a href="http://menghao.org/tag/advfinml.html">AdvFinML</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/android.html">Android</a>
+      <a href="http://menghao.org/tag/android.html">Android</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/can-shu-you-hua.html">参数优化</a>
+      <a href="http://menghao.org/tag/can-shu-you-hua.html">参数优化</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/cheng-shou-zhi-biao.html">成熟指标</a>
+      <a href="http://menghao.org/tag/cheng-shou-zhi-biao.html">成熟指标</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/chi-cang-liang.html">持仓量</a>
+      <a href="http://menghao.org/tag/chi-cang-liang.html">持仓量</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/elite3.html">Elite3</a>
+      <a href="http://menghao.org/tag/elite3.html">Elite3</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/fifthcircle.html">fifthcircle</a>
+      <a href="http://menghao.org/tag/fifthcircle.html">fifthcircle</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/gai-lu.html">概率</a>
+      <a href="http://menghao.org/tag/gai-lu.html">概率</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/gu-piao.html">股票</a>
+      <a href="http://menghao.org/tag/gu-piao.html">股票</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/hifi.html">hifi</a>
+      <a href="http://menghao.org/tag/hifi.html">hifi</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/ji-qi-xue-xi.html">机器学习</a>
+      <a href="http://menghao.org/tag/ji-qi-xue-xi.html">机器学习</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/ji-zhu.html">技术</a>
+      <a href="http://menghao.org/tag/ji-zhu.html">技术</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/keng.html">坑</a>
+      <a href="http://menghao.org/tag/keng.html">坑</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/lai-ci-gou.html">莱茨狗</a>
+      <a href="http://menghao.org/tag/lai-ci-gou.html">莱茨狗</a>
     </li>
     <li class="list-group-item tag-1">
-      <a href="/tag/liang-hua.html">量化</a>
+      <a href="http://menghao.org/tag/liang-hua.html">量化</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/lu-you-qi.html">路由器</a>
+      <a href="http://menghao.org/tag/lu-you-qi.html">路由器</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/mongodb.html">mongodb</a>
+      <a href="http://menghao.org/tag/mongodb.html">mongodb</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/monkey.html">monkey</a>
+      <a href="http://menghao.org/tag/monkey.html">monkey</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/music.html">Music</a>
+      <a href="http://menghao.org/tag/music.html">Music</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/qi-huo.html">期货</a>
+      <a href="http://menghao.org/tag/qi-huo.html">期货</a>
     </li>
     <li class="list-group-item tag-1">
-      <a href="/tag/ri-chang.html">日常</a>
+      <a href="http://menghao.org/tag/ri-chang.html">日常</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/shi-jian-xu-lie.html">时间序列</a>
+      <a href="http://menghao.org/tag/shi-jian-xu-lie.html">时间序列</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/shu-xue.html">数学</a>
+      <a href="http://menghao.org/tag/shu-xue.html">数学</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/tong-ji.html">统计</a>
+      <a href="http://menghao.org/tag/tong-ji.html">统计</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/ubuntu.html">Ubuntu</a>
+      <a href="http://menghao.org/tag/ubuntu.html">Ubuntu</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/wu-du-quan.html">五度圈</a>
+      <a href="http://menghao.org/tag/wu-du-quan.html">五度圈</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/xi-tong.html">系统</a>
+      <a href="http://menghao.org/tag/xi-tong.html">系统</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/xin-li-xue.html">心理学</a>
+      <a href="http://menghao.org/tag/xin-li-xue.html">心理学</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/yi-chuan-suan-fa.html">遗传算法</a>
+      <a href="http://menghao.org/tag/yi-chuan-suan-fa.html">遗传算法</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/yi-wen.html">译文</a>
+      <a href="http://menghao.org/tag/yi-wen.html">译文</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/ying-wen.html">英文</a>
+      <a href="http://menghao.org/tag/ying-wen.html">英文</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/yu-le.html">娱乐</a>
+      <a href="http://menghao.org/tag/yu-le.html">娱乐</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/za-tan.html">杂谈</a>
+      <a href="http://menghao.org/tag/za-tan.html">杂谈</a>
     </li>
   </ul>
 </li>
@@ -374,11 +362,13 @@ PlanOut是Facebook研发的一套AB测试框架，也是开源项目<a href="htt
         </div>
     </div>
 </div>
+<!-- End Content Container -->
+
 <footer>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2022 雪山
+         <div class="col-xs-10">&copy; 2022 Bryce
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -386,13 +376,14 @@ PlanOut是Facebook研发的一套AB测试框架，也是开源项目<a href="htt
       </div>
    </div>
 </footer>
-<script src="/theme/js/jquery.min.js"></script>
+<script src="http://menghao.org/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
+<script src="http://menghao.org/theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+<script src="http://menghao.org/theme/js/respond.min.js"></script>
+
 
 
 

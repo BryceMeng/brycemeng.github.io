@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>量化中的一些注意细节(min数据合成逻辑) - 雪山</title>
+    <title>量化中的一些注意细节(min数据合成逻辑) - TechLoveDeath</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <link href="/images/favicon.png" rel="icon">
+    <link href="http://menghao.org/images/favicon.png" rel="icon">
 
-<link rel="canonical" href="/details-in-quant-tick2min.html">
+<link rel="canonical" href="http://menghao.org/details-in-quant-tick2min.html">
 
         <meta name="author" content="雪山" />
         <meta name="keywords" content="量化" />
         <meta name="description" content="量化中的一些注意细节（tick数据合成分钟级数据）" />
 
-        <meta property="og:site_name" content="雪山" />
+        <meta property="og:site_name" content="TechLoveDeath" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="量化中的一些注意细节(min数据合成逻辑)"/>
-        <meta property="og:url" content="/details-in-quant-tick2min.html"/>
+        <meta property="og:url" content="http://menghao.org/details-in-quant-tick2min.html"/>
         <meta property="og:description" content="量化中的一些注意细节（tick数据合成分钟级数据）"/>
         <meta property="article:published_time" content="2017-08-10" />
             <meta property="article:section" content="量化" />
@@ -27,34 +27,22 @@
             <meta property="article:author" content="雪山" />
 
 
+
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://menghao.org/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://menghao.org/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
-
-
+    <link href="http://menghao.org/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://menghao.org/theme/css/style.css" type="text/css"/>
 
 
-
-    <!-- baidu Statistics -->
-	<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?a7cd0e317621471e586bf369894135aa";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-	</script>
 
 
 </head>
 <body>
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -62,25 +50,25 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand">
-<img class="img-responsive pull-left gap-right" src="/images/favicon.png" width="24"/> 雪山            </a>
+            <a href="http://menghao.org/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="http://menghao.org/images/favicon.png" width="24"/> TechLoveDeath            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                         <li >
-                            <a href="/category/android.html">Android</a>
+                            <a href="http://menghao.org/category/android.html">Android</a>
                         </li>
                         <li >
-                            <a href="/category/ji-zhu.html">技术</a>
+                            <a href="http://menghao.org/category/ji-zhu.html">技术</a>
                         </li>
                         <li class="active">
-                            <a href="/category/liang-hua.html">量化</a>
+                            <a href="http://menghao.org/category/liang-hua.html">量化</a>
                         </li>
                         <li >
-                            <a href="/category/music.html">Music</a>
+                            <a href="http://menghao.org/category/music.html">Music</a>
                         </li>
                         <li >
-                            <a href="/category/ri-chang.html">日常</a>
+                            <a href="http://menghao.org/category/ri-chang.html">日常</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -89,8 +77,11 @@
         <!-- /.navbar-collapse -->
     </div>
 </div> <!-- /.navbar -->
+
 <!-- Banner -->
 <!-- End Banner -->
+
+<!-- Content Container -->
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
@@ -98,7 +89,7 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/details-in-quant-tick2min.html"
+                    <a href="http://menghao.org/details-in-quant-tick2min.html"
                        rel="bookmark"
                        title="Permalink to 量化中的一些注意细节(min数据合成逻辑)">
                         量化中的一些注意细节(min数据合成逻辑)
@@ -119,12 +110,11 @@
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/liang-hua.html">量化</a>
+	<a href="http://menghao.org/tag/liang-hua.html">量化</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=17540888&auto=1&height=66"></iframe>
-
 <p>这里主要针对vnpy吧，因为我在用这个平台，说到这里还是非常感谢作者，给新手们真的减少了好多的时间。</p>
 <h2><a href="https://github.com/vnpy/vnpy/issues/411">Github上的Issue</a></h2>
 <ol>
@@ -136,16 +126,16 @@
 <ol>
 <li>过滤掉没有成交量的tick就行。代码：</li>
 </ol>
-<div class="highlight"><pre><span></span> <span class="k">def</span> <span class="nf">onTick</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tick</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;收到行情TICK推送（必须由用户继承实现）&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code> <span class="k">def</span> <span class="nf">onTick</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tick</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;收到行情TICK推送（必须由用户继承实现）&quot;&quot;&quot;</span>
         <span class="c1"># print str(tick.__dict__)</span>
 
         <span class="c1"># 过滤掉没有成交量的tick Issue411-1</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="n">volume</span> <span class="o">==</span> <span class="n">tick</span><span class="o">.</span><span class="n">volume</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="n">volume</span> <span class="o">==</span> <span class="n">tick</span><span class="o">.</span><span class="n">volume</span><span class="p">:</span>
             <span class="k">return</span>
 
         <span class="c1"># 计算分钟线</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        在原有逻辑的基础上增加了对小时的判断，为什么呢？因为前一天的23:00:00和第二天的09:00:00的minute都是0</span>
 <span class="sd">        但是其实是在不同的小时里面了，按原有的逻辑的话，今天早上09:00:00～09:01:00的走势会作为昨天23:00的K线展示</span>
 <span class="sd">        Issue411-2</span>
@@ -160,9 +150,9 @@
         <span class="k">if</span> <span class="n">tick_minute</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">barMinute</span> <span class="ow">or</span> <span class="n">tick_hour</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">barHour</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">minBar</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="n">volume</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">minBar</span><span class="o">.</span><span class="n">volume</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">minBar</span><span class="o">.</span><span class="n">__dict__</span>
-                    <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="n">__dict__</span>
-                    <span class="k">print</span> <span class="n">tick</span><span class="o">.</span><span class="n">__dict__</span>
+                    <span class="nb">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">minBar</span><span class="o">.</span><span class="vm">__dict__</span>
+                    <span class="nb">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="vm">__dict__</span>
+                    <span class="nb">print</span> <span class="n">tick</span><span class="o">.</span><span class="vm">__dict__</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;bar volume less than 0&#39;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">minBar</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="n">volume</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">minBar</span><span class="o">.</span><span class="n">volume</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">onMinBar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minBar</span><span class="p">)</span>
@@ -182,13 +172,13 @@
             <span class="n">bar</span><span class="o">.</span><span class="n">datetime</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">second</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># K线的时间设为第一个Tick的时间</span>
 
             <span class="c1"># 实盘中用不到的数据可以选择不算，从而加快速度</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">bar</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">tick</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tickVolumeSplitTime</span><span class="p">:</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tickVolumeResetSwitch</span><span class="p">:</span>
                         <span class="n">bar</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="mi">0</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">tickVolumeResetSwitch</span> <span class="o">=</span> <span class="bp">True</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">tickVolumeResetSwitch</span> <span class="o">=</span> <span class="kc">True</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">bar</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="n">volume</span>
                 <span class="k">else</span><span class="p">:</span>
@@ -197,7 +187,7 @@
                         <span class="n">bar</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="mi">0</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">bar</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span><span class="o">.</span><span class="n">volume</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">tickVolumeResetSwitch</span> <span class="o">=</span> <span class="bp">False</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">tickVolumeResetSwitch</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="c1"># bar.openInterest = tick.openInterest</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">minBar</span> <span class="o">=</span> <span class="n">bar</span>  <span class="c1"># 这种写法为了减少一层访问，加快速度</span>
@@ -212,15 +202,14 @@
             <span class="n">bar</span><span class="o">.</span><span class="n">close</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">lastPrice</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">preTick</span> <span class="o">=</span> <span class="n">tick</span>
-</pre></div>
-
+</code></pre></div>
 
 <ol>
 <li>加上Hour的过滤就行，可以参考上面的代码。</li>
 <li>改了一些逻辑，看代码：</li>
 </ol>
-<div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">onMinBar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bar</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;收到Bar推送（必须由用户继承实现）&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">onMinBar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bar</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;收到Bar推送（必须由用户继承实现）&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dtMinBarCount</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="c1"># 特殊处理分钟线，减少后面处理时间</span>
         <span class="c1"># TODO: 实盘时一定要精简代码，不要太多if else，减少处理时间</span>
@@ -238,7 +227,7 @@
                 <span class="c1"># 推送5分钟线数据</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">onMultiFrameBar</span><span class="p">(</span><span class="n">mmBar</span><span class="p">)</span>
                 <span class="c1"># 清空5分钟线数据缓存</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">multiFrameBar</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">multiFrameBar</span> <span class="o">=</span> <span class="kc">None</span>
 
             <span class="c1"># clark add 建立缓存，不应该在下一分钟建立缓存</span>
             <span class="c1"># print &#39;init 5 bar &#39; + str(bar.datetime)</span>
@@ -287,17 +276,17 @@
                 <span class="n">mmBar</span><span class="o">.</span><span class="n">low</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">mmBar</span><span class="o">.</span><span class="n">low</span><span class="p">,</span> <span class="n">bar</span><span class="o">.</span><span class="n">low</span><span class="p">)</span>
                 <span class="n">mmBar</span><span class="o">.</span><span class="n">close</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">close</span>
                 <span class="n">mmBar</span><span class="o">.</span><span class="n">volume</span> <span class="o">+=</span> <span class="n">bar</span><span class="o">.</span><span class="n">volume</span>
-</pre></div>
+</code></pre></div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/some-idea-of-functional-analysis.html">数学分析的一些感悟</a></li>
-        <li><a href="/mongodb-data-insert-trap.html">MongoDb数据导入踩坑记录</a></li>
-        <li><a href="/details-in-quant.html">量化中的一些注意细节(数据)</a></li>
-        <li><a href="/edgerouter-lite-3-config.html">EdgeRouter Lite 3配置实例</a></li>
-        <li><a href="/ctp-archive-future-tick-2.html">用CTP接口实现期货交易明细分析(2)</a></li>
+        <li><a href="http://menghao.org/some_exp_of_two_arg_strategy.html">最近的一些经验总结</a></li>
+        <li><a href="http://menghao.org/AdvFinML-Standard-Bars.html">AdvFinML - Standard Bars</a></li>
+        <li><a href="http://menghao.org/something-about-financial-analysis.html">财务分析相关</a></li>
+        <li><a href="http://menghao.org/hidden-markov-model.html">HMM 稳形马尔科夫</a></li>
+        <li><a href="http://menghao.org/numpy-version-pandas-ewm-mean-var.html">numpy pandas ewm mean/var</a></li>
     </ul>
 </section>
         </article>
@@ -321,109 +310,109 @@
 
 <!-- Sidebar/Tag Cloud -->
 <li class="list-group-item">
-  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <a href="http://menghao.org/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
   <ul class="list-group list-inline tagcloud" id="tags">
     <li class="list-group-item tag-3">
-      <a href="/tag/adb.html">adb</a>
+      <a href="http://menghao.org/tag/adb.html">adb</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/advfinml.html">AdvFinML</a>
+      <a href="http://menghao.org/tag/advfinml.html">AdvFinML</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/android.html">Android</a>
+      <a href="http://menghao.org/tag/android.html">Android</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/can-shu-you-hua.html">参数优化</a>
+      <a href="http://menghao.org/tag/can-shu-you-hua.html">参数优化</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/cheng-shou-zhi-biao.html">成熟指标</a>
+      <a href="http://menghao.org/tag/cheng-shou-zhi-biao.html">成熟指标</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/chi-cang-liang.html">持仓量</a>
+      <a href="http://menghao.org/tag/chi-cang-liang.html">持仓量</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/elite3.html">Elite3</a>
+      <a href="http://menghao.org/tag/elite3.html">Elite3</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/fifthcircle.html">fifthcircle</a>
+      <a href="http://menghao.org/tag/fifthcircle.html">fifthcircle</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/gai-lu.html">概率</a>
+      <a href="http://menghao.org/tag/gai-lu.html">概率</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/gu-piao.html">股票</a>
+      <a href="http://menghao.org/tag/gu-piao.html">股票</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/hifi.html">hifi</a>
+      <a href="http://menghao.org/tag/hifi.html">hifi</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/ji-qi-xue-xi.html">机器学习</a>
+      <a href="http://menghao.org/tag/ji-qi-xue-xi.html">机器学习</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/ji-zhu.html">技术</a>
+      <a href="http://menghao.org/tag/ji-zhu.html">技术</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/keng.html">坑</a>
+      <a href="http://menghao.org/tag/keng.html">坑</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/lai-ci-gou.html">莱茨狗</a>
+      <a href="http://menghao.org/tag/lai-ci-gou.html">莱茨狗</a>
     </li>
     <li class="list-group-item tag-1">
-      <a href="/tag/liang-hua.html">量化</a>
+      <a href="http://menghao.org/tag/liang-hua.html">量化</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/lu-you-qi.html">路由器</a>
+      <a href="http://menghao.org/tag/lu-you-qi.html">路由器</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/mongodb.html">mongodb</a>
+      <a href="http://menghao.org/tag/mongodb.html">mongodb</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/monkey.html">monkey</a>
+      <a href="http://menghao.org/tag/monkey.html">monkey</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/music.html">Music</a>
+      <a href="http://menghao.org/tag/music.html">Music</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/qi-huo.html">期货</a>
+      <a href="http://menghao.org/tag/qi-huo.html">期货</a>
     </li>
     <li class="list-group-item tag-1">
-      <a href="/tag/ri-chang.html">日常</a>
+      <a href="http://menghao.org/tag/ri-chang.html">日常</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/shi-jian-xu-lie.html">时间序列</a>
+      <a href="http://menghao.org/tag/shi-jian-xu-lie.html">时间序列</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/shu-xue.html">数学</a>
+      <a href="http://menghao.org/tag/shu-xue.html">数学</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/tong-ji.html">统计</a>
+      <a href="http://menghao.org/tag/tong-ji.html">统计</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/ubuntu.html">Ubuntu</a>
+      <a href="http://menghao.org/tag/ubuntu.html">Ubuntu</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/wu-du-quan.html">五度圈</a>
+      <a href="http://menghao.org/tag/wu-du-quan.html">五度圈</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/xi-tong.html">系统</a>
+      <a href="http://menghao.org/tag/xi-tong.html">系统</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/xin-li-xue.html">心理学</a>
+      <a href="http://menghao.org/tag/xin-li-xue.html">心理学</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/yi-chuan-suan-fa.html">遗传算法</a>
+      <a href="http://menghao.org/tag/yi-chuan-suan-fa.html">遗传算法</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/yi-wen.html">译文</a>
+      <a href="http://menghao.org/tag/yi-wen.html">译文</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/ying-wen.html">英文</a>
+      <a href="http://menghao.org/tag/ying-wen.html">英文</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="/tag/yu-le.html">娱乐</a>
+      <a href="http://menghao.org/tag/yu-le.html">娱乐</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/za-tan.html">杂谈</a>
+      <a href="http://menghao.org/tag/za-tan.html">杂谈</a>
     </li>
   </ul>
 </li>
@@ -445,11 +434,13 @@
         </div>
     </div>
 </div>
+<!-- End Content Container -->
+
 <footer>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2022 雪山
+         <div class="col-xs-10">&copy; 2022 Bryce
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -457,13 +448,14 @@
       </div>
    </div>
 </footer>
-<script src="/theme/js/jquery.min.js"></script>
+<script src="http://menghao.org/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
+<script src="http://menghao.org/theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+<script src="http://menghao.org/theme/js/respond.min.js"></script>
+
 
 
 
