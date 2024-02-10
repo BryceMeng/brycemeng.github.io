@@ -1,4 +1,4 @@
 # mhxueshan.github.io
 personal website
 
-http://menghao.org
+https://brycemeng.com
