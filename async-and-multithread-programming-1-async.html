@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>主力合约切换的Bug记录 - TechLoveDeath</title>
+    <title>Async and multithread programming - 1 Async - TechLoveDeath</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,21 +10,20 @@
 
     <link href="https://brycemeng.com/images/favicon.png" rel="icon">
 
-<link rel="canonical" href="https://brycemeng.com/bug-record-coutinues-contract-switch.html">
+<link rel="canonical" href="https://brycemeng.com/async-and-multithread-programming-1-async.html">
 
         <meta name="author" content="Bryce" />
-        <meta name="keywords" content="Quant,Futures" />
-        <meta name="description" content="主力合约切换的Bug记录" />
+        <meta name="keywords" content="Quant" />
+        <meta name="description" content="Async and multithread programming - 1 What is asynchronous programming? (JavaScript)" />
 
         <meta property="og:site_name" content="TechLoveDeath" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="主力合约切换的Bug记录"/>
-        <meta property="og:url" content="https://brycemeng.com/bug-record-coutinues-contract-switch.html"/>
-        <meta property="og:description" content="主力合约切换的Bug记录"/>
-        <meta property="article:published_time" content="2019-01-14" />
+        <meta property="og:title" content="Async and multithread programming - 1 Async"/>
+        <meta property="og:url" content="https://brycemeng.com/async-and-multithread-programming-1-async.html"/>
+        <meta property="og:description" content="Async and multithread programming - 1 What is asynchronous programming? (JavaScript)"/>
+        <meta property="article:published_time" content="2024-05-21" />
             <meta property="article:section" content="Quant" />
             <meta property="article:tag" content="Quant" />
-            <meta property="article:tag" content="Futures" />
             <meta property="article:author" content="Bryce" />
 
 
@@ -90,10 +89,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="https://brycemeng.com/bug-record-coutinues-contract-switch.html"
+                    <a href="https://brycemeng.com/async-and-multithread-programming-1-async.html"
                        rel="bookmark"
-                       title="Permalink to 主力合约切换的Bug记录">
-                        主力合约切换的Bug记录
+                       title="Permalink to Async and multithread programming - 1 Async">
+                        Async and multithread programming - 1 Async
                     </a>
                 </h1>
             </header>
@@ -103,7 +102,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2019-01-14T20:54:00+08:00"> Mon 14 January 2019</time>
+        <i class="fa fa-calendar"></i><time datetime="2024-05-21T18:32:00+08:00"> Tue 21 May 2024</time>
     </span>
 
 
@@ -112,61 +111,30 @@
 
 <span class="label label-default">Tags</span>
 	<a href="https://brycemeng.com/tag/quant.html">Quant</a>
-        /
-	<a href="https://brycemeng.com/tag/futures.html">Futures</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>全名应该是商品期货主力合约切换导致的Bug记录</p>
-<p><strong>品种</strong>：商品期货 rb</p>
-<p><strong>回测数据</strong>：tb提取的分钟线</p>
-<p><strong>实时数据</strong>：ctp获取</p>
-<p><strong>Bug描述</strong>：策略当中需要一段时间的历史数据进行指标计算，主力切换导致这段历史数据里面含有两份合约的数据，分别是rb1901和rb1905，这两个合约于20181128 21:00切换，价差竟然达到了300点左右，以当时rb1901 3700的价格，也达到了8%，导致指标计算的误差非常大，开了错单。</p>
-<p>很早前就知道这个问题的存在，但是一直没有动力去调整，一直用策略的鲁棒性安慰着自己。但是这次的切换价差到达了8%，还开了错单，没有这么考验鲁棒性的，还是打算修复一下。</p>
-<p>我是先改的线上策略，线上策略的主力切换数据从新浪财经网站上获取。</p>
-<p><strong>线上修改方案</strong>：以该bug为例子，主力切换后我在rb1905上进行交易，把rb1901的OHLC数据全部减去300点的价差，这个300是20181128 15:00(rb1901) 和 20181128 21:00(rb1905)的价差。也叫左侧价差调整。</p>
-<p>但是交易了几单全部都在亏损，发现有点问题，忽然想到有问题，虽然还没有达到下架策略的条件，但是也有点奇怪。后来发现是回测的问题，我的回测优化是在主力切换价差未做调整的情况下做的，现在实盘又是调整后的数据。。。。。。</p>
-<p>为什么要用tb的数据呢？其实我是有tick数据的，以前尝试过清洗一次，发现早期的数据问题太多了就一直没弄，个人量化者就是啥都得干。就直接提取tb的分钟线，质量还行又方便，为了节省时间嘛， 所以这次还是在tb的数据上做文章。</p>
-<p><strong>回测修改方案</strong>：</p>
-<p>找出tb主连合约分钟线的切换点
-在指标计算的价格buffer中进行左侧价差调整
-给策略发信号让策略在切换的前半个小时就平仓而且暂停交易，切换后再重新开启交易</p>
-<p><strong>* 找出tb主连合约分钟线的切换点</strong></p>
-<p>一个相对好点的办法去识别就是<strong>持仓量的变化</strong>，因为大部分的主力切换规则都与持仓量相关，比如：次主力的持仓量在某一天大于主力的持仓量后，第二天进行切换。但是每个公司的规则都不一样，我对比过新浪财经上的切换时间和tb的就不一样，所以我觉得最后还是得把自己的数据搞全，这样回测和实盘都用自己的主力切换规则，这样才是最好的。</p>
-<p>我发一张tb分钟线的图就一目了然了</p>
-<p><img alt="rb888 分钟线" src="http://sinacloud.net/mhblog/2019/01/tb_contunues_data.jpg"></p>
-<p>这次tb数据的切换比新浪财经的晚一天。红线上面和红线下面就是切换前后的数据，变化最明显的就是最后一列数据：<strong>持仓量</strong>。</p>
-<p>所以我设置了一个阀值，把持仓量变化大于了这个阀值的点就当做主力切换点，当然这个是近似值，出来的结果我都人工review了的。</p>
-<p>看看我找出来的rb的主力切换时间列表：</p>
-<div class="highlight"><pre><span></span><code><span class="n">switch_time_list</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s2">&quot;20090720_0900&quot;</span><span class="p">,</span> <span class="s2">&quot;20090810_0900&quot;</span><span class="p">,</span> <span class="s2">&quot;20090901_0900&quot;</span><span class="p">,</span> <span class="s2">&quot;20091012_0900&quot;</span><span class="p">,</span> <span class="s2">&quot;20091110_0900&quot;</span><span class="p">,</span> <span class="s2">&quot;20091201_0900&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;20100309_0900&quot;</span><span class="p">,</span> <span class="s2">&quot;20101014_0900&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;20110210_0900&quot;</span><span class="p">,</span> <span class="s2">&quot;20110808_0900&quot;</span><span class="p">,</span> <span class="s2">&quot;20111103_0900&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;20120302_0900&quot;</span><span class="p">,</span> <span class="s2">&quot;20120712_0900&quot;</span><span class="p">,</span> <span class="s2">&quot;20121023_0900&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;20130219_0900&quot;</span><span class="p">,</span> <span class="s2">&quot;20130704_0900&quot;</span><span class="p">,</span> <span class="s2">&quot;20131031_0900&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;20140305_0900&quot;</span><span class="p">,</span> <span class="s2">&quot;20140708_0900&quot;</span><span class="p">,</span> <span class="s2">&quot;20141021_0900&quot;</span><span class="p">,</span>
-        <span class="c1"># 夜盘开始</span>
-        <span class="s2">&quot;20150311_2100&quot;</span><span class="p">,</span> <span class="s2">&quot;20150720_2100&quot;</span><span class="p">,</span> <span class="s2">&quot;20151104_2100&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;20160311_2100&quot;</span><span class="p">,</span> <span class="s2">&quot;20160817_2100&quot;</span><span class="p">,</span> <span class="s2">&quot;20161125_2100&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;20170322_2100&quot;</span><span class="p">,</span> <span class="s2">&quot;20170807_2100&quot;</span><span class="p">,</span> <span class="s2">&quot;20171108_2100&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;20180328_2100&quot;</span><span class="p">,</span> <span class="s2">&quot;20180816_2100&quot;</span><span class="p">,</span> <span class="s2">&quot;20181129_2100&quot;</span><span class="p">,</span>
-    <span class="p">]</span>
-</code></pre></div>
-
-<p>2和3应该不复杂，我是用的vnpy，我是在ArrayManager和BarManager中做了调整，很快就能实现。</p>
-<p>这个bug修改了之后，重新做一次回测优化，发现参数变得还不少，看来这个bug对回测准确性的影响确实不小。</p>
-<p>我把主力切换数据和寻找切换时间的代码放在了github上，暂时只有rb的数据，如有需要的朋友可以直接使用，也希望有兴趣的朋友可以新增其他品种的数据。</p>
-<p><a href="https://github.com/mhxueshan/dominant_contract_switch">mhxueshan/dominant_contract_switch</a></p>
+                <h1>content</h1>
+<ol>
+<li>What is asynchronous programming? (JavaScript)</li>
+<li></li>
+</ol>
+<h1>background</h1>
+<p>我们这个系列主要是讲异步和多线程。异步和多线程本质上来讲都是为了充分的利用计算资源。</p>
+<p>当CPU单核主频的发展速度达到瓶颈之后，往多核CPU发展。同时GPU的并行运算给LLM的发展有着极大的促进作用。当然我这一个系列主要是讲CPU，这里我只是想表明并行计算这个概念在现在这个时代非常重要。</p>
+<p>那么异步编程是指什么？它和多线程是什么关系？多线程与硬件的关系是什么？异步编程&amp;多线程编程与并行计算又有什么关系？我们将通过这个系列搞清楚这些问题。</p>
+<p>＃ relative resources</p>
+<p><a href="https://x.com/DrJimFan/status/1791514371086250291">GPU programming from Jim Fan</a></p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="https://brycemeng.com/async-and-multithread-programming-1-async.html">Async and multithread programming - 1 Async</a></li>
         <li><a href="https://brycemeng.com/some_exp_of_two_arg_strategy.html">最近的一些经验总结</a></li>
         <li><a href="https://brycemeng.com/AdvFinML-Standard-Bars.html">AdvFinML - Standard Bars</a></li>
         <li><a href="https://brycemeng.com/something-about-financial-analysis.html">财务分析相关</a></li>
         <li><a href="https://brycemeng.com/hidden-markov-model.html">HMM 稳形马尔科夫</a></li>
+        <li><a href="https://brycemeng.com/numpy-version-pandas-ewm-mean-var.html">numpy pandas ewm mean/var</a></li>
     </ul>
 </section>
         </article>
