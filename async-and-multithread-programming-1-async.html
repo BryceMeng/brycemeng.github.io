@@ -114,15 +114,33 @@
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <h1>content</h1>
+                <h2>content</h2>
 <ol>
 <li>What is asynchronous programming? (JavaScript)</li>
 <li></li>
 </ol>
-<h1>background</h1>
+<h2>introduction</h2>
+<h3>background</h3>
 <p>我们这个系列主要是讲异步和多线程。异步和多线程本质上来讲都是为了充分的利用计算资源。</p>
 <p>当CPU单核主频的发展速度达到瓶颈之后，往多核CPU发展。同时GPU的并行运算给LLM的发展有着极大的促进作用。当然我这一个系列主要是讲CPU，这里我只是想表明并行计算这个概念在现在这个时代非常重要。</p>
 <p>那么异步编程是指什么？它和多线程是什么关系？多线程与硬件的关系是什么？异步编程&amp;多线程编程与并行计算又有什么关系？我们将通过这个系列搞清楚这些问题。</p>
+<h3>in this article</h3>
+<p>在这篇文章里面我会介绍:
+1. 什么是异步编程？为什么需要它？
+2. JavaScript中的异步编程 (为什么从javascript讲)
+  a. 回调函数
+  b. 事件循环
+  b. promise
+  c. await
+3. 怎么判断IO操作有没有结束？</p>
+<h2>什么是异步编程？</h2>
+<p>异步的反面是同步编程。
+同步编程：我去邮局寄一个邮件去我朋友家-&gt;邮局发邮件去朋友家-&gt;朋友回复邮件-&gt;邮局收到回复的邮件-&gt;我拿到邮件-&gt;回家吃饭
+异步编程：我去邮局寄一个邮件去我朋友家-&gt;回家吃饭-&gt;做点其他的事情 ...                        我拿到邮件
+                                  |                                                   |
+                                   -&gt;邮局发邮件去朋友家-&gt;朋友回复邮件-&gt;邮局收到回复的邮件-&gt;</p>
+<p>TODO:JavaScript的截图</p>
+<p>注意：同步：我得在邮局等待 </p>
 <p>＃ relative resources</p>
 <p><a href="https://x.com/DrJimFan/status/1791514371086250291">GPU programming from Jim Fan</a></p>
             </div>

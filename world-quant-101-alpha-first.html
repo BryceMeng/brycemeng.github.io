@@ -284,8 +284,8 @@ Cumulative(Volume x Typical Price)/Cumulative(Volume)
 <p><a href="https://uqer.io/community/share/56f3c074228e5b887ee51258">公式源码</a></p>
 <p><strong>#11&nbsp;&nbsp;&nbsp;&nbsp;((rank(ts_max((vwap-close),3)) + rank(ts_min((vwap - close), 3))) * rank(delta(volume, 3)))</strong></p>
 <p><strong>元素1：</strong> rank(ts_max((vwap-close),3)) <strong>+</strong> rank(ts_min((vwap - close), 3))  vwap-close越大说明成交量越大？(有待考察)，这里max和min相加会抵消</p>
-<p><strong>元素2: </strong> rank(delta(volume, 3)) 这里就是成交量越大，分级越高</p>
-<p><strong>简化版: </strong> 元素1 × 元素2</p>
+<p>**元素2: ** rank(delta(volume, 3)) 这里就是成交量越大，分级越高</p>
+<p>**简化版: ** 元素1 × 元素2</p>
 <p>2018.3.24 成交量越大越优先买入, <strong>价量关系</strong></p>
 <p><strong>#12&nbsp;&nbsp;&nbsp;&nbsp;(sign(delta(volume,1))*(-1 * delta(close,1)))</strong></p>
 <p><a href="https://uqer.io/community/share/56f4a475228e5b887fe5123c">公式源码</a></p>
@@ -421,7 +421,7 @@ Cumulative(Volume x Typical Price)/Cumulative(Volume)
 <p><strong>(delay(close,20) - delay(close,10)) - (delay(close,10) - close) &lt; -1? 1 :-1*(close-delay(close,1))</strong></p>
 <p>2018.6.4 直接用了价格，这其实是不合理的。最好的alpha出现在深跌10天，再缓跌10天，这样结果是大于1的</p>
 <p><strong>#50&nbsp;&nbsp;&nbsp;&nbsp;(-1*ts_max(rank(correlation(rank(volume), rank(vwap), 5)),5))</strong></p>
-<p>2018.6.5 volume和vwap负相关越大越好，放量下跌or缩量上涨<strong>价量关系 </strong></p>
+<p>2018.6.5 volume和vwap负相关越大越好，放量下跌or缩量上涨**价量关系 **</p>
 <p><strong>#51&nbsp;&nbsp;&nbsp;&nbsp;(((((delay(close,20) - delay(close,10))/10) - ((delay(close,10) - close)/10))&lt;(-1<em>0.05))?1:((-1</em>1)*(close-delay(close,1))))</strong></p>
 <p><strong>(delay(close,20) - delay(close,10)) - (delay(close,10) - close)&lt; -0.5 ? 1 : -1*(close-delay(close,1))</strong></p>
 <p>2018.6.6 md的，这和49是一模一样的，只是参数不一样，101alpha有点特别水</p>
