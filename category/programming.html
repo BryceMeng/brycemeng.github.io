@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Trading Systems - TechLoveDeath</title>
+    <title>Programming - TechLoveDeath</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,21 +10,16 @@
 
     <link href="https://brycemeng.com/images/favicon.png" rel="icon">
 
-<link rel="canonical" href="https://brycemeng.com/trading-systems-reading-note.html">
 
-        <meta name="author" content="Bryce" />
-        <meta name="keywords" content="Quant" />
-        <meta name="description" content="Trading Systems 读后笔记" />
+    <meta name="author" content="Bryce" />
+    <meta name="keywords" content="Programming" />
 
+    <!-- Open Graph tags -->
         <meta property="og:site_name" content="TechLoveDeath" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Trading Systems"/>
-        <meta property="og:url" content="https://brycemeng.com/trading-systems-reading-note.html"/>
-        <meta property="og:description" content="Trading Systems 读后笔记"/>
-        <meta property="article:published_time" content="2017-06-28" />
-            <meta property="article:section" content="Quant" />
-            <meta property="article:tag" content="Quant" />
-            <meta property="article:author" content="Bryce" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="TechLoveDeath"/>
+        <meta property="og:url" content="https://brycemeng.com"/>
+        <meta property="og:description" content="TechLoveDeath"/>
 
 
 
@@ -64,10 +59,10 @@
                         <li >
                             <a href="https://brycemeng.com/category/music.html">Music</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="https://brycemeng.com/category/programming.html">Programming</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="https://brycemeng.com/category/quant.html">Quant</a>
                         </li>
                         <li >
@@ -88,68 +83,13 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="https://brycemeng.com/trading-systems-reading-note.html"
-                       rel="bookmark"
-                       title="Permalink to Trading Systems">
-                        Trading Systems
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-06-28T20:16:00+08:00"> Wed 28 June 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="https://brycemeng.com/tag/quant.html">Quant</a>
-    
-</footer><!-- /.post-info -->                    </div>
+            <article>
+                <h2><a href="https://brycemeng.com/async-and-multithread-programming-1-async.html">Async and multithread programming - 1 Async</a></h2>
+                <div class="summary"><p>Async and multithread programming - 1 What is asynchronous programming? (JavaScript) (Draft 2024.05.26)</p>
+                    <a class="btn btn-default btn-xs" href="https://brycemeng.com/async-and-multithread-programming-1-async.html">more ...</a>
                 </div>
-                <p>非常感谢vnpy作者在他的live上推荐的这本书，作为一本入门书箱是极好的，过一下这本书非常重要。</p>
-<h3>书名：Trading Systems: a new approach to system development and portfolio optimisation</h3>
-<p>这是一本英文书，还木有找着中文版的，我打算励志一把靠自己把它啃完的，不过。。。好吧，不过我倒是找到了一个看英文书的比较快速的方式，就是目录翻译和google translate。</p>
-<p>目录翻译能让我们快速清晰的看清书的结构。</p>
-<p>google translate现在它的翻译准确度还是非常高的，高于其他的翻译软件，可能有时候由于上下文的关系一些名词的意思会弄错，不过句子的结构都是非常的准确。而且可以页面上点击某个单词可以单独给出翻译结果和朗读的功能，非常方便。</p>
-<p>说说这本书吧，我一边看一边会跟随书中的例子，书中用的TradeStation，我用的vnpy。按我的理解主要四部分内容：</p>
-<p>1.<strong>怎么写一个交易策略</strong>。书中是用的一个LUXOR的示例，其实就是一个双均线突破系统，加了一点点变化：不是金叉买，而是金叉后，再次突破那个金叉bar时最高价时买。</p>
-<p>2.<strong>加入优化和退出策略</strong>。我开始是猜想的金叉买后，死叉卖。我又错了，这本书介绍的思路是按risk management的思路走的，用了固定止损，移动止损和止盈这几种方法来决定策略卖出时间。</p>
-<p>这部分是我看起来最感兴趣的一部分，首先是参数优化，这个功能在vnpy里面也是有的，而且还带多核优化功能，我的i7+16G一跑就是20小时，可见真把量化做起来了对机器的要求还是比较高的。不过参数优化功能对结果的处理功能略简单，我自己增加了回测数据保存，3D曲面图显示功能，方便回测数据再分析和参数的可视化选择。这些功能也是这本书中在TradeStation中用到了的。</p>
-<p>还有一些功能我后续打算在自己的定制版vnpy中完善的：</p>
-<p>a. 交易时间过滤测试。不过这个功能优化级放低，因为书中测试的是外汇，外汇是24小时的，而国内的期货，期权，股票等都是白天交易，不过现在期货也有了夜市，后面要不要把夜市和白天的交易区分开来，这也可以做个测试。</p>
-<p>b. 止损点的查找，用MAE的方式。只要对参数优化中每个参数组合回测的结果进行分析即可，应该不是太复杂。</p>
-<p>c. 止盈点的查找，用MFE的方式。这里面有个参数是回测中没记录的，要加这个功能可能需要修改到一些核心功能。不过按量化的一个思路是需要多止损，少止盈的，所以这个功能还有待考量的。</p>
-<p>d. 各种参数的改变对NP/DD(NetProfit/DrawDown)的影响。</p>
-<p>e. 增加WFA功能。简单来讲就是每个时段执行某策略的参数应该是不一样的，其实这个里面训练时段和实盘阶段时段的选择还是需要一个主观判断的。</p>
-<p>3.<strong>money management</strong>。简单来讲就是以我现在的盈利，仓位，资金情况决定我下一次应该买几手合约。这个功能强烈建议加在策略里面，简单的都可以。</p>
-<p>4.<strong>股票或者其他市场的金融产品做投资组合</strong>。这部分我看得不多，我的资金还差得远去做这个，而且这个东西需要的数据多，在资金没到一定规模时我个人觉得不用花太大的精力在这个上面。</p>
-<p>其实在最后的推荐策略中，我看到了一个非常有趣的策略就是triangle策略，记得我早期玩股票的时候，三解形突破理论是我非常喜欢的，核心就是市场活跃度越来越低，等待最后选择一个方向。我之前还在想，我怎么去做三角形识别呢？没想到在triangle策略中给了一种替代方式，真是非常棒。而且可以扩散出来的是：能不能把市场的活跃度(波动)，成交量的变化等等也加入到策略当中呢？应该是一个非常有意思的话题。</p>
-<p>总体来讲，非常推荐此书。</p>
-            </div>
-            <!-- /.entry-content -->
-<section class="well" id="related-posts">
-    <h4>Related Posts:</h4>
-    <ul>
-        <li><a href="https://brycemeng.com/some_exp_of_two_arg_strategy.html">最近的一些经验总结</a></li>
-        <li><a href="https://brycemeng.com/AdvFinML-Standard-Bars.html">AdvFinML - Standard Bars</a></li>
-        <li><a href="https://brycemeng.com/something-about-financial-analysis.html">财务分析相关</a></li>
-        <li><a href="https://brycemeng.com/hidden-markov-model.html">HMM 稳形马尔科夫</a></li>
-        <li><a href="https://brycemeng.com/numpy-version-pandas-ewm-mean-var.html">numpy pandas ewm mean/var</a></li>
-    </ul>
-</section>
-        </article>
-    </section>
+            </article>
+            <hr/>
 
         </div>
         <div class="col-sm-3" id="sidebar">

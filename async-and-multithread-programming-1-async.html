@@ -13,17 +13,20 @@
 <link rel="canonical" href="https://brycemeng.com/async-and-multithread-programming-1-async.html">
 
         <meta name="author" content="Bryce" />
-        <meta name="keywords" content="Quant" />
-        <meta name="description" content="Async and multithread programming - 1 What is asynchronous programming? (JavaScript)" />
+        <meta name="keywords" content="programming,async,multithread,javascript" />
+        <meta name="description" content="Async and multithread programming - 1 What is asynchronous programming? (JavaScript) (Draft 2024.05.26)" />
 
         <meta property="og:site_name" content="TechLoveDeath" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Async and multithread programming - 1 Async"/>
         <meta property="og:url" content="https://brycemeng.com/async-and-multithread-programming-1-async.html"/>
-        <meta property="og:description" content="Async and multithread programming - 1 What is asynchronous programming? (JavaScript)"/>
+        <meta property="og:description" content="Async and multithread programming - 1 What is asynchronous programming? (JavaScript) (Draft 2024.05.26)"/>
         <meta property="article:published_time" content="2024-05-21" />
-            <meta property="article:section" content="Quant" />
-            <meta property="article:tag" content="Quant" />
+            <meta property="article:section" content="Programming" />
+            <meta property="article:tag" content="programming" />
+            <meta property="article:tag" content="async" />
+            <meta property="article:tag" content="multithread" />
+            <meta property="article:tag" content="javascript" />
             <meta property="article:author" content="Bryce" />
 
 
@@ -65,6 +68,9 @@
                             <a href="https://brycemeng.com/category/music.html">Music</a>
                         </li>
                         <li class="active">
+                            <a href="https://brycemeng.com/category/programming.html">Programming</a>
+                        </li>
+                        <li >
                             <a href="https://brycemeng.com/category/quant.html">Quant</a>
                         </li>
                         <li >
@@ -110,51 +116,74 @@
 
 
 <span class="label label-default">Tags</span>
-	<a href="https://brycemeng.com/tag/quant.html">Quant</a>
+	<a href="https://brycemeng.com/tag/programming.html">programming</a>
+        /
+	<a href="https://brycemeng.com/tag/async.html">async</a>
+        /
+	<a href="https://brycemeng.com/tag/multithread.html">multithread</a>
+        /
+	<a href="https://brycemeng.com/tag/javascript.html">javascript</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <h2>content</h2>
 <ol>
 <li>What is asynchronous programming? (JavaScript)</li>
-<li></li>
+<li>其他语言的异步编程</li>
+<li>多线程编程 (c++)
+   a. 什么是多线程？与硬件的关系是什么？
+   b. 使用多线程意味着什么？
+   c. 使用多线程的目标是什么？</li>
+<li>其他语言的多线程编程</li>
+<li>多线程与异步编程的关系 (主要讲GoRotine，分析源码，看一下rust有没有改进)</li>
+<li>GPU并行编程 </li>
 </ol>
 <h2>introduction</h2>
 <h3>background</h3>
 <p>我们这个系列主要是讲异步和多线程。异步和多线程本质上来讲都是为了充分的利用计算资源。</p>
 <p>当CPU单核主频的发展速度达到瓶颈之后，往多核CPU发展。同时GPU的并行运算给LLM的发展有着极大的促进作用。当然我这一个系列主要是讲CPU，这里我只是想表明并行计算这个概念在现在这个时代非常重要。</p>
 <p>那么异步编程是指什么？它和多线程是什么关系？多线程与硬件的关系是什么？异步编程&amp;多线程编程与并行计算又有什么关系？我们将通过这个系列搞清楚这些问题。</p>
+<p>我将会不定期的更新这个系列的文章</p>
 <h3>in this article</h3>
 <p>在这篇文章里面我会介绍:
 1. 什么是异步编程？为什么需要它？
-2. JavaScript中的异步编程 (为什么从javascript讲)
+2. JavaScript中的异步编程 
   a. 回调函数
-  b. 事件循环
+  b. 事件循环（源码）
   b. promise
   c. await
-3. 怎么判断IO操作有没有结束？</p>
+3. 怎么判断IO操作有没有结束？(源码)
+4. 异步真的没有浪费资源吗？背后的机制是什么？(源码)</p>
 <h2>什么是异步编程？</h2>
 <p>异步的反面是同步编程。
-同步编程：我去邮局寄一个邮件去我朋友家-&gt;邮局发邮件去朋友家-&gt;朋友回复邮件-&gt;邮局收到回复的邮件-&gt;我拿到邮件-&gt;回家吃饭
-异步编程：我去邮局寄一个邮件去我朋友家-&gt;回家吃饭-&gt;做点其他的事情 ...                        我拿到邮件
-                                  |                                                   |
-                                   -&gt;邮局发邮件去朋友家-&gt;朋友回复邮件-&gt;邮局收到回复的邮件-&gt;</p>
-<p>TODO:JavaScript的截图</p>
-<p>注意：同步：我得在邮局等待 </p>
+同步编程：(注意：同步：我得在邮局等待)(TODO:换成流程图)
+我去邮局寄一个邮件去我朋友家-&gt;邮局发邮件去朋友家-&gt;朋友回复邮件-&gt;邮局收到回复的邮件-&gt;我拿到邮件-&gt;把回复邮件中的Cheque存到银行-&gt;回家吃饭
+异步编程：
+我去邮局寄一个邮件去我朋友家-&gt;回家吃饭-&gt;做点其他的事情 ...                        我拿到邮件-&gt;把回复邮件中的Cheque存到银行
+                        |                                                   |
+                          -&gt;邮局发邮件去朋友家-&gt;朋友回复邮件-&gt;邮局收到回复的邮件-&gt;</p>
+<p>TODO:流程图 (链接到github)
+TODO:JavaScript的截图
+TODO:时序图</p>
+<p>所以我们能看到同步和异步最大的差别就是我(寄件人)在把邮件给邮局后是否在邮局等待朋友的回信。</p>
+<p>寄信这个活动有什么特点呢？
+a. 是别人来寄，不需要我
+b. 寄信这个活动需要比较长的时间</p>
+<p>在编程里面我们可以想到类似的操作：定时器, 文件读写，网络请求(TCP,HTTP,DNS) 等等。我们把主线程相像成我们自己，在执行这些操作时，我们用等待的时间去执行其他的事情，这样我们可以在相同的时间内去做更多的事情。</p>
+<p>对于计算机来讲，主要是让主线程利用所有的空闲时间去做其他的事情，这样可以充分发利用主线程的计算资源。</p>
+<p>对于 JavaScript 来说，主线程（Main Thread）就是 UI 线程（UI Thread）。这意味着 JavaScript 负责执行所有的代码，同时还要处理用户界面（UI）的渲染和用户交互事件（如点击按钮、输入等）。如果主线程被长时间占用或阻塞，就会导致用户界面无法及时响应用户的交互请求，用户界面会进入无响应状态。</p>
+<p>JavaScript 设计之初就是为了在浏览器中执行，以实现动态网页交互。为了避免用户界面频繁处于无响应状态，JavaScript 语言及其运行环境（浏览器）引入了一系列机制来处理异步操作。这些机制允许长时间运行的任务和 I/O 操作（如网络请求、文件读取等）不会阻塞主线程，从而确保用户界面始终保持响应。这也是我为什么用JavaScript来做实验的原因，当然我这里为了方便用了Node.js来做javascript的runtime。</p>
+<p>比如：JavaScript请求一个REST API(HTTP): Mail, 需要反应个2s，如果是同步在这2s内，应用点击UI是没有响应的，因为主线程在这2s内的任务是等待Mail的返回，无法做其他的事情。但如果是异步，这2s内主线程是空闲的，完全可以处理用户的任何请求，而不会出现UI无响应的情况。</p>
+<p>那如果在这2s内，如：1.2秒，Mail突然返回了数据，会打断其他的任务吗？不会。因为1.2接受到Mail的返回时JavaScript会把Mail的回调函数插入事件循环，等待当前任务执行完毕后才会从<strong>事件循环</strong>中取出Mail的<strong>回调函数</strong>并执行相应的处理任务。</p>
+<h2>JavaScript中的异步编程</h2>
+<p>我们刚刚碰到了两个新的名词：事件循环和回调函数。我们来解释一下JavaScript中是怎么用他们来实现异步编程的。</p>
+<h3>回调函数</h3>
+<p>TODO:再贴一下时序图</p>
+<p>图中所示，</p>
 <p>＃ relative resources</p>
 <p><a href="https://x.com/DrJimFan/status/1791514371086250291">GPU programming from Jim Fan</a></p>
             </div>
             <!-- /.entry-content -->
-<section class="well" id="related-posts">
-    <h4>Related Posts:</h4>
-    <ul>
-        <li><a href="https://brycemeng.com/some_exp_of_two_arg_strategy.html">最近的一些经验总结</a></li>
-        <li><a href="https://brycemeng.com/AdvFinML-Standard-Bars.html">AdvFinML - Standard Bars</a></li>
-        <li><a href="https://brycemeng.com/something-about-financial-analysis.html">财务分析相关</a></li>
-        <li><a href="https://brycemeng.com/hidden-markov-model.html">HMM 稳形马尔科夫</a></li>
-        <li><a href="https://brycemeng.com/numpy-version-pandas-ewm-mean-var.html">numpy pandas ewm mean/var</a></li>
-    </ul>
-</section>
         </article>
     </section>
 
@@ -191,6 +220,9 @@
       <a href="https://brycemeng.com/tag/android.html">Android</a>
     </li>
     <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/tag/async.html">async</a>
+    </li>
+    <li class="list-group-item tag-4">
       <a href="https://brycemeng.com/tag/cryptocurrency.html">Cryptocurrency</a>
     </li>
     <li class="list-group-item tag-4">
@@ -218,6 +250,9 @@
       <a href="https://brycemeng.com/tag/hifi.html">Hifi</a>
     </li>
     <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/tag/javascript.html">javascript</a>
+    </li>
+    <li class="list-group-item tag-4">
       <a href="https://brycemeng.com/tag/kalman-filter.html">Kalman Filter</a>
     </li>
     <li class="list-group-item tag-4">
@@ -239,6 +274,9 @@
       <a href="https://brycemeng.com/tag/monkey.html">monkey</a>
     </li>
     <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/tag/multithread.html">multithread</a>
+    </li>
+    <li class="list-group-item tag-4">
       <a href="https://brycemeng.com/tag/music.html">Music</a>
     </li>
     <li class="list-group-item tag-4">
@@ -249,6 +287,9 @@
     </li>
     <li class="list-group-item tag-4">
       <a href="https://brycemeng.com/tag/pandas.html">Pandas</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/tag/programming.html">programming</a>
     </li>
     <li class="list-group-item tag-3">
       <a href="https://brycemeng.com/tag/python.html">Python</a>
