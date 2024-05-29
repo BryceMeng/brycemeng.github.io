@@ -210,28 +210,32 @@
 <p>我们刚刚碰到了两个新的名词：<strong>事件循环</strong>和<strong>回调函数</strong>。我们来解释一下JavaScript中是怎么用他们来实现异步编程的。</p>
 <h3>回调函数</h3>
 <p>从现在开始我们只讲异步模型了，请忘掉同步模型。</p>
-<p>如图5所示，"Saved the cheque to my bank account"就是回调函数，因为只有等待朋友把包含cheque的邮件寄回来了，才可以执行，而且回调函数的<strong>调用方应该是邮局</strong>，因为它能精准的知道回复邮件什么时候到。</p>
+<p>如图5所示，"Saved the cheque to my bank account"就是回调函数，因为只有等待朋友把包含cheque的邮件寄回来了，才可以执行，而且回调函数的<strong>调用(通知)方应该是邮局</strong>，因为它能精准的知道回复邮件什么时候到。</p>
 <p>让我们来看一下代码 <a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/MailDemo.js#L84">CallBackDemo</a></p>
 <p><img alt="CallBack Code" src="/images/2024/5/Async6_callback_1.png"></p>
 <p align="center">
   <em>Figure 6. CallBack code in mailing example</em>
 </p>
 
-<p>我们可以看到callBackFromPostOffice就是CallBack函数，Post Office是给我发了个消息，然后我自己调用的这个函数。(<em>因为我的Demo是用多线程编写，所以用消息进行通信是很重要的一方式，尽量避免在新线程里面直接调用主线程的函数。JavaScript是单线程。</em>)</p>
+<p>我们可以看到callBackFromPostOffice()就是CallBack函数，Post Office是给我发了个消息，然后我自己调用的这个函数。(<em>因为我的Demo是用多线程编写，所以用消息进行通信是很重要的一方式，尽量避免在新线程里面直接调用主线程的函数。JavaScript是单线程。</em>)</p>
 <p>我的Demo为了方便在Post Office拿到回复邮件后直接调用了唯一的回调函数，但是JavaScript并不仅仅这一个回调函数，那这些回调函数存储在什么地方呢？</p>
-<p>队列。先进先出。然后事件循环会不断的查询Post Office有没有获取到邮件，一旦获取就会把回调函数callBackFromPostOffice插入到Queue里面，之后事件循环又会看Queue里面有没有等待执行的回调函数，有就执行。(按理来讲这里面应该有两个Queue:IO queue, CallBack Queue)</p>
+<p>队列。先进先出。然后事件循环会不断的查询Post Office有没有获取到邮件，一旦获取就会把回调函数callBackFromPostOffice()插入到Queue里面，之后事件循环又会看Queue里面有没有等待执行的回调函数，有就执行。(按理来讲这里面应该有两个Queue:IO queue, CallBack Queue)</p>
+<p>回调函数，就是等拿到结果数据后对该数据进行函数的函数。</p>
 <h3>事件循环(EventLoop)</h3>
 <p>如果让我起名字可能会起TaskLoop，因为它的核心作用就是不断的去执行回调函数，如果我们把一个回调函数当作一个task的话，大部分时间处理的就是task。</p>
 <p>当然JavaScript最早是应用于Browser，大部分的task都是来自用户的操作：点击，鼠标经过，页面加载等待。这些都是事件，为了异步处理这些事件，这个loop所以叫做EventLoop。</p>
-<p>先看一下我们自己的示例 Mailing Demo </p>
-<p>TODO: 流程图</p>
-<p>TODO: node.js的示例 (链接到github)</p>
-<p>TODO: 讲解一下代码(队列，先进先出)</p>
-<p>TODO: 用event loop实现mail demo (链接到github)</p>
-<p>TODO: 并简单的讲解</p>
-<p>TODO: 展示 nodejs和V8的事件循环的源码</p>
+<p>先看一下我们自己的示例 <a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/MailDemoWithEventLoop.js#L77">Mailing Demo</a></p>
+<p><img alt="EventLoop Code" src="/images/2024/5/Async7_eventloop_1.png"></p>
+<p align="center">
+  <em>Figure 7. EventLoop in mailing example</em>
+</p>
+
+<p>实事上，我们执行了eventLoop.addTask()之后，callBackFromPostOffice()并不会马上执行，要等待eventLoop.run()执行检查Queue时发现有等待执行的任务(回调函数)才会执行。</p>
+<p>JavaScript EventLoop在Browser和Node.js中的实现是我这个示例的增强版(<em>JavaScript只是一个语言，具体的语法解析和实现需要其他的平台如Chrome或者Node.js</em>)。只是事件循环的任务类型和触发时间会复杂一些，而且Browser和nNode.js也不一样。</p>
+<p>事件循环是什么？需要异步执行时把回调函数插入队列，事件循环里面会检查该队列，如果有待执行任务就去执行。当然还有一些细节，比如文件和网络操作，怎么知道他们有没有拿到结果？我只能拿到结果数据了才能调用对应的回调函数，不然调用就会出错。我们接下来看Node.js是怎么实现的。</p>
 <h4>Node.js</h4>
 <p>TODO: 流程图</p>
+<p>触发机制</p>
 <p>TODO: 讲解一下，每一步的作用</p>
 <p>事件循环不是一直执行的，有异步任务才会执行. Browser的事件循环是一直开启的，因为需要处理渲染任务.</p>
 <h4>Browser (讲一下差别就行)</h4>
