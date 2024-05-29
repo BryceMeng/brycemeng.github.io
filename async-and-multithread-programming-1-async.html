@@ -153,43 +153,103 @@
   b. promise
   c. await
 3. 怎么判断IO操作有没有结束？(源码)
-4. 异步真的没有浪费资源吗？背后的机制是什么？(源码)</p>
+  a. 网络操作
+  b. 文件操作
+  c. 有没有浪费资源呢? 
+     对于cpu来讲是没有的，因为就算</p>
 <h2>什么是异步编程？</h2>
-<p>异步的反面是同步编程。
-同步编程：(注意：同步：我得在邮局等待)(TODO:换成流程图)
-我去邮局寄借钱邮件去我朋友家-&gt;邮局发邮件去朋友家-&gt;朋友回复邮件-&gt;邮局收到回复的邮件-&gt;我拿到邮件-&gt;把回复邮件中的Cheque存到银行-&gt;回家吃饭
-异步编程：
-我去邮局寄借钱邮件去我朋友家-&gt;回家吃饭-&gt;做点其他的事情 ...                        我拿到邮件-&gt;把回复邮件中的Cheque存到银行
-                        |                                                   |
-                          -&gt;邮局发邮件去朋友家-&gt;朋友回复邮件-&gt;邮局收到回复的邮件-&gt;</p>
-<p>TODO:流程图 (链接到github)
-TODO:JavaScript的截图
-TODO:时序图</p>
+<p>异步的反面是同步编程。</p>
+<p><img alt="Basic Introduction to Async and Sync" src="/images/2024/5/Async1.png"></p>
+<p align="center">
+  <em>Figure 1. Basic Introduction to Async and Sync</em>
+</p>
+
+<p>我用Node.js写了一个示例程序，来看看执行结果<a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/MailDemo.js">MailDemo</a></p>
+<p><img alt="Synchronized Mailing Demo" src="/images/2024/5/Async2.png"></p>
+<p align="center">
+  <em>Figure 2. Synchronized Mailing Demo</em>
+</p>
+
+<p><img alt="Asynchronized Mailing Demo" src="/images/2024/5/Async3.png"></p>
+<p align="center">
+  <em>Figure 3. Synchronized Mailing Demo</em>
+</p>
+
 <p>所以我们能看到同步和异步最大的差别就是我(寄件人)在把邮件给邮局后是否在邮局等待朋友的回信。</p>
+<p>从这个实例可以看出，很明显的在异步的邮寄过程当中，这个安排更合理。在同步的邮寄程序中有个看似非常奇怪的问题：<strong>我为什么把邮件给邮局后，我为什么还要在邮局傻傻的等？</strong> 我明明可以去吃饭，逛街，看电影做很多事情。朋友回复邮件了，邮局可以<strong>打电话通知</strong>我，我再去取啊。</p>
+<p>所以在邮局等待是一个不合理的操作，有一个词叫<strong>阻塞</strong>经常和同步编程一起出现。阻塞意味着主人翁没有做任何事情的在等待一个结果。发生在现实生活中不合理，同样在程序中也不合理，所以异步编程会解决这个问题。</p>
+<p>在工业界有个领域叫统筹规划，简单来讲就是就是让资源（包括机器、人力等）保持高效运转，从而在相同的时间内完成更多的任务。(在这里我希望大家可以不要像机器一样一直运转，在享受生活的同时，也能赚到很多钱。是的，统筹规划不应该应该到人身上。)</p>
+<p>回到编程我们看一看<strong>异步</strong>和<strong>同步</strong>的时序图。</p>
+<p><img alt="Synchronized Mailing Sequence Diagram" src="/images/2024/5/Async4_sequence_sync.png"></p>
+<p align="center">
+  <em>Figure 4. Synchronized Mailing Sequence Diagram</em>
+</p>
+
+<p><img alt="Asynchronized Mailing Sequence Diagram" src="/images/2024/5/Async5_sequence_async.png"></p>
+<p align="center">
+  <em>Figure 5. Asynchronized Mailing Sequence Diagram</em>
+</p>
+
 <p>寄信这个活动有什么特点呢？
-a. 是别人来寄，不需要我
-b. 寄信这个活动需要比较长的时间</p>
-<p>在编程里面我们可以想到类似的操作：定时器, 文件读写，网络请求(TCP,HTTP,DNS) 等等。我们把主线程相像成我们自己，在执行这些操作时，我们用等待的时间去执行其他的事情，这样我们可以在相同的时间内去做更多的事情。</p>
-<p>对于计算机来讲，主要是让主线程利用所有的空闲时间去做其他的事情，这样可以充分发利用主线程的计算资源。</p>
-<p>对于 JavaScript 来说，主线程（Main Thread）就是 UI 线程（UI Thread）。这意味着 JavaScript 负责执行所有的代码，同时还要处理用户界面（UI）的渲染和用户交互事件（如点击按钮、输入等）。如果主线程被长时间占用或阻塞，就会导致用户界面无法及时响应用户的交互请求，用户界面会进入无响应状态。</p>
-<p>JavaScript 设计之初就是为了在浏览器中执行，以实现动态网页交互。为了避免用户界面频繁处于无响应状态，JavaScript 语言及其运行环境（浏览器）引入了一系列机制来处理异步操作。这些机制允许长时间运行的任务和 I/O 操作（如网络请求、文件读取等）不会阻塞主线程，从而确保用户界面始终保持响应。这也是我为什么用JavaScript来做实验的原因，当然我这里为了方便用了Node.js来做javascript的runtime。</p>
-<p>比如：JavaScript请求一个REST API(HTTP): Mail, 需要等待2s才能回复数据。
-如果是同步：在这2s内，应用点击UI是没有响应的，因为主线程在这2s内的任务是等待Mail的返回，无法做其他的事情。
-如果是异步：这2s内主线程是空闲的，完全可以处理用户的任何请求，而不会出现UI无响应的情况。那如果在这2s内，如：1.2秒，Mail突然返回了数据，会打断其他的任务吗？不会。因为1.2后接受到Mail的返回时JavaScript会把Mail的回调函数插入事件循环，等待当前任务执行完毕后才会从<strong>事件循环</strong>中取出Mail的<strong>回调函数</strong>并执行相应的处理任务。</p>
+ 1. 是邮局来寄，不需要我
+ 2. 等待回信需要比较长的时间</p>
+<p>在编程里面我们可以想到类似的操作：文件读写，网络请求(TCP,HTTP,DNS) 等等。</p>
+<ul>
+<li>文件读写：磁盘控制器去帮我们找到我们想要的内容</li>
+<li>网络请求：服务器在处理请求</li>
+</ul>
+<p>Timer也是，Timer就是不需要等待任何返回，就是单纯的等待。</p>
+<p>异步编程就是让主线程在等待时去做其他的事情。</p>
 <h2>JavaScript中的异步编程</h2>
-<p>我们刚刚碰到了两个新的名词：事件循环和回调函数。我们来解释一下JavaScript中是怎么用他们来实现异步编程的。</p>
+<p>我为什么要讲JavaScript中的异步编程?</p>
+<p>因为JavaScript是设计成单线程的，在Browser里面是事件响应型的模型，而且网络请求(<em>年纪大点的人应该听过Ajax</em>)又多，所以一旦有点阻塞，Browser来不及处理用户的Click和界面的渲染，整个UI就会处于无响应的状态，用户体验就会极差。</p>
+<p>为什么不设计成多线程的？处理多线程极其的麻烦，会让编程者的头发掉光。相比之下异步模型会编写起来会简单很多。</p>
+<p>比如：一个Web page在Browser里面请求一个REST API(HTTP): Mail, 需要等待2s才能回复数据。
+<strong>如果是同步</strong>：在这2s内，用户点击页面是没有响应的，因为主线程在这2s内的任务是等待Mail的返回，无法做其他的事情。
+<strong>如果是异步</strong>：这2s内主线程是空闲的，完全可以处理用户的任何请求，而不会出现UI无响应的情况。那如果在这2s内，如：1.2秒，Mail突然返回了数据，会打断其他的任务吗？不会。因为1.2后接受到Mail的返回时JS会把Mail的回调函数插入事件循环，等待当前任务执行完毕后才会从<strong>事件循环</strong>中取出Mail的<strong>回调函数</strong>并执行相应的处理任务。</p>
+<p>我们刚刚碰到了两个新的名词：<strong>事件循环</strong>和<strong>回调函数</strong>。我们来解释一下JavaScript中是怎么用他们来实现异步编程的。</p>
 <h3>回调函数</h3>
-<p>TODO:再贴一下时序图</p>
-<p>图中所示，“把回复邮件中的Cheque存到银行”就是回调函数，因为只有等待朋友把包含cheque的邮件寄回来了才可以执行，而且回调函数的调用方应该是邮局，因为它能精准的知道回复邮件什么时候到。</p>
-<p>TODO：展示一下代码</p>
-<h3>事件循环</h3>
+<p>从现在开始我们只讲异步模型了，请忘掉同步模型。</p>
+<p>如图5所示，"Saved the cheque to my bank account"就是回调函数，因为只有等待朋友把包含cheque的邮件寄回来了，才可以执行，而且回调函数的<strong>调用方应该是邮局</strong>，因为它能精准的知道回复邮件什么时候到。</p>
+<p>让我们来看一下代码 <a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/MailDemo.js#L84">CallBackDemo</a></p>
+<p><img alt="CallBack Code" src="/images/2024/5/Async6_callback_1.png"></p>
+<p align="center">
+  <em>Figure 6. CallBack code in mailing example</em>
+</p>
+
+<p>我们可以看到callBackFromPostOffice就是CallBack函数，Post Office是给我发了个消息，然后我自己调用的这个函数。(<em>因为我的Demo是用多线程编写，所以用消息进行通信是很重要的一方式，尽量避免在新线程里面直接调用主线程的函数。JavaScript是单线程。</em>)</p>
+<p>我的Demo为了方便在Post Office拿到回复邮件后直接调用了唯一的回调函数，但是JavaScript并不仅仅这一个回调函数，那这些回调函数存储在什么地方呢？</p>
+<p>队列。先进先出。然后事件循环会不断的查询Post Office有没有获取到邮件，一旦获取就会把回调函数callBackFromPostOffice插入到Queue里面，之后事件循环又会看Queue里面有没有等待执行的回调函数，有就执行。(按理来讲这里面应该有两个Queue:IO queue, CallBack Queue)</p>
+<h3>事件循环(EventLoop)</h3>
+<p>如果让我起名字可能会起TaskLoop，因为它的核心作用就是不断的去执行回调函数，如果我们把一个回调函数当作一个task的话，大部分时间处理的就是task。</p>
+<p>当然JavaScript最早是应用于Browser，大部分的task都是来自用户的操作：点击，鼠标经过，页面加载等待。这些都是事件，为了异步处理这些事件，这个loop所以叫做EventLoop。</p>
 <p>TODO: 流程图</p>
 <p>TODO: node.js的示例 (链接到github)</p>
 <p>TODO: 讲解一下代码(队列，先进先出)</p>
 <p>TODO: 用event loop实现mail demo (链接到github)</p>
 <p>TODO: 并简单的讲解</p>
 <p>TODO: 展示 nodejs和V8的事件循环的源码</p>
-<p>＃ relative resources</p>
+<h4>Node.js</h4>
+<p>TODO: 流程图</p>
+<p>TODO: 讲解一下，每一步的作用</p>
+<p>事件循环不是一直执行的，有异步任务才会执行. Browser的事件循环是一直开启的，因为需要处理渲染任务.</p>
+<h4>Browser (讲一下差别就行)</h4>
+<h3>Promise</h3>
+<p>为什么要讲promise?</p>
+<p>代码github链接</p>
+<p>画流程图，标注一下与回调函数的关系 callbacks</p>
+<p>解释</p>
+<h3>await</h3>
+<p>“async” 这个单词表达了一个简单的事情：即这个函数总是返回一个 promise，如果正常return，就是resolve(returned value),如果异常或者主动返回一个reject了的promise也可以触发reject</p>
+<p>await 接受thenable（什么是thenable，只要这个对象具有符合 Promise/A+ 规范的 then 方法即可），如果不是thenable，是具体的值，会立刻解决</p>
+<p>await只能和async配合使用，async可以单独使用。</p>
+<h2>怎么判断IO操作有没有结束？(源码)</h2>
+<h3>网络操作</h3>
+<h3>文件操作</h3>
+<h3>异步真的没有浪费资源吗?</h3>
+<p>事实上在同步编程里面，如果某线程傻傻等待不做任何事件，CPU也不会浪费资源，因为操作系统会把CPU的时间片分配给其他的进程。但这就是操作系统层面的调度了，但是对于线程层面的调度来讲，还是需要异步操作。那么对于进程层面的调度呢？是可以用多线程来解决的，但是比较麻烦。其实异步操作里面大都用了多线程，异步操作和多线程的关系还是很紧密的。简单来讲，现在的异步操作同时大大简化了多线程的管理。</p>
+<p>在讲多线程之前，我们会浏览一下异步操作在其他编程语言上的实现。更有利于我们去了解异步与多线程之间的关系。</p>
+<h2>relative resources</h2>
 <p><a href="https://x.com/DrJimFan/status/1791514371086250291">GPU programming from Jim Fan</a></p>
             </div>
             <!-- /.entry-content -->
