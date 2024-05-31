@@ -128,7 +128,8 @@
                 </div>
                 <h2>content</h2>
 <ol>
-<li>What is asynchronous programming? (JavaScript)</li>
+<li><strong>What is asynchronous programming? (JavaScript)</strong>
+   1.1 怎么在JavaScript中进行异步编程?</li>
 <li>其他语言的异步编程</li>
 <li>多线程编程 (c++)
    a. 什么是多线程？与硬件的关系是什么？
@@ -157,6 +158,9 @@
   b. 文件操作
   c. 有没有浪费资源呢? 
      对于cpu来讲是没有的，因为就算</p>
+<h2>实验环境</h2>
+<p><strong>OS:</strong> Windows 11 21H2 22000.2538</p>
+<p><strong>Node.js:</strong> 20.13.1</p>
 <h2>什么是异步编程？</h2>
 <p>异步的反面是同步编程。</p>
 <p><img alt="Basic Introduction to Async and Sync" src="/images/2024/5/Async1.png"></p>
@@ -234,30 +238,73 @@
 <p>JavaScript EventLoop在Browser和Node.js中的实现是我这个示例的增强版(<em>JavaScript只是一个语言，具体的语法解析和实现需要其他的平台如Chrome或者Node.js</em>)。只是事件循环的任务类型和触发时间会复杂一些，而且Browser和nNode.js也不一样。</p>
 <p>事件循环是什么？需要异步执行时把回调函数插入队列，事件循环里面会检查该队列，如果有待执行任务就去执行。当然还有一些细节，比如文件和网络操作，怎么知道他们有没有拿到结果？我只能拿到结果数据了才能调用对应的回调函数，不然调用就会出错。我们接下来看Node.js是怎么实现的。</p>
 <h4>Node.js</h4>
-<p>TODO: 流程图</p>
-<p>触发机制</p>
-<p>TODO: 讲解一下，每一步的作用</p>
-<p>事件循环不是一直执行的，有异步任务才会执行. Browser的事件循环是一直开启的，因为需要处理渲染任务.</p>
-<h4>Browser (讲一下差别就行)</h4>
-<h3>Promise</h3>
-<p>为什么要讲promise?</p>
-<p>代码github链接</p>
-<p>画流程图，标注一下与回调函数的关系 callbacks</p>
-<p>解释</p>
-<h3>await</h3>
-<p>“async” 这个单词表达了一个简单的事情：即这个函数总是返回一个 promise，如果正常return，就是resolve(returned value),如果异常或者主动返回一个reject了的promise也可以触发reject</p>
-<p>await 接受thenable（什么是thenable，只要这个对象具有符合 Promise/A+ 规范的 then 方法即可），如果不是thenable，是具体的值，会立刻解决</p>
-<p>await只能和async配合使用，async可以单独使用。</p>
-<h2>怎么判断IO操作有没有结束？(源码)</h2>
-<h3>网络操作</h3>
-<h3>文件操作</h3>
-<h3>异步真的没有浪费资源吗?</h3>
-<p>事实上在同步编程里面，如果某线程傻傻等待不做任何事件，CPU也不会浪费资源，因为操作系统会把CPU的时间片分配给其他的进程。但这就是操作系统层面的调度了，但是对于线程层面的调度来讲，还是需要异步操作。那么对于进程层面的调度呢？是可以用多线程来解决的，但是比较麻烦。其实异步操作里面大都用了多线程，异步操作和多线程的关系还是很紧密的。简单来讲，现在的异步操作同时大大简化了多线程的管理。</p>
-<p>在讲多线程之前，我们会浏览一下异步操作在其他编程语言上的实现。更有利于我们去了解异步与多线程之间的关系。</p>
+<p>我们先来看一下流程图，Node.js的事件循环和异步操作由UV库来管理。对应的代码请参考<a href="https://github.com/nodejs/node/blob/main/deps/uv/src/unix/core.c#L415">Node.js EventLoop</a></p>
+<p><img alt="EventLoop in Node.js" src="/images/2024/5/Async8_node_eventloop_2.png"></p>
+<p align="center">
+  <em>Figure 8. EventLoop in Node.js</em>
+</p>
+
+<p><a href="https://github.com/nodejs/node/blob/main/deps/uv/include/uv/unix.h#L220">查看Node.js Loop中的数据结构源码(Linux平台)</a> | <a href="https://github.com/nodejs/node/blob/main/deps/uv/src/unix/core.c#L415">查看Node.js EventLoop源码</a></p>
+<p><img alt="EventLoop in Node.js" src="/images/2024/5/Async9_node_eventloop_3.png"></p>
+<p align="center">
+  <em>Figure 9. EventLoop in Node.js</em>
+</p>
+
+<p>*当所有的IO处理完毕，回调函数执行完毕，EventLoop便会退出。</p>
+<p>我来讲一下这个事件循环的每一步：</p>
+<p><strong>timers:</strong> 执行setTimtout()和setInterval()的设置的回调函数。
+这里有两个有意思的事情:
+<img alt="EventLoop Timer in Node.js" src="/images/2024/5/Async9.1_node_eventloop_timer_1.png"></p>
+<p align="center">
+  <em>Figure 9.1 EventLoop Timer in Node.js</em>
+</p>
+
+<ol>
+<li>timers对应的数据结构是小项堆。堆这种结构是部分排序，在处理timer时，它每次只需取出最小的timer，也就是最近那个 <a href="https://github.com/nodejs/node/blob/main/deps/uv/src/timer.c#L174">(点击查看EventLoop Timer源码)</a>。</li>
+<li>让我们来复习一下堆排序的时间复杂度：要为两个主要步骤<strong>建立树</strong>和<strong>取出元素</strong>。假设有n个元素，建立树(插入所有元素)的时间复杂度是O(n)，取出所有元素包含重建树的阶段的时间复杂度是O(nlogn)。堆排序是部分排序，取出一次调整一次树，不像其他的排序一次排序后，取出的时间复杂度就是O(n)了。</li>
+<li>Node.js的timer是基于遍历机制，而且很可能被其他的操作阻塞。所以我们可以确认setTimer()设置的定时器肯定是不准确的。</li>
+</ol>
+<p><strong>Pending Queue:</strong> 执行IO Poll阶段里面遗留的一些任务，一般来讲IO Poll阶段如果发现IO操作完成会即时处理掉对应的CallBack函数，但是有些情况会需要触发新的回调函数如出错了。就会放在Pending Queue，在下一轮来处理。(<em>其实现在的代码会在IO Poll阶段后执行8轮的Pending Queue的清空，我也很好奇这个数字8是怎么来的。具体可以参考图8中间的代码</em>)</p>
+<p><strong>Idle Handers&amp;Prepare Handlers:</strong> 由UV库内部使用。</p>
+<p><strong>IO Poll:</strong> 这里就是去看一下这些IO操作有没有完成，完成了就执行对应的回调函数，或者需要进一步处理就会建新的回调函数放在Pending Queue里面。比如看读取某个文件有没有读完，HTTP的API请求有没有返回结果，进行的DNS查询有没有返回结果等等。</p>
+<p>这一步可是非常关键，也是非常影响性能的一个阶段，在Linux平台上用了epoll模型，当年Nginx用epoll实现了极高的性能。Windows有对应的完成端口(IOCP).Mac的叫Kqueue.不过这个模型只针对网络socket访问。这里的细节我会在下一篇文章介绍。</p>
+<p><strong>Check:</strong> 执行setImmediate()设置的回调函数。</p>
+<p><strong>Close:</strong> 执行关闭请求的回调函数，如socket.on('Close', ...)。与网络操作相关，与文件操作无关。</p>
+<h5>微任务</h5>
+<p>在JavaScript语言中，除了用setTimeout，setInterval和setImmediate设置自定义的异步函数，还可以用process.nextTick, Promise和Await(Promise的高级实现)来把自己的异步回调函数插入事件循环。关于Promise和Await的细节我会在下一篇文章中提及。</p>
+<p>上节中介绍的那些任务我们称之为宏任务，process.nextTick()和Promise.then()插入的异步函数我们称之为微任务。那这些微任务在什么时候执行呢？</p>
+<p><img alt="Tasks Execution Process in Node.js" src="/images/2024/5/Async10_node_eventloop_4.png"></p>
+<p align="center">
+  <em>Figure 10. Tasks Execution Process in Node.js</em>
+</p>
+
+<p>我们可以看到，用户通过Promise.then()插入的回调函数优先级是非常高的，会在同步代码时间执行完后立刻执行。而且在每种任务如: setTimeout(), setInterval(), I/O Poll执行完后都会检查一下有没有微任务，有的话立即执行。</p>
+<p>注意：
+1. process.nextTick()插入的函数优先级高于Promise.then()插入的函数。
+2. 在每执行完一个任务会就会检查一下，并不是执行完队列才会检查微任务<a href="https://github.com/nodejs/node/pull/22842">Related Pull Request</a>。</p>
+<p>我自己写了一个程序来检测一下不同的异步任务的执行顺序<a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/EventLoop.js">点击查看源码</a></p>
+<p><img alt="Tasks Execution Order in Node.js" src="/images/2024/5/Async11_node_eventloop_5.png"></p>
+<p align="center">
+  <em>Figure 10. Tasks Execution Order in Node.js</em>
+</p>
+
+<h4>Browser</h4>
+<p>在浏览器中事件循环有一些不一样：
+1. 没有process.nextEvent()
+2. 有MutationObserver()任务，主要用来监控网络上元素属性的变化，也属于微任务
+3. 有渲染任务(其实Browser是有专门的渲染线程的，是接收主线程渲染任务发送的指令，然后渲染线程负责具体的实施，为了高效渲染不阻塞主线程)
+4. 把同步代码执行一次就算第一个宏任务
+5. Event Loop里面执行顺序是<strong>一个宏任务</strong>=&gt;<strong>执行所有微任务</strong>=&gt;<strong>所有的渲染任务</strong>。执行顺序和Node.js类似，但是Node.js里面会先把所有微任务执行一次，而且没有渲染任务。</p>
 <h2>relative resources</h2>
 <p><a href="https://x.com/DrJimFan/status/1791514371086250291">GPU programming from Jim Fan</a></p>
             </div>
             <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="https://brycemeng.com/async-and-multithread-programming-1-async-in-javascript-cn.html">Async and multithread programming - 1 Async in JavaScript</a></li>
+    </ul>
+</section>
         </article>
     </section>
 
@@ -293,7 +340,7 @@
     <li class="list-group-item tag-2">
       <a href="https://brycemeng.com/tag/android.html">Android</a>
     </li>
-    <li class="list-group-item tag-4">
+    <li class="list-group-item tag-3">
       <a href="https://brycemeng.com/tag/async.html">async</a>
     </li>
     <li class="list-group-item tag-4">
@@ -323,7 +370,7 @@
     <li class="list-group-item tag-2">
       <a href="https://brycemeng.com/tag/hifi.html">Hifi</a>
     </li>
-    <li class="list-group-item tag-4">
+    <li class="list-group-item tag-3">
       <a href="https://brycemeng.com/tag/javascript.html">javascript</a>
     </li>
     <li class="list-group-item tag-4">
@@ -347,7 +394,7 @@
     <li class="list-group-item tag-4">
       <a href="https://brycemeng.com/tag/monkey.html">monkey</a>
     </li>
-    <li class="list-group-item tag-4">
+    <li class="list-group-item tag-3">
       <a href="https://brycemeng.com/tag/multithread.html">multithread</a>
     </li>
     <li class="list-group-item tag-4">
@@ -362,7 +409,7 @@
     <li class="list-group-item tag-4">
       <a href="https://brycemeng.com/tag/pandas.html">Pandas</a>
     </li>
-    <li class="list-group-item tag-4">
+    <li class="list-group-item tag-3">
       <a href="https://brycemeng.com/tag/programming.html">programming</a>
     </li>
     <li class="list-group-item tag-3">
