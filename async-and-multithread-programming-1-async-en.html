@@ -126,51 +126,70 @@
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <h2>整个系列的目录</h2>
+                <h2>Table of Contents for the whole series</h2>
 <ul>
-<li>1.<strong>What is asynchronous programming? (JavaScript)</strong></li>
-<li>1.1怎么在JavaScript中进行异步编程?</li>
-<li>2.其他语言的异步编程</li>
-<li>3.多线程编程 (c++)
-  a.什么是多线程？与硬件的关系是什么？
-  b.使用多线程意味着什么？
-  c.使用多线程的目标是什么？</li>
-<li>4.其他语言的多线程编程</li>
-<li>5.多线程与异步编程的关系 (主要讲GoRotine，分析源码，看一下rust有没有改进)</li>
-<li>6.GPU并行编程</li>
-</ul>
-<h2>introduction</h2>
-<h3>background</h3>
-<p>我们这个系列主要是讲异步和多线程。异步和多线程本质上来讲都是为了充分的利用计算资源。</p>
-<p>当CPU单核主频的发展速度达到瓶颈之后，往多核CPU发展。同时GPU的并行运算给LLM的发展有着极大的促进作用。当然我这一个系列主要是讲CPU，这里我只是想表明并行计算这个概念在现在这个时代非常重要。</p>
-<p>那么异步编程是指什么？它和多线程是什么关系？多线程与硬件的关系是什么？异步编程&amp;多线程编程与并行计算又有什么关系？我们将通过这个系列搞清楚这些问题。</p>
-<p>我将会不定期的更新这个系列的文章</p>
-<h3>in this article</h3>
-<p>在这篇文章里面我会介绍:</p>
+<li>
 <ol>
-<li>什么是异步编程？为什么需要它？</li>
-<li>JavaScript中的异步编程 
-  a. 回调函数
-  b. 事件循环（源码）
-  b. promise
-  c. await</li>
-<li>怎么判断IO操作有没有结束？(源码)
-  a. 网络操作
-  b. 文件操作
-  c. 有没有浪费资源呢? 
-     对于cpu来讲是没有的，因为就算</li>
+<li><strong>What is asynchronous programming? (JavaScript)</strong></li>
 </ol>
-<h2>实验环境</h2>
+</li>
+<li>1.1 How to perform asynchronous programming in JavaScript?</li>
+<li>
+<ol>
+<li>Asynchronous programming in other languages</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Multithreading programming (C++)</li>
+</ol>
+</li>
+<li>a. What is multithreading? What is its relationship with hardware?</li>
+<li>b. What does it mean to use multithreading?</li>
+<li>c. What is the goal of using multithreading?</li>
+<li>
+<ol>
+<li>Multithreading programming in other languages</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>The relationship between multithreading and asynchronous programming (mainly discussing GoRoutine, analyzing the source code, and examining if Rust has made improvements)</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>GPU parallel programming</li>
+</ol>
+</li>
+</ul>
+<h2>Introduction</h2>
+<h3>Background (Asynchronous &amp; Multithreading)</h3>
+<p>This series mainly discusses asynchronous and multithreading programming. Both asynchronous and multithreading programming aim to fully utilize computing resources.</p>
+<p>As CPU single-core frequency development reached a bottleneck, the trend shifted towards multi-core CPUs. In recent years, parallel matrix operations on GPUs have greatly promoted the development of machine learning and LLMs. This series will mainly focus on CPUs and will not cover GPUs for now. The main goal is to introduce asynchronous and multithreading programming and their relationship.</p>
+<p>So, what is asynchronous programming? How is it related to multithreading? What is the relationship between multithreading and hardware? And how are asynchronous &amp; multithreading programming related to parallel computing? We will address these questions throughout this series.</p>
+<p><em>(If I discover errors or new viewpoints, I will update the published articles or change the structure of this series)</em></p>
+<h3>In this article</h3>
+<p>In this article, I will introduce:</p>
+<ol>
+<li>What is asynchronous programming? Why is it needed?</li>
+<li>Asynchronous programming in JavaScript </li>
+<li>a. Callback functions</li>
+<li>b. Event loop (source code analysis)</li>
+<li>The next article</li>
+</ol>
+<h2>Experimental Environment</h2>
 <p><strong>OS:</strong> Windows 11 21H2 22000.2538</p>
 <p><strong>Node.js:</strong> 20.13.1</p>
-<h2>什么是异步编程？</h2>
-<p>异步的反面是同步编程。</p>
+<h2>What is asynchronous programming?</h2>
+<h3>What is asynchronous?</h3>
+<p>The opposite of asynchronous is synchronous. Let's look at an example from daily life: <strong>I go to the post office to mail a letter to borrow money from a friend, and then I deposit the check into the bank after receiving it</strong>. I can achieve this using <strong>synchronous</strong> and <strong>asynchronous</strong> approaches:</p>
 <p><img alt="Basic Introduction to Async and Sync" src="/images/2024/5/Async1.png"></p>
 <p align="center">
   <em>Figure 1. Basic Introduction to Async and Sync</em>
 </p>
 
-<p>我用Node.js写了一个示例程序，来看看执行结果<a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/MailDemo.js">MailDemo</a></p>
+<p>I wrote a sample program in Node.js to see the execution results <a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/MailDemo.js">Click to view source code MailDemo</a></p>
 <p><img alt="Synchronized Mailing Demo" src="/images/2024/5/Async2.png"></p>
 <p align="center">
   <em>Figure 2. Synchronized Mailing Demo</em>
@@ -178,14 +197,14 @@
 
 <p><img alt="Asynchronized Mailing Demo" src="/images/2024/5/Async3.png"></p>
 <p align="center">
-  <em>Figure 3. Synchronized Mailing Demo</em>
+  <em>Figure 3. Asynchronized Mailing Demo</em>
 </p>
 
-<p>所以我们能看到同步和异步最大的差别就是我(寄件人)在把邮件给邮局后是否在邮局等待朋友的回信。</p>
-<p>从这个实例可以看出，很明显的在异步的邮寄过程当中，这个安排更合理。在同步的邮寄程序中有个看似非常奇怪的问题：<strong>我为什么把邮件给邮局后，我为什么还要在邮局傻傻的等？</strong> 我明明可以去吃饭，逛街，看电影做很多事情。朋友回复邮件了，邮局可以<strong>打电话通知</strong>我，我再去取啊。</p>
-<p>所以在邮局等待是一个不合理的操作，有一个词叫<strong>阻塞</strong>经常和同步编程一起出现。阻塞意味着主人翁没有做任何事情的在等待一个结果。发生在现实生活中不合理，同样在程序中也不合理，所以异步编程会解决这个问题。</p>
-<p>在工业界有个领域叫统筹规划，简单来讲就是就是让资源（包括机器、人力等）保持高效运转，从而在相同的时间内完成更多的任务。(在这里我希望大家可以不要像机器一样一直运转，在享受生活的同时，也能赚到很多钱。是的，统筹规划不应该应该到人身上。)</p>
-<p>回到编程我们看一看<strong>异步</strong>和<strong>同步</strong>的时序图。</p>
+<p>So, the biggest difference we can see between synchronous and asynchronous is whether <strong>I (the sender) wait at the post office after handing the letter to the post office or go do other things</strong>.</p>
+<p>From this example, it's obvious that the asynchronous mailing process is more reasonable. In the synchronous mailing program, there's a seemingly strange question: <strong>Why do I need to wait at the post office after giving the letter?</strong> I could be eating, shopping, watching movies, or doing many other things. When my friend replies, the post office can <strong>call me</strong>, and I can then pick up the letter.</p>
+<p>So, waiting at the post office is an unreasonable operation. A term called <strong>blocking</strong> often appears with synchronous programming, meaning the protagonist is doing nothing but waiting for a result. This is unreasonable in real life and also in programming, so asynchronous programming solves this problem.</p>
+<p>In the industry, there is a field called operations research, which aims to keep resources (including machines, labor, etc.) running efficiently to complete more tasks in the same amount of time. (<em>I hope everyone can enjoy life while earning money, and not run like machines. Operations research shouldn't apply to humans.</em>)</p>
+<p>Back to programming, let's look at the timing diagrams of <strong>asynchronous</strong> and <strong>synchronous</strong>.</p>
 <p><img alt="Synchronized Mailing Sequence Diagram" src="/images/2024/5/Async4_sequence_sync.png"></p>
 <p align="center">
   <em>Figure 4. Synchronized Mailing Sequence Diagram</em>
@@ -196,111 +215,119 @@
   <em>Figure 5. Asynchronized Mailing Sequence Diagram</em>
 </p>
 
-<p>寄信这个活动有什么特点呢？
- 1. 是邮局来寄，不需要我
- 2. 等待回信需要比较长的时间</p>
-<p>在编程里面我们可以想到类似的操作：文件读写，网络请求(TCP,HTTP,DNS) 等等。</p>
+<p>These two timing diagrams make it clearer that asynchronous is more reasonable. During the mailing process, I can do many things like eating and shopping without waiting at the post office.</p>
+<p>What are the characteristics of this mailing activity?
+1. It's handled by someone else (the post office), not myself.
+2. Waiting for a reply takes a relatively long time.</p>
+<h3>Asynchronous Programming</h3>
+<p>In programming, there are some operations similar to mailing a letter, such as file reading/writing, network requests (TCP, HTTP, DNS), etc.</p>
 <ul>
-<li>文件读写：磁盘控制器去帮我们找到我们想要的内容</li>
-<li>网络请求：服务器在处理请求</li>
+<li>File reading/writing: The <strong>disk controller</strong> helps us find the content we want.</li>
+<li>Network requests: The <strong>server</strong> processes the request.</li>
+<li>Timer: The timer just waits and doesn't need to wait for any return.</li>
 </ul>
-<p>Timer也是，Timer就是不需要等待任何返回，就是单纯的等待。</p>
-<p>异步编程就是让主线程在等待时去做其他的事情。</p>
-<h2>JavaScript中的异步编程</h2>
-<p>我为什么要讲JavaScript中的异步编程?</p>
-<p>因为JavaScript是设计成单线程的，在Browser里面是事件响应型的模型，而且网络请求(<em>年纪大点的人应该听过Ajax</em>)又多，所以一旦有点阻塞，Browser来不及处理用户的Click和界面的渲染，整个UI就会处于无响应的状态，用户体验就会极差。</p>
-<p>为什么不设计成多线程的？处理多线程极其的麻烦，会让编程者的头发掉光。相比之下异步模型会编写起来会简单很多。</p>
-<p>比如：一个Web page在Browser里面请求一个REST API(HTTP): Mail, 需要等待2s才能回复数据。
-<strong>如果是同步</strong>：在这2s内，用户点击页面是没有响应的，因为主线程在这2s内的任务是等待Mail的返回，无法做其他的事情。
-<strong>如果是异步</strong>：这2s内主线程是空闲的，完全可以处理用户的任何请求，而不会出现UI无响应的情况。那如果在这2s内，如：1.2秒，Mail突然返回了数据，会打断其他的任务吗？不会。因为1.2后接受到Mail的返回时JS会把Mail的回调函数插入事件循环，等待当前任务执行完毕后才会从<strong>事件循环</strong>中取出Mail的<strong>回调函数</strong>并执行相应的处理任务。</p>
-<p>我们刚刚碰到了两个新的名词：<strong>事件循环</strong>和<strong>回调函数</strong>。我们来解释一下JavaScript中是怎么用他们来实现异步编程的。</p>
-<h3>回调函数</h3>
-<p>从现在开始我们只讲异步模型了，请忘掉同步模型。</p>
-<p>如图5所示，"Saved the cheque to my bank account"就是回调函数，因为只有等待朋友把包含cheque的邮件寄回来了，才可以执行，而且回调函数的<strong>调用(通知)方应该是邮局</strong>，因为它能精准的知道回复邮件什么时候到。</p>
-<p>让我们来看一下代码 <a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/MailDemo.js#L84">CallBackDemo</a></p>
+<p>The disk controller and server are the third parties, equivalent to the post office in the previous example. The time it takes to handle these tasks depends on them, and I can't control it.</p>
+<p>To summarize: <strong>Asynchronous programming allows the main thread to perform other tasks while waiting for some tasks to be handled by a third party</strong>.</p>
+<h2>Asynchronous Programming in JavaScript</h2>
+<p>Why do I want to discuss asynchronous programming in JavaScript?</p>
+<p>Because JavaScript was initially designed to be single-threaded, it follows an event-driven model in the browser, and network requests (such as Ajax) are frequent. If there is any blocking, the browser can't process user clicks and render the interface in time, leading to an unresponsive UI and poor user experience. (<em>The JavaScript browser environment has some auxiliary threads in addition to the main thread</em>)</p>
+<p>Why not design it to be multithreaded? Handling multithreading is extremely complicated and causes more headaches for developers. Comparatively, the asynchronous model is much simpler to write than multithreading.</p>
+<p>For example, a web page in the browser requests a REST API (HTTP): Mail, which takes 2 seconds to return data.
+- <strong>If it's synchronous</strong>: During these 2 seconds, user clicks on the page are unresponsive because the main thread can only wait for the Mail to return and cannot do other things.
+- <strong>If it's asynchronous</strong>: During these 2 seconds, the main thread is idle and can handle any user requests and render the page, avoiding unresponsive UI. If the Mail suddenly returns data at 1.2 seconds, it will not interrupt other tasks. When the Mail returns at 1.2 seconds, JavaScript will insert the Mail's <strong>callback function</strong> into the event loop, waiting for the current task to complete before retrieving and executing the Mail's <strong>callback function</strong> from the <strong>event loop</strong>.</p>
+<p>We encountered two new terms: <strong>callback function</strong> and <strong>event loop</strong>. Let's explain how JavaScript uses them to achieve asynchronous programming.</p>
+<h3>Callback function</h3>
+<p>From now on, we will only talk about the asynchronous model. Please forget the synchronous model.</p>
+<p>What is a callback function? As shown in Figure 5, "Saved the cheque to my bank account" is a callback function because it can only be executed after my friend sends back the cheque, and the <strong>caller (notifier) should be the third-party post office</strong> because it knows precisely when the reply letter arrives.</p>
+<p>Let's continue to look at the mailing example from the code perspective <a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/MailDemo.js#L84">Click to view source code MailDemo CallBack</a></p>
 <p><img alt="CallBack Code" src="/images/2024/5/Async6_callback_1.png"></p>
 <p align="center">
   <em>Figure 6. CallBack code in mailing example</em>
 </p>
 
-<p>我们可以看到callBackFromPostOffice()就是CallBack函数，Post Office是给我发了个消息，然后我自己调用的这个函数。(<em>因为我的Demo是用多线程编写，所以用消息进行通信是很重要的一方式，尽量避免在新线程里面直接调用主线程的函数。JavaScript是单线程。</em>)</p>
-<p>我的Demo为了方便在Post Office拿到回复邮件后直接调用了唯一的回调函数，但是JavaScript并不仅仅这一个回调函数，那这些回调函数存储在什么地方呢？</p>
-<p>队列。先进先出。然后事件循环会不断的查询Post Office有没有获取到邮件，一旦获取就会把回调函数callBackFromPostOffice()插入到Queue里面，之后事件循环又会看Queue里面有没有等待执行的回调函数，有就执行。(按理来讲这里面应该有两个Queue:IO queue, CallBack Queue)</p>
-<p>回调函数，就是等拿到结果数据后对该数据进行函数的函数。</p>
-<h3>事件循环(EventLoop)</h3>
-<p>如果让我起名字可能会起TaskLoop，因为它的核心作用就是不断的去执行回调函数，如果我们把一个回调函数当作一个task的话，大部分时间处理的就是task。</p>
-<p>当然JavaScript最早是应用于Browser，大部分的task都是来自用户的操作：点击，鼠标经过，页面加载等待。这些都是事件，为了异步处理这些事件，这个loop所以叫做EventLoop。</p>
-<p>先看一下我们自己的示例 <a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/MailDemoWithEventLoop.js#L77">Mailing Demo</a></p>
+<p>We can see that callBackFromPostOffice() is the CallBack function. The post office sends me a message after receiving the letter, and then I call this function myself. (<em>Because my demo is written in multithreading, using message communication is very important to avoid directly calling main thread functions from new threads. JavaScript is single-threaded.</em>)</p>
+<p>My demo uses a single event, so after the post office receives the reply letter, it directly calls the only callback function. However, a typical user interface is filled with various events. Where are these callback functions stored? How are they handled?</p>
+<p>JavaScript uses a queue (first in, first out) to store these callback functions. The event loop constantly checks if the post office has received a letter, and if it has, it inserts the callback function callBackFromPostOffice() into the queue, then checks if there are waiting callback functions in the queue, and executes them.</p>
+<p>To summarize: A callback function processes the result data after receiving it (depositing the friend's cheque into the bank).</p>
+<h3>Event loop</h3>
+<p>If I were to name it, I might call it TaskLoop because its core function is to execute callback functions continuously. If we consider each callback function as a task, most of the time is spent handling tasks. Of course, it also checks if the friend's mail has arrived (if the IO operation is complete or if the timer has counted down).</p>
+<p>JavaScript was originally used in browsers, and most tasks come from user actions: clicks, mouseovers, page loads, etc. These are all events, so the loop that handles them is called the EventLoop.</p>
+<p>I changed the previous mailing example to use an event loop. Let's look at it <a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/MailDemoWithEventLoop.js#L77">Click to view source code MailDemo EventLoop</a></p>
 <p><img alt="EventLoop Code" src="/images/2024/5/Async7_eventloop_1.png"></p>
 <p align="center">
   <em>Figure 7. EventLoop in mailing example</em>
 </p>
 
-<p>实事上，我们执行了eventLoop.addTask()之后，callBackFromPostOffice()并不会马上执行，要等待eventLoop.run()执行检查Queue时发现有等待执行的任务(回调函数)才会执行。</p>
-<p>JavaScript EventLoop在Browser和Node.js中的实现是我这个示例的增强版(<em>JavaScript只是一个语言，具体的语法解析和实现需要其他的平台如Chrome或者Node.js</em>)。只是事件循环的任务类型和触发时间会复杂一些，而且Browser和nNode.js也不一样。</p>
-<p>事件循环是什么？需要异步执行时把回调函数插入队列，事件循环里面会检查该队列，如果有待执行任务就去执行。当然还有一些细节，比如文件和网络操作，怎么知道他们有没有拿到结果？我只能拿到结果数据了才能调用对应的回调函数，不然调用就会出错。我们接下来看Node.js是怎么实现的。</p>
+<p>In fact, after we execute eventLoop.addTask(), callBackFromPostOffice() will not execute immediately. It must wait for eventLoop.run() to check the queue and find that there are tasks (callback functions) waiting to be executed before it runs.</p>
+<p>The JavaScript EventLoop in the browser and Node.js is an enhanced version of this example (<em>JavaScript is just a language. Specific syntax parsing and underlying functionality need a runtime like Chrome or Node.js, which both use the V8 engine for syntax parsing</em>). The task types and trigger times of the event loop are more complex than in this example, and there are differences between the browser and Node.js.</p>
+<p><strong>What is the event loop</strong>? When the user needs to execute some functions asynchronously, the callback function is inserted into the queue, and the event loop checks the queue and executes the tasks if there are any. For asynchronous IO operations, such as file and network operations, it also regularly checks if the operation is successful, and if so, inserts the callback function into the event loop. Next, let's see how Node.js implements this.</p>
 <h4>Node.js</h4>
-<p>我们先来看一下流程图，Node.js的事件循环和异步操作由UV库来管理。对应的代码请参考<a href="https://github.com/nodejs/node/blob/main/deps/uv/src/unix/core.c#L415">Node.js EventLoop</a></p>
+<p>Let's look at the flowchart first. The event loop and asynchronous operations in Node.js are managed by the UV library. The code corresponding to Figure 8 can be found here <a href="https://github.com/nodejs/node/blob/main/deps/uv/src/unix/core.c#L415">Node.js EventLoop</a></p>
 <p><img alt="EventLoop in Node.js" src="/images/2024/5/Async8_node_eventloop_2.png"></p>
 <p align="center">
   <em>Figure 8. EventLoop in Node.js</em>
 </p>
 
-<p><a href="https://github.com/nodejs/node/blob/main/deps/uv/include/uv/unix.h#L220">查看Node.js Loop中的数据结构源码(Linux平台)</a> | <a href="https://github.com/nodejs/node/blob/main/deps/uv/src/unix/core.c#L415">查看Node.js EventLoop源码</a></p>
+<p><a href="https://github.com/nodejs/node/blob/main/deps/uv/include/uv/unix.h#L220">See Figure 9 for the source code related to the data structure of the Node.js Loop (Linux platform)</a> | <a href="https://github.com/nodejs/node/blob/main/deps/uv/src/unix/core.c#L415">See Figure 8 for the source code related to the Node.js EventLoop</a></p>
 <p><img alt="EventLoop in Node.js" src="/images/2024/5/Async9_node_eventloop_3.png"></p>
 <p align="center">
   <em>Figure 9. Main relationship of the EventLoop in Node.js</em>
 </p>
 
-<p>*当所有的IO处理完毕，回调函数执行完毕，EventLoop便会退出。</p>
-<p>我来讲一下这个事件循环的每一步：</p>
-<p><strong>timers:</strong> 执行setTimtout()和setInterval()的设置的回调函数。
-这里有两个有意思的事情:
+<p><strong>When all IO operations are complete and callback functions are executed, the EventLoop will exit.</strong></p>
+<p>Let's talk about each step of this event loop (<strong>timers=&gt;Pending Queue=&gt;Idle Handlers=&gt;Prepare Handlers=&gt;IO Poll=&gt;Check=&gt;Close</strong>):</p>
+<p><strong>timers:</strong> Execute the callback functions set by setTimeout() and setInterval().
+There are two interesting things here:
 <img alt="EventLoop Timer in Node.js" src="/images/2024/5/Async9.1_node_eventloop_timer_1.png"></p>
 <p align="center">
   <em>Figure 9.1 EventLoop Timer in Node.js</em>
 </p>
 
 <ol>
-<li>timers对应的数据结构是小项堆。堆这种结构是部分排序，在处理timer时，它每次只需取出最小的timer，也就是最近那个 <a href="https://github.com/nodejs/node/blob/main/deps/uv/src/timer.c#L174">(点击查看EventLoop Timer源码)</a>。</li>
-<li>让我们来复习一下堆排序的时间复杂度：要为两个主要步骤<strong>建立树</strong>和<strong>取出元素</strong>。假设有n个元素，建立树(插入所有元素)的时间复杂度是O(n)，取出所有元素包含重建树的阶段的时间复杂度是O(nlogn)。堆排序是部分排序，取出一次调整一次树，不像其他的排序一次排序后，取出的时间复杂度就是O(n)了。</li>
-<li>Node.js的timer是基于遍历机制，而且很可能被其他的操作阻塞。所以我们可以确认setTimer()设置的定时器肯定是不准确的。</li>
+<li>The data structure corresponding to timers is a min-heap. A heap is partially sorted; in handling timers, it only needs to take out the smallest timer each time, which is the closest one <a href="https://github.com/nodejs/node/blob/main/deps/uv/src/timer.c#L174">(Click to see the source code related to the EventLoop Timer)</a>.</li>
+<li>Let's review the time complexity of heap sort: For two main steps, <strong>building the tree</strong> and <strong>removing elements</strong>. Assuming there are n elements, the time complexity of building the tree (inserting all elements) is O(n), and the time complexity of removing all elements, including rebuilding the tree, is O(nlogn). Heap sort is partial sorting, taking out and adjusting the tree once each time, unlike other sorting algorithms that sort once and take out all with a time complexity of O(n) and single O(1).</li>
+<li>Node.js timers are based on a polling mechanism and may be blocked by other callback functions or even another timer's callback function. So, we can confirm that timers set by setTimer() are inaccurate. Setting very precise timers is another topic.</li>
 </ol>
-<p><strong>Pending Queue:</strong> 执行IO Poll阶段里面遗留的一些任务，一般来讲IO Poll阶段如果发现IO操作完成会即时处理掉对应的CallBack函数，但是有些情况会需要触发新的回调函数如出错了。就会放在Pending Queue，在下一轮来处理。(<em>其实现在的代码会在IO Poll阶段后执行8轮的Pending Queue的清空，我也很好奇这个数字8是怎么来的。具体可以参考图8中间的代码</em>)</p>
-<p><strong>Idle Handers&amp;Prepare Handlers:</strong> 由UV库内部使用。</p>
-<p><strong>IO Poll:</strong> 这里就是去看一下这些IO操作有没有完成，完成了就执行对应的回调函数，或者需要进一步处理就会建新的回调函数放在Pending Queue里面。比如看读取某个文件有没有读完，HTTP的API请求有没有返回结果，进行的DNS查询有没有返回结果等等。</p>
-<p>这一步可是非常关键，也是非常影响性能的一个阶段，在Linux平台上用了epoll模型，当年Nginx用epoll实现了极高的性能。Windows有对应的完成端口(IOCP).Mac的叫Kqueue.不过这个模型只针对网络socket访问。这里的细节我会在下一篇文章介绍。</p>
-<p><strong>Check:</strong> 执行setImmediate()设置的回调函数。</p>
-<p><strong>Close:</strong> 执行关闭请求的回调函数，如socket.on('Close', ...)。与网络操作相关，与文件操作无关。</p>
-<h5>微任务</h5>
-<p>在JavaScript语言中，除了用setTimeout，setInterval和setImmediate设置自定义的异步函数，还可以用process.nextTick, Promise和Await(Promise的高级实现)来把自己的异步回调函数插入事件循环。关于Promise和Await的细节我会在下一篇文章中提及。</p>
-<p>上节中介绍的那些任务我们称之为宏任务，process.nextTick()和Promise.then()插入的异步函数我们称之为微任务。那这些微任务在什么时候执行呢？</p>
+<p><strong>Pending Queue:</strong> Execute some tasks left over from the IO Poll phase. Generally, when the IO Poll phase finds that the IO operation is complete, it will handle the corresponding callback function immediately, but in some cases, it may trigger new callback functions, such as errors, which will be placed in the Pending Queue to be processed in the next round. (<em>In fact, the current code will execute the Pending Queue 8 times after the IO Poll phase. I'm also curious about the number 8. Refer to the middle code in Figure 8</em>)</p>
+<p><strong>Idle Handers&amp;Prepare Handlers:</strong> Used internally by the UV library.</p>
+<p><strong>IO Poll:</strong> Here, it checks if these IO operations are complete, and if so, it executes the corresponding callback function. If further processing is needed, it creates new callback functions and places them in the Pending Queue. For example, checking if a file read is complete, if the HTTP API request has returned results, if the DNS query has returned results, etc.</p>
+<p>This step is crucial and significantly impacts performance. The epoll model is used on the Linux platform, which achieved extremely high performance when implemented by Nginx. Windows has corresponding completion ports (IOCP). Mac's is called Kqueue. I will introduce these details in the next article.</p>
+<p><strong>Check:</strong> Execute the callback functions set by setImmediate().</p>
+<p><strong>Close:</strong> Execute the callback functions for close requests, such as socket.on('Close', ...). Related to network operations, not file operations.</p>
+<h4>Microtasks</h4>
+<p>In the JavaScript language, besides using setTimeout(), setInterval(), and setImmediate() to set custom asynchronous functions, you can also use process.nextTick(), Promise(), and Await() [<em>the advanced implementation of Promise()</em>] to insert the callback functions (any function) you want to execute asynchronously into the event loop. I will mention the details of Promise and Await in the next article.</p>
+<p>Functions inserted by process.nextTick() and Promise.then() are called microtasks. The other tasks mentioned in the previous section (setTimeout(), setInterval(), IO, and setImmediate()) are called macro tasks. When are microtasks and macro tasks executed?</p>
 <p><img alt="Tasks Execution Process in Node.js" src="/images/2024/5/Async10_node_eventloop_4.png"></p>
 <p align="center">
   <em>Figure 10. Tasks Execution Process in Node.js</em>
 </p>
 
-<p>我们可以看到，用户通过Promise.then()插入的回调函数优先级是非常高的，会在同步代码时间执行完后立刻执行。而且在每种任务如: setTimeout(), setInterval(), I/O Poll执行完后都会检查一下有没有微任务，有的话立即执行。</p>
-<p>注意：</p>
+<p>We can see that the priority of microtasks is very high and will be executed immediately after the synchronous code is executed. Moreover, after each type of task, such as setTimeout(), setInterval(), I/O Poll, is executed, the microtask queue is checked, and if there are any, they are executed immediately.</p>
+<p>Note:</p>
 <ol>
-<li>process.nextTick()插入的函数优先级高于Promise.then()插入的函数。</li>
-<li>在每执行完一个任务会就会检查一下，并不是执行完队列才会检查微任务<a href="https://github.com/nodejs/node/pull/22842">Related Pull Request</a>。</li>
+<li>The priority of functions inserted by process.nextTick() is higher than those inserted by Promise.then().</li>
+<li>The microtask queue is checked after each task is executed, not after the entire macro task queue is executed <a href="https://github.com/nodejs/node/pull/22842">Related Pull Request</a>.</li>
 </ol>
-<p>我自己写了一个程序来检测一下不同的异步任务的执行顺序<a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/EventLoop.js">点击查看源码</a></p>
+<p>I wrote a program to check the execution order of different asynchronous tasks <a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/EventLoop.js">Click to view source code</a></p>
 <p><img alt="Tasks Execution Order in Node.js" src="/images/2024/5/Async11_node_eventloop_5.png"></p>
 <p align="center">
   <em>Figure 10. Tasks Execution Order in Node.js</em>
 </p>
 
+<p>We can compare it with the previous code flowchart, which matches completely.</p>
 <h4>Browser</h4>
-<p>在浏览器中事件循环有一些不一样：</p>
+<p>The event loop in the browser is a bit different:</p>
 <ol>
-<li>没有process.nextEvent()</li>
-<li>有MutationObserver()任务，主要用来监控网络上元素属性的变化，也属于微任务</li>
-<li>有渲染任务(其实Browser是有专门的渲染线程的，是接收主线程渲染任务发送的指令，然后渲染线程负责具体的实施，为了高效渲染不阻塞主线程)</li>
-<li>把同步代码执行一次就算第一个宏任务</li>
-<li>Event Loop里面执行顺序是<strong>一个宏任务</strong>=&gt;<strong>执行所有微任务</strong>=&gt;<strong>所有的渲染任务</strong>。执行顺序和Node.js类似，但是Node.js里面会先把所有微任务执行一次，而且没有渲染任务。</li>
+<li>No process.nextEvent()</li>
+<li>There is a MutationObserver() task, mainly used to monitor changes in network element attributes, which also belongs to microtasks</li>
+<li>There are rendering tasks (actually, the browser has a dedicated rendering thread that receives rendering tasks sent by the main thread, and the rendering thread is responsible for the specific implementation to render efficiently without blocking the main thread)</li>
+<li>Synchronous code execution is considered the first macro task</li>
+<li>In the Event Loop, the execution order is <strong>one macro task</strong> =&gt; <strong>execute all microtasks</strong> =&gt; <strong>all rendering tasks</strong>. The execution order is similar to Node.js, but in Node.js, all microtasks are executed first, and there are no rendering tasks.</li>
 </ol>
+<h2>Summary</h2>
+<p>In this article, we mainly introduced what asynchronous programming is. Through a mailing example, callback functions, and then to the event loop in Node.js, we explained what asynchronous looks like from a life perspective to the code level.</p>
+<p>In the next article, we will discuss how to perform asynchronous programming in JavaScript and some related underlying implementations.</p>
+<p>If you find any errors in my article or have any new viewpoints, feel free to contact me or leave a comment.</p>
 <h2>relative resources</h2>
 <p><a href="https://x.com/DrJimFan/status/1791514371086250291">GPU programming from Jim Fan</a></p>
             </div>
@@ -308,10 +335,41 @@
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="https://brycemeng.com/async-and-multithread-programming-1-async-in-javascript-cn.html">Async and multithread programming - 1 Async in JavaScript</a></li>
+        <li><a href="https://brycemeng.com/async-and-multithread-programming-1-async-in-javascript-cn.html">异步和多线程自编程 - 1 JavaScript中的异步</a></li>
+        <li><a href="https://brycemeng.com/async-and-multithread-programming-1-async-in-javascript-en.html">Async&Multithrad - 1 Async - 1 Async in JavaScript</a></li>
         <li><a href="https://brycemeng.com/async-and-multithread-programming-1-async-cn.html">异步和多线程编程 - 1 异步</a></li>
     </ul>
 </section>
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'brycemeng'; // required: replace example with your forum shortname
+
+            var disqus_config = function () {
+                this.language = "en";
+
+                        this.page.identifier = '2024-05-21-async-and-multithread-programming-1-async-en';
+                        this.page.url = 'https://brycemeng.com/async-and-multithread-programming-1-async-en.html';
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
         </article>
     </section>
 
@@ -347,7 +405,7 @@
     <li class="list-group-item tag-2">
       <a href="https://brycemeng.com/tag/android.html">Android</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-2">
       <a href="https://brycemeng.com/tag/async.html">async</a>
     </li>
     <li class="list-group-item tag-4">
@@ -377,7 +435,7 @@
     <li class="list-group-item tag-2">
       <a href="https://brycemeng.com/tag/hifi.html">Hifi</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-2">
       <a href="https://brycemeng.com/tag/javascript.html">javascript</a>
     </li>
     <li class="list-group-item tag-4">
@@ -401,7 +459,7 @@
     <li class="list-group-item tag-4">
       <a href="https://brycemeng.com/tag/monkey.html">monkey</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-2">
       <a href="https://brycemeng.com/tag/multithread.html">multithread</a>
     </li>
     <li class="list-group-item tag-4">
@@ -416,7 +474,7 @@
     <li class="list-group-item tag-4">
       <a href="https://brycemeng.com/tag/pandas.html">Pandas</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-2">
       <a href="https://brycemeng.com/tag/programming.html">programming</a>
     </li>
     <li class="list-group-item tag-3">
@@ -504,6 +562,21 @@
 <script src="https://brycemeng.com/theme/js/respond.min.js"></script>
 
 
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'brycemeng'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
 
 
 </body>
