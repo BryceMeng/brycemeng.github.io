@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>机器学习模型效果不好了怎么办？ - TechLoveDeath</title>
+    <title>Knowledge Sharing - TechLoveDeath</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,22 +10,16 @@
 
     <link href="https://brycemeng.com/images/favicon.png" rel="icon">
 
-<link rel="canonical" href="https://brycemeng.com/action-of-bad-ml-model.html">
 
-        <meta name="author" content="Bryce" />
-        <meta name="keywords" content="Quant,ML" />
-        <meta name="description" content="这个是从课程中总结出来的，非个人实践总结" />
+    <meta name="author" content="Bryce" />
+    <meta name="keywords" content="Knowledge Sharing" />
 
+    <!-- Open Graph tags -->
         <meta property="og:site_name" content="TechLoveDeath" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="机器学习模型效果不好了怎么办？"/>
-        <meta property="og:url" content="https://brycemeng.com/action-of-bad-ml-model.html"/>
-        <meta property="og:description" content="这个是从课程中总结出来的，非个人实践总结"/>
-        <meta property="article:published_time" content="2019-04-05" />
-            <meta property="article:section" content="Quant" />
-            <meta property="article:tag" content="Quant" />
-            <meta property="article:tag" content="ML" />
-            <meta property="article:author" content="Bryce" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="TechLoveDeath"/>
+        <meta property="og:url" content="https://brycemeng.com"/>
+        <meta property="og:description" content="TechLoveDeath"/>
 
 
 
@@ -71,7 +65,7 @@
                         <li >
                             <a href="https://brycemeng.com/category/programming.html">Programming</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="https://brycemeng.com/category/quant.html">Quant</a>
                         </li>
                         <li >
@@ -92,116 +86,13 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="https://brycemeng.com/action-of-bad-ml-model.html"
-                       rel="bookmark"
-                       title="Permalink to 机器学习模型效果不好了怎么办？">
-                        机器学习模型效果不好了怎么办？
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2019-04-05T20:32:00+08:00"> Fri 05 April 2019</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="https://brycemeng.com/tag/quant.html">Quant</a>
-        /
-	<a href="https://brycemeng.com/tag/ml.html">ML</a>
-
-    <span class="label label-default">Translation</span>
-    <a href="javascript:void(window.open('https://translate.google.com/translate?sl=en&tl=zh-CN&u=' + encodeURIComponent(window.location.href)))">
-    中文版
-    </a>/
-    <a href="javascript:void(window.open('https://translate.google.com/translate?sl=zh-CN&tl=en&u=' + encodeURIComponent(window.location.href)))">
-    English
-    </a>
-
-    
-</footer><!-- /.post-info -->                    </div>
+            <article>
+                <h2><a href="https://brycemeng.com/teaching-nerual-network.html">解释什么是神经网络</a></h2>
+                <div class="summary"><p>我想用一种新的方式来解释什么是神经网络</p>
+                    <a class="btn btn-default btn-xs" href="https://brycemeng.com/teaching-nerual-network.html">more ...</a>
                 </div>
-                <p>请参考：lee hongyi 2007 lec 9-1</p>
-<p><img alt="ML遇到问题了怎么办" src="http://sinacloud.net/mhblog/2019/04/ML_problem.jpg"></p>
-<h2>更换activation function</h2>
-<p><strong>sigmoid</strong>的缺点：
-- 在多层NN时，backpropagation会有点问题
-- sigmoid 的特性决定，输入的变化很大时，其实越到后面输出的变化就越小</p>
-<p><strong>relu</strong>:</p>
-<p>现在是主力激活函数，虽然relu本身是线性函数，但是多层复合组合起来并不是线性模型</p>
-<p>注意： relu是可能导致某节点weight为0的，减慢学习速率是可以缓解这个问题的</p>
-<p><strong>maxout</strong>:</p>
-<p>这个是动态的激活函数，貌似很厉害，再云深入了解一下。</p>
-<h2>Adaptive learning rate</h2>
-<p>自适应学习速率</p>
-<p><strong>adagrad</strong> 还不错，但是鲁棒性不强</p>
-<p><strong>rmsprop(froot mean square prop)</strong> 推荐，带权重自动调整learning rate</p>
-<p><strong>adam</strong>，最后上场，带动量特性，现在最常用。adam = Rmsprop + momentum</p>
-<h2>early stopping</h2>
-<p><img alt="early stopping" src="http://sinacloud.net/mhblog/2019/04/early_stopping.png"></p>
-<p>一张图解释一切，其实就是传统机器学习方法的方差和偏差均衡的问题。调整的参数是epoch的轮数。</p>
-<p>在DNN上做cross validation是否可行？</p>
-<h2>regulization</h2>
-<p>在传统的统计学方法就是岭回归和lasso回归，岭是l2，lasso是l1，这个貌似用在DNN上效果不如在传统方法上明显</p>
-<h2>Dropout(随机丢掉一些神经元)</h2>
-<p>这不就是传统方法上的bagging吗？</p>
-<h2>batch normalization</h2>
-<p><a href="Batch normalization">相关解释</a> 解决梯度爆炸</p>
-            </div>
-            <!-- /.entry-content -->
-<section class="well" id="related-posts">
-    <h4>Related Posts:</h4>
-    <ul>
-        <li><a href="https://brycemeng.com/reinforcement-learning.html">强化学习</a></li>
-        <li><a href="https://brycemeng.com/some-traps-of-stock-prices-predicted.html">股价预测的陷阱</a></li>
-        <li><a href="https://brycemeng.com/summary-of-machine-learning-class.html">机器学习刷课总结</a></li>
-        <li><a href="https://brycemeng.com/some_exp_of_two_arg_strategy.html">最近的一些经验总结</a></li>
-        <li><a href="https://brycemeng.com/AdvFinML-Standard-Bars.html">AdvFinML - Standard Bars</a></li>
-    </ul>
-</section>
-    <hr/>
-    <section class="comments" id="comments">
-        <h2>Comments</h2>
-
-        <div id="disqus_thread"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = 'brycemeng'; // required: replace example with your forum shortname
-
-            var disqus_config = function () {
-                this.language = "en";
-
-                        this.page.identifier = '2019-04-05-action-of-bad-ml-model';
-                        this.page.url = 'https://brycemeng.com/action-of-bad-ml-model.html';
-            };
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function () {
-                var dsq = document.createElement('script');
-                dsq.type = 'text/javascript';
-                dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
-            Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    </section>
-        </article>
-    </section>
+            </article>
+            <hr/>
 
         </div>
         <div class="col-sm-3" id="sidebar">
