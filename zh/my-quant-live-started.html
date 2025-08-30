@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>我的量化交易 - 中文版本</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="https://brycemeng.com/zh/images/favicon.png" rel="icon">
+
+<link rel="canonical" href="https://brycemeng.com/zh/my-quant-live-started.html">
+
+        <meta name="author" content="Bryce" />
+        <meta name="keywords" content="Quant" />
+        <meta name="description" content="我的量化交易，当时写这篇文章时有点小激动啊" />
+
+        <meta property="og:site_name" content="中文版本" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="我的量化交易"/>
+        <meta property="og:url" content="https://brycemeng.com/zh/my-quant-live-started.html"/>
+        <meta property="og:description" content="我的量化交易，当时写这篇文章时有点小激动啊"/>
+        <meta property="article:published_time" content="2016-12-22" />
+            <meta property="article:section" content="Quant" />
+            <meta property="article:tag" content="Quant" />
+            <meta property="article:author" content="Bryce" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://brycemeng.com/zh/../theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="https://brycemeng.com/zh/../theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://brycemeng.com/zh/../theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://brycemeng.com/zh/../theme/css/style.css" type="text/css"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://brycemeng.com/zh/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="https://brycemeng.com/zh/images/favicon.png" width="24"/> 中文版本            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/music.html">Music</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/programming.html">Programming</a>
+                        </li>
+                        <li class="active">
+                            <a href="https://brycemeng.com/zh/category/quant.html">Quant</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/tech.html">Tech</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://brycemeng.com/zh/my-quant-live-started.html"
+                       rel="bookmark"
+                       title="Permalink to 我的量化交易">
+                        我的量化交易
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2016-12-22T20:12:00+08:00"> Thu 22 December 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://brycemeng.com/zh/tag/quant.html">Quant</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>我是一名程序猿，非常想进入量化行业的程序猿，为什么我想进入量化行业呢？</p>
+<p>从2008年入坑炒股，到现在总盈利5W，10%，中间经历过大小行情很多个，发现人工交易的弱点非常明显，<strong>心里因素</strong>，有时候股价下跌，我非常有信心的认为这是调整，不用卖，可真跌了5%再回升到2%时，立刻就抛了，因为怕(<strong>前景理论 Prospect Theory</strong>)。</p>
+<p>在2013年底的时候，我非常想做一件事情就是把一些简单的短线规律实现到股票软件上，给上涨线画个红色向上的箭头。因为有位神秘人物有着非常严谨的人工交易逻辑，但是我又不太懂，所以我想用程序来实现这些逻辑。这些逻辑比股软上的公式要复杂，股软根本实现不了，怎么办呢？我当时做了两件事</p>
+<ol>
+<li>下载了一个开源的股票软件</li>
+<li>下载了一套连接某券商行情的代码(crack)</li>
+</ol>
+<p>这套行情代码非原创，但是非常难编译，需要Matlab和Boost库，还需要一系列貌似在Linux下才用得到的库，我花了一个星期的时间还真给编译出来了，最神奇的事情是还能用，真有行情。后来我把这个行情引入到了这款开源的股软上，我真在60分钟K线上实现了一套非常简单的无交易策略，只做展示用：在我认为会涨的K线下面画个红色上涨的箭头。</p>
+<p>后来这套东西也没怎么用，用C++写策略有点复杂，写个MACD啥的都费劲。。。逻辑不复杂，但是在开源股软里面硬插入策略是非常难受的，取数据，画图什么的，很麻烦。所以就慢慢就放弃了。</p>
+<p>其实去年和今年我都没有碰股市，因为我觉得人工交易需要的时间太多了。之前提到的那位神秘人物一直在我背后给我指点，他做人工交易付出的时间让我有点害怕，我觉得以我现在白天被虐，晚上还有可能被加班的情况，做人工交易从科学上来讲是必定会亏的，简单来讲就是付出少回报多这个事情不太可能发生。</p>
+<p>现在回想起来，其实在2013年底我是在做股票的类CTA策略，基于股价和成交量关系来对未来进行预测。</p>
+<p>为什么今年又有了这个冲动，今年在听一个技术Live时，发现主讲人，也是我的偶像在搞量化基金，而且他还听了一个知乎Live“<a href="https://www.zhihu.com/lives/749262897309315072">金融外行如何入门量化交易</a>”，我就好奇去听了一下。听完后根据里面的内容在网上一搜，发现大量的量化平台已经崛起，我当年花了九牛二虎之力搞的行情现在完全免费了，我在想：<strong>量化交易时代到来</strong>。对于我们程序猿来讲，是不是另外一个能实现自我价值的机会呢？</p>
+<p>和好友交流了这个想法之后决定开始干。</p>
+<p>迷茫，对于量化和我这个门外汉来讲就这个词来形容最准确。此时我做了如下几件事：</p>
+<ol>
+<li>
+<p>看了两本入门书籍：《打开量化投资的黑箱》《西蒙斯用公式打败市场的故事》；</p>
+</li>
+<li>
+<p>把知乎上与量化相关的live都听了下，最终只听了与股票和期货相关的；</p>
+</li>
+<li>
+<p>看了一套优酷上的量化36节公开课；</p>
+</li>
+<li>
+<p>阅读了CTP协议，因为我打算从CTA策略开始入门。高频，套利现在做的人多，而且我们一下子还没有那么高的硬件和网络环境，所以CTA最适合；</p>
+</li>
+<li>
+<p>用了VNPY框架来做为我的入门框架，在Ubuntu 16.04和Win 10 To Go上都成功运行；</p>
+</li>
+</ol>
+<p>计划：</p>
+<ol>
+<li>今晚用VNPY把基于CTP的Tick数据拿到手了，准备把Tick数据详细分析一下；
+<img alt="My Program" src="http://sinacloud.net/mhblog/2016/12/1.png"></li>
+<li>把常见的，已经存在的CTA策略先用VNPY实现，同时阅读期货相关书籍；</li>
+<li>每天阅读国外的量化相关文章(<a href="https://www.zhihu.com/question/20874888">量化投资方面，国内外都有哪些好的论坛或者网站</a>)；</li>
+<li>把神秘人物的策略用VNPY实现；</li>
+<li>后面的计划还没有想好，先把前3点实施好吧，不能太急。</li>
+</ol>
+<p>我个人觉得，现在量化和主观是不是有点脱节？我觉得如果能结合，是不是更好呢？</p>
+<p>这1个多月以来，感觉量化这个行业门槛非常高，数学，股市，期货，金融心理，程序都要有所涉及，我和我的好友深感这个行当中的困难，不过这些都将会被我们的努力慢慢侵蚀掉，也希望其他想进入该行业的朋友能一起努力。</p>
+<p>这篇就是我想入门量化行业的一篇杂文，没啥含量，借此文记录我的量化成长历程。</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="https://brycemeng.com/zh/some_exp_of_two_arg_strategy.html">最近的一些经验总结</a></li>
+        <li><a href="https://brycemeng.com/zh/AdvFinML-Standard-Bars.html">AdvFinML - Standard Bars</a></li>
+        <li><a href="https://brycemeng.com/zh/something-about-financial-analysis.html">财务分析相关</a></li>
+        <li><a href="https://brycemeng.com/zh/hidden-markov-model.html">HMM 稳形马尔科夫</a></li>
+        <li><a href="https://brycemeng.com/zh/numpy-version-pandas-ewm-mean-var.html">numpy pandas ewm mean/var</a></li>
+    </ul>
+</section>
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'brycemeng'; // required: replace example with your forum shortname
+
+            var disqus_config = function () {
+                this.language = "zh";
+
+                        this.page.identifier = '2016-12-22-my-quant-live-started';
+                        this.page.url = 'https://brycemeng.com/zh/my-quant-live-started.html';
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/BryceMeng"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="https://brycemeng.com/zh/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/101alpha.html">101Alpha</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/adb.html">adb</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/advfinml.html">AdvFinML</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/android.html">Android</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/async.html">async</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/cryptocurrency.html">Cryptocurrency</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/elite3.html">Elite3</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/english.html">English</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/fifthcircle.html">fifthcircle</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/fun.html">Fun</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/futures.html">Futures</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/genetic-algorithm.html">Genetic Algorithm</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/hidden-markov.html">Hidden Markov</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/hifi.html">Hifi</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/javascript.html">javascript</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/kalman-filter.html">Kalman Filter</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/life.html">Life</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/math.html">Math</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="https://brycemeng.com/zh/tag/misc.html">Misc</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/ml.html">ML</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/mongodb.html">Mongodb</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/monkey.html">monkey</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/multithread.html">multithread</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/music.html">Music</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/numpy.html">Numpy</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/optimization.html">Optimization</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/pandas.html">Pandas</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/programming.html">programming</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="https://brycemeng.com/zh/tag/quant.html">Quant</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/router.html">Router</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/stats.html">Stats</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/stock.html">Stock</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/system.html">System</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/tech.html">Tech</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/tech-indicator.html">Tech Indicator</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/time-series.html">Time Series</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/translation.html">Translation</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/trap.html">Trap</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/ubuntu.html">Ubuntu</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/vm.html">VM</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/wu-du-quan.html">五度圈</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://makerchen.com" target="_blank">MakerChen</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2024 Bryce
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="https://brycemeng.com/zh/../theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://brycemeng.com/zh/../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="https://brycemeng.com/zh/../theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'brycemeng'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+
+
+</body>
+</html>

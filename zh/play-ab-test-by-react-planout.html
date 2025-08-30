@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>[译]用React和PlanOut来做产品的AB测试 - 中文版本</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="https://brycemeng.com/zh/images/favicon.png" rel="icon">
+
+<link rel="canonical" href="https://brycemeng.com/zh/play-ab-test-by-react-planout.html">
+
+        <meta name="author" content="Bryce" />
+        <meta name="keywords" content="Tech,Translation" />
+        <meta name="description" content="用React和PlanOut来做产品的AB测试，AB测试其实概念很早就出来了，但是最近才被facebook用到极致。" />
+
+        <meta property="og:site_name" content="中文版本" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="[译]用React和PlanOut来做产品的AB测试"/>
+        <meta property="og:url" content="https://brycemeng.com/zh/play-ab-test-by-react-planout.html"/>
+        <meta property="og:description" content="用React和PlanOut来做产品的AB测试，AB测试其实概念很早就出来了，但是最近才被facebook用到极致。"/>
+        <meta property="article:published_time" content="2015-11-01" />
+            <meta property="article:section" content="Tech" />
+            <meta property="article:tag" content="Tech" />
+            <meta property="article:tag" content="Translation" />
+            <meta property="article:author" content="Bryce" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://brycemeng.com/zh/../theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="https://brycemeng.com/zh/../theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://brycemeng.com/zh/../theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://brycemeng.com/zh/../theme/css/style.css" type="text/css"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://brycemeng.com/zh/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="https://brycemeng.com/zh/images/favicon.png" width="24"/> 中文版本            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/music.html">Music</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/quant.html">Quant</a>
+                        </li>
+                        <li class="active">
+                            <a href="https://brycemeng.com/zh/category/tech.html">Tech</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://brycemeng.com/zh/play-ab-test-by-react-planout.html"
+                       rel="bookmark"
+                       title="Permalink to [译]用React和PlanOut来做产品的AB测试">
+                        [译]用React和PlanOut来做产品的AB测试
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-11-01T21:04:00+08:00"> Sun 01 November 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://brycemeng.com/zh/tag/tech.html">Tech</a>
+        /
+	<a href="https://brycemeng.com/zh/tag/translation.html">Translation</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p><img alt="React Experiments" src="http://img.blog.csdn.net/20151101210307966"></p>
+<p>攻城师，设计师和产品经理每天为了达到一些KPI做一些盲目的决策。我们想去重新设计一个页面因为我们相信这样可以提升用户体验和提高用户的留存。我们想要去增加一个品牌的新特性或者扩展一个已有的特性因为我们相信通过使产品对用户更有价值可以提高产品的可用性。</p>
+<p>每一个决策最终归结于这个问题：这个变更真的会带来预期的效果吗？这又可以归结为因果性推断：决策X能导致结果Y的发生吗？在Web应用中，我们可以使用金本位制（以黄金为本位币的货币制度）用来回答因果性推断的问题：<a href="http://baike.baidu.com/link?url=puuOwN02RiWbjoQ1w5iEwKvpoCtmaOxLO_W7MnLG6FWeP4gd6oc9HmfvNyBe4_cfBFOjxbPKtVqjBbvU-YvuXq">随机化实验</a>（<a href="https://en.wikipedia.org/wiki/Randomized_experiment">英文解释</a>）。</p>
+<p>在大型的公司里面，市场，销售和售前售后支持都能影响的用户的行为，这样把实验当作一个工具去做产品级的决策尤为重要。这套实验方法，从某种程度上来讲，可以帮你把其他各式各样的因素给排除掉。最终表明，这套实验方法在Sidekick小组（<strong><em>这篇文章出自于Hubspot Sidekick小组</em></strong>）中处于产品的核心地位。我们在不断迭代的使用这种方式这样我们的用户能容易的理解而且从Sidekick获取价值。这套实验方法帮助我们实现快速变革而且对于一个功能的生命周期的各个阶段都有更多的自信。它还使我们更理解我们的用户，而且能把这些理解应用于该产品的其他部分。最重要的是，它帮助我们细致的打造着产品的未来。</p>
+<h1>找寻一套实验框架和解决方案</h1>
+<p>要开启这套实验进程，在需要通过公司实现它的规模和确保测试的可统计性的同时，还需要有工具让它容易的去安装，部署和分析实验结果。在我们看来，这套实验框架应该具有如下的特性：</p>
+<ol>
+<li>针对一个特定的实验，用户总是收到相同的参数值。除了带来糟糕的用户体验，不同的会话指定不同的参数值也会使之从实验中获得有价值的东西变得非常困难。</li>
+<li>关心该实验框架的全流程实验日志记录，这样实验的分析过程将是自然的，可预测的而且无Bug产生（<strong><em>这里的无Bug是指根据log很容易的查出Bug</em></strong>）。全流程日志记录用一种简单的记录方法用来记录参与实验的用户和用户在该实验中受到的对待。</li>
+<li>实验规模取决于你实施了的实验数量和基于用户的产品增长。</li>
+<li>实验的设计应该抛开复杂的设计，应该是可执行性强的而且能容易的被公司里的每个人理解。</li>
+<li>这套框架要确保一些实验不会拖拉的时间太长导致代码库做无用的增长。</li>
+</ol>
+<p>根据上述这些限制，我们开始使用Facebook的PlanOut实验框架（用Python编写）。我们发现PlanOut有着不可思意的作用，但是当我们慢慢的把基础框架从服务端实现转换成客户端渲染时，我们发现把实验信息，参数还有实验日志从服务端传输到客户端时，变得笨重，慢还导致产生了一些可避免的Bug。</p>
+<p>为了适应框架的变化，我们决定放弃使用Python的部署，而使用基于JavaScript的部署。结果，我们做了一套基于JavaScript的PlanOut部署框架<a href="https://github.com/HubSpot/PlanOut.js">[Github]</a>，该框架能让我们在客户端定义实验和管理实验。这套部署框架相对于服务端的部署有很多的好处。第一，自从我们无需把实验参数从服务端传送到客户端后基本没有性能瓶颈。自从我们深刻的认识到性能上的下降能影响到我们的一些重要指标后这一点显得非常重要。</p>
+<p>第二，基于同一套代码定义和实施用户界面的实验变得更容易而且很少出现Bug，我们现在运行的大部分实验都是这样。自从PlanOut部署更适应我们之后把实验集成在标准的单页面APP里面变得非常容易。每一个实验为了实施合适的随机化实验都需要一套输入的集合，但是如果在服务端部署PlanOut，在实验初始化时就需要把参数定义好。我们的部署允许输入在单页面程序引导时注册而非初始化时，这样可以允许我们的一些实验类的初始化和实验输入的注册进行分离。这样可以很容易的使各种扩展的服务相互作用，而且能最小化日志的重复。</p>
+<h1>用PlanOut去测试传播特性</h1>
+<p>一个案例是我们在SideKick上尝试去影响传播邀请发送的质量和数量。作为Sidekick的免费用户，如果他发送注册邀请给他的朋友，而且他的朋友接受了邀请，他们都会获得一个月的无限制的通知服务。一个使用户发送邀请的巨大驱动力是该组件（邀请发送组件）能让用户一键邀请。我们的这个实验是通过改变该组件的相关参数能否让用户发送更多的邀请。在该实验中我们不想让付费用户参与，所以我们把付费用户排除在外（也不会对他们进行日志记录）。我们对免费用户进行了2x3的实验（两个测试点，一个测试点有2种属性，另一个测试点有3种属性），这两个点是建议邀请发送的数目和显示给邀请方账户的建议话述。我们把建议邀请发送的数据做为测试点是为了去测试真正发送邀请的数据是否会按照建议的那样去增长还是是否存在一个点这个数字的建议对实际的发送量根本无影响或者还有负面的影响。另外一个测试点是在邀请按钮上显示两种不同的文字，上面显示一种是自私的动机（邀请）和无私的动机（礼物）。代码如下：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//InviteSuggestionsExp.js hosted with ❤ by GitHub</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nx">InviteSuggestions</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Experiment</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">//do some logger configuration</span>
+
+<span class="w">  </span><span class="nx">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">setName</span><span class="p">(</span><span class="err">‘</span><span class="nx">InviteSuggestions</span><span class="err">’</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">assign</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">args</span><span class="p">.</span><span class="nx">paying_user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">params</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="err">‘</span><span class="nx">suggestionCount</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PlanOut</span><span class="p">.</span><span class="nx">Ops</span><span class="p">.</span><span class="nx">Random</span><span class="p">.</span><span class="nx">UniformChoice</span><span class="p">(</span><span class="nx">choices</span><span class="o">=</span><span class="p">[</span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">],</span><span class="w"> </span><span class="nx">unit</span><span class="o">=</span><span class="nx">user_id</span><span class="p">));</span>
+<span class="w">    </span><span class="nx">params</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="err">‘</span><span class="nx">inviteText</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PlanOut</span><span class="p">.</span><span class="nx">Ops</span><span class="p">.</span><span class="nx">Random</span><span class="p">.</span><span class="nx">UniformChoice</span><span class="p">(</span><span class="nx">choices</span><span class="o">=</span><span class="p">[</span><span class="err">‘</span><span class="nx">Invite</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="nx">Gift</span><span class="err">’</span><span class="p">],</span><span class="w"> </span><span class="nx">unit</span><span class="o">=</span><span class="nx">user_id</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span><span class="w"> </span>
+</code></pre></div>
+
+<p>执行一项测试需要定义实验和进行适当的部署，我们会需要一种方式自然的从实验定义到实验的部署。在HubSpot大部分的客户端Javascript应用我们使用的React框架实现其View层，自从我们开始实施一些实验，我们自然的找到了一种方式在React框架上无逢的实施实验。结果是产生了一个小型的库 <a href="https://github.com/HubSpot/react-experiments">[react-experiments]</a>。</p>
+<h1>React实验系统介绍</h1>
+<p>这个库的核心是它建立一个单对单的映射，从PlanOut的实验参数映射到React组件的Props（<strong><em>React里从父节点传递到子节点的数据称为 props，是属性（properties）的缩写</em></strong>），而且为了一个特定的用户用随机化实验的分配当作合适的组件的props。这把PlanOut的参数当作变量优雅的集成了进来。这个结果让定义和部署间的连接变更更易理解，使得不至于有难以捉摸的Bug让实验失效，而且使实验不断的实施而不是不断的积累无用的东西。让我们来看看实施上文提到的实验有多容易用React。</p>
+<p>这是实施实验之前的代码：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//invite-suggestions.jsx hosted with ❤ by GitHub</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">InviteSuggestions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">getDefaultProps</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">      </span><span class="nx">numSuggestionsToShow</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">inviteButtonText</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nx">renderInviteSuggestions</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">suggestions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">suggestions</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">numSuggestionsToShow</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">suggestions</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">suggestion</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">InviteSuggestion</span>
+<span class="w">      </span><span class="nx">inviteButtonText</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">inviteButtonText</span><span class="p">}</span>
+<span class="w">          </span><span class="nx">suggestion</span><span class="o">=</span><span class="p">{</span><span class="nx">suggestion</span><span class="p">}</span><span class="w"> </span>
+<span class="w">        </span><span class="o">/&gt;</span>
+<span class="w">      </span><span class="p">);</span>
+<span class="w">     </span><span class="p">});</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nx">render</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">numSuggestionsToShow</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">renderInviteSuggestions</span><span class="p">()}</span>
+<span class="w">      </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">InviteSuggestions</span><span class="p">;</span>
+</code></pre></div>
+
+<p>现在，去实施该实验需要做的是用下面的代码替换上面代码的最后一行</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//invite-suggestions-exp.jsx hosted with ❤ by GitHub</span>
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">parametrize</span><span class="p">(</span><span class="nx">InviteSuggestionsExperiment</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;suggestionCount&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;inviteText&#39;</span><span class="p">],</span><span class="w"> </span><span class="nx">InviteSuggestions</span><span class="p">);</span>
+</code></pre></div>
+
+<p>该库的基础是一个参数化的组件，它使其余的库的能力更有力。比如，一个高序的参数化组件当所有的props在同一个组件当中时是一个非常方便的封装。当你想在一个组件中实施一个实验而又发现感兴趣的props又在子组件当中时，你可以直接使用参数化组件的基类，联合子组件相关的高序附着实验参数组件一起使用去提供心要的props的参数化。下面是一个利用参数化组件随同高序附着实验参数组件的实例。</p>
+<p>附着实验参数组件和高序参数化组件都为实验提供了强大的抽象性。在某些情况下，我们想去做完整的重新设计在不同的设计之间去设置不同区间的参数。对于这些实验，react实验系统提供了一套AB测试组件，提供一套方法在你的组件当中去定义不同的参数。这些开放的API能显而易见的让读者通过代码发现可以通过实验发现若干变量和这些变量导致的行为之间的关系。这个组件，类似于高序的组件，同时又是一个基于参数化组件的非常方便的封装。</p>
+<p>带着实验性倾向的产品设计和研发对于任何产品团队都是一种资产，而且能让产品团队把关注点放在正确的事情上还能快速的进行迭代研发。我们发现用PlanOut.js和react实验系统实施实验有很多的优点，我们希望你能用我们提供的开源项目做和我们一样的事情。<a href="https://github.com/HubSpot/react-experiments?__hssc=&amp;__hstc=&amp;hsCtaTracking=be742a0f-346d-4a03-b18a-187e55ca95df%7C801fef34-d47f-4465-b945-c0ff8de8a899">[在GitHu上的项目]</a></p>
+<h1>译者述</h1>
+<p>React是一套Facebook研发的前端开源框架，只负责View层
+PlanOut是Facebook研发的一套AB测试框架，也是开源项目<a href="https://github.com/facebook/planout">[GitHub PlanOut]</a>
+本人非前端攻城师，所以可能有些地方翻译的有些问题欢迎指出，非常感谢。AB测试这个概念很早就已提出，但是是Facebook把他用得炉火纯青，现在个人有点崇拜Facebook，今天还看了覃超的文章，觉得Facebook已经把数据化驱动做得非常好，是大部分公司都应该学习的榜样。</p>
+<p><a href="http://product.hubspot.com/blog/product-experimentation-with-planout-and-react.js">[查看原文]</a></p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="https://brycemeng.com/zh/how-to-be-data-driven-cop.html">[译]如何（为什么）成为一家数据驱动型的公司？</a></li>
+        <li><a href="https://brycemeng.com/zh/convert-hyperv-to-virtualbox.html">Convert Hyper-V VM to VirtualBox VM</a></li>
+        <li><a href="https://brycemeng.com/zh/tech-meet-content.html">当技术遇到内容</a></li>
+        <li><a href="https://brycemeng.com/zh/get-screen-from-android-dev.html">从Android设备获取实时截屏(adb)</a></li>
+        <li><a href="https://brycemeng.com/zh/adb-support-monkey.html">让Adb.exe支持Monkey</a></li>
+    </ul>
+</section>
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'brycemeng'; // required: replace example with your forum shortname
+
+            var disqus_config = function () {
+                this.language = "zh";
+
+                        this.page.identifier = '2015-11-01-play-ab-test-by-react-planout';
+                        this.page.url = 'https://brycemeng.com/zh/play-ab-test-by-react-planout.html';
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/BryceMeng"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="https://brycemeng.com/zh/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/101alpha.html">101Alpha</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/adb.html">adb</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/advfinml.html">AdvFinML</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/android.html">Android</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/async.html">async</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/cryptocurrency.html">Cryptocurrency</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/elite3.html">Elite3</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/english.html">English</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/fifthcircle.html">fifthcircle</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/fun.html">Fun</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/futures.html">Futures</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/genetic-algorithm.html">Genetic Algorithm</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/hidden-markov.html">Hidden Markov</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/hifi.html">Hifi</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/javascript.html">javascript</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/kalman-filter.html">Kalman Filter</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/life.html">Life</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/math.html">Math</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="https://brycemeng.com/zh/tag/misc.html">Misc</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/ml.html">ML</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/mongodb.html">Mongodb</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/monkey.html">monkey</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/multithread.html">multithread</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/music.html">Music</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/numpy.html">Numpy</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/optimization.html">Optimization</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/pandas.html">Pandas</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/programming.html">programming</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="https://brycemeng.com/zh/tag/quant.html">Quant</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/router.html">Router</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/stats.html">Stats</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/stock.html">Stock</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/system.html">System</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/tech.html">Tech</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/tech-indicator.html">Tech Indicator</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/time-series.html">Time Series</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/translation.html">Translation</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/trap.html">Trap</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/ubuntu.html">Ubuntu</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/vm.html">VM</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/wu-du-quan.html">五度圈</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://makerchen.com" target="_blank">MakerChen</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2024 Bryce
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="https://brycemeng.com/zh/../theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://brycemeng.com/zh/../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="https://brycemeng.com/zh/../theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'brycemeng'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+
+
+</body>
+</html>

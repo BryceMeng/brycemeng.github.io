@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>统计小计 - 中文版本</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="https://brycemeng.com/zh/images/favicon.png" rel="icon">
+
+<link rel="canonical" href="https://brycemeng.com/zh/stat-prob-notes.html">
+
+        <meta name="author" content="Bryce" />
+        <meta name="keywords" content="Quant,Stats,Math" />
+        <meta name="description" content="统计学中遇到的一些东西" />
+
+        <meta property="og:site_name" content="中文版本" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="统计小计"/>
+        <meta property="og:url" content="https://brycemeng.com/zh/stat-prob-notes.html"/>
+        <meta property="og:description" content="统计学中遇到的一些东西"/>
+        <meta property="article:published_time" content="2019-08-04" />
+            <meta property="article:section" content="Quant" />
+            <meta property="article:tag" content="Quant" />
+            <meta property="article:tag" content="Stats" />
+            <meta property="article:tag" content="Math" />
+            <meta property="article:author" content="Bryce" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://brycemeng.com/zh/../theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="https://brycemeng.com/zh/../theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://brycemeng.com/zh/../theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://brycemeng.com/zh/../theme/css/style.css" type="text/css"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://brycemeng.com/zh/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="https://brycemeng.com/zh/images/favicon.png" width="24"/> 中文版本            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/music.html">Music</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/programming.html">Programming</a>
+                        </li>
+                        <li class="active">
+                            <a href="https://brycemeng.com/zh/category/quant.html">Quant</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/tech.html">Tech</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://brycemeng.com/zh/stat-prob-notes.html"
+                       rel="bookmark"
+                       title="Permalink to 统计小计">
+                        统计小计
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2019-08-04T11:32:00+08:00"> Sun 04 August 2019</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://brycemeng.com/zh/tag/quant.html">Quant</a>
+        /
+	<a href="https://brycemeng.com/zh/tag/stats.html">Stats</a>
+        /
+	<a href="https://brycemeng.com/zh/tag/math.html">Math</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<h2>Population Stability Index (PSI) 稳定度指标</h2>
+<p>$$P S I = \sum \left( f _ { \text { development } } ^ { i } - f _ { \text {validation} } ^ { i } \right) * \ln \left( f _ { \text {development} } ^ { i } / f _ { \text {validation} } ^ { i } \right)$$</p>
+<p>概念简单，表明某时刻某群体真实值和预测模型间的偏离度。</p>
+<p>study: <a href="http://ucanalytics.com/blogs/population-stability-index-psi-banking-case-study/">Bank case PSI</a>, <a href="http://manuge.com/population-stability-index/">PSI</a></p>
+<p>实际策略：<a href="http://www.priceactionlab.com/Blog/2017/10/dow-30-weekly-mean-reversion-strategy/">PSI5 mean reversion</a></p>
+<p>这个策略没有源码和思路，只是说是用的统计学教科书中关于股价的公式来做的，而且是用的PSI回归模型，我猜是用的PSI计算的一个指标，偏离多少必回归，然后开仓。</p>
+<h2>QQ 图</h2>
+<p>判定是否为正态分布 (scipy.stats.probplot)</p>
+<p><a href="https://blog.csdn.net/hzwwpgmwy/article/details/79178485">理论参考</a></p>
+<p><img alt="正态分布QQ图" src="http://sinacloud.net/mhblog/2019/06/qq1.png"></p>
+<p><img alt="普通QQ图" src="http://sinacloud.net/mhblog/2019/06/qq2.png"></p>
+<h2>期望值的近似</h2>
+<p>在强化学习中需要知道某个action后导致的tao，这个tao就是后面一系列的动作(episode)，需要知道出现某个action后产生tao的概率。然后把每种tao产生的reward乘以tao出现的概率，求期望值，其实就是加权平均嘛</p>
+<p>这个很难计算的，这样就可以用如下方法来近似，直接用这个action玩N次游戏，把所有的reward加起来，除以N，即可近似出这个期望值</p>
+<p><img alt="近似公式" src="http://sinacloud.net/mhblog/2019/06/probAppx.png"></p>
+<h2>正态分布 -&gt; 均匀分布</h2>
+<p>一个正态分布的向量 通过对应正态分布的CDF进行转换就可以得到均匀分布 <a href="https://en.wikipedia.org/wiki/Probability_integral_transform">概率积分变换</a></p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">MASS</span><span class="p">)</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">100</span><span class="p">)</span>
+
+<span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">3</span>
+<span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2000</span>
+<span class="c1"># 产生mu=0 std=1的互有相关性的正态分布的3维向量</span>
+<span class="n">sigma</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w"> </span><span class="m">0.2</span><span class="p">,</span>
+<span class="w">                  </span><span class="m">0.4</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">-0.8</span><span class="p">,</span>
+<span class="w">                  </span><span class="m">0.2</span><span class="p">,</span><span class="w"> </span><span class="m">-0.8</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span>
+<span class="w">                </span><span class="n">nrow</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="n">z</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mvrnorm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">),</span><span class="n">Sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span><span class="n">empirical</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+
+<span class="nf">library</span><span class="p">(</span><span class="n">psych</span><span class="p">)</span>
+<span class="nf">cor</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s">&#39;spearman&#39;</span><span class="p">)</span>
+<span class="nf">pairs.panels</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="c1"># 上面显示的是正态分布</span>
+
+<span class="c1"># pnorm 就是通过mean=0 std=1的正态分布的cdf来求z中每个变量的概率</span>
+<span class="n">u</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">pnorm</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="nf">pairs.panels</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="c1"># 这里显示的就是均匀分布</span>
+</code></pre></div>
+
+<h2>价格变化分布</h2>
+<p><em>(取自于Advanced ML in Finance page 27)</em></p>
+<p><strong>固定时间内的价格变化</strong></p>
+<p>这个一直是高斯分布，其实最贴切的应该是 <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.893.2254&amp;rep=rep1&amp;type=pdf">Generalized Pareto Distribution</a>，最能匹配尖峰肥尾。</p>
+<p>GPD对应的R包<a href="https://www.rdocumentation.org/packages/SpatialExtremes/versions/2.0-7/topics/Generalized%20Pareto%20Distribution">SpatialExtremes下载</a>(<em>如果2.0-7.1编译出错，安装<a href="https://cloud.r-project.org/src/contrib/SpatialExtremes_2.0-7.tar.gz">7.0版本</a></em>)</p>
+<p>这里有一篇用R分析收益率的文章<a href="http://statmath.wu.ac.at/~hornik/QFS1/pareto-vignette.pdf">Exploring Heavy Tails Pareto and Generalized Pareto Distributions</a></p>
+<div class="highlight"><pre><span></span><code><span class="n">packageurl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;https://cloud.r-project.org/src/contrib/SpatialExtremes_2.0-7.tar.gz&quot;</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="n">packageurl</span><span class="p">,</span><span class="w"> </span><span class="n">repos</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;source&quot;</span><span class="p">)</span>
+
+<span class="c1"># 安装 Rsafd 包</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;Rsafd&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">repos</span><span class="o">=</span><span class="s">&quot;http://R-Forge.R-project.org&quot;</span><span class="p">)</span>
+
+<span class="s">&#39;&#39;&#39;</span>
+<span class="s">通过这种方式安装的 Rsafd 是1.2版和 随书的1.0版不一样</span>
+
+<span class="s">1.0 的 fit.gpd 等于 1.2的gpd.tail</span>
+<span class="s">1.0 的 pgpd 等等 1.2的gpd.1p</span>
+<span class="s">&#39;&#39;&#39;</span>
+</code></pre></div>
+
+<p>但是这个分布貌似只有一边，非对称，难道要把正收益和abs(负收益)分开匹配？</p>
+<p>这个GPD只能分析尾巴，中间部分如果符合正态是不需要分析的。而且是只能分析右尾，分析左尾得把数据做abs</p>
+<p><strong>固定成交量(额)内的价格变化</strong></p>
+<p>高斯分布</p>
+<h2>copula</h2>
+<p>必须要细致的看一下 <a href="https://en.wikipedia.org/wiki/Copula_(probability_theory)">wikipedia</a></p>
+<p>概念不必再描述，注意点：</p>
+<ol>
+<li>前提是时间序列要是<strong>平稳</strong>且<strong>连续</strong>的，如果有自相关，可能计算出来的copula是错误的</li>
+<li>分类： gaussian, archimedean(阿基米德), student-t 。 其中 archimedean 含 有很多子类(Clayton, Gumbel, Grank)</li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="https://brycemeng.com/zh/pre-knowledge-to-learn-timeserias-anaysis.html">学习时间序列分析的前置基础知识</a></li>
+        <li><a href="https://brycemeng.com/zh/tips-of-linear-algebra.html">线代的一些tips</a></li>
+        <li><a href="https://brycemeng.com/zh/some-idea-of-functional-analysis.html">数学分析的一些感悟</a></li>
+        <li><a href="https://brycemeng.com/zh/some_exp_of_two_arg_strategy.html">最近的一些经验总结</a></li>
+        <li><a href="https://brycemeng.com/zh/AdvFinML-Standard-Bars.html">AdvFinML - Standard Bars</a></li>
+    </ul>
+</section>
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'brycemeng'; // required: replace example with your forum shortname
+
+            var disqus_config = function () {
+                this.language = "zh";
+
+                        this.page.identifier = '2019-08-04-stat-prob-notes';
+                        this.page.url = 'https://brycemeng.com/zh/stat-prob-notes.html';
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/BryceMeng"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="https://brycemeng.com/zh/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/101alpha.html">101Alpha</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/adb.html">adb</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/advfinml.html">AdvFinML</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/android.html">Android</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/async.html">async</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/cryptocurrency.html">Cryptocurrency</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/elite3.html">Elite3</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/english.html">English</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/fifthcircle.html">fifthcircle</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/fun.html">Fun</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/futures.html">Futures</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/genetic-algorithm.html">Genetic Algorithm</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/hidden-markov.html">Hidden Markov</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/hifi.html">Hifi</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/javascript.html">javascript</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/kalman-filter.html">Kalman Filter</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/life.html">Life</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/math.html">Math</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="https://brycemeng.com/zh/tag/misc.html">Misc</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/ml.html">ML</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/mongodb.html">Mongodb</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/monkey.html">monkey</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/multithread.html">multithread</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/music.html">Music</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/numpy.html">Numpy</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/optimization.html">Optimization</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/pandas.html">Pandas</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/programming.html">programming</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="https://brycemeng.com/zh/tag/quant.html">Quant</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/router.html">Router</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/stats.html">Stats</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/stock.html">Stock</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/system.html">System</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/tech.html">Tech</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/tech-indicator.html">Tech Indicator</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/time-series.html">Time Series</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/translation.html">Translation</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/trap.html">Trap</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/ubuntu.html">Ubuntu</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/vm.html">VM</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/wu-du-quan.html">五度圈</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://makerchen.com" target="_blank">MakerChen</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2024 Bryce
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="https://brycemeng.com/zh/../theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://brycemeng.com/zh/../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="https://brycemeng.com/zh/../theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'brycemeng'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+
+
+</body>
+</html>

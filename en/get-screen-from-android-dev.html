@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>从Android设备获取实时截屏(adb) - English Version</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="https://brycemeng.com/en/images/favicon.png" rel="icon">
+
+<link rel="canonical" href="https://brycemeng.com/en/get-screen-from-android-dev.html">
+
+        <meta name="author" content="Bryce" />
+        <meta name="keywords" content="Android,adb,Tech" />
+        <meta name="description" content="从Android设备获取实时截屏(adb)，细节和干货来啦。" />
+
+        <meta property="og:site_name" content="English Version" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="从Android设备获取实时截屏(adb)"/>
+        <meta property="og:url" content="https://brycemeng.com/en/get-screen-from-android-dev.html"/>
+        <meta property="og:description" content="从Android设备获取实时截屏(adb)，细节和干货来啦。"/>
+        <meta property="article:published_time" content="2015-10-06" />
+            <meta property="article:section" content="Android" />
+            <meta property="article:tag" content="Android" />
+            <meta property="article:tag" content="adb" />
+            <meta property="article:tag" content="Tech" />
+            <meta property="article:author" content="Bryce" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://brycemeng.com/en/./theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="https://brycemeng.com/en/./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://brycemeng.com/en/./theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://brycemeng.com/en/./theme/css/style.css" type="text/css"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://brycemeng.com/en/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="https://brycemeng.com/en/images/favicon.png" width="24"/> English Version            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="https://brycemeng.com/en/category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/en/category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/en/category/music.html">Music</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/en/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/en/category/quant.html">Quant</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/en/category/tech.html">Tech</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://brycemeng.com/en/get-screen-from-android-dev.html"
+                       rel="bookmark"
+                       title="Permalink to 从Android设备获取实时截屏(adb)">
+                        从Android设备获取实时截屏(adb)
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-10-06T23:53:00+08:00"> Tue 06 October 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://brycemeng.com/en/tag/android.html">Android</a>
+        /
+	<a href="https://brycemeng.com/en/tag/adb.html">adb</a>
+        /
+	<a href="https://brycemeng.com/en/tag/tech.html">Tech</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <blockquote>
+<p>前两篇文章已经把如何控制android设备的输入讲了，这一篇就是如何获取输出，通过adb的方式</p>
+</blockquote>
+<h1>原理</h1>
+<p><img alt="framebuffer获取" src="http://img.blog.csdn.net/20151006225155664"></p>
+<p>AdbClient和AdbServer都是运行在PC上的，AdbDaemon运行在android设备上。那framebuffer倒底是个啥？</p>
+<blockquote>
+<p><strong>帧缓冲(frame buffer)是Linux视频系统的核心概念，因此先了解一下他的功能。</strong> 
+因为视频适配器可能基于不同的硬件体系架构，较高内核层和应用程序的实现可能会因视频卡的不同而不同，这会导致在使用不同视频卡的时需要采用不同的方案。随之而来的低可移植性和冗余的代码需要大量的投入和维护开销。帧缓冲的概念解决了这个问题，它进行了一般化的抽象并规定编程接口，从而开发人员可以以与平台无关的方式编写应用层和较高内核层程序。因此，内核的帧缓冲接口允许应用程序与底层图形硬件的变化无关，如果应用和显示器驱动程序遵循帧缓冲接口，应用程序不用改变就可以在不同类型的视频硬件上运行。 (<a href="http://www.360doc.com/content/13/0115/11/1317564_260267468.shtml">引用链接</a>)</p>
+</blockquote>
+<p>我来简单的解释一下，其实就是当前时间和之前几个帧的屏幕图像信息（每个像素点的颜色，分辨率等等）。</p>
+<h1>java实现</h1>
+<p>我们来看看android系统里面对每一帧图像信息的定义</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//ddmlib\src\com\android\ddmlib\Device.java </span>
+
+<span class="kd">public</span><span class="w"> </span><span class="n">RawImage</span><span class="w"> </span><span class="nf">getScreenshot</span><span class="p">()</span>
+<span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">TimeoutException</span><span class="p">,</span><span class="w"> </span><span class="n">AdbCommandRejectedException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">AdbHelper</span><span class="p">.</span><span class="na">getFrameBuffer</span><span class="p">(</span><span class="n">AndroidDebugBridge</span><span class="p">.</span><span class="na">getSocketAddress</span><span class="p">(),</span><span class="w"> </span><span class="k">this</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1">//ddmlib\src\com\android\ddmlib\AdbHelper.java</span>
+
+<span class="cm">/**</span>
+<span class="cm">     * Retrieve the frame buffer from the device.</span>
+<span class="cm">     * @throws TimeoutException in case of timeout on the connection.</span>
+<span class="cm">     * @throws AdbCommandRejectedException if adb rejects the command</span>
+<span class="cm">     * @throws IOException in case of I/O error on the connection.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="n">RawImage</span><span class="w"> </span><span class="nf">getFrameBuffer</span><span class="p">(</span><span class="n">InetSocketAddress</span><span class="w"> </span><span class="n">adbSockAddr</span><span class="p">,</span><span class="w"> </span><span class="n">Device</span><span class="w"> </span><span class="n">device</span><span class="p">)</span>
+<span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">TimeoutException</span><span class="p">,</span><span class="w"> </span><span class="n">AdbCommandRejectedException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="n">RawImage</span><span class="w"> </span><span class="n">imageParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RawImage</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">formAdbRequest</span><span class="p">(</span><span class="s">&quot;framebuffer:&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">//$NON-NLS-1$</span>
+<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">nudge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="mi">0</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">reply</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">SocketChannel</span><span class="w"> </span><span class="n">adbChan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">adbChan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SocketChannel</span><span class="p">.</span><span class="na">open</span><span class="p">(</span><span class="n">adbSockAddr</span><span class="p">);</span>
+<span class="w">            </span><span class="n">adbChan</span><span class="p">.</span><span class="na">configureBlocking</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// if the device is not -1, then we first tell adb we&#39;re looking to talk</span>
+<span class="w">            </span><span class="c1">// to a specific device</span>
+<span class="w">            </span><span class="n">setDevice</span><span class="p">(</span><span class="n">adbChan</span><span class="p">,</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">write</span><span class="p">(</span><span class="n">adbChan</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">AdbResponse</span><span class="w"> </span><span class="n">resp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readAdbResponse</span><span class="p">(</span><span class="n">adbChan</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="cm">/* readDiagString */</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="na">okay</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdbCommandRejectedException</span><span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="na">message</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="c1">// first the protocol version.</span>
+<span class="w">            </span><span class="n">reply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span><span class="p">;</span>
+<span class="w">            </span><span class="n">read</span><span class="p">(</span><span class="n">adbChan</span><span class="p">,</span><span class="w"> </span><span class="n">reply</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">ByteBuffer</span><span class="w"> </span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ByteBuffer</span><span class="p">.</span><span class="na">wrap</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+<span class="w">            </span><span class="n">buf</span><span class="p">.</span><span class="na">order</span><span class="p">(</span><span class="n">ByteOrder</span><span class="p">.</span><span class="na">LITTLE_ENDIAN</span><span class="p">);</span>
+
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buf</span><span class="p">.</span><span class="na">getInt</span><span class="p">();</span>
+
+<span class="w">            </span><span class="c1">// get the header size (this is a count of int)</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">headerSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RawImage</span><span class="p">.</span><span class="na">getHeaderSize</span><span class="p">(</span><span class="n">version</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// read the header</span>
+<span class="w">            </span><span class="n">reply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">headerSize</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="o">]</span><span class="p">;</span>
+<span class="w">            </span><span class="n">read</span><span class="p">(</span><span class="n">adbChan</span><span class="p">,</span><span class="w"> </span><span class="n">reply</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ByteBuffer</span><span class="p">.</span><span class="na">wrap</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+<span class="w">            </span><span class="n">buf</span><span class="p">.</span><span class="na">order</span><span class="p">(</span><span class="n">ByteOrder</span><span class="p">.</span><span class="na">LITTLE_ENDIAN</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// fill the RawImage with the header</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">imageParams</span><span class="p">.</span><span class="na">readHeader</span><span class="p">(</span><span class="n">version</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Log</span><span class="p">.</span><span class="na">e</span><span class="p">(</span><span class="s">&quot;Screenshot&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Unsupported protocol: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">version</span><span class="p">);</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="s">&quot;ddms&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;image params: bpp=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">imageParams</span><span class="p">.</span><span class="na">bpp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, size=&quot;</span>
+<span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="n">imageParams</span><span class="p">.</span><span class="na">size</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, width=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">imageParams</span><span class="p">.</span><span class="na">width</span>
+<span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, height=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">imageParams</span><span class="p">.</span><span class="na">height</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">write</span><span class="p">(</span><span class="n">adbChan</span><span class="p">,</span><span class="w"> </span><span class="n">nudge</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">reply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">imageParams</span><span class="p">.</span><span class="na">size</span><span class="o">]</span><span class="p">;</span>
+<span class="w">            </span><span class="n">read</span><span class="p">(</span><span class="n">adbChan</span><span class="p">,</span><span class="w"> </span><span class="n">reply</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">imageParams</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reply</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">adbChan</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">adbChan</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">imageParams</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+
+<p>上面两段源码取自于ddmlib库，展示了AdbClient需要如何去和AdbServer通信去获取framebuffer当前帧，<strong>PS:当前adb自带的一些工具都还没有实现该功能</strong>，如果我们想实现该功能，很简单，建立一个java程序，引用ddmlib和一些其他的库，去调用即可(<strong>getScreenshot()</strong>)，怎么调用？请看<strong>《Android Adb调试功能漫谈》</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">buf</span><span class="p">.</span><span class="na">order</span><span class="p">(</span><span class="n">ByteOrder</span><span class="p">.</span><span class="na">LITTLE_ENDIAN</span><span class="p">);</span>
+</code></pre></div>
+
+<p>注意上面这一句，涉及到一个大字节序和小字节序的问题，详情请见<a href="http://www.dianzitx.com/mcu/linux/77643.html">大字节序与小字节序详解</a>。</p>
+<p><strong><em>由于现在大部分民用cpu都是小字节序，所以我在adb.exe翻译成c代码时，这一段没有实现。也希望有兴趣的朋友把大小字节序转换的函数实现，网上也有部分代码参考哦。</em></strong></p>
+<h1>adb.exe 实现</h1>
+<p>这里是一个代码翻译过程，不多啰嗦，看代码</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//outScreen由函数里面申请，外面用完了必须要释放内存,因为协议里面带有长度</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">getScreen</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">inSerial</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">outScreen</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">outWidth</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">outHeight</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">dbgRel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">buf</span><span class="p">[</span><span class="mi">10240</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">headerSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">retScreen</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">cousor</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">cCousor</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">nudge</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">//图片的信息</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">bpp</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">red_offset</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">red_length</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">blue_offset</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">blue_length</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">green_offset</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">green_length</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">alpha_offset</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">alpha_length</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">transport_type</span><span class="w"> </span><span class="n">ttype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kTransportAny</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">server_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DEFAULT_ADB_PORT</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">adb_set_transport</span><span class="p">(</span><span class="n">ttype</span><span class="p">,</span><span class="w"> </span><span class="n">inSerial</span><span class="p">);</span>
+<span class="w">    </span><span class="n">adb_set_tcp_specifics</span><span class="p">(</span><span class="n">server_port</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adb_connect</span><span class="p">(</span><span class="s">&quot;framebuffer:&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">//+</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">fd</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">//read_finished(fd);</span>
+<span class="w">        </span><span class="c1">//adb_close(fd);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">//开始接收数据</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">readx</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="n">buf</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span>
+<span class="w">        </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)(</span><span class="n">buf</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//printf(&quot;version:%d\n&quot;,version);</span>
+<span class="w">    </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">        </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="s">&quot;err recv size&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">version</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+<span class="w">        </span><span class="n">headerSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span>
+<span class="w">        </span><span class="n">headerSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">headerSize</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">adb_close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">retScreen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">headerSize</span><span class="o">*</span><span class="mi">4</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">readx</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="n">retScreen</span><span class="p">,</span><span class="n">headerSize</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="s">&quot;err recv size&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">adb_close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+
+<span class="w">    </span><span class="n">cousor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">retScreen</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">version</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bpp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">cousor</span><span class="p">;</span><span class="n">cousor</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">cousor</span><span class="p">;</span><span class="n">cousor</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">cousor</span><span class="p">;</span><span class="n">cousor</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">cousor</span><span class="p">;</span><span class="n">cousor</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">red_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">cousor</span><span class="p">;</span><span class="n">cousor</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">red_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">cousor</span><span class="p">;</span><span class="n">cousor</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">blue_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">cousor</span><span class="p">;</span><span class="n">cousor</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">blue_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">cousor</span><span class="p">;</span><span class="n">cousor</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">green_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">cousor</span><span class="p">;</span><span class="n">cousor</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">green_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">cousor</span><span class="p">;</span><span class="n">cousor</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">alpha_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">cousor</span><span class="p">;</span><span class="n">cousor</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">alpha_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">cousor</span><span class="p">;</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">version</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bpp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// read actual values.</span>
+<span class="w">        </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">cousor</span><span class="p">;</span><span class="n">cousor</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">cousor</span><span class="p">;</span><span class="n">cousor</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">cousor</span><span class="p">;</span><span class="n">cousor</span><span class="o">++</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// create default values for the rest. Format is 565</span>
+<span class="w">        </span><span class="n">red_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">;</span>
+<span class="w">        </span><span class="n">red_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">        </span><span class="n">green_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">        </span><span class="n">green_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
+<span class="w">        </span><span class="n">blue_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">blue_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">        </span><span class="n">alpha_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">alpha_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="s">&quot;unsupport version&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//printf(&quot;bpp:%d width:%d high:%d size:%d\n&quot;,bpp,width,height,size);</span>
+
+<span class="w">    </span><span class="n">adb_write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="n">nudge</span><span class="p">,</span><span class="k">sizeof</span><span class="w"> </span><span class="n">nudge</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">retScreen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">realloc</span><span class="p">(</span><span class="n">retScreen</span><span class="p">,</span><span class="n">size</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">readx</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="n">retScreen</span><span class="p">,</span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="s">&quot;err recv size should be:%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">size</span><span class="p">);</span>
+<span class="w">        </span><span class="n">adb_close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="o">*</span><span class="w"> </span><span class="n">outScreen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">retScreen</span><span class="p">;</span>
+<span class="w">    </span><span class="o">*</span><span class="w"> </span><span class="n">outWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">width</span><span class="p">;</span>
+<span class="w">    </span><span class="o">*</span><span class="w"> </span><span class="n">outHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//write png</span>
+<span class="w">    </span><span class="c1">//write_PNG(retScreen,&quot;d:\\a.png&quot;,width,height);</span>
+<span class="w">    </span><span class="c1">//free(retScreen);</span>
+<span class="w">    </span><span class="n">adb_close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>使用该函数就可以把当前帧的framebuffer取过来，进行处理。C代码？怎么用？请见<strong>《让Adb.exe支持Monkey》</strong></p>
+<h1>framebuffer格式</h1>
+<p>那把framebuffer取下来之后怎么处理呢？这是一个问题。</p>
+<h2>对字节流进行处理</h2>
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">RGBA</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">RGBA</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">G</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">RGBA</span><span class="p">(</span><span class="n">BYTE</span><span class="w"> </span><span class="n">pR</span><span class="p">,</span><span class="w"> </span><span class="n">BYTE</span><span class="w"> </span><span class="n">pG</span><span class="p">,</span><span class="w"> </span><span class="n">BYTE</span><span class="w"> </span><span class="n">pB</span><span class="p">,</span><span class="w"> </span><span class="n">BYTE</span><span class="w"> </span><span class="n">pA</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pR</span><span class="p">;</span>
+<span class="w">        </span><span class="n">G</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pG</span><span class="p">;</span>
+<span class="w">        </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pB</span><span class="p">;</span>
+<span class="w">        </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pA</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">BYTE</span><span class="w"> </span><span class="n">R</span><span class="p">;</span>
+<span class="w">    </span><span class="n">BYTE</span><span class="w"> </span><span class="n">G</span><span class="p">;</span>
+<span class="w">    </span><span class="n">BYTE</span><span class="w"> </span><span class="n">B</span><span class="p">;</span>
+<span class="w">    </span><span class="n">BYTE</span><span class="w"> </span><span class="n">A</span><span class="p">;</span>
+<span class="p">}</span><span class="o">*</span><span class="n">PRGBA</span><span class="p">;</span>
+</code></pre></div>
+
+<p>这是一个像素点的RGBA信息，R是Alpha通道，与透明度相关，GBA就不解释了。一个像素是占用4个字节，按顺序是R,G,B,A信息。整个字节流是一个二维数组，可以根据framebuffer里面的元数组取得长和宽，这样就可以精确的读取到每一个像素点的信息。</p>
+<h2>用opencv进行处理</h2>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c1">//传入 framebuffer, frameWidth, frameHeight</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="n">try</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Size</span><span class="w"> </span><span class="nf">size</span><span class="p">(</span><span class="n">frameWidth</span><span class="p">,</span><span class="w"> </span><span class="n">frameHeight</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//这里创建不会复制数据，只会创建一个头部</span>
+<span class="w">        </span><span class="n">Mat</span><span class="w"> </span><span class="nf">ref</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">CV_8UC4</span><span class="p">,</span><span class="w"> </span><span class="n">framebuffer</span><span class="p">);</span>
+<span class="w">        </span><span class="n">cvtColor</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="n">ref</span><span class="p">,</span><span class="w"> </span><span class="n">CV_BGRA2RGB</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...(</span><span class="n">function</span><span class="p">)(</span><span class="n">Mat</span><span class="w"> </span><span class="n">ref</span><span class="p">)</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="o">*</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Function execute err:%s</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">what</span><span class="p">());</span>
+<span class="w">        </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">freeFramebuffer</span><span class="p">)</span>
+<span class="w">        </span><span class="n">free</span><span class="p">(</span><span class="n">framebuffer</span><span class="p">);</span>
+<span class="w">    </span><span class="p">...</span>
+</code></pre></div>
+
+<p>现在的图形处理如果还不用opencv可就有点out了哦 :)</p>
+<h1>后记</h1>
+<p>经过实测，framebuffer是无压缩的，有些分辨率高的设备取到的framebuffer非常大，从设备传送到AdbClient耗时会比较大，5秒左右的也有，如果追求极限是可以在android侧制作一个程序先获取framebuffer再压缩，再传送到AdbClient，就会快很多，有兴趣的朋友可以交流。</p>
+<p>framebuffer获取的原理和格式都已经清楚了，其实已经可以做非常多的自由发挥了。下一篇是啥？怎么用opencv做一些处理？或者用tesseract做一些有意思的东东？</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="https://brycemeng.com/en/adb-support-monkey.html">让Adb.exe支持Monkey</a></li>
+        <li><a href="https://brycemeng.com/en/android-adb-talk.html">Android Adb调试功能漫谈</a></li>
+        <li><a href="https://brycemeng.com/en/make-android-to-hifi.html">Android手机能变Hifi播放器？</a></li>
+        <li><a href="https://brycemeng.com/en/convert-hyperv-to-virtualbox.html">Convert Hyper-V VM to VirtualBox VM</a></li>
+        <li><a href="https://brycemeng.com/en/tech-meet-content.html">当技术遇到内容</a></li>
+    </ul>
+</section>
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'brycemeng'; // required: replace example with your forum shortname
+
+            var disqus_config = function () {
+                this.language = "en";
+
+                        this.page.identifier = '2015-10-06-get-screen-from-android-dev';
+                        this.page.url = 'https://brycemeng.com/en/get-screen-from-android-dev.html';
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/BryceMeng"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="https://brycemeng.com/en/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/101alpha.html">101Alpha</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/en/tag/adb.html">adb</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/advfinml.html">AdvFinML</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/en/tag/android.html">Android</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/async.html">async</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/cryptocurrency.html">Cryptocurrency</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/elite3.html">Elite3</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/english.html">English</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/fifthcircle.html">fifthcircle</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/en/tag/fun.html">Fun</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/futures.html">Futures</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/genetic-algorithm.html">Genetic Algorithm</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/hidden-markov.html">Hidden Markov</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/en/tag/hifi.html">Hifi</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/javascript.html">javascript</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/kalman-filter.html">Kalman Filter</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/life.html">Life</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/en/tag/math.html">Math</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="https://brycemeng.com/en/tag/misc.html">Misc</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/en/tag/ml.html">ML</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/mongodb.html">Mongodb</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/monkey.html">monkey</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/multithread.html">multithread</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/music.html">Music</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/numpy.html">Numpy</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/optimization.html">Optimization</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/pandas.html">Pandas</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/programming.html">programming</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/en/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="https://brycemeng.com/en/tag/quant.html">Quant</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/router.html">Router</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/en/tag/stats.html">Stats</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/stock.html">Stock</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/system.html">System</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/en/tag/tech.html">Tech</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/tech-indicator.html">Tech Indicator</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/time-series.html">Time Series</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/en/tag/translation.html">Translation</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/trap.html">Trap</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/ubuntu.html">Ubuntu</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/vm.html">VM</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/en/tag/wu-du-quan.html">五度圈</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://makerchen.com" target="_blank">MakerChen</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2024 Bryce
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="https://brycemeng.com/en/./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://brycemeng.com/en/./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="https://brycemeng.com/en/./theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'brycemeng'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+
+
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Async&Multithrad - 1 Async - 中文版本</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="https://brycemeng.com/zh/images/favicon.png" rel="icon">
+
+<link rel="canonical" href="https://brycemeng.com/zh/async-and-multithread-programming-1-async-en.html">
+
+        <meta name="author" content="Bryce" />
+        <meta name="keywords" content="programming,async,multithread,javascript" />
+        <meta name="description" content="Async&amp;Multithrad programming - 1 What is asynchronous programming? (JavaScript)" />
+
+        <meta property="og:site_name" content="中文版本" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Async&amp;Multithrad - 1 Async"/>
+        <meta property="og:url" content="https://brycemeng.com/zh/async-and-multithread-programming-1-async-en.html"/>
+        <meta property="og:description" content="Async&amp;Multithrad programming - 1 What is asynchronous programming? (JavaScript)"/>
+        <meta property="article:published_time" content="2024-05-31" />
+            <meta property="article:section" content="Programming" />
+            <meta property="article:tag" content="programming" />
+            <meta property="article:tag" content="async" />
+            <meta property="article:tag" content="multithread" />
+            <meta property="article:tag" content="javascript" />
+            <meta property="article:author" content="Bryce" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://brycemeng.com/zh/../theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="https://brycemeng.com/zh/../theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://brycemeng.com/zh/../theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://brycemeng.com/zh/../theme/css/style.css" type="text/css"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://brycemeng.com/zh/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="https://brycemeng.com/zh/images/favicon.png" width="24"/> 中文版本            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/music.html">Music</a>
+                        </li>
+                        <li class="active">
+                            <a href="https://brycemeng.com/zh/category/programming.html">Programming</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/quant.html">Quant</a>
+                        </li>
+                        <li >
+                            <a href="https://brycemeng.com/zh/category/tech.html">Tech</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://brycemeng.com/zh/async-and-multithread-programming-1-async-en.html"
+                       rel="bookmark"
+                       title="Permalink to Async&Multithrad - 1 Async">
+                        Async&Multithrad - 1 Async
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2024-05-31T18:32:00+08:00"> Fri 31 May 2024</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://brycemeng.com/zh/tag/programming.html">programming</a>
+        /
+	<a href="https://brycemeng.com/zh/tag/async.html">async</a>
+        /
+	<a href="https://brycemeng.com/zh/tag/multithread.html">multithread</a>
+        /
+	<a href="https://brycemeng.com/zh/tag/javascript.html">javascript</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p><a href="javascript:void(window.open('https://translate.google.com/translate?sl=en&tl=zh-CN&u=' + encodeURIComponent(window.location.href)))">
+    中文版test
+</a></p>
+<h2>Table of Contents for the whole series</h2>
+<ul>
+<li>1.<strong>What is asynchronous programming? (JavaScript)</strong></li>
+<li>1.1How to perform asynchronous programming in JavaScript?</li>
+<li>2.Asynchronous programming in other languages</li>
+<li>3.Multithreading programming (C++) </li>
+<li>a.What is multithreading? What is its relationship with hardware?</li>
+<li>b.What does it mean to use multithreading?</li>
+<li>c.What is the goal of using multithreading?</li>
+<li>4.Multithreading programming in other languages</li>
+<li>5.The relationship between multithreading and asynchronous programming (mainly discussing GoRoutine, analyzing the source code, and examining if Rust has made improvements)</li>
+<li>6.GPU parallel programming</li>
+</ul>
+<h2>Introduction</h2>
+<h3>Background (Asynchronous &amp; Multithreading)</h3>
+<p>This series mainly discusses asynchronous and multithreading programming. Both asynchronous and multithreading programming aim to fully utilize computing resources.</p>
+<p>As CPU single-core frequency development reached a bottleneck, the trend shifted towards multi-core CPUs. In recent years, parallel matrix operations on GPUs have greatly promoted the development of machine learning and LLMs. This series will mainly focus on CPUs and will not cover GPUs for now. The main goal is to introduce asynchronous and multithreading programming and their relationship.</p>
+<p>So, what is asynchronous programming? How is it related to multithreading? What is the relationship between multithreading and hardware? And how are asynchronous &amp; multithreading programming related to parallel computing? We will address these questions throughout this series.</p>
+<p><em>(If I discover errors or new viewpoints, I will update the published articles or change the structure of this series)</em></p>
+<h3>In this article</h3>
+<p>In this article, I will introduce:</p>
+<ol>
+<li>What is asynchronous programming? Why is it needed?</li>
+<li>Asynchronous programming in JavaScript </li>
+<li>a. Callback functions</li>
+<li>b. Event loop (source code analysis)</li>
+<li>The next article</li>
+</ol>
+<p>You can find all my demo codes in <a href="https://github.com/BryceMeng/AsyncNMultithread/tree/main/1%20async">MyGithub</a>.</p>
+<h2>Experimental Environment</h2>
+<p><strong>OS:</strong> Windows 11 21H2 22000.2538</p>
+<p><strong>Node.js:</strong> 20.13.1</p>
+<h2>What is asynchronous programming?</h2>
+<h3>What is asynchronous?</h3>
+<p>The opposite of asynchronous is synchronous. Let's look at an example from daily life: <strong>I go to the post office to mail a letter to borrow money from a friend, and then I deposit the check into the bank after receiving it</strong>. I can achieve this using <strong>synchronous</strong> and <strong>asynchronous</strong> approaches:</p>
+<p><img alt="Basic Introduction to Async and Sync" src="/images/2024/5/Async1.png"></p>
+<p align="center">
+  <em>Figure 1. Basic Introduction to Async and Sync</em>
+</p>
+
+<p>I wrote a sample program in Node.js to see the execution results <a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/MailDemo.js">Click to view source code MailDemo</a></p>
+<p><img alt="Synchronized Mailing Demo" src="/images/2024/5/Async2.png"></p>
+<p align="center">
+  <em>Figure 2. Synchronized Mailing Demo</em>
+</p>
+
+<p><img alt="Asynchronized Mailing Demo" src="/images/2024/5/Async3.png"></p>
+<p align="center">
+  <em>Figure 3. Asynchronized Mailing Demo</em>
+</p>
+
+<p>So, the biggest difference we can see between synchronous and asynchronous is whether <strong>I (the sender) wait at the post office after handing the letter to the post office or go do other things</strong>.</p>
+<p>From this example, it's obvious that the asynchronous mailing process is more reasonable. In the synchronous mailing program, there's a seemingly strange question: <strong>Why do I need to wait at the post office after giving the letter?</strong> I could be eating, shopping, watching movies, or doing many other things. When my friend replies, the post office can <strong>call me</strong>, and I can then pick up the letter.</p>
+<p>So, waiting at the post office is an unreasonable operation. A term called <strong>blocking</strong> often appears with synchronous programming, meaning the protagonist is doing nothing but waiting for a result. This is unreasonable in real life and also in programming, so asynchronous programming solves this problem.</p>
+<p>In the industry, there is a field called operations research, which aims to keep resources (including machines, labor, etc.) running efficiently to complete more tasks in the same amount of time. (<em>I hope everyone can enjoy life while earning money, and not run like machines. Operations research shouldn't apply to humans.</em>)</p>
+<p>Back to programming, let's look at the timing diagrams of <strong>asynchronous</strong> and <strong>synchronous</strong>.</p>
+<p><img alt="Synchronized Mailing Sequence Diagram" src="/images/2024/5/Async4_sequence_sync.png"></p>
+<p align="center">
+  <em>Figure 4. Synchronized Mailing Sequence Diagram</em>
+</p>
+
+<p><img alt="Asynchronized Mailing Sequence Diagram" src="/images/2024/5/Async5_sequence_async.png"></p>
+<p align="center">
+  <em>Figure 5. Asynchronized Mailing Sequence Diagram</em>
+</p>
+
+<p>These two timing diagrams make it clearer that asynchronous is more reasonable. During the mailing process, I can do many things like eating and shopping without waiting at the post office.</p>
+<p>What are the characteristics of this mailing activity?
+1. It's handled by someone else (the post office), not myself.
+2. Waiting for a reply takes a relatively long time.</p>
+<h3>Asynchronous Programming</h3>
+<p>In programming, there are some operations similar to mailing a letter, such as file reading/writing, network requests (TCP, HTTP, DNS), etc.</p>
+<ul>
+<li>File reading/writing: The <strong>disk controller</strong> helps us find the content we want.</li>
+<li>Network requests: The <strong>server</strong> processes the request.</li>
+<li>Timer: The timer just waits and doesn't need to wait for any return.</li>
+</ul>
+<p>The disk controller and server are the third parties, equivalent to the post office in the previous example. The time it takes to handle these tasks depends on them, and I can't control it.</p>
+<p>To summarize: <strong>Asynchronous programming allows the main thread to perform other tasks while waiting for some tasks to be handled by a third party</strong>.</p>
+<h2>Asynchronous Programming in JavaScript</h2>
+<p>Why do I want to discuss asynchronous programming in JavaScript?</p>
+<p>Because JavaScript was initially designed to be single-threaded, it follows an event-driven model in the browser, and network requests (such as Ajax) are frequent. If there is any blocking, the browser can't process user clicks and render the interface in time, leading to an unresponsive UI and poor user experience. (<em>The JavaScript browser environment has some auxiliary threads in addition to the main thread</em>)</p>
+<p>Why not design it to be multithreaded? Handling multithreading is extremely complicated and causes more headaches for developers. Comparatively, the asynchronous model is much simpler to write than multithreading.</p>
+<p>For example, a web page in the browser requests a REST API (HTTP): Mail, which takes 2 seconds to return data.
+- <strong>If it's synchronous</strong>: During these 2 seconds, user clicks on the page are unresponsive because the main thread can only wait for the Mail to return and cannot do other things.
+- <strong>If it's asynchronous</strong>: During these 2 seconds, the main thread is idle and can handle any user requests and render the page, avoiding unresponsive UI. If the Mail suddenly returns data at 1.2 seconds, it will not interrupt other tasks. When the Mail returns at 1.2 seconds, JavaScript will insert the Mail's <strong>callback function</strong> into the event loop, waiting for the current task to complete before retrieving and executing the Mail's <strong>callback function</strong> from the <strong>event loop</strong>.</p>
+<p>We encountered two new terms: <strong>callback function</strong> and <strong>event loop</strong>. Let's explain how JavaScript uses them to achieve asynchronous programming.</p>
+<h3>Callback function</h3>
+<p>From now on, we will only talk about the asynchronous model. Please forget the synchronous model.</p>
+<p>What is a callback function? As shown in Figure 5, "Saved the cheque to my bank account" is a callback function because it can only be executed after my friend sends back the cheque, and the <strong>caller (notifier) should be the third-party post office</strong> because it knows precisely when the reply letter arrives.</p>
+<p>Let's continue to look at the mailing example from the code perspective <a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/MailDemo.js#L84">Click to view source code MailDemo CallBack</a></p>
+<p><img alt="CallBack Code" src="/images/2024/5/Async6_callback_1.png"></p>
+<p align="center">
+  <em>Figure 6. CallBack code in mailing example</em>
+</p>
+
+<p>We can see that callBackFromPostOffice() is the CallBack function. The post office sends me a message after receiving the letter, and then I call this function myself. (<em>Because my demo is written in multithreading, using message communication is very important to avoid directly calling main thread functions from new threads. JavaScript is single-threaded.</em>)</p>
+<p>My demo uses a single event, so after the post office receives the reply letter, it directly calls the only callback function. However, a typical user interface is filled with various events. Where are these callback functions stored? How are they handled?</p>
+<p>JavaScript uses a queue (first in, first out) to store these callback functions. The event loop constantly checks if the post office has received a letter, and if it has, it inserts the callback function callBackFromPostOffice() into the queue, then checks if there are waiting callback functions in the queue, and executes them.</p>
+<p>To summarize: A callback function processes the result data after receiving it (depositing the friend's cheque into the bank).</p>
+<h3>Event loop</h3>
+<p>If I were to name it, I might call it TaskLoop because its core function is to execute callback functions continuously. If we consider each callback function as a task, most of the time is spent handling tasks. Of course, it also checks if the friend's mail has arrived (if the IO operation is complete or if the timer has counted down).</p>
+<p>JavaScript was originally used in browsers, and most tasks come from user actions: clicks, mouseovers, page loads, etc. These are all events, so the loop that handles them is called the EventLoop.</p>
+<p>I changed the previous mailing example to use an event loop. Let's look at it <a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/MailDemoWithEventLoop.js#L77">Click to view source code MailDemo EventLoop</a></p>
+<p><img alt="EventLoop Code" src="/images/2024/5/Async7_eventloop_1.png"></p>
+<p align="center">
+  <em>Figure 7. EventLoop in mailing example</em>
+</p>
+
+<p>In fact, after we execute eventLoop.addTask(), callBackFromPostOffice() will not execute immediately. It must wait for eventLoop.run() to check the queue and find that there are tasks (callback functions) waiting to be executed before it runs.</p>
+<p>The JavaScript EventLoop in the browser and Node.js is an enhanced version of this example (<em>JavaScript is just a language. Specific syntax parsing and underlying functionality need a runtime like Chrome or Node.js, which both use the V8 engine for syntax parsing</em>). The task types and trigger times of the event loop are more complex than in this example, and there are differences between the browser and Node.js.</p>
+<p><strong>What is the event loop</strong>? When the user needs to execute some functions asynchronously, the callback function is inserted into the queue, and the event loop checks the queue and executes the tasks if there are any. For asynchronous IO operations, such as file and network operations, it also regularly checks if the operation is successful, and if so, inserts the callback function into the event loop. Next, let's see how Node.js implements this.</p>
+<h4>Node.js</h4>
+<p>Let's look at the flowchart first. The event loop and asynchronous operations in Node.js are managed by the UV library. The code corresponding to Figure 8 can be found here <a href="https://github.com/nodejs/node/blob/main/deps/uv/src/unix/core.c#L415">Node.js EventLoop</a></p>
+<p><img alt="EventLoop in Node.js" src="/images/2024/5/Async8_node_eventloop_2.png"></p>
+<p align="center">
+  <em>Figure 8. EventLoop in Node.js</em>
+</p>
+
+<p><a href="https://github.com/nodejs/node/blob/main/deps/uv/include/uv/unix.h#L220">See Figure 9 for the source code related to the data structure of the Node.js Loop (Linux platform)</a> | <a href="https://github.com/nodejs/node/blob/main/deps/uv/src/unix/core.c#L415">See Figure 8 for the source code related to the Node.js EventLoop</a></p>
+<p><img alt="EventLoop in Node.js" src="/images/2024/5/Async9_node_eventloop_3.png"></p>
+<p align="center">
+  <em>Figure 9. Main relationship of the EventLoop in Node.js</em>
+</p>
+
+<p><strong>When all IO operations are complete and callback functions are executed, the EventLoop will exit.</strong></p>
+<p>Let's talk about each step of this event loop (<strong>timers=&gt;Pending Queue=&gt;Idle Handlers=&gt;Prepare Handlers=&gt;IO Poll=&gt;Check=&gt;Close</strong>):</p>
+<p><strong>timers:</strong> Execute the callback functions set by setTimeout() and setInterval().
+There are two interesting things here:
+<img alt="EventLoop Timer in Node.js" src="/images/2024/5/Async9.1_node_eventloop_timer_1.png"></p>
+<p align="center">
+  <em>Figure 9.1 EventLoop Timer in Node.js</em>
+</p>
+
+<ol>
+<li>The data structure corresponding to timers is a min-heap. A heap is partially sorted; in handling timers, it only needs to take out the smallest timer each time, which is the closest one <a href="https://github.com/nodejs/node/blob/main/deps/uv/src/timer.c#L174">(Click to see the source code related to the EventLoop Timer)</a>.</li>
+<li>Let's review the time complexity of heap sort: For two main steps, <strong>building the tree</strong> and <strong>removing elements</strong>. Assuming there are n elements, the time complexity of building the tree (inserting all elements) is O(n), and the time complexity of removing all elements, including rebuilding the tree, is O(nlogn). Heap sort is partial sorting, taking out and adjusting the tree once each time, unlike other sorting algorithms that sort once and take out all with a time complexity of O(n) and single O(1).</li>
+<li>Node.js timers are based on a polling mechanism and may be blocked by other callback functions or even another timer's callback function. So, we can confirm that timers set by setTimer() are inaccurate. Setting very precise timers is another topic.</li>
+</ol>
+<p><strong>Pending Queue:</strong> Execute some tasks left over from the IO Poll phase. Generally, when the IO Poll phase finds that the IO operation is complete, it will handle the corresponding callback function immediately, but in some cases, it may trigger new callback functions, such as errors, which will be placed in the Pending Queue to be processed in the next round. (<em>In fact, the current code will execute the Pending Queue 8 times after the IO Poll phase. I'm also curious about the number 8. Refer to the middle code in Figure 8</em>)</p>
+<p><strong>Idle Handers&amp;Prepare Handlers:</strong> Used internally by the UV library.</p>
+<p><strong>IO Poll:</strong> Here, it checks if these IO operations are complete, and if so, it executes the corresponding callback function. If further processing is needed, it creates new callback functions and places them in the Pending Queue. For example, checking if a file read is complete, if the HTTP API request has returned results, if the DNS query has returned results, etc.</p>
+<p>This step is crucial and significantly impacts performance. The epoll model is used on the Linux platform, which achieved extremely high performance when implemented by Nginx. Windows has corresponding completion ports (IOCP). Mac's is called Kqueue. I will introduce these details in the next article.</p>
+<p><strong>Check:</strong> Execute the callback functions set by setImmediate().</p>
+<p><strong>Close:</strong> Execute the callback functions for close requests, such as socket.on('Close', ...). Related to network operations, not file operations.</p>
+<h4>Microtasks</h4>
+<p>In the JavaScript language, besides using setTimeout(), setInterval(), and setImmediate() to set custom asynchronous functions, you can also use process.nextTick(), Promise(), and Await() [<em>the advanced implementation of Promise()</em>] to insert the callback functions (any function) you want to execute asynchronously into the event loop. I will mention the details of Promise and Await in the next article.</p>
+<p>Functions inserted by process.nextTick() and Promise.then() are called microtasks. The other tasks mentioned in the previous section (setTimeout(), setInterval(), IO, and setImmediate()) are called macro tasks. When are microtasks and macro tasks executed?</p>
+<p><img alt="Tasks Execution Process in Node.js" src="/images/2024/5/Async10_node_eventloop_4.png"></p>
+<p align="center">
+  <em>Figure 10. Tasks Execution Process in Node.js</em>
+</p>
+
+<p>We can see that the priority of microtasks is very high and will be executed immediately after the synchronous code is executed. Moreover, after each type of task, such as setTimeout(), setInterval(), I/O Poll, is executed, the microtask queue is checked, and if there are any, they are executed immediately.</p>
+<p>Note:</p>
+<ol>
+<li>The priority of functions inserted by process.nextTick() is higher than those inserted by Promise.then().</li>
+<li>The microtask queue is checked after each task is executed, not after the entire macro task queue is executed <a href="https://github.com/nodejs/node/pull/22842">Related Pull Request</a>.</li>
+</ol>
+<p>I wrote a program to check the execution order of different asynchronous tasks <a href="https://github.com/BryceMeng/AsyncNMultithread/blob/main/1%20async/EventLoop.js">Click to view source code</a></p>
+<p><img alt="Tasks Execution Order in Node.js" src="/images/2024/5/Async11_node_eventloop_5.png"></p>
+<p align="center">
+  <em>Figure 10. Tasks Execution Order in Node.js</em>
+</p>
+
+<p>We can compare it with the previous code flowchart, which matches completely.</p>
+<h4>Browser</h4>
+<p>The event loop in the browser is a bit different:</p>
+<ol>
+<li>No process.nextEvent()</li>
+<li>There is a MutationObserver() task, mainly used to monitor changes in network element attributes, which also belongs to microtasks</li>
+<li>There are rendering tasks (actually, the browser has a dedicated rendering thread that receives rendering tasks sent by the main thread, and the rendering thread is responsible for the specific implementation to render efficiently without blocking the main thread)</li>
+<li>Synchronous code execution is considered the first macro task</li>
+<li>In the Event Loop, the execution order is <strong>one macro task</strong> =&gt; <strong>execute all microtasks</strong> =&gt; <strong>all rendering tasks</strong>. The execution order is similar to Node.js, but in Node.js, all microtasks are executed first, and there are no rendering tasks.</li>
+</ol>
+<h2>Summary</h2>
+<p>In this article, we mainly introduced what asynchronous programming is. Through a mailing example, callback functions, and then to the event loop in Node.js, we explained what asynchronous looks like from a life perspective to the code level.</p>
+<p>In the next article, we will discuss how to perform asynchronous programming in JavaScript and some related underlying implementations.</p>
+<p>If you find any errors in my article or have any new viewpoints, feel free to contact me or leave a comment.</p>
+<h2>relative resources</h2>
+<p><a href="https://x.com/DrJimFan/status/1791514371086250291">GPU programming from Jim Fan</a></p>
+            </div>
+            <!-- /.entry-content -->
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'brycemeng'; // required: replace example with your forum shortname
+
+            var disqus_config = function () {
+                this.language = "zh";
+
+                        this.page.identifier = '2024-05-31-async-and-multithread-programming-1-async-en';
+                        this.page.url = 'https://brycemeng.com/zh/async-and-multithread-programming-1-async-en.html';
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/BryceMeng"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="https://brycemeng.com/zh/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/101alpha.html">101Alpha</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/adb.html">adb</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/advfinml.html">AdvFinML</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/android.html">Android</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/async.html">async</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/cryptocurrency.html">Cryptocurrency</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/elite3.html">Elite3</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/english.html">English</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/fifthcircle.html">fifthcircle</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/fun.html">Fun</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/futures.html">Futures</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/genetic-algorithm.html">Genetic Algorithm</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/hidden-markov.html">Hidden Markov</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/hifi.html">Hifi</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/javascript.html">javascript</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/kalman-filter.html">Kalman Filter</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/life.html">Life</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/math.html">Math</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="https://brycemeng.com/zh/tag/misc.html">Misc</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/ml.html">ML</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/mongodb.html">Mongodb</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/monkey.html">monkey</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/multithread.html">multithread</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/music.html">Music</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/numpy.html">Numpy</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/optimization.html">Optimization</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/pandas.html">Pandas</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/programming.html">programming</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="https://brycemeng.com/zh/tag/quant.html">Quant</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/router.html">Router</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/stats.html">Stats</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/stock.html">Stock</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/system.html">System</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="https://brycemeng.com/zh/tag/tech.html">Tech</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/tech-indicator.html">Tech Indicator</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/time-series.html">Time Series</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="https://brycemeng.com/zh/tag/translation.html">Translation</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/trap.html">Trap</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/ubuntu.html">Ubuntu</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/vm.html">VM</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="https://brycemeng.com/zh/tag/wu-du-quan.html">五度圈</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://makerchen.com" target="_blank">MakerChen</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2024 Bryce
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="https://brycemeng.com/zh/../theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://brycemeng.com/zh/../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="https://brycemeng.com/zh/../theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'brycemeng'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+
+
+</body>
+</html>
